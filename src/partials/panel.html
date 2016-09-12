@@ -1,0 +1,73 @@
+<form class="panel">
+  <h3 class="panel-title">
+    Panel
+  </h3>
+  <div class="panel-header">
+    <div class="row">
+      <div class="medium-6 columns">
+        <label>Input Label
+          <input type="text" placeholder=".medium-6.columns">
+        </label>
+      </div>
+      <div class="medium-6 columns">
+        <label>Input Label
+          <input type="text" placeholder=".medium-6.columns">
+        </label>
+      </div>
+    </div>
+    <label>
+      How many puppies?
+      <input type="number" value="100">
+    </label>
+    <label>
+      What books did you read over summer break?
+      <textarea placeholder="None"></textarea>
+    </label>
+  </div>
+  <div class="panel-content">
+    <label>Select Menu
+      <select>
+        <option value="husker">Husker</option>
+        <option value="starbuck">Starbuck</option>
+        <option value="hotdog">Hot Dog</option>
+        <option value="apollo">Apollo</option>
+      </select>
+    </label>
+    <label>Multiple Select Menu
+      <select multiple>
+        <option value="showboat">Showboat</option>
+        <option value="redwing">Redwing</option>
+        <option value="narcho">Narcho</option>
+        <option value="hardball">Hardball</option>
+      </select>
+    </label>
+    <div class="row">
+      <fieldset class="large-6 columns">
+        <legend>Choose Your Favorite</legend>
+        <input type="radio" name="pokemon" value="Red" id="pokemonRed" required><label for="pokemonRed">Red</label>
+        <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Blue</label>
+        <input type="radio" name="pokemon" value="Yellow" id="pokemonYellow"><label for="pokemonYellow">Yellow</label>
+      </fieldset>
+      <fieldset class="large-6 columns">
+        <legend>Check these out</legend>
+        <input id="checkbox1" type="checkbox"><label for="checkbox1">Checkbox 1</label>
+        <input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
+        <input id="checkbox3" type="checkbox"><label for="checkbox3">Checkbox 3</label>
+      </fieldset>
+    </div>
+    <label>Password
+      <input type="password" aria-describedby="passwordHelpText">
+    </label>
+    <p class="help-text" id="passwordHelpText">Your password must have at least 10 characters, a number, and an Emoji.</p>
+    <div class="input-group">
+      <span class="input-group-label">$</span>
+      <input class="input-group-field" type="number">
+      <div class="input-group-button">
+        <input type="submit" class="button" value="Submit">
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <button type="submit" name="button" class="button small">Save</button>
+  </div>
+</form>

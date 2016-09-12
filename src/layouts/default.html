@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="{{root}}assets/css/app.css">
   </head>
   <body>
-    <div id="wrapper" class="off-canvas-wrapper">
-      <div id="wrapper-inner" class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-        {{> sidebar}}
+    <div class="off-canvas-wrapper">
+      <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        {{> offcanvas_left}}
         {{> content}}
+        {{> offcanvas_right}}
       </div>
     </div>
     <script src="{{root}}assets/js/app.js"></script>

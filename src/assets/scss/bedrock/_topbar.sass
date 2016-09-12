@@ -1,0 +1,30 @@
+.top-bar
+
+  &.sticky:first-child
+    top: 0
+    left: 0
+    right: 0
+    z-index: 99
+
+  .top-bar-left, .top-bar-right
+    width: auto
+
+  > .menu, .top-bar-left > .menu, .top-bar-right .menu
+
+    > li > .menu
+      margin-top: .5rem
+
+    .menu
+      background: lighten($light-gray, 5)
+
+  .menu
+    border: 0
+
+  .button
+    padding: $menu-item-padding
+
+  .menu-text
+    white-space: nowrap
+
+.sticky-top-bar
+  padding-top: 3.5rem

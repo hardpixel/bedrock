@@ -1,0 +1,122 @@
+.off-canvas-menu
+  background: $sidebar-background
+
+  &.is-collapsed
+
+    [data-dropdown-menu]
+      display: block
+
+    [data-accordion-menu]
+      display: none
+
+    .menu-text span, > .menu > li > a > span
+      display: none
+
+    .top-bar
+      text-align: center
+
+      &.sticky
+        width: $sidebar-collapsed-size
+
+  &.position-right
+
+    > .menu
+
+      > li
+
+        &.is-accordion-submenu-parent
+
+          &.active, &[aria-expanded="true"]
+
+            a
+              box-shadow: inset -3px 0 0 $sidebar-submenu-item-border-color-active
+
+        &.active, &[aria-expanded="true"]
+
+          > a
+            box-shadow: inset -3px 0 0 $sidebar-menu-item-border-color-active !important
+
+  > .menu
+
+    > li
+
+      &.is-accordion-submenu-parent
+
+        > .menu a:before
+            content: ""
+            display: inline-block
+            margin-left: $sidebar-menu-margin-nested
+
+        &.active, &[aria-expanded="true"]
+
+          a
+            box-shadow: inset 3px 0 0 $sidebar-submenu-item-border-color-active
+
+      &.active, &[aria-expanded="true"]
+
+        > a
+          background: $sidebar-menu-item-background-active
+          color: $sidebar-menu-item-color-active
+          box-shadow: inset 3px 0 0 $sidebar-menu-item-border-color-active !important
+
+  .menu
+    background: $sidebar-background
+    border: 0 !important
+    background: inherit
+    color: inherit
+
+    &.is-accordion-submenu, &.is-dropdown-submenu
+      background: $sidebar-submenu-background
+
+      a
+        color: $sidebar-submenu-color
+        padding: $sidebar-submenu-item-padding
+
+    li
+
+      &.is-submenu-item
+
+        &.active, &[aria-expanded="true"]
+
+          a
+            background: rgba($black, .05)
+
+          > a
+            color: $sidebar-menu-item-color-active
+
+    a
+      color: $sidebar-color
+      white-space: nowrap
+      padding: $sidebar-menu-item-padding
+      font-size: .9rem
+
+      i
+        width: 2rem
+        text-align: center
+        margin-right: .1rem
+
+  [data-dropdown-menu]
+    display: none
+
+  .top-bar
+    background: $sidebar-header-background
+    color: $sidebar-header-color
+
+    &.sticky
+      left: 0
+      width: $offcanvas-size
+      z-index: 99
+      top: 0
+
+    .menu
+      margin: 0 !important
+      padding: 0 !important
+      font-size: 1rem
+
+    .menu-text
+      width: 100%
+
+      i
+        width: 1rem
+        text-align: center
+        margin-right: .5rem

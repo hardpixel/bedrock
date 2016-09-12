@@ -1,0 +1,61 @@
+.off-canvas-wrapper, .off-canvas-wrapper-inner, .off-canvas, .off-canvas-content
+  min-height: 100%
+  min-height: 100vh
+
+.off-canvas
+  height: 100%
+
+.off-canvas-no-transitions
+
+  &.off-canvas-wrapper, .off-canvas-wrapper-inner, .off-canvas, .off-canvas-content
+    transition-property: none !important
+
+.off-canvas-collapsing
+
+  .off-canvas-content
+    transition-property: margin
+
+  .top-bar, .footer-bar
+
+    &.sticky
+      transition-property: left right
+      transition-duration: $offcanvas-transition-length
+      transition-timing-function: $offcanvas-transition-timing
+
+  .off-canvas
+    overflow: hidden !important
+    transition-property: width
+    transition-duration: $offcanvas-transition-length
+    transition-timing-function: $offcanvas-transition-timing
+
+    &.is-collapsing > *
+      width: $offcanvas-size
+
+@each $screen in (medium, large)
+
+  +breakpoint(#{$screen})
+
+    .off-canvas.reveal-for-#{$screen}
+      transform: none !important
+
+      &.is-collapsed
+        width: $sidebar-collapsed-size
+        overflow: visible
+
+@each $position in (left right)
+
+  .off-canvas-reveal-#{$position}
+
+    .off-canvas-content
+      margin-#{$position}: $offcanvas-size !important
+
+    .footer-bar.sticky
+      #{$position}: $offcanvas-size !important
+
+  .off-canvas-collapse-#{$position}
+
+    .off-canvas-content
+      margin-#{$position}: $sidebar-collapsed-size !important
+
+    .footer-bar.sticky
+      #{$position}: $sidebar-collapsed-size !important

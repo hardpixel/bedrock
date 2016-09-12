@@ -1,0 +1,10 @@
+.avatar
+  border-radius: 50%
+
+.container
+
+  @each $breakpoint, $value in $grid-column-gutter
+    $padding: rem-calc($value) / 2
+
+    +breakpoint($breakpoint)
+      padding: $padding

@@ -1,10 +1,32 @@
-<div id="topbar" class="top-bar">
+<div class="top-bar">
   <div class="top-bar-left">
     <ul class="menu">
-      <li><button type="button" class="button plain" data-toggle="sidebar"><i class="fa fa-bars"></i></button></li>
+      <li>
+        <button type="button" class="button plain" data-collapse="off-canvas-left">
+          <i class="fa fa-bars"></i>
+        </button>
+      </li>
     </ul>
   </div>
-  <div class="top-bar-right">
 
+  <div class="top-bar-right">
+    <ul class="menu dropdown" data-dropdown-menu>
+      <li>
+        <a class="button plain gravatar">
+          <img src="https://api.adorable.io/avatars/40/berdock%40hardpixel.eu" alt="Gravatar" class="avatar" />
+          John Doe
+        </a>
+        <ul class="menu dropdown">
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Log Out</a></li>
+        </ul>
+      </li>
+      <li>
+        <button type="button" class="button plain notify" data-collapse="off-canvas-right">
+          <i class="fa fa-gears"></i>
+          <span class="badge warning">5</span>
+        </button>
+      </li>
+    </ul>
   </div>
 </div>
