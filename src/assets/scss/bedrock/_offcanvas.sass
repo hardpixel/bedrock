@@ -1,61 +1,113 @@
 .off-canvas-wrapper, .off-canvas-wrapper-inner, .off-canvas, .off-canvas-content
-  min-height: 100%
-  min-height: 100vh
+	min-height: 100%
+	min-height: 100vh
+	transform: none
+
+.off-canvas-wrapper-inner, .off-canvas-content, .off-canvas, .sticky
+	transition-duration: $offcanvas-transition-length
+	transition-timing-function: $offcanvas-transition-timing
+
+.off-canvas-wrapper-inner
+	left: 0
+	transition-property: left, right
+
+.off-canvas-content
+	margin-left: 0
+	margin-right: 0
+	z-index: unset
+	transition-property: margin-left, margin-right
+
+	+breakpoint(medium down)
+		min-width: 100%
+
+		.sticky
+			min-width: 100%
+
+	.sticky
+		transition-property: left, right
 
 .off-canvas
-  height: 100%
+	height: 100%
+	z-index: unset
+	transition-property: left, right, width
 
-.off-canvas-no-transitions
+	&.is-collapsed
 
-  &.off-canvas-wrapper, .off-canvas-wrapper-inner, .off-canvas, .off-canvas-content
-    transition-property: none !important
+		.sticky
+			width: $offcanvas-menu-collapsed-size
 
-.off-canvas-collapsing
+	.sticky
+		width: $offcanvas-size
+		transition-property: left, right, width
 
-  .off-canvas-content
-    transition-property: margin
-
-  .top-bar, .footer-bar
-
-    &.sticky
-      transition-property: left right
-      transition-duration: $offcanvas-transition-length
-      transition-timing-function: $offcanvas-transition-timing
-
-  .off-canvas
-    overflow: hidden !important
-    transition-property: width
-    transition-duration: $offcanvas-transition-length
-    transition-timing-function: $offcanvas-transition-timing
-
-    &.is-collapsing > *
-      width: $offcanvas-size
+.js-off-canvas-exit
+	z-index: 99
 
 @each $screen in (medium, large)
 
-  +breakpoint(#{$screen})
+	+breakpoint(#{$screen})
 
-    .off-canvas.reveal-for-#{$screen}
-      transform: none !important
+		.off-canvas
 
-      &.is-collapsed
-        width: $sidebar-collapsed-size
-        overflow: visible
+			&.reveal-for-#{$screen}
+
+				&.is-collapsed
+					width: $offcanvas-menu-collapsed-size
+					overflow: visible
 
 @each $position in (left right)
 
-  .off-canvas-reveal-#{$position}
+	.off-canvas-wrapper-inner
 
-    .off-canvas-content
-      margin-#{$position}: $offcanvas-size !important
+		&.is-open-#{$position}
 
-    .footer-bar.sticky
-      #{$position}: $offcanvas-size !important
+			@if $position == right
+				left: -$offcanvas-size
 
-  .off-canvas-collapse-#{$position}
+				.off-canvas-content .is-stuck
+					left: -$offcanvas-size
+					right: $offcanvas-size
 
-    .off-canvas-content
-      margin-#{$position}: $sidebar-collapsed-size !important
+				.off-canvas .is-stuck
+					right: 0
 
-    .footer-bar.sticky
-      #{$position}: $sidebar-collapsed-size !important
+				.off-canvas.position-left.is-stuck
+					left: -$offcanvas-size
+
+			@if $position == left
+				left: $offcanvas-size
+
+				.off-canvas.position-#{$position}
+					left: 0
+
+				.off-canvas-content .is-stuck
+					left: $offcanvas-size
+					right: -$offcanvas-size
+
+	.off-canvas.position-#{$position}
+
+		.is-stuck
+
+			@if $position == right
+				left: auto
+				#{$position}: -$offcanvas-size
+
+			@if $position == left
+				right: auto
+				#{$position}: 0
+
+	.off-canvas-reveal-#{$position}
+
+		.off-canvas-content
+			margin-#{$position}: $offcanvas-size !important
+
+		.off-canvas-content .sticky
+			#{$position}: $offcanvas-size
+
+	.off-canvas-collapse-#{$position}
+
+		.off-canvas-content
+			margin-#{$position}: $offcanvas-menu-collapsed-size !important
+
+		.off-canvas-content .sticky
+			#{$position}: $offcanvas-menu-collapsed-size

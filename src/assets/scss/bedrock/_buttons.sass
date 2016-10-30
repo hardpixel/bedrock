@@ -1,24 +1,28 @@
 .button
 
-  &.plain
-    background: none
-    color: inherit
+	&.plain
+		background: none
+		color: inherit
 
-  &.gravatar
-    padding-left: 4rem !important
+	&.notify
+		position: relative
 
-    img
-      position: absolute
-      top: 0
-      left: .8rem
-      width: 36px
-      height: 36px
+		.badge, .label
+			position: absolute
+			top: 0
+			right: 0
+			min-width: 1.7em
 
-  &.notify
-    position: relative
+.top-bar
 
-    .badge, .label
-      position: absolute
-      top: 0
-      right: 0
-      min-width: 1.7em
+	.button
+
+		&.gravatar
+			padding-left: 4rem
+
+			img
+				position: absolute
+				top: 0
+				left: .8rem
+				width: 2.25rem
+				height: 2.25rem

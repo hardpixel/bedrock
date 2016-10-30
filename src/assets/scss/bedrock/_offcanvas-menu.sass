@@ -1,122 +1,113 @@
 .off-canvas-menu
-  background: $sidebar-background
+	background: $offcanvas-menu-background
 
-  &.is-collapsed
+	&.is-collapsed
 
-    [data-dropdown-menu]
-      display: block
+		[data-dropdown-menu]
+			display: block
 
-    [data-accordion-menu]
-      display: none
+		[data-accordion-menu]
+			display: none
 
-    .menu-text span, > .menu > li > a > span
-      display: none
+		.menu-text span, > .menu > li > a > span
+			display: none
 
-    .top-bar
-      text-align: center
+		.top-bar
+			text-align: center
 
-      &.sticky
-        width: $sidebar-collapsed-size
+	&.position-right
 
-  &.position-right
+		> .menu
 
-    > .menu
+			> li
 
-      > li
+				&.is-accordion-submenu-parent
 
-        &.is-accordion-submenu-parent
+					&.active, &[aria-expanded="true"]
 
-          &.active, &[aria-expanded="true"]
+						a
+							box-shadow: inset -3px 0 0 $offcanvas-menu-submenu-item-border-color-active
 
-            a
-              box-shadow: inset -3px 0 0 $sidebar-submenu-item-border-color-active
+				&.active, &[aria-expanded="true"]
 
-        &.active, &[aria-expanded="true"]
+					> a
+						box-shadow: inset -3px 0 0 $offcanvas-menu-item-border-color-active
 
-          > a
-            box-shadow: inset -3px 0 0 $sidebar-menu-item-border-color-active !important
+	> .menu
 
-  > .menu
+		> li
 
-    > li
+			&.is-accordion-submenu-parent
 
-      &.is-accordion-submenu-parent
+				> .menu a:before
+						content: ""
+						display: inline-block
+						margin-left: $offcanvas-menu-margin-nested
 
-        > .menu a:before
-            content: ""
-            display: inline-block
-            margin-left: $sidebar-menu-margin-nested
+				&.active, &[aria-expanded="true"]
 
-        &.active, &[aria-expanded="true"]
+					a
+						box-shadow: inset 3px 0 0 $offcanvas-menu-submenu-item-border-color-active
 
-          a
-            box-shadow: inset 3px 0 0 $sidebar-submenu-item-border-color-active
+			&.active, &[aria-expanded="true"]
 
-      &.active, &[aria-expanded="true"]
+				> a
+					background: $offcanvas-menu-item-background-active
+					color: $offcanvas-menu-item-color-active
+					box-shadow: inset 3px 0 0 $offcanvas-menu-item-border-color-active
 
-        > a
-          background: $sidebar-menu-item-background-active
-          color: $sidebar-menu-item-color-active
-          box-shadow: inset 3px 0 0 $sidebar-menu-item-border-color-active !important
+	.menu
+		background: $offcanvas-menu-background
+		border: 0
+		background: inherit
+		color: inherit
 
-  .menu
-    background: $sidebar-background
-    border: 0 !important
-    background: inherit
-    color: inherit
+		&.is-accordion-submenu, &.is-dropdown-submenu
+			background: $offcanvas-menu-submenu-background
 
-    &.is-accordion-submenu, &.is-dropdown-submenu
-      background: $sidebar-submenu-background
+			a
+				color: $offcanvas-menu-submenu-color
+				padding: $offcanvas-menu-submenu-item-padding
 
-      a
-        color: $sidebar-submenu-color
-        padding: $sidebar-submenu-item-padding
+		li
 
-    li
+			&.is-submenu-item
 
-      &.is-submenu-item
+				&.active, &[aria-expanded="true"]
 
-        &.active, &[aria-expanded="true"]
+					a
+						background: rgba($black, .05)
 
-          a
-            background: rgba($black, .05)
+					> a
+						color: $offcanvas-menu-item-color-active
 
-          > a
-            color: $sidebar-menu-item-color-active
+		a
+			color: $offcanvas-menu-color
+			white-space: nowrap
+			padding: $offcanvas-menu-item-padding
+			font-size: .9rem
 
-    a
-      color: $sidebar-color
-      white-space: nowrap
-      padding: $sidebar-menu-item-padding
-      font-size: .9rem
+			i
+				width: 2rem
+				text-align: center
+				margin-right: .1rem
 
-      i
-        width: 2rem
-        text-align: center
-        margin-right: .1rem
+	[data-dropdown-menu]
+		display: none
 
-  [data-dropdown-menu]
-    display: none
+	.top-bar
+		background: $offcanvas-menu-header-background
+		color: $offcanvas-menu-header-color
 
-  .top-bar
-    background: $sidebar-header-background
-    color: $sidebar-header-color
+		.menu
+			margin: 0
+			padding: 0
+			font-size: 1rem
 
-    &.sticky
-      left: 0
-      width: $offcanvas-size
-      z-index: 99
-      top: 0
+		.menu-text
+			width: 100%
 
-    .menu
-      margin: 0 !important
-      padding: 0 !important
-      font-size: 1rem
-
-    .menu-text
-      width: 100%
-
-      i
-        width: 1rem
-        text-align: center
-        margin-right: .5rem
+			i
+				width: 1rem
+				text-align: center
+				margin-right: .5rem
