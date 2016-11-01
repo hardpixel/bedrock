@@ -6,8 +6,8 @@
   ],
   "description": "HTML5 framework based on ZURB Foundation 6.",
   "main": [
-    "scss/bedrock.scss",
-    "js/bedrock.js"
+    "src/assets/scss/bedrock.scss",
+    "src/assets/js/bedrock.js"
   ],
   "ignore": [
     "**/.*",
