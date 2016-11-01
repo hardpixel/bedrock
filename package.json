@@ -1,6 +1,5 @@
 {
   "name": "bedrock-html",
-  "version": "1.0.0",
   "description": "HTML5 framework based on ZURB Foundation 6.",
   "main": "gulpfile.js",
   "scripts": {
