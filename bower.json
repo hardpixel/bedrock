@@ -21,5 +21,6 @@
     "foundation-sites": "~6.2",
     "motion-ui": "~1.2",
     "font-awesome": "~4.7"
-  }
+  },
+  "private": false
 }
