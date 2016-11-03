@@ -1,4 +1,13 @@
 @charset 'utf-8';
 
 @import 'font-awesome';
-@import 'bedrock';
+
+@import 'bedrock/settings';
+@import 'bedrock/base';
+@import 'bedrock/elements';
+@import 'bedrock/buttons';
+@import 'bedrock/topbar';
+@import 'bedrock/panel';
+@import 'bedrock/footerbar';
+@import 'bedrock/offcanvas';
+@import 'bedrock/offcanvas-menu';
