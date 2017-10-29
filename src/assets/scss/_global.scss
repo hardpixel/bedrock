@@ -1,0 +1,16 @@
+.content {
+  padding: $global-padding * 2;
+}
+
+.top-bar {
+  min-height: 4rem;
+  border-bottom: 1px solid darken($topbar-background, 10);
+
+  i {
+    font-size: 1.5rem;
+  }
+
+  a {
+    color: inherit;
+  }
+}
