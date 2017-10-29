@@ -6,13 +6,30 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foundation for Sites</title>
+    <title>Bedrock Framework</title>
     <link rel="stylesheet" href="{{root}}assets/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900&amp;subset=cyrillic,greek" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/1.9.32/css/materialdesignicons.min.css">
   </head>
   <body>
 
     {{!-- Pages you create in the src/pages/ folder are inserted here when the flattened page is created. --}}
-    {{> body}}
+    <div class="off-canvas-wrapper">
+      <div class="off-canvas-menu-wrapper off-canvas-content" data-off-canvas-content>
+        <div id="sidebar" class="off-canvas-menu position-left" data-off-canvas-menu>
+          {{> sidebar }}
+        </div>
+        <div class="off-canvas-menu-content" data-off-canvas-menu-content>
+          {{> top-bar }}
+          <main class="content">
+            {{> body}}
+          </main>
+        </div>
+      </div>
+      <div id="offcanvas" class="off-canvas position-right" data-off-canvas>
+        {{> offcanvas }}
+      </div>
+    </div>
 
     <script src="{{root}}assets/js/app.js"></script>
   </body>
