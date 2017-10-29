@@ -1,0 +1,98 @@
+$panel-background: $white !default;
+$panel-background-fade: 85% !default;
+$panel-color-scale: 10 !default;
+$panel-border-width: 2px !default;
+$panel-margin: 0 0 ($global-margin * 2) !default;
+$panel-padding: $global-padding !default;
+$panel-font-color: $body-font-color !default;
+$panel-font-color-alt: $body-background !default;
+$panel-radius: $global-radius !default;
+
+// Panel Mixins
+
+@mixin panel-border($color) {
+  border-color: smart-scale($color, $panel-color-scale);
+  border-style: solid;
+  border-width: 0 1px;
+
+  &:first-child {
+    border-top-width: 1px;
+  }
+
+  &:last-child {
+    border-bottom-width: 1px;
+  }
+
+  &.border {
+    border-bottom-width: 1px;
+  }
+}
+
+@mixin panel-radius {
+  &:first-child {
+    border-top-left-radius: $panel-radius;
+    border-top-right-radius: $panel-radius;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: $panel-radius;
+    border-bottom-right-radius: $panel-radius;
+  }
+}
+
+@mixin panel-fill {
+  @each $name, $color in $foundation-palette {
+    &.#{$name} {
+      background-color: $color;
+      color: color-pick-contrast($color, ($panel-font-color, $panel-font-color-alt));
+      border: 0;
+    }
+  }
+}
+
+@mixin panel($color) {
+  margin: $panel-margin;
+  background: $panel-background;
+  @include panel-fill;
+}
+
+@mixin panel-header($color) {
+  padding: $panel-padding;
+  font-weight: $global-weight-bold;
+  @include panel-border($color);
+  @include panel-radius;
+  @include panel-fill;
+}
+
+@mixin panel-footer($color) {
+  padding: $panel-padding;
+  @include panel-border($color);
+  @include panel-radius;
+  @include panel-fill;
+}
+
+@mixin panel-content($color) {
+  padding: $panel-padding;
+  @include panel-border($color);
+  @include panel-radius;
+  @include panel-fill;
+}
+
+
+// Panel Component
+
+.panel {
+  @include panel($panel-background);
+}
+
+.panel-content {
+  @include panel-content($panel-background);
+}
+
+.panel-header {
+  @include panel-header($panel-background);
+}
+
+.panel-footer {
+  @include panel-footer($panel-background);
+}
