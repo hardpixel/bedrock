@@ -1,4 +1,5 @@
 $offcanvas-menu-background: $secondary-color !default;
+$offcanvas-menu-collapsed-size: 4.1rem !default;
 $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !default;
 $offcanvas-menu-header-background: $primary-color !default;
 
@@ -6,15 +7,216 @@ $offcanvas-menu-header-background: $primary-color !default;
 
 @mixin off-canvas-menu-wrapper {
   @include xy-grid;
+  @include off-canvas-wrapper;
   min-height: 100vh;
 }
 
 @mixin off-canvas-menu-content {
   @include xy-cell(auto, false);
-  @include off-canvas-content;
+  @extend .#{$maincontent-class};
 
   @include breakpoint(large) {
     transform: translateX(0);
+  }
+}
+
+@mixin off-canvas-menu-header {
+  background: $offcanvas-menu-header-background;
+  border-color: $offcanvas-menu-background;
+  color: $white;
+  justify-content: flex-start;
+
+  img {
+    height: 1.6rem;
+    margin: 0 1rem;
+  }
+
+  span {
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 1.2rem;
+  }
+
+  @include breakpoint(large) {
+    @at-root .is-collapsed#{&} {
+      white-space: nowrap;
+      width: $offcanvas-menu-collapsed-size;
+
+      span {
+        display: none;
+      }
+    }
+  }
+}
+
+@mixin offcanvas-menu-basics {
+  &.secondary {
+
+    a {
+      color: rgba($white, .6);
+      text-transform: uppercase;
+    }
+  }
+
+  a {
+    color: $white;
+    font-size: .9rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    outline: 0;
+  }
+
+  .submenu {
+    background: $offcanvas-menu-submenu-background;
+    margin: 0;
+  }
+
+  @include breakpoint(large) {
+    @at-root .off-canvas-menu.is-collapsed > .menu:not(.icons) {
+      display: none;
+    }
+  }
+}
+
+@mixin offcanvas-menu-icons {
+  &.icons {
+
+    i {
+      font-size: 1.2rem;
+      position: relative;
+      width: 1.2rem;
+
+      &:before {
+        @include vertical-center;
+      }
+    }
+  }
+
+  &.icon-left {
+
+    i {
+      margin-right: .7rem;
+    }
+  }
+
+  &.icon-right {
+
+    a {
+      padding-right: 40px;
+      position: relative;
+
+      i {
+        @include vertical-center;
+        left: calc(100% - 40px);
+      }
+    }
+  }
+
+  @include breakpoint(large) {
+    @at-root .off-canvas-menu.is-collapsed > .menu {
+      > li {
+
+        > a {
+          overflow: hidden;
+          white-space: nowrap;
+          width: $offcanvas-menu-collapsed-size;
+          padding-left: 0;
+          padding-right: 0;
+
+          > i {
+            position: relative;
+            transform: none;
+            margin: 0 auto;
+            left: 0;
+            width: 0;
+
+            &:before {
+              @include absolute-center;
+            }
+          }
+
+          > span {
+            width: 0;
+            opacity: 0;
+            overflow: hidden;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin off-canvas-menu-accordion {
+  > li {
+    border-bottom: 1px solid rgba(white, .04);
+
+    &:hover {
+
+      > a {
+        box-shadow: inset 3px 0 0 $white;
+      }
+    }
+
+    &:last-child {
+      border-bottom: 0;
+
+      > .submenu {
+        box-shadow: 0 1px 0 rgba(white, .04);
+      }
+    }
+
+    > a {
+      padding-top: 1.1rem;
+      padding-bottom: 1.1rem;
+    }
+
+    > .submenu {
+      padding: .5rem 0;
+      box-shadow: 0 -1px 0 rgba(white, .04);
+
+      .submenu {
+        background: rgba(darken($offcanvas-menu-background, 15), 0.1);
+        box-shadow: 0 -1px 0 rgba(white, .02), 0 1px 0 rgba(white, .02);
+      }
+    }
+
+    > .submenu-toggle {
+      height: 50px;
+    }
+  }
+
+  a {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .submenu-toggle {
+    height: 45px;
+    padding-right: .8rem;
+    outline: none;
+
+    &:after {
+      border: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba($white, 0.1);
+    }
+  }
+
+  @include breakpoint(large) {
+    @at-root .is-collapsed#{&} {
+      > li > .submenu-toggle {
+        width: 0;
+        opacity: 0;
+        overflow: hidden;
+      }
+
+      .submenu {
+        display: none;
+      }
+    }
   }
 }
 
@@ -36,142 +238,9 @@ $offcanvas-menu-header-background: $primary-color !default;
     @each $name, $size in $offcanvas-sizes {
       width: $size;
     }
-  }
 
-  .top-bar {
-    background: $offcanvas-menu-header-background;
-    border-color: $offcanvas-menu-background;
-    color: $white;
-    justify-content: flex-start;
-
-    img {
-      height: 1.6rem;
-      margin: 0 1rem;
-    }
-
-    span {
-      margin: 0;
-      text-transform: uppercase;
-      font-weight: normal;
-      font-size: 1.2rem;
-    }
-  }
-
-  > .menu {
-    > li {
-      border-bottom: 1px solid rgba(white, .04);
-
-      &:hover {
-
-        > a {
-          box-shadow: inset 3px 0 0 $white;
-        }
-      }
-
-      &:last-child {
-        border-bottom: 0;
-
-        > .submenu {
-          box-shadow: 0 1px 0 rgba(white, .04);
-        }
-      }
-
-      > a {
-        padding: 1.1rem 1.5rem;
-
-        > i:first-child {
-          position: relative;
-          margin-right: .7rem;
-          font-size: 1.2rem;
-          width: 1.2rem;
-          vertical-align: middle;
-          display: inline-block;
-
-          &:before {
-            position: absolute;
-            top: -.7rem;
-          }
-        }
-      }
-
-      > .submenu {
-        padding: .5rem 0;
-        box-shadow: 0 -1px 0 rgba(white, .04);
-
-        .submenu {
-          background: rgba(darken($offcanvas-menu-background, 15), 0.1);
-          box-shadow: 0 -1px 0 rgba(white, .02), 0 1px 0 rgba(white, .02);
-        }
-      }
-
-      > .submenu-toggle {
-        height: 50px;
-      }
-    }
-  }
-
-  .menu {
-    a {
-      color: $white;
-      font-size: .9rem;
-      padding: 1rem 1.5rem;
-      outline: 0;
-    }
-
-    .submenu {
-      background: $offcanvas-menu-submenu-background;
-      margin: 0;
-    }
-
-    .submenu-toggle {
-      height: 45px;
-      padding-right: .8rem;
-      outline: none;
-
-      &:after {
-        border: 0;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: rgba($white, 0.1);
-      }
-    }
-  }
-
-  @include breakpoint(large) {
     &.is-collapsed {
-      width: 4rem;
-
-      > .menu {
-
-        > li {
-
-          > a {
-            overflow: hidden;
-            white-space: nowrap;
-            width: 4rem;
-
-            > i {
-              width: 4rem;
-            }
-          }
-
-          > .submenu-toggle {
-            opacity: 0;
-            visibility: hidden;
-          }
-        }
-      }
-
-      .top-bar {
-        white-space: nowrap;
-        width: 4rem;
-        overflow: hidden;
-
-        span {
-          opacity: 0;
-        }
-      }
+      width: $offcanvas-menu-collapsed-size;
     }
   }
 }
@@ -189,4 +258,17 @@ $offcanvas-menu-header-background: $primary-color !default;
 
 .off-canvas-menu {
   @include off-canvas-menu;
+
+  > .top-bar {
+    @include off-canvas-menu-header;
+  }
+
+  > .accordion-menu {
+    @include off-canvas-menu-accordion;
+  }
+
+  .menu {
+    @include offcanvas-menu-basics;
+    @include offcanvas-menu-icons;
+  }
 }
