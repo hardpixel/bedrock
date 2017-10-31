@@ -52,6 +52,14 @@ $offcanvas-menu-header-background: $primary-color !default;
   }
 }
 
+@mixin offcanvas-menu-dot {
+  border: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba($white, 0.1);
+}
+
 @mixin offcanvas-menu-basics {
   &.secondary {
 
@@ -110,7 +118,7 @@ $offcanvas-menu-header-background: $primary-color !default;
 
       i {
         @include vertical-center;
-        left: calc(100% - 40px);
+        left: calc(100% - 45px);
       }
     }
   }
@@ -149,7 +157,7 @@ $offcanvas-menu-header-background: $primary-color !default;
   }
 }
 
-@mixin off-canvas-menu-accordion {
+@mixin off-canvas-menu-style {
   > li {
     border-bottom: 1px solid rgba(white, .04);
 
@@ -162,15 +170,30 @@ $offcanvas-menu-header-background: $primary-color !default;
 
     &:last-child {
       border-bottom: 0;
-
-      > .submenu {
-        box-shadow: 0 1px 0 rgba(white, .04);
-      }
     }
 
     > a {
       padding-top: 1.1rem;
       padding-bottom: 1.1rem;
+    }
+  }
+
+  a {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+@mixin off-canvas-menu-accordion {
+  @include off-canvas-menu-style;
+
+  > li {
+
+    &:last-child {
+
+      > .submenu {
+        box-shadow: 0 1px 0 rgba(white, .04);
+      }
     }
 
     > .submenu {
@@ -188,37 +211,47 @@ $offcanvas-menu-header-background: $primary-color !default;
     }
   }
 
-  a {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-
   .submenu-toggle {
     height: 45px;
     padding-right: .8rem;
     outline: none;
 
     &:after {
-      border: 0;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba($white, 0.1);
+      @include offcanvas-menu-dot;
     }
   }
 
   @include breakpoint(large) {
     @at-root .is-collapsed#{&} {
-      > li > .submenu-toggle {
-        width: 0;
-        opacity: 0;
-        overflow: hidden;
-      }
-
-      .submenu {
-        display: none;
-      }
+      display: none;
     }
+  }
+}
+
+@mixin off-canvas-menu-dropdown {
+  @include off-canvas-menu-style;
+
+  > li {
+
+    > a:after {
+      display: none !important;
+    }
+  }
+
+  .is-active > a {
+    color: $white;
+  }
+
+  .is-dropdown-submenu .is-dropdown-submenu-parent > a::after {
+    @include offcanvas-menu-dot;
+    margin-top: -3px;
+    right: 18px;
+  }
+
+  .submenu {
+    padding: .17rem 0;
+    border: 0;
+    margin-top: -1px;
   }
 }
 
@@ -238,6 +271,7 @@ $offcanvas-menu-header-background: $primary-color !default;
     background: $offcanvas-menu-background;
     visibility: visible;
     transition: none;
+    overflow: visible;
 
     @each $name, $size in $offcanvas-sizes {
       width: $size;
@@ -245,7 +279,15 @@ $offcanvas-menu-header-background: $primary-color !default;
 
     &.is-collapsed {
       width: $offcanvas-menu-collapsed-size;
+
+      .collapse-show {
+        display: block;
+      }
     }
+  }
+
+  .collapse-show {
+    display: none;
   }
 }
 
@@ -269,6 +311,10 @@ $offcanvas-menu-header-background: $primary-color !default;
 
   > .accordion-menu {
     @include off-canvas-menu-accordion;
+  }
+
+  > .dropdown.menu {
+    @include off-canvas-menu-dropdown;
   }
 
   .menu {

@@ -3,6 +3,8 @@
 import $ from 'jquery';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { OffCanvas } from 'foundation-sites/js/foundation.offcanvas';
+import { AccordionMenu } from 'foundation-sites/js/foundation.accordionMenu';
+import { DropdownMenu } from 'foundation-sites/js/foundation.dropdownMenu';
 import { MediaQuery } from 'foundation-sites/js/foundation.util.mediaQuery';
 
 /**
@@ -42,8 +44,7 @@ class OffCanvasMenu extends Plugin {
     this.$collapsed = this.$element.hasClass('is-collapsed');
 
     this._setMQChecker();
-    // this._state(this);
-    // this._menus(this);
+    this._menus(this);
   }
 
   /**
@@ -70,6 +71,43 @@ class OffCanvasMenu extends Plugin {
       _this.reveal();
     }).one('load.zf.offcanvas', function() {
       _this.reveal();
+    });
+  }
+
+  /**
+   * Applies event listener for elements that will reveal at certain breakpoints.
+   * @private
+   */
+  _menus() {
+    this.$element.find('.accordion-menu').each(function(index, el) {
+      var accordion, dropdown, parents;
+
+      accordion = $(el).foundation('destroy');
+      dropdown = $(el).clone();
+
+      dropdown.removeClass('accordion-menu');
+      dropdown.addClass('dropdown collapse-show');
+
+      parents = dropdown.children('li').filter(function(index, el) {
+        return !$(el).children('ul').length;
+      });
+
+      parents.each(function(index, el) {
+        var link, menu;
+
+        menu = $('<ul class="vertical menu"><li></li></ul>');
+        link = $(el).children('a:first').clone();
+
+        link.find('i').remove();
+        menu.find('li').append(link);
+
+        $(el).append(menu);
+      });
+
+      dropdown.insertAfter(accordion);
+
+      new AccordionMenu(accordion);
+      new DropdownMenu(dropdown);
     });
   }
 
