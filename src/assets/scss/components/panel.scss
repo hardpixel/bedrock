@@ -9,10 +9,27 @@ $panel-radius: $global-radius !default;
 
 // Panel Mixins
 
+@mixin panel-children-border {
+  @each $name, $color in $foundation-palette {
+    &.#{$name} {
+
+      > [class^="panel"] {
+        border-color: smart-scale($color, $panel-color-scale);
+      }
+    }
+  }
+}
+
 @mixin panel-border($color) {
   border-color: smart-scale($color, $panel-color-scale);
   border-style: solid;
   border-width: 0 1px;
+
+  @each $name, $color in $foundation-palette {
+    &.#{$name} {
+      border-color: smart-scale($color, $panel-color-scale);
+    }
+  }
 
   &:first-child {
     border-top-width: 1px;
@@ -44,13 +61,13 @@ $panel-radius: $global-radius !default;
     &.#{$name} {
       background-color: $color;
       color: color-pick-contrast($color, ($panel-font-color, $panel-font-color-alt));
-      border: 0;
     }
   }
 }
 
 @mixin panel($color) {
   background: $panel-background;
+  @include panel-children-border;
   @include panel-fill;
 
   @each $name, $size in $grid-column-gutter {
