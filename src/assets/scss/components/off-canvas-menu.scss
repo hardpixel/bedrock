@@ -27,10 +27,12 @@ $offcanvas-menu-header-background: $primary-color !default;
   border-color: $offcanvas-menu-background;
   color: $white;
   justify-content: flex-start;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 
   img {
     height: 1.6rem;
-    margin: 0 1rem;
+    margin-right: .7rem;
   }
 
   span {
