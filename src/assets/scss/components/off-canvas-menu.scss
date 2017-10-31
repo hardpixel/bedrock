@@ -16,7 +16,9 @@ $offcanvas-menu-header-background: $primary-color !default;
   @extend .#{$maincontent-class};
 
   @include breakpoint(large) {
+    margin: 0;
     transform: translateX(0);
+    transition: none;
   }
 }
 
@@ -234,6 +236,8 @@ $offcanvas-menu-header-background: $primary-color !default;
   @include breakpoint(large) {
     @include in-canvas;
     background: $offcanvas-menu-background;
+    visibility: visible;
+    transition: none;
 
     @each $name, $size in $offcanvas-sizes {
       width: $size;

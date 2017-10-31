@@ -41,10 +41,7 @@ class OffCanvasMenu extends Plugin {
     this.$wrapper = $('.off-canvas-wrapper');
     this.$collapsed = this.$element.hasClass('is-collapsed');
 
-    if (MediaQuery.atLeast('large')) {
-      this.$element.removeClass('is-closed');
-    }
-
+    this._setMQChecker();
     // this._state(this);
     // this._menus(this);
   }
@@ -63,6 +60,53 @@ class OffCanvasMenu extends Plugin {
   }
 
   /**
+   * Applies event listener for elements that will reveal at certain breakpoints.
+   * @private
+   */
+  _setMQChecker() {
+    var _this = this;
+
+    $(window).on('changed.zf.mediaquery', function() {
+      _this.reveal();
+    }).one('load.zf.offcanvas', function() {
+      _this.reveal();
+    });
+  }
+
+  /**
+   * Handles the revealing/hiding the off-canvas at breakpoints, not the same as open.
+   * @function
+   */
+  reveal() {
+    if (MediaQuery.atLeast('large')) {
+      this.offcanvas.$element.removeClass('is-closed');
+      this.offcanvas.close();
+
+      this.offcanvas._removeContentClasses();
+      this.offcanvas._removeContentClasses(false);
+    } else {
+      this.offcanvas.reveal(false);
+      this.offcanvas.close();
+    }
+
+    this._events();
+  }
+
+  /**
+   * Handles the collapsing/expanding the off-canvas at breakpoints, not the same as open.
+   * @function
+   */
+  collapse(isCollapsed) {
+    this.$collapsed = isCollapsed;
+
+    if (isCollapsed) {
+      this.$element.addClass('is-collapsed');
+    } else {
+      this.$element.removeClass('is-collapsed');
+    }
+  }
+
+  /**
    * Opens the off-canvas menu.
    * @function
    * @param {Object} event - Event object passed from listener.
@@ -71,8 +115,7 @@ class OffCanvasMenu extends Plugin {
    */
   open(event, trigger) {
     if (MediaQuery.atLeast('large')) {
-      this.$collapsed = true;
-      this.$element.addClass('is-collapsed');
+      this.collapse(true);
     } else {
       this.offcanvas.open();
     }
@@ -86,8 +129,7 @@ class OffCanvasMenu extends Plugin {
    */
   close(event, trigger) {
     if (MediaQuery.atLeast('large')) {
-      this.$collapsed = false;
-      this.$element.removeClass('is-collapsed');
+      this.collapse(false);
     } else {
       this.offcanvas.close();
     }
@@ -100,11 +142,7 @@ class OffCanvasMenu extends Plugin {
    */
   toggle(event, trigger) {
     if (MediaQuery.atLeast('large')) {
-      if (this.$collapsed) {
-        this.close(event, trigger);
-      } else {
-        this.open(event, trigger);
-      }
+      this.collapse(!this.$collapsed);
     } else {
       this.offcanvas.toggle();
     }
