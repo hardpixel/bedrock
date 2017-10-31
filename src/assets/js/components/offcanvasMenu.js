@@ -86,7 +86,7 @@ class OffCanvasMenu extends Plugin {
       dropdown = $(el).clone();
 
       dropdown.removeClass('accordion-menu');
-      dropdown.addClass('dropdown collapse-show');
+      dropdown.addClass('dropdown collapse-show off-canvas-menu-generated');
 
       parents = dropdown.children('li').filter(function(index, el) {
         return !$(el).children('ul').length;
@@ -184,6 +184,18 @@ class OffCanvasMenu extends Plugin {
     } else {
       this.offcanvas.toggle();
     }
+  }
+
+  /**
+   * Destroys the offcanvas plugin.
+   * @function
+   */
+  _destroy() {
+    this.collapse(false);
+    this.$element.off('.zf.trigger .zf.offcanvas');
+    this.$element.find('.off-canvas-menu-generated').foundation('destroy');
+    this.$element.find('.off-canvas-menu-generated').remove();
+    this.offcanvas._destroy();
   }
 }
 
