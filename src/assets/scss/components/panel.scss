@@ -2,7 +2,6 @@ $panel-background: $white !default;
 $panel-background-fade: 85% !default;
 $panel-color-scale: 10 !default;
 $panel-border-width: 2px !default;
-$panel-margin: 0 0 ($global-margin * 2) !default;
 $panel-padding: $global-padding !default;
 $panel-font-color: $body-font-color !default;
 $panel-font-color-alt: $body-background !default;
@@ -51,9 +50,14 @@ $panel-radius: $global-radius !default;
 }
 
 @mixin panel($color) {
-  margin: $panel-margin;
   background: $panel-background;
   @include panel-fill;
+
+  @each $name, $size in $grid-column-gutter {
+    @include breakpoint($name) {
+      margin-bottom: $size;
+    }
+  }
 }
 
 @mixin panel-header($color) {

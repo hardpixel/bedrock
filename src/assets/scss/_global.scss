@@ -1,5 +1,11 @@
 .content {
   padding: $global-padding * 2;
+
+  @each $name, $size in $grid-column-gutter {
+    @include breakpoint($name) {
+      padding: $size;
+    }
+  }
 }
 
 .top-bar {
