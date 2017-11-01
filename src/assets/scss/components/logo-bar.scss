@@ -1,0 +1,41 @@
+$logo-bar-color: $white !default;
+$logo-bar-background: $primary-color !default;
+$logo-bar-padding: $topbar-padding !default;
+
+// Logo Bar Mixins
+
+@mixin logo-bar {
+  @if $global-flexbox {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+  @else {
+    @include clearfix;
+  }
+
+  padding: $logo-bar-padding;
+  background: $logo-bar-background;
+  border-color: $logo-bar-background;
+  color: $logo-bar-color;
+
+  img {
+    height: 1.6rem;
+    margin-right: .7rem;
+  }
+
+  span {
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 1.2rem;
+  }
+}
+
+
+// Logo Bar Components
+
+.logo-bar {
+  @include logo-bar;
+}

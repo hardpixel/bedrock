@@ -1,7 +1,6 @@
 $offcanvas-menu-background: $secondary-color !default;
 $offcanvas-menu-collapsed-size: 4.1rem !default;
 $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !default;
-$offcanvas-menu-header-background: $primary-color !default;
 
 // Offcanvas Menu Mixins
 
@@ -23,24 +22,10 @@ $offcanvas-menu-header-background: $primary-color !default;
 }
 
 @mixin off-canvas-menu-header {
-  background: $offcanvas-menu-header-background;
-  border-color: $offcanvas-menu-background;
-  color: $white;
-  justify-content: flex-start;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-
-  img {
-    height: 1.6rem;
-    margin-right: .7rem;
-  }
-
-  span {
-    margin: 0;
-    text-transform: uppercase;
-    font-weight: normal;
-    font-size: 1.2rem;
-  }
+  border-color: $offcanvas-menu-background;
+  justify-content: flex-start;
 
   @include breakpoint(large) {
     @at-root .is-collapsed#{&} {
@@ -307,7 +292,7 @@ $offcanvas-menu-header-background: $primary-color !default;
 .off-canvas-menu {
   @include off-canvas-menu;
 
-  > .top-bar {
+  > .logo-bar {
     @include off-canvas-menu-header;
   }
 
