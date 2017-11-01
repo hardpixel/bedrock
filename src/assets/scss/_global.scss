@@ -8,7 +8,8 @@
   }
 }
 
-.top-bar, .logo-bar {
+.top-bar,
+.logo-bar {
   min-height: 4rem;
   border-bottom: 1px solid darken($topbar-background, 10);
 
@@ -18,5 +19,10 @@
 
   a {
     color: inherit;
+  }
+
+  .top-bar-left,
+  .top-bar-right {
+    flex: 0 0 auto;
   }
 }
