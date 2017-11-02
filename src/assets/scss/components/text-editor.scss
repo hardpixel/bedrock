@@ -1,0 +1,10 @@
+@import '../vendor/quill';
+
+.text-editor-toolbar {
+  @include top-bar-container;
+  border: 1px solid darken($topbar-background, 10);
+}
+
+.text-editor {
+  border: 1px solid darken($topbar-background, 10);
+}
