@@ -105,6 +105,15 @@ let webpackConfig = {
             loader: 'babel-loader'
           }
         ]
+      },
+      {
+        test: /\.svg$/,
+        use: [{
+          loader: 'html-loader',
+          options: {
+            minimize: true
+          }
+        }]
       }
     ]
   }
