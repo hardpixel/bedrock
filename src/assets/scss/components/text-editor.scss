@@ -1,10 +1,51 @@
+// Import Vendor Styles
+
 @import '../vendor/quill';
 
-.text-editor-toolbar {
-  @include top-bar-container;
-  border: 1px solid darken($topbar-background, 10);
+
+// Text Editor Mixins
+
+@mixin text-editor-basics {
+  border: 1px solid darken($panel-background, 10);
+
+  .ql-toolbar, .ql-container {
+    font-family: $body-font-family;
+  }
+
+  .ql-toolbar {
+    border-color: darken($panel-background, 10);
+    border-width: 0 0 1px;
+
+    &.ql-snow {
+      padding: $global-padding / 2;
+
+      .ql-picker-label::before {
+        line-height: normal;
+      }
+
+      .ql-picker-options {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .ql-container {
+    border: 0;
+    font-size: inherit;
+
+    .ql-editor {
+      padding: $global-padding;
+    }
+
+    .ql-tooltip {
+      box-shadow: none;
+    }
+  }
 }
 
+
+// Text Editor Component
+
 .text-editor {
-  border: 1px solid darken($topbar-background, 10);
+  @include text-editor-basics;
 }

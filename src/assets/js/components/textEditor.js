@@ -22,8 +22,9 @@ class TextEditor extends Plugin {
   _setup(element, options) {
     this.className = 'TextEditor'; // ie9 back compat
     this.$element = element;
-    this.options = $.extend({}, TextEditor.defaults, this.$element.data(), options, { modules: { toolbar: '#toolbar' } });
-    this.editor = new Quill(this.$element.get(0), this.options);
+    this.$container = $('<div></div>')
+    this.options = $.extend({}, TextEditor.defaults, this.$element.data(), options);
+    this.editor = null;
 
     this._init();
   }
@@ -34,6 +35,9 @@ class TextEditor extends Plugin {
    * @private
    */
   _init() {
+    this.$element.append(this.$container);
+    this.editor = new Quill(this.$container.get(0), this.options);
+
     if (this.options.minHeight) {
       this.$element.css('min-height', this.options.minHeight + 'px');
     }
@@ -57,6 +61,20 @@ class TextEditor extends Plugin {
   }
 }
 
-TextEditor.defaults = {};
+TextEditor.defaults = {
+  theme: 'snow',
+  minHeight: '300',
+  modules: {
+    toolbar: [
+      [{ 'header': [2, 3, 4, 5, 6, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }, 'blockquote'],
+      ['align', { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }],
+      [{ 'indent': '-1'}, { 'indent': '+1' }],
+      ['link', 'image', 'video'],
+      ['clean']
+    ]
+  }
+};
 
 export {TextEditor};
