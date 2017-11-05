@@ -50,6 +50,7 @@ class TextEditor extends Plugin {
       target: this.$element.get(0),
       menubar: false,
       branding: false,
+      skin_url: './assets/tinymce/skins/lightgray',
       plugins: 'paste link autoresize table wordcount fullscreen',
       toolbar: ['formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen']
     });
