@@ -1,44 +1,27 @@
-// Import Vendor Styles
-
-@import '../vendor/quill';
-
-
 // Text Editor Mixins
 
 @mixin text-editor-basics {
   border: 1px solid darken($panel-background, 10);
 
-  .ql-toolbar, .ql-container {
-    font-family: $body-font-family;
-  }
-
-  .ql-toolbar {
-    border-color: darken($panel-background, 10);
-    border-width: 0 0 1px;
-
-    &.ql-snow {
-      padding: $global-padding / 2;
-
-      .ql-picker-label::before {
-        line-height: normal;
-      }
-
-      .ql-picker-options {
-        box-shadow: none;
-      }
-    }
-  }
-
-  .ql-container {
+  .mce-tinymce {
+    box-sizing: inherit;
     border: 0;
-    font-size: inherit;
+  }
 
-    .ql-editor {
-      padding: $global-padding;
+  .mce-container {
+    border-color: darken($panel-background, 10);
+  }
+
+  .mce-top-part {
+
+    &:before {
+      display: none !important;
     }
+  }
 
-    .ql-tooltip {
-      box-shadow: none;
+  @at-root {
+    .mce-panel, .mce-menu {
+      box-shadow: none !important;
     }
   }
 }

@@ -3,7 +3,17 @@
 import $ from 'jquery';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
-var Quill = require('quill/dist/quill.js');
+import tinymce from 'tinymce';
+
+import 'tinymce/themes/inlite';
+import 'tinymce/themes/modern';
+import 'tinymce/plugins/paste';
+import 'tinymce/plugins/link';
+import 'tinymce/plugins/autoresize';
+import 'tinymce/plugins/table';
+import 'tinymce/plugins/wordcount';
+import 'tinymce/plugins/fullscreen';
+
 
 /**
  * TextEditor module.
@@ -22,7 +32,6 @@ class TextEditor extends Plugin {
   _setup(element, options) {
     this.className = 'TextEditor'; // ie9 back compat
     this.$element = element;
-    this.$container = $('<div></div>')
     this.options = $.extend({}, TextEditor.defaults, this.$element.data(), options);
     this.editor = null;
 
@@ -35,12 +44,15 @@ class TextEditor extends Plugin {
    * @private
    */
   _init() {
-    this.$element.append(this.$container);
-    this.editor = new Quill(this.$container.get(0), this.options);
+    this.$element.wrap('<div class="text-editor"></div>');
 
-    if (this.options.minHeight) {
-      this.$element.css('min-height', this.options.minHeight + 'px');
-    }
+    this.editor = tinymce.init({
+      target: this.$element.get(0),
+      menubar: false,
+      branding: false,
+      plugins: 'paste link autoresize table wordcount fullscreen',
+      toolbar: ['formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen']
+    });
   }
 
   /**
@@ -62,19 +74,7 @@ class TextEditor extends Plugin {
 }
 
 TextEditor.defaults = {
-  theme: 'snow',
-  minHeight: '300',
-  modules: {
-    toolbar: [
-      [{ 'header': [2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }, 'blockquote'],
-      ['align', { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }],
-      [{ 'indent': '-1'}, { 'indent': '+1' }],
-      ['link', 'image', 'video'],
-      ['clean']
-    ]
-  }
+
 };
 
 export {TextEditor};
