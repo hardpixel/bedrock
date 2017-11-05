@@ -16,7 +16,7 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
 
   @include breakpoint(large) {
     margin: 0;
-    transform: translateX(0);
+    transform: none;
     transition: none;
   }
 }
