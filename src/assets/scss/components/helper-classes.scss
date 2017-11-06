@@ -1,90 +1,14 @@
-// Remove attributes
+// Table helpers
 
-@each $attribute in (padding, margin, border) {
-  .no-#{$attribute} {
-    #{$attribute}: 0;
-  }
+@mixin table-helpers {
 
-  @each $side in (top, right, bottom, left) {
-    .no-#{$attribute}-#{$side} {
-      #{$attribute}-#{$side}: 0;
+  th, td {
+
+    &.shrink {
+      width: 1px;
+      white-space: nowrap;
     }
-  }
-
-  .no-#{$attribute}-x {
-    #{$attribute}-left: 0;
-    #{$attribute}-right: 0;
-  }
-
-  .no-#{$attribute}-y {
-    #{$attribute}-top: 0;
-    #{$attribute}-bottom: 0;
   }
 }
 
-
-// Add attributes
-
-@each $attribute in (margin, padding) {
-  $value: $global-margin;
-
-  @if $attribute == padding {
-    $value: $global-padding;
-  }
-
-  .#{$attribute} {
-    #{$attribute}: $value;
-  }
-
-  .#{$attribute}-small {
-    #{$attribute}: $value / 2;
-  }
-
-  .#{$attribute}-large {
-    #{$attribute}: $value * 2;
-  }
-
-  @each $side in (top, right, bottom, left) {
-    .#{$attribute}-#{$side} {
-      #{$attribute}-#{$side}: $value;
-    }
-
-    .#{$attribute}-#{$side}-small {
-      #{$attribute}-#{$side}: $value / 2;
-    }
-
-    .#{$attribute}-#{$side}-large {
-      #{$attribute}-#{$side}: $value * 2;
-    }
-  }
-
-  .#{$attribute}-x {
-    #{$attribute}-left: $value;
-    #{$attribute}-right: $value;
-  }
-
-  .#{$attribute}-y {
-    #{$attribute}-top: $value;
-    #{$attribute}-bottom: $value;
-  }
-
-  .#{$attribute}-x-small {
-    #{$attribute}-left: $value / 2;
-    #{$attribute}-right: $value / 2;
-  }
-
-  .#{$attribute}-y-small {
-    #{$attribute}-top: $value / 2;
-    #{$attribute}-bottom: $value / 2;
-  }
-
-  .#{$attribute}-x-large {
-    #{$attribute}-left: $value * 2;
-    #{$attribute}-right: $value * 2;
-  }
-
-  .#{$attribute}-y-large {
-    #{$attribute}-top: $value * 2;
-    #{$attribute}-bottom: $value * 2;
-  }
-}
+@include table-helpers;
