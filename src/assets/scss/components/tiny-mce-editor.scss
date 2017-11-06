@@ -1,6 +1,6 @@
 // Text Editor Mixins
 
-@mixin text-editor-basics {
+@mixin tiny-mce-editor-basics {
   border: 1px solid darken($panel-background, 10);
 
   .mce-tinymce {
@@ -67,6 +67,6 @@
 
 // Text Editor Component
 
-.text-editor {
-  @include text-editor-basics;
+.tiny-mce-editor {
+  @include tiny-mce-editor-basics;
 }

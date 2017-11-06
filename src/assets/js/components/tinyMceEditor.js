@@ -4,35 +4,35 @@ import $ from 'jquery';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 /**
- * TextEditor module.
- * @module textEditor
+ * TinyMceEditor module.
+ * @module tinyMceEditor
  */
 
-class TextEditor extends Plugin {
+class TinyMceEditor extends Plugin {
   /**
-   * Creates a new instance of an text-editor.
+   * Creates a new instance of an tiny-mce-editor.
    * @class
-   * @name TextEditor
-   * @fires TextEditor#init
+   * @name TinyMceEditor
+   * @fires TinyMceEditor#init
    * @param {Object} element - jQuery object to initialize.
    * @param {Object} options - Overrides to the default plugin settings.
    */
   _setup(element, options) {
-    this.className = 'TextEditor'; // ie9 back compat
+    this.className = 'TinyMceEditor'; // ie9 back compat
     this.$element = element;
-    this.options = $.extend({}, TextEditor.defaults, this.$element.data(), options);
+    this.options = $.extend({}, TinyMceEditor.defaults, this.$element.data(), options);
     this.editor = null;
 
     this._init();
   }
 
   /**
-   * Initializes the text-editor wrapper.
+   * Initializes the tiny-mce-editor wrapper.
    * @function
    * @private
    */
   _init() {
-    this.$element.wrap('<div class="text-editor"></div>');
+    this.$element.wrap('<div class="tiny-mce-editor"></div>');
     this.options = $.extend({}, this.options, { target: this.$element.get(0) });
 
     if (tinymce !== 'undefined') {
@@ -43,16 +43,7 @@ class TextEditor extends Plugin {
   }
 
   /**
-   * Adds event handlers to the text-editor.
-   * @function
-   * @private
-   */
-  _events() {
-
-  }
-
-  /**
-   * Destroys the text-editor plugin.
+   * Destroys the tiny-mce-editor plugin.
    * @function
    */
   _destroy() {
@@ -60,7 +51,7 @@ class TextEditor extends Plugin {
   }
 }
 
-TextEditor.toolbar = [
+TinyMceEditor.toolbar = [
   'bold italic underline strikethrough',
   'bullist numlist blockquote',
   'alignleft aligncenter alignright alignjustify',
@@ -73,7 +64,7 @@ TextEditor.toolbar = [
   'fullscreen'
 ];
 
-TextEditor.plugins = [
+TinyMceEditor.plugins = [
   'paste',
   'link',
   'lists',
@@ -84,11 +75,11 @@ TextEditor.plugins = [
   'fullscreen'
 ];
 
-TextEditor.defaults = {
+TinyMceEditor.defaults = {
   menubar: false,
   branding: false,
-  plugins: TextEditor.plugins.join(' '),
-  toolbar: TextEditor.toolbar.join(' | ')
+  plugins: TinyMceEditor.plugins.join(' '),
+  toolbar: TinyMceEditor.toolbar.join(' | ')
 };
 
-export {TextEditor};
+export {TinyMceEditor};

@@ -5,10 +5,10 @@ window.$ = $;
 
 import Foundation from 'foundation-sites';
 import { OffCanvasMenu } from './components/offcanvasMenu';
-import { TextEditor } from './components/textEditor';
+import { TinyMceEditor } from './components/tinyMceEditor';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
-Foundation.plugin(TextEditor, 'TextEditor');
+Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
 
 // If you want to pick and choose which modules to include, comment out the above and uncomment
 // the line below
