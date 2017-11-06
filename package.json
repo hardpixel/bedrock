@@ -12,9 +12,9 @@
   "dependencies": {
     "clndr": "^1.4.7",
     "dropzone": "^5.2.0",
-    "foundation-sites": "~6.4.1",
-    "jquery": ">=3.0.0",
-    "motion-ui": "~1.2.2",
+    "foundation-sites": "^6.4.3",
+    "jquery": "^3.0.0",
+    "motion-ui": "^1.2.2",
     "select2": "^4.0.5",
     "what-input": "^4.1.3"
   },
