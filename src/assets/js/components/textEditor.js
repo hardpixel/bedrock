@@ -61,17 +61,34 @@ class TextEditor extends Plugin {
 }
 
 TextEditor.toolbar = [
-  'formatselect', 'bold italic underline',
+  'bold italic underline strikethrough',
+  'bullist numlist blockquote',
   'alignleft aligncenter alignright alignjustify',
-  'bullist numlist outdent indent', 'removeformat',
+  'outdent indent',
+  'link unlink',
+  'formatselect',
+  'charmap',
+  'removeformat pastetext',
+  'undo redo',
+  'fullscreen'
+];
+
+TextEditor.plugins = [
+  'paste',
+  'link',
+  'lists',
+  'charmap',
+  'autoresize',
+  'table',
+  'wordcount',
   'fullscreen'
 ];
 
 TextEditor.defaults = {
   menubar: false,
   branding: false,
-  plugins: 'paste link autoresize table wordcount fullscreen',
-  toolbar: [TextEditor.toolbar.join(' | ')]
+  plugins: TextEditor.plugins.join(' '),
+  toolbar: TextEditor.toolbar.join(' | ')
 };
 
 export {TextEditor};

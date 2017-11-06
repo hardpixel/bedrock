@@ -12,6 +12,14 @@
     border-color: darken($panel-background, 10);
   }
 
+  .mce-edit-area {
+    padding: 0 ($global-padding / 2);
+  }
+
+  .mce-path {
+    padding-left: ($global-padding * 0.95);
+  }
+
   .mce-top-part {
 
     &:before {
@@ -19,9 +27,39 @@
     }
   }
 
+  .mce-toolbar .mce-btn-group {
+    margin: 0;
+    padding: ($global-padding / 3) ($global-padding / 2);
+    border-color: darken($panel-background, 10);
+
+    &:first-child {
+      margin-left: -1px;
+    }
+
+    .mce-btn {
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .mce-menubtn.mce-fixed-width span {
+    position: relative;
+    top: 1px;
+  }
+
   @at-root {
     .mce-panel, .mce-menu {
       box-shadow: none !important;
+    }
+
+    .mce-container, .mce-container *, .mce-widget, .mce-widget *, .mce-reset {
+      font-family: $body-font-family;
     }
   }
 }
