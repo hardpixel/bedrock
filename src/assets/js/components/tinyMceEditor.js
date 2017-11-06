@@ -47,7 +47,12 @@ class TinyMceEditor extends Plugin {
    * @function
    */
   _destroy() {
-
+    if (this.editor) {
+      tinymce.remove('#' + this.$element.attr('id'));
+      this.$element.unwrap();
+    } else {
+      console.log('No editor instance found! Maybe you are missing TinyMCE.');
+    }
   }
 }
 
