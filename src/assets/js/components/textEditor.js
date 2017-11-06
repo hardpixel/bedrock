@@ -1,10 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-import tinymce from 'tinymce';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
-
-tinymce.baseURL = './assets/tinymce/';
 
 /**
  * TextEditor module.
@@ -36,9 +33,13 @@ class TextEditor extends Plugin {
    */
   _init() {
     this.$element.wrap('<div class="text-editor"></div>');
-
     this.options = $.extend({}, this.options, { target: this.$element.get(0) });
-    this.editor = tinymce.init(this.options);
+
+    if (tinymce !== 'undefined') {
+      this.editor = tinymce.init(this.options);
+    } else {
+      console.log('TinyMCE is not available! Please download and install TinyMCE.');
+    }
   }
 
   /**
