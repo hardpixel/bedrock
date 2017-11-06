@@ -24,6 +24,8 @@ PATHS:
     - "src/assets/**/*"
     - "!src/assets/{img,js,scss}/**/*"
     - "node_modules/tinymce*/skins*/**/*"
+    - "node_modules/tinymce*/plugins*/**/*"
+    - "node_modules/tinymce*/themes*/**/*"
   # Paths to Sass libraries, which can then be loaded with @import
   sass:
     - "node_modules/foundation-sites/scss"
