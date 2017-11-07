@@ -4,9 +4,46 @@
 
   th, td {
 
-    &.shrink {
+    &.shrink, &.compact, &.check {
       width: 1px;
       white-space: nowrap;
+    }
+
+    &.compact:not(:last-child) {
+      padding-right: $global-padding * 2;
+    }
+
+    &.center {
+      text-align: center;
+
+      &.compact {
+        padding-left: $global-padding * 2;
+        padding-right: $global-padding * 2;
+      }
+    }
+
+    &.expand {
+      width: 100%;
+    }
+
+    &.check {
+
+      input {
+        margin: 0;
+      }
+    }
+
+    &.actions {
+      white-space: nowrap;
+
+      a {
+        margin: 0;
+        padding: ($global-padding / 4) ($global-padding / 3.5);
+
+        &:not(:last-child) {
+          margin-right: $global-padding / 4;
+        }
+      }
     }
   }
 }

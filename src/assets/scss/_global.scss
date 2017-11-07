@@ -26,3 +26,15 @@
     flex: 0 0 auto;
   }
 }
+
+table {
+
+  input {
+
+    &[type="radio"],
+    &[type="checkbox"] {
+      position: relative;
+      top: 2px;
+    }
+  }
+}
