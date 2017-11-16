@@ -36,6 +36,8 @@ $logo-bar-padding: $topbar-padding !default;
 
 // Logo Bar Components
 
-.logo-bar {
-  @include logo-bar;
+@mixin bedrock-logo-bar {
+  .logo-bar {
+    @include logo-bar;
+  }
 }

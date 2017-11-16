@@ -48,4 +48,6 @@
   }
 }
 
-@include table-helpers;
+@mixin bedrock-prototype-classes {
+  @include table-helpers;
+}

@@ -67,6 +67,8 @@
 
 // Text Editor Component
 
-.tiny-mce-editor {
-  @include tiny-mce-editor-basics;
+@mixin bedrock-tiny-mce-editor {
+  .tiny-mce-editor {
+    @include tiny-mce-editor-basics;
+  }
 }

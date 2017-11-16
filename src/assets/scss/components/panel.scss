@@ -102,18 +102,20 @@ $panel-radius: $global-radius !default;
 
 // Panel Component
 
-.panel {
-  @include panel($panel-background);
-}
+@mixin bedrock-panel {
+  .panel {
+    @include panel($panel-background);
+  }
 
-.panel-content {
-  @include panel-content($panel-background);
-}
+  .panel-content {
+    @include panel-content($panel-background);
+  }
 
-.panel-header {
-  @include panel-header($panel-background);
-}
+  .panel-header {
+    @include panel-header($panel-background);
+  }
 
-.panel-footer {
-  @include panel-footer($panel-background);
+  .panel-footer {
+    @include panel-footer($panel-background);
+  }
 }

@@ -1,5 +1,12 @@
-@import 'components/logo-bar';
-@import 'components/panel';
-@import 'components/tiny-mce-editor';
-@import 'components/off-canvas-menu';
 @import 'components/helper-classes';
+@import 'components/panel';
+@import 'components/logo-bar';
+@import 'components/off-canvas-menu';
+@import 'components/tiny-mce-editor';
+
+@include bedrock-global-styles;
+@include bedrock-prototype-classes;
+@include bedrock-panel;
+@include bedrock-logo-bar;
+@include bedrock-off-canvas-menu;
+@include bedrock-tiny-mce-editor;

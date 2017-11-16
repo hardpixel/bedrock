@@ -1,40 +1,42 @@
-.content {
-  padding: $global-padding * 2;
+@mixin bedrock-global-styles {
+  .content {
+    padding: $global-padding * 2;
 
-  @each $name, $size in $grid-column-gutter {
-    @include breakpoint($name) {
-      padding: $size;
+    @each $name, $size in $grid-column-gutter {
+      @include breakpoint($name) {
+        padding: $size;
+      }
     }
   }
-}
 
-.top-bar,
-.logo-bar {
-  min-height: 4rem;
-  border-bottom: 1px solid darken($topbar-background, 10);
+  .top-bar,
+  .logo-bar {
+    min-height: 4rem;
+    border-bottom: 1px solid darken($topbar-background, 10);
 
-  i {
-    font-size: 1.5rem;
+    i {
+      font-size: 1.5rem;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .top-bar-left,
+    .top-bar-right {
+      flex: 0 0 auto;
+    }
   }
 
-  a {
-    color: inherit;
-  }
+  table {
 
-  .top-bar-left,
-  .top-bar-right {
-    flex: 0 0 auto;
-  }
-}
+    input {
 
-table {
-
-  input {
-
-    &[type="radio"],
-    &[type="checkbox"] {
-      position: relative;
-      top: 2px;
+      &[type="radio"],
+      &[type="checkbox"] {
+        position: relative;
+        top: 2px;
+      }
     }
   }
 }

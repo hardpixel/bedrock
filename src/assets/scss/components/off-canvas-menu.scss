@@ -281,31 +281,33 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
 
 // Offcanvas Menu Component
 
-.off-canvas-menu-wrapper {
-  @include off-canvas-menu-wrapper;
-}
-
-.off-canvas-menu-content {
-  @include off-canvas-menu-content;
-}
-
-.off-canvas-menu {
-  @include off-canvas-menu;
-
-  > .logo-bar {
-    @include off-canvas-menu-header;
+@mixin bedrock-off-canvas-menu {
+  .off-canvas-menu-wrapper {
+    @include off-canvas-menu-wrapper;
   }
 
-  > .accordion-menu {
-    @include off-canvas-menu-accordion;
+  .off-canvas-menu-content {
+    @include off-canvas-menu-content;
   }
 
-  > .dropdown.menu {
-    @include off-canvas-menu-dropdown;
-  }
+  .off-canvas-menu {
+    @include off-canvas-menu;
 
-  .menu {
-    @include offcanvas-menu-basics;
-    @include offcanvas-menu-icons;
+    > .logo-bar {
+      @include off-canvas-menu-header;
+    }
+
+    > .accordion-menu {
+      @include off-canvas-menu-accordion;
+    }
+
+    > .dropdown.menu {
+      @include off-canvas-menu-dropdown;
+    }
+
+    .menu {
+      @include offcanvas-menu-basics;
+      @include offcanvas-menu-icons;
+    }
   }
 }
