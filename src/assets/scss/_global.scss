@@ -1,5 +1,5 @@
 @mixin bedrock-global-styles {
-  .content {
+  main.content {
     padding: $global-padding * 2;
 
     @each $name, $size in $grid-column-gutter {
@@ -36,6 +36,19 @@
       &[type="checkbox"] {
         position: relative;
         top: 2px;
+      }
+    }
+  }
+
+  .pagination {
+
+    .current, .disabled, .ellipsis {
+
+      a {
+        margin: 0;
+        padding: 0;
+        color: inherit;
+        background: none;
       }
     }
   }
