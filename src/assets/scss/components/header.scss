@@ -1,0 +1,60 @@
+$header-border: 1px solid darken($body-background, 10) !default;
+$header-wide-background: $white !default;
+
+// Page Header Mixins
+
+@mixin header {
+  @include xy-grid;
+  align-items: flex-end;
+  border-bottom: $header-border;
+
+  @each $name, $size in $grid-column-gutter {
+    @include breakpoint($name) {
+      padding: 0 0 ($size * 0.75);
+      margin: 0 0 $size;
+    }
+  }
+
+  &.wide {
+    background: $header-wide-background;
+
+    @each $name, $size in $grid-column-gutter {
+      @include breakpoint($name) {
+        padding: ($size * 0.75) $size;
+        margin: (-$size) (-$size) $size;
+      }
+    }
+  }
+}
+
+@mixin header-title {
+  @include xy-cell(auto, false);
+  margin: 0;
+  line-height: 1;
+}
+
+@mixin header-actions {
+  @include xy-cell(shrink, false);
+  margin: 0;
+}
+
+
+// Page Header Component
+
+@mixin bedrock-header {
+  .header {
+    @include header;
+
+    .title {
+      @include header-title;
+    }
+
+    .actions {
+      @include header-actions;
+
+      a {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
