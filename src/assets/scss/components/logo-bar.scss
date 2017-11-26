@@ -22,14 +22,16 @@ $logo-bar-padding: $topbar-padding !default;
 
   img {
     height: 1.6rem;
-    margin-right: .7rem;
   }
 
   span {
     margin: 0;
+    margin-left: .7rem;
     text-transform: uppercase;
     font-weight: normal;
     font-size: 1.2rem;
+    display: inline-block;
+    vertical-align: middle;
   }
 }
 

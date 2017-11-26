@@ -27,6 +27,11 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
   border-color: $offcanvas-menu-background;
   justify-content: flex-start;
 
+  .logo-small {
+    display: none;
+    justify-content: center;
+  }
+
   @include breakpoint(large) {
     @at-root .is-collapsed#{&} {
       white-space: nowrap;
@@ -34,6 +39,19 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
 
       span {
         display: none;
+      }
+
+      .logo-bar {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .logo-big {
+        display: none;
+      }
+
+      .logo-small {
+        display: block;
       }
     }
   }
