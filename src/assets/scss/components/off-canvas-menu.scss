@@ -29,21 +29,19 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
 
   .logo-small {
     display: none;
-    justify-content: center;
+    width: 100%;
+    text-align: center;
   }
 
   @include breakpoint(large) {
     @at-root .is-collapsed#{&} {
       white-space: nowrap;
       width: $offcanvas-menu-collapsed-size;
+      padding-left: 0;
+      padding-right: 0;
 
       span {
         display: none;
-      }
-
-      .logo-bar {
-        padding-left: 0;
-        padding-right: 0;
       }
 
       .logo-big {
