@@ -39,6 +39,7 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
       width: $offcanvas-menu-collapsed-size;
       padding-left: 0;
       padding-right: 0;
+      justify-content: center;
 
       span {
         display: none;
