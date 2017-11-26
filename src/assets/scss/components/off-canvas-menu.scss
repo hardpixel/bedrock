@@ -50,6 +50,24 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
 @mixin offcanvas-menu-basics {
   &.secondary {
 
+    li {
+      &:hover, &.is-active {
+
+        > a {
+          color: $menu-item-color-active;
+          background: transparent;
+        }
+      }
+
+      &.is-current {
+
+        > a {
+          color: $menu-item-color-active;
+          background: $menu-item-background-active;
+        }
+      }
+    }
+
     a {
       color: rgba($white, .6);
       text-transform: uppercase;
@@ -148,10 +166,21 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
   > li {
     border-bottom: 1px solid rgba(white, .04);
 
-    &:hover {
+    &:hover, &.is-active {
 
       > a {
         box-shadow: inset 3px 0 0 $white;
+        color: $menu-item-color-active;
+        background: transparent;
+      }
+    }
+
+    &.is-current {
+
+      > a {
+        box-shadow: inset 3px 0 0 $menu-item-background-active;
+        color: $menu-item-color-active;
+        background: transparent;
       }
     }
 
@@ -179,7 +208,7 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
     &:last-child {
 
       > .submenu {
-        box-shadow: 0 1px 0 rgba(white, .04);
+        box-shadow: 0 1px 0 rgba(white, .04), 0 -1px 0 rgba(white, .04);
       }
     }
 

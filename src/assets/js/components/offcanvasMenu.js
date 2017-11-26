@@ -108,6 +108,8 @@ class OffCanvasMenu extends Plugin {
 
       new AccordionMenu(accordion);
       new DropdownMenu(dropdown);
+
+      accordion.foundation('down', accordion.find('.is-current > ul'));
     });
   }
 
