@@ -1,0 +1,45 @@
+//  Bedrock Admin Settings
+//  -----------------------------
+//
+//  Table of Contents:
+//
+//   1. Header
+//   2. Logo Bar
+//   3. Offcanvas Menu
+//   4. Panel
+
+
+// 1. Header
+// ---------
+
+$header-border: 1px solid darken($body-background, 10) !default;
+$header-wide-background: $white !default;
+
+
+// 2. Logo Bar
+// ---------
+
+$logo-bar-color: $white !default;
+$logo-bar-background: $primary-color !default;
+$logo-bar-padding: $topbar-padding !default;
+
+
+// 3. Offcanvas Menu
+// ---------
+
+$offcanvas-menu-background: $secondary-color !default;
+$offcanvas-menu-collapsed-size: 4.1rem !default;
+$offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !default;
+
+
+// 4. Panel
+// ---------
+
+$panel-background: $white !default;
+$panel-background-fade: 85% !default;
+$panel-color-scale: 10 !default;
+$panel-border-width: 2px !default;
+$panel-padding: $global-padding !default;
+$panel-font-color: $body-font-color !default;
+$panel-font-color-alt: $body-background !default;
+$panel-radius: $global-radius !default;
