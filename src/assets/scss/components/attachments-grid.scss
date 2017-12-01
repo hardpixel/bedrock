@@ -1,0 +1,130 @@
+// Attachments Grid Mixins
+
+@mixin attachments-grid-button($color: $primary-color) {
+  position: absolute;
+  top: -.6rem;
+  right: -.6rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: $color;
+  color: white;
+  font-size: 1.7em;
+  line-height: .9;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  display: block;
+  cursor: pointer;
+}
+
+@mixin attachments-grid-item {
+  &.is-active .thumbnail {
+    box-shadow: 0 0 0 2px $anchor-color;
+
+    .check-button {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &.removable {
+
+    &:hover, &:focus {
+
+      .thumbnail {
+        box-shadow: 0 0 0 2px $alert-color;
+      }
+
+      .remove-button {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .check-button {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+
+  .thumbnail {
+    position: relative;
+    user-select: none;
+  }
+
+  .remove-button {
+    @include attachments-grid-button($alert-color);
+  }
+
+  .check-button {
+    @include attachments-grid-button;
+    font-size-adjust: .4;
+    text-indent: 3px;
+  }
+
+  img {
+    display: block;
+    margin: 0;
+  }
+
+  small {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-top: $thumbnail-border;
+    line-height: 1.2;
+  }
+}
+
+@mixin attachments-grid {
+  @include xy-grid;
+  @include xy-grid-layout(1, '.attachment');
+  margin-left: -.625rem;
+  margin-right: -.625rem;
+
+  @include breakpoint(320px) {
+    @include xy-grid-layout(2, '.attachment');
+  }
+
+  @include breakpoint(480px) {
+    @include xy-grid-layout(3, '.attachment');
+  }
+
+  @include breakpoint(680px) {
+    @include xy-grid-layout(4, '.attachment');
+  }
+
+  @include breakpoint(800px) {
+    @include xy-grid-layout(5, '.attachment');
+  }
+
+  @include breakpoint(1280px) {
+    @include xy-grid-layout(6, '.attachment');
+  }
+
+  @include breakpoint(1366px) {
+    @include xy-grid-layout(7, '.attachment');
+  }
+
+  @include breakpoint(1440px) {
+    @include xy-grid-layout(8, '.attachment');
+  }
+
+  @include breakpoint(1600px) {
+    @include xy-grid-layout(9, '.attachment');
+  }
+
+  .attachment {
+    @include attachments-grid-item;
+  }
+}
+
+
+// Attachments Grid Component
+
+@mixin bedrock-attachments-grid {
+  .attachments-grid {
+    @include attachments-grid;
+  }
+}
