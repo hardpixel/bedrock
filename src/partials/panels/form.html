@@ -29,6 +29,17 @@
     </label>
   </div>
   <div class="panel-footer">
-    <button class="button hollow margin-0" type="submit" name="button">Submit</button>
+    <div class="grid-x">
+      <div class="cell auto">
+        <button class="button hollow margin-0" type="submit" name="button">Submit</button>
+      </div>
+      <div class="cell shrink">
+        <a class="button success hollow margin-0" data-open="reveal-default">Modal</a>
+        <a class="button primary hollow margin-0" data-open="reveal-primary">P Modal</a>
+        <a class="button secondary hollow margin-0" data-open="reveal-secondary">S Modal</a>
+      </div>
+    </div>
   </div>
 </form>
+
+{{> reveal }}
