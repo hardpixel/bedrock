@@ -1,0 +1,89 @@
+$panel-font-color: $body-font-color !default;
+$panel-font-color-alt: $body-background !default;
+
+// Reveal Panel Mixins
+
+@mixin reveal-panel-header {
+  @include xy-cell-reset();
+  @include xy-cell-static(shrink, false, $breakpoint: $-zf-size, $vertical: true);
+}
+
+@mixin reveal-panel-content {
+  @include xy-cell-reset();
+  @include xy-cell-static(auto, false, $breakpoint: $-zf-size, $vertical: true);
+  @include xy-cell-block(true);
+}
+
+@mixin reveal-panel-footer {
+  @include xy-cell-reset();
+  @include xy-cell-static(shrink, false, $breakpoint: $-zf-size, $vertical: true);
+}
+
+@mixin reveal-panel-size($full: false) {
+  @if $full {
+    height: 100vh;
+    max-height: unset;
+  }
+
+  @else {
+    height: auto;
+    max-height: 96vh;
+
+    @include breakpoint($-zf-zero-breakpoint only) {
+      height: 100vh;
+      max-height: unset;
+    }
+  }
+}
+
+@mixin reveal-panel {
+  padding: 0 !important;
+  border: 0 !important;
+
+  .close-button {
+    top: .8rem;
+  }
+
+  .panel {
+    @include xy-grid(vertical, false);
+    @include xy-grid-frame(true);
+
+    @each $name, $color in $foundation-palette {
+      &.#{$name} .close-button {
+        color: color-pick-contrast($color, ($panel-font-color, $panel-font-color-alt));
+      }
+    }
+  }
+
+  .panel-header {
+    @include reveal-panel-header;
+  }
+
+  .panel-content {
+    @include reveal-panel-content;
+  }
+
+  .panel-footer {
+    @include reveal-panel-footer;
+  }
+
+  .panel, .panel-content {
+    @include reveal-panel-size;
+  }
+
+  &.full {
+
+    .panel, .panel-content {
+      @include reveal-panel-size(true);
+    }
+  }
+}
+
+
+// Reveal Panel Component
+
+@mixin bedrock-reveal-panel {
+  .reveal-panel {
+    @include reveal-panel;
+  }
+}

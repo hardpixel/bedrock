@@ -4,6 +4,7 @@
 @import 'components/panel';
 @import 'components/logo-bar';
 @import 'components/off-canvas-menu';
+@import 'components/reveal-panel';
 @import 'components/tiny-mce-editor';
 
 @include bedrock-global-styles;
@@ -12,4 +13,5 @@
 @include bedrock-panel;
 @include bedrock-logo-bar;
 @include bedrock-off-canvas-menu;
+@include bedrock-reveal-panel;
 @include bedrock-tiny-mce-editor;
