@@ -8,8 +8,9 @@
   height: 1.6rem;
   background: $color;
   color: white;
-  font-size: 1.7em;
-  line-height: .9;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: .2rem;
   text-align: center;
   opacity: 0;
   visibility: hidden;
@@ -58,8 +59,6 @@
 
   .check-button {
     @include attachments-grid-button;
-    font-size-adjust: .4;
-    text-indent: 3px;
   }
 
   img {
@@ -69,11 +68,13 @@
 
   small {
     display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     border-top: $thumbnail-border;
     line-height: 1.2;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
   }
 }
 
