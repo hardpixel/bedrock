@@ -5,34 +5,15 @@
 
   <div class="panel-content border padding-bottom-0">
     <div class="attachments-grid removable" data-list-remove>
-      <div class="attachment" data-list-item>
-        <div class="thumbnail">
-          <img src="https://picsum.photos/300">
-          <small>Image title</small>
-          <span class="remove-button mdi mdi-close"></span>
+      {{#repeat 8}}
+        <div class="attachment" data-list-item>
+          <div class="thumbnail">
+            <img src="https://picsum.photos/300?image=1{{ @index }}">
+            <small>Image title #{{ @index }}</small>
+            <span class="remove-button mdi mdi-close"></span>
+          </div>
         </div>
-      </div>
-      <div class="attachment" data-list-item>
-        <div class="thumbnail">
-          <img src="https://picsum.photos/350">
-          <small>Image title</small>
-          <span class="remove-button mdi mdi-close"></span>
-        </div>
-      </div>
-      <div class="attachment" data-list-item>
-        <div class="thumbnail">
-          <img src="https://picsum.photos/400">
-          <small>Image title</small>
-          <span class="remove-button mdi mdi-close"></span>
-        </div>
-      </div>
-      <div class="attachment" data-list-item>
-        <div class="thumbnail">
-          <img src="https://picsum.photos/450">
-          <small>Image title</small>
-          <span class="remove-button mdi mdi-close"></span>
-        </div>
-      </div>
+      {{/repeat}}
     </div>
   </div>
 
