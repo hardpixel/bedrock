@@ -28,7 +28,7 @@
     }
   }
 
-  &.removable {
+  @at-root .removable#{&} {
 
     &:hover, &:focus {
 
