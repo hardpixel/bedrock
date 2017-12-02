@@ -21,6 +21,7 @@ class ListSelect extends Plugin {
     this.className = 'ListSelect'; // ie9 back compat
     this.$element = element;
     this.options = $.extend({}, ListSelect.defaults, this.$element.data(), options);
+    this.multiple = this.options.listSelectMultiple;
     this.lastSelected = null;
     this.activeItems = [];
     this.selectMultiple = false;
@@ -66,7 +67,7 @@ class ListSelect extends Plugin {
     var item = $(event.currentTarget);
     var items = this.$element.find('[data-list-item]');
 
-    if (!this.options.listSelectMultiple || !this.lastSelected || !event.shiftKey) {
+    if (!this.multiple || !this.lastSelected || !event.shiftKey) {
       this.lastSelected = item;
       this.toggle(event);
       return;
@@ -102,7 +103,7 @@ class ListSelect extends Plugin {
   select(event) {
     var target = $(event.currentTarget);
 
-    if (!this.options.listSelectMultiple) {
+    if (!this.multiple) {
       target.siblings().removeClass('is-active');
     }
 
