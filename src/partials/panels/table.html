@@ -13,150 +13,28 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="expand">
-            <span>Table row expanded title cell</span>
-          </td>
-          <td class="center">
-            <span class="label success">Yes</span>
-          </td>
-          <td class="compact">
-            <span>Tue Nov 7, 11:18</span>
-          </td>
-          <td class="actions">
-            <a href="#" class="button hollow" title="Edit"><i class="mdi mdi-pencil"></i></a>
-            <a href="#" class="button hollow success" title="Show"><i class="mdi mdi-eye"></i></a>
-            <a href="#" class="button hollow alert" title="Delete"><i class="mdi mdi-delete"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td class="expand">
-            <span>Table row expanded title cell</span>
-          </td>
-          <td class="center">
-            <span class="label alert">No</span>
-          </td>
-          <td class="compact">
-            <span>Tue Nov 7, 11:18</span>
-          </td>
-          <td class="actions">
-            <a href="#" class="button hollow" title="Edit"><i class="mdi mdi-pencil"></i></a>
-            <a href="#" class="button hollow success" title="Show"><i class="mdi mdi-eye"></i></a>
-            <a href="#" class="button hollow alert" title="Delete"><i class="mdi mdi-delete"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td class="expand">
-            <span>Table row expanded title cell</span>
-          </td>
-          <td class="center">
-            <span class="label">So</span>
-          </td>
-          <td class="compact">
-            <span>Tue Nov 7, 11:18</span>
-          </td>
-          <td class="actions">
-            <a href="#" class="button hollow" title="Edit"><i class="mdi mdi-pencil"></i></a>
-            <a href="#" class="button hollow success" title="Show"><i class="mdi mdi-eye"></i></a>
-            <a href="#" class="button hollow alert" title="Delete"><i class="mdi mdi-delete"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td class="expand">
-            <span>Table row expanded title cell</span>
-          </td>
-          <td class="center">
-            <span class="label success">Yes</span>
-          </td>
-          <td class="compact">
-            <span>Tue Nov 7, 11:18</span>
-          </td>
-          <td class="actions">
-            <a href="#" class="button hollow" title="Edit"><i class="mdi mdi-pencil"></i></a>
-            <a href="#" class="button hollow success" title="Show"><i class="mdi mdi-eye"></i></a>
-            <a href="#" class="button hollow alert" title="Delete"><i class="mdi mdi-delete"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td class="expand">
-            <span>Table row expanded title cell</span>
-          </td>
-          <td class="center">
-            <span class="label alert">No</span>
-          </td>
-          <td class="compact">
-            <span>Tue Nov 7, 11:18</span>
-          </td>
-          <td class="actions">
-            <a href="#" class="button hollow" title="Edit"><i class="mdi mdi-pencil"></i></a>
-            <a href="#" class="button hollow success" title="Show"><i class="mdi mdi-eye"></i></a>
-            <a href="#" class="button hollow alert" title="Delete"><i class="mdi mdi-delete"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td class="expand">
-            <span>Table row expanded title cell</span>
-          </td>
-          <td class="center">
-            <span class="label">So</span>
-          </td>
-          <td class="compact">
-            <span>Tue Nov 7, 11:18</span>
-          </td>
-          <td class="actions">
-            <a href="#" class="button hollow" title="Edit"><i class="mdi mdi-pencil"></i></a>
-            <a href="#" class="button hollow success" title="Show"><i class="mdi mdi-eye"></i></a>
-            <a href="#" class="button hollow alert" title="Delete"><i class="mdi mdi-delete"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td class="expand">
-            <span>Table row expanded title cell</span>
-          </td>
-          <td class="center">
-            <span class="label success">Yes</span>
-          </td>
-          <td class="compact">
-            <span>Tue Nov 7, 11:18</span>
-          </td>
-          <td class="actions">
-            <a href="#" class="button hollow" title="Edit"><i class="mdi mdi-pencil"></i></a>
-            <a href="#" class="button hollow success" title="Show"><i class="mdi mdi-eye"></i></a>
-            <a href="#" class="button hollow alert" title="Delete"><i class="mdi mdi-delete"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td class="expand">
-            <span>Table row expanded title cell</span>
-          </td>
-          <td class="center">
-            <span class="label alert">No</span>
-          </td>
-          <td class="compact">
-            <span>Tue Nov 7, 11:18</span>
-          </td>
-          <td class="actions">
-            <a href="#" class="button hollow" title="Edit"><i class="mdi mdi-pencil"></i></a>
-            <a href="#" class="button hollow success" title="Show"><i class="mdi mdi-eye"></i></a>
-            <a href="#" class="button hollow alert" title="Delete"><i class="mdi mdi-delete"></i></a>
-          </td>
-        </tr>
-        <tr>
-          <td class="expand">
-            <span>Table row expanded title cell</span>
-          </td>
-          <td class="center">
-            <span class="label">So</span>
-          </td>
-          <td class="compact">
-            <span>Tue Nov 7, 11:18</span>
-          </td>
-          <td class="actions">
-            <a href="#" class="button hollow" title="Edit"><i class="mdi mdi-pencil"></i></a>
-            <a href="#" class="button hollow success" title="Show"><i class="mdi mdi-eye"></i></a>
-            <a href="#" class="button hollow alert" title="Delete"><i class="mdi mdi-delete"></i></a>
-          </td>
-        </tr>
+        {{#repeat 10}}
+          <tr>
+            <td class="expand">
+              <span>Table cell #{{ @index }}</span>
+            </td>
+            <td class="center">
+              {{#ifequal @index 3}}
+                <span class="label alert">No</span>
+              {{else}}
+                <span class="label success">Yes</span>
+              {{/ifequal}}
+            </td>
+            <td class="compact">
+              <span>Tue Nov 7, 11:18</span>
+            </td>
+            <td class="actions">
+              <a href="#" class="button hollow" title="Edit"><i class="mdi mdi-pencil"></i></a>
+              <a href="#" class="button hollow success" title="Show"><i class="mdi mdi-eye"></i></a>
+              <a href="#" class="button hollow alert" title="Delete"><i class="mdi mdi-delete"></i></a>
+            </td>
+          </tr>
+        {{/repeat}}
       </tbody>
     </table>
   </div>
