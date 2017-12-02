@@ -32,7 +32,7 @@ class ListRemove extends Plugin {
    * @private
    */
   _events() {
-    this.$element.find('.remove-button').off('click').on({
+    this.$element.find('[data-remove]').off('click').on({
       'click': this._handleClick.bind(this)
     });
 
@@ -77,7 +77,7 @@ class ListRemove extends Plugin {
    */
   _destroy() {
     this.$element.off('.zf.remove.list');
-    this.$element.find('.remove-button').off('click');
+    this.$element.find('[data-remove]').off('click');
     this.$element.find('[data-list-item]').off('.zf.trigger');
   }
 }
