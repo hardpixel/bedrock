@@ -179,7 +179,10 @@ class MediaReveal extends Plugin {
    * @function
    */
   _destroy() {
-
+    this.reveal._destroy();
+    this.$element.off('.zf.reveal');
+    this.$grid.off('changed.zf.select.list');
+    this.$insert.off('click');
   }
 }
 
