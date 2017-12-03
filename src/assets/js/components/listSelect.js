@@ -59,6 +59,16 @@ class ListSelect extends Plugin {
   }
 
   /**
+   * Switch multi select mode
+   * @param {Boolean} multiple - Enable/disable multiple mode.
+   * @private
+   */
+  _switchMode(multiple) {
+    this.multiple = multiple;
+    this.$element.unselectAll();
+  }
+
+  /**
    * Updates active items on changes.
    * @function
    * @private
@@ -106,6 +116,22 @@ class ListSelect extends Plugin {
     }
 
     this.lastSelected = item;
+  }
+
+  /**
+   * Set multiple select mode
+   * @private
+   */
+  multiple() {
+    this._switchMode(true);
+  }
+
+  /**
+   * Set single select mode
+   * @private
+   */
+  single() {
+    this._switchMode(false);
   }
 
   /**
