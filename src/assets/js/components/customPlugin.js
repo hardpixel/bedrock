@@ -46,6 +46,7 @@ class CustomPlugin extends Plugin {
   /**
    * Destroys the custom-plugin plugin.
    * @function
+   * @private
    */
   _destroy() {
 
