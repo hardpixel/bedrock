@@ -171,6 +171,7 @@ class MediaReveal extends Plugin {
       items.push($(item).data('imageObject'));
     });
 
+    this.reveal.close();
     this.$element.trigger('insert.zf.media.reveal', [items]);
   }
 
