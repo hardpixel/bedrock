@@ -51,6 +51,8 @@
   .thumbnail {
     position: relative;
     user-select: none;
+    width: 100%;
+    min-height: calc(100% - #{$global-margin});
   }
 
   .remove-button {
@@ -64,6 +66,7 @@
   img {
     display: block;
     margin: 0;
+    width: 100%;
   }
 
   small {
