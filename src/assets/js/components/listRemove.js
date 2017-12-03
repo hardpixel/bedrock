@@ -37,7 +37,7 @@ class ListRemove extends Plugin {
     });
 
     this.$element.find('[data-list-item]').off('.zf.trigger').on({
-      'remove.zf.trigger': this.select.bind(this)
+      'remove.zf.trigger': this.remove.bind(this)
     });
   }
 
