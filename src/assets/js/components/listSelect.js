@@ -50,6 +50,8 @@ class ListSelect extends Plugin {
     }, '[data-list-item]');
 
     this.$element.off('.zf.trigger', '[data-list-item]').on({
+      'selectAll.zf.trigger': this.selectAll.bind(this),
+      'unselectAll.zf.trigger': this.unselectAll.bind(this),
       'select.zf.trigger': this.select.bind(this),
       'unselect.zf.trigger': this.unselect.bind(this),
       'toggle.zf.trigger': this.toggle.bind(this)
@@ -104,6 +106,26 @@ class ListSelect extends Plugin {
     }
 
     this.lastSelected = item;
+  }
+
+  /**
+   * Select all list items
+   * @param {Object} event - Event object passed from listener.
+   * @private
+   */
+  selectAll(event) {
+    this.$element.find('[data-list-item]').addClass('is-active');
+    this._updateActiveItems();
+  }
+
+  /**
+   * Unselect all list items
+   * @param {Object} event - Event object passed from listener.
+   * @private
+   */
+  unselectAll(event) {
+    this.$element.find('[data-list-item]').removeClass('is-active');
+    this._updateActiveItems();
   }
 
   /**
