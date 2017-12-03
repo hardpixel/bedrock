@@ -23,7 +23,17 @@ class ListRemove extends Plugin {
     this.options = $.extend({}, ListRemove.defaults, this.$element.data(), options);
     this.activeItems = [];
 
+    this._init();
     this._events();
+  }
+
+  /**
+   * Initializes the list-remove wrapper.
+   * @function
+   * @private
+   */
+  _init() {
+
   }
 
   /**

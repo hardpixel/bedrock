@@ -26,7 +26,17 @@ class ListSelect extends Plugin {
     this.activeItems = [];
     this.selectMultiple = false;
 
+    this._init();
     this._events();
+  }
+
+  /**
+   * Initializes the list-select wrapper.
+   * @function
+   * @private
+   */
+  _init() {
+
   }
 
   /**
