@@ -47,6 +47,7 @@ class ListRemove extends Plugin {
     }, '[data-remove]');
 
     this.$element.off('.zf.trigger', '[data-list-item]').on({
+      'removeAll.zf.trigger': this.removeAll.bind(this),
       'remove.zf.trigger': this.remove.bind(this)
     }, '[data-list-item]');
   }
@@ -69,6 +70,16 @@ class ListRemove extends Plugin {
   _handleClick(event) {
     var target = $(event.currentTarget).parents('[data-list-item]:first');
     target.trigger('remove.zf.trigger');
+  }
+
+  /**
+   * Remove all list items
+   * @param {Object} event - Event object passed from listener.
+   * @private
+   */
+  removeAll(event) {
+    this.$element.find('[data-list-item]').remove();
+    this._updateActiveItems();
   }
 
   /**
