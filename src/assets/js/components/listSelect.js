@@ -35,7 +35,7 @@ class ListSelect extends Plugin {
    * @private
    */
   _events() {
-    this.$element.off('click' '[data-list-item]').on({
+    this.$element.off('click', '[data-list-item]').on({
       'click': this._handleClick.bind(this)
     }, '[data-list-item]');
 
