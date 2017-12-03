@@ -141,6 +141,8 @@ class MediaReveal extends Plugin {
     this.selectedItems = [];
 
     this.$grid.empty();
+    this.$grid.foundation('unselectAll');
+
     this.$element.trigger('closed.zf.media.reveal');
   }
 
