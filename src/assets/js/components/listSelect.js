@@ -59,17 +59,6 @@ class ListSelect extends Plugin {
   }
 
   /**
-   * Switches multi select mode.
-   * @param {Boolean} multiple - Enable/disable multiple mode.
-   * @function
-   * @private
-   */
-  _switchMode(multiple) {
-    this.multiple = multiple;
-    this.$element.unselectAll();
-  }
-
-  /**
    * Updates active items on changes.
    * @function
    * @private
@@ -121,19 +110,13 @@ class ListSelect extends Plugin {
   }
 
   /**
-   * Sets multiple select mode.
+   * Switches multi select mode.
+   * @param {Boolean} enable - Enable/disable multiple mode.
    * @function
    */
-  multiple() {
-    this._switchMode(true);
-  }
-
-  /**
-   * Sets single select mode.
-   * @function
-   */
-  single() {
-    this._switchMode(false);
+  multiSelect(enable) {
+    this.multiple = enable;
+    this.unselectAll();
   }
 
   /**
