@@ -32,13 +32,13 @@ class ListRemove extends Plugin {
    * @private
    */
   _events() {
-    this.$element.find('[data-remove]').off('click').on({
+    this.$element.off('click', '[data-remove]').on({
       'click': this._handleClick.bind(this)
-    });
+    }, '[data-remove]');
 
-    this.$element.find('[data-list-item]').off('.zf.trigger').on({
+    this.$element.off('.zf.trigger', '[data-list-item]').on({
       'remove.zf.trigger': this.remove.bind(this)
-    });
+    }, '[data-list-item]');
   }
 
   /**
@@ -77,8 +77,8 @@ class ListRemove extends Plugin {
    */
   _destroy() {
     this.$element.off('.zf.remove.list');
-    this.$element.find('[data-remove]').off('click');
-    this.$element.find('[data-list-item]').off('.zf.trigger');
+    this.$element.off('click', '[data-remove]');
+    this.$element.off('.zf.trigger', '[data-list-item]');
   }
 }
 
