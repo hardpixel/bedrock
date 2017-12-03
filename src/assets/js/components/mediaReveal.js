@@ -74,8 +74,9 @@ class MediaReveal extends Plugin {
    */
   _getItems() {
     $.ajax(this.mediaUrl).done(function(response) {
-      if (this.mediaKey)
+      if (this.mediaKey) {
         response = this._getObjectValue(response, this.mediaKey);
+      }
 
       this._appendItems(response);
     }.bind(this));
@@ -83,6 +84,8 @@ class MediaReveal extends Plugin {
 
   /**
    * Gets value from object by dot notation.
+   * @param {Object} obj - Object to get the key value from.
+   * @param {String} path - Dot notated path to the key.
    * @function
    * @private
    */
@@ -92,6 +95,7 @@ class MediaReveal extends Plugin {
 
   /**
    * Builds single attachment item.
+   * @param {Object} data - Image data object to build item from.
    * @function
    * @private
    */
@@ -109,6 +113,7 @@ class MediaReveal extends Plugin {
 
   /**
    * Appends all attachment items to grid.
+   * @param {Array} data - Collection of image data objects to build items from.
    * @function
    * @private
    */
@@ -122,7 +127,7 @@ class MediaReveal extends Plugin {
   }
 
   /**
-   * Open media reveal
+   * Opens media reveal.
    * @param {Object} event - Event object passed from listener.
    * @private
    */
@@ -132,7 +137,7 @@ class MediaReveal extends Plugin {
   }
 
   /**
-   * Close media reveal
+   * Closes media reveal.
    * @param {Object} event - Event object passed from listener.
    * @private
    */
@@ -147,22 +152,24 @@ class MediaReveal extends Plugin {
   }
 
   /**
-   * Select items
+   * Updates insert button and data on item selection.
    * @param {Object} event - Event object passed from listener.
+   * @param {Object} items - Items passed from listSelect element.
    * @private
    */
   select(event, items) {
     this.selectedItems = items;
     this.$element.trigger('changed.zf.media.reveal', [this.selectedItems]);
 
-    if (items.length)
+    if (items.length) {
       this.$insert.removeClass('disabled');
-    else
+    } else {
       this.$insert.addClass('disabled');
+    }
   }
 
   /**
-   * Insert items
+   * Closes reveal and passes selected items objects.
    * @param {Object} event - Event object passed from listener.
    * @private
    */
@@ -180,6 +187,7 @@ class MediaReveal extends Plugin {
   /**
    * Destroys the media-reveal plugin.
    * @function
+   * @private
    */
   _destroy() {
     this.reveal.destroy();
