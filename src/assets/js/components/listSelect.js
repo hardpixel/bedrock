@@ -59,8 +59,9 @@ class ListSelect extends Plugin {
   }
 
   /**
-   * Switch multi select mode
+   * Switches multi select mode.
    * @param {Boolean} multiple - Enable/disable multiple mode.
+   * @function
    * @private
    */
   _switchMode(multiple) {
@@ -82,6 +83,7 @@ class ListSelect extends Plugin {
 
   /**
    * Handles click events on items.
+   * @param {Object} event - Event object passed from listener.
    * @function
    * @private
    */
@@ -119,25 +121,25 @@ class ListSelect extends Plugin {
   }
 
   /**
-   * Set multiple select mode
-   * @private
+   * Sets multiple select mode.
+   * @function
    */
   multiple() {
     this._switchMode(true);
   }
 
   /**
-   * Set single select mode
-   * @private
+   * Sets single select mode.
+   * @function
    */
   single() {
     this._switchMode(false);
   }
 
   /**
-   * Select all list items
+   * Selects all list items.
    * @param {Object} event - Event object passed from listener.
-   * @private
+   * @function
    */
   selectAll(event) {
     this.$element.find('[data-list-item]').addClass('is-active');
@@ -145,9 +147,9 @@ class ListSelect extends Plugin {
   }
 
   /**
-   * Unselect all list items
+   * Unselects all list items.
    * @param {Object} event - Event object passed from listener.
-   * @private
+   * @function
    */
   unselectAll(event) {
     this.$element.find('[data-list-item]').removeClass('is-active');
@@ -155,9 +157,9 @@ class ListSelect extends Plugin {
   }
 
   /**
-   * Select list item
+   * Selects a list item.
    * @param {Object} event - Event object passed from listener.
-   * @private
+   * @function
    */
   select(event) {
     var target = $(event.currentTarget);
@@ -171,9 +173,9 @@ class ListSelect extends Plugin {
   }
 
   /**
-   * Unselect list item
+   * Unselects a list item.
    * @param {Object} event - Event object passed from listener.
-   * @private
+   * @function
    */
   unselect(event) {
     var target = $(event.currentTarget);
@@ -183,9 +185,9 @@ class ListSelect extends Plugin {
   }
 
   /**
-   * Toggle list item
+   * Toggles a list item selection.
    * @param {Object} event - Event object passed from listener.
-   * @private
+   * @function
    */
   toggle(event) {
     var target = $(event.currentTarget);
@@ -200,6 +202,7 @@ class ListSelect extends Plugin {
   /**
    * Destroys the list-select plugin.
    * @function
+   * @private
    */
   _destroy() {
     this.$element.off('.zf.select.list');
