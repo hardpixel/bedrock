@@ -1,4 +1,4 @@
-<div class="reveal full reveal-panel" id="media-modal" data-reveal>
+<div class="reveal full reveal-panel" id="media-modal" data-media-reveal data-media-url="https://picsum.photos/list">
   <div class="panel">
     <div class="panel-header border">
       Add Media
@@ -8,16 +8,14 @@
     </div>
 
     <div class="panel-content border">
-      <div class="attachments-grid" data-list-select data-list-select-multiple="true">
-        {{#repeat 64}}
-          <div class="attachment" data-list-item>
-            <div class="thumbnail">
-              <img src="https://picsum.photos/300?image={{ @index }}">
-              <small>Image title #{{ @index }}</small>
-              <span class="check-button mdi mdi-check"></span>
-            </div>
+      <div class="attachments-grid" data-list-select data-list-select>
+        <div class="attachment" data-list-item>
+          <div class="thumbnail">
+            <img data-src="id" data-url="https://picsum.photos/300?image=[src]">
+            <small data-text="author"></small>
+            <span class="check-button mdi mdi-check"></span>
           </div>
-        {{/repeat}}
+        </div>
       </div>
     </div>
 
@@ -27,7 +25,7 @@
           <button class="button hollow alert margin-0" data-close aria-label="Close modal" type="button">Close</button>
         </div>
         <div class="cell shrink">
-          <button class="button margin-0" aria-label="Insert Media" type="button">Insert Media</button>
+          <button class="button margin-0" data-insert aria-label="Insert Media" type="button">Insert Media</button>
         </div>
       </div>
     </div>
