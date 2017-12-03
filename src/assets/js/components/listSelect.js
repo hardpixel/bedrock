@@ -35,15 +35,15 @@ class ListSelect extends Plugin {
    * @private
    */
   _events() {
-    this.$element.find('[data-list-item]').off('click').on({
+    this.$element.off('click').on({
       'click': this._handleClick.bind(this)
-    });
+    }, '[data-list-item]');
 
-    this.$element.find('[data-list-item]').off('.zf.trigger').on({
+    this.$element.off('.zf.trigger').on({
       'select.zf.trigger': this.select.bind(this),
       'unselect.zf.trigger': this.unselect.bind(this),
       'toggle.zf.trigger': this.toggle.bind(this)
-    });
+    }, '[data-list-item]');
   }
 
   /**
@@ -90,6 +90,7 @@ class ListSelect extends Plugin {
       }
 
       this.selectMultiple = false;
+      this._updateActiveItems();
     }
 
     this.lastSelected = item;
@@ -144,7 +145,8 @@ class ListSelect extends Plugin {
    */
   _destroy() {
     this.$element.off('.zf.select.list');
-    this.$element.find('[data-list-item]').off('click').off('.zf.trigger');
+    this.$element.off('click', '[data-list-item]')
+    this.$element.off('.zf.trigger', '[data-list-item]');
   }
 }
 
