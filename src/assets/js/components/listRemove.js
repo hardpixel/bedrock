@@ -73,9 +73,9 @@ class ListRemove extends Plugin {
   }
 
   /**
-   * Remove all list items
+   * Removes all list items.
    * @param {Object} event - Event object passed from listener.
-   * @private
+   * @function
    */
   removeAll(event) {
     this.$element.find('[data-list-item]').remove();
@@ -83,9 +83,9 @@ class ListRemove extends Plugin {
   }
 
   /**
-   * Remove list item
+   * Removes a list item.
    * @param {Object} event - Event object passed from listener.
-   * @private
+   * @function
    */
   remove(event) {
     $(event.currentTarget).remove();
@@ -95,6 +95,7 @@ class ListRemove extends Plugin {
   /**
    * Destroys the list-remove plugin.
    * @function
+   * @private
    */
   _destroy() {
     this.$element.off('.zf.remove.list');
