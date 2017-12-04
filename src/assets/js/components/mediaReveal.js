@@ -21,7 +21,9 @@ class MediaReveal extends Plugin {
   _setup(element, options) {
     this.className = 'MediaReveal'; // ie9 back compat
     this.$element = element;
+    this.id = this.$element.attr('id');
     this.options = $.extend({}, MediaReveal.defaults, this.$element.data(), options);
+    this.template = $(`#${this.id}-item-template`).html();
     this.items = [];
     this.selectedItems = [];
     this.reveal = new Foundation.Reveal(element, this.options);
@@ -29,7 +31,7 @@ class MediaReveal extends Plugin {
     this.mediaKey = this.options.mediaKey;
     this.$insert = this.$element.find('[data-insert]');
     this.$grid = this.$element.find('[data-list-select]');
-    this.$item = $($('#' + element.attr('id') + '-item-template').html());
+    this.$item = $(this.template);
     this.imageKey = this.$item.find('[data-src]').attr('data-src');
     this.imageUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
     this.titleKey = this.$item.find('[data-text]').attr('data-text');
@@ -90,7 +92,7 @@ class MediaReveal extends Plugin {
    * @private
    */
   _getObjectValue(obj, path) {
-    return new Function('_', 'return _.' + path)(obj);
+    return new Function('_', `return _.${path}`)(obj);
   }
 
   /**
