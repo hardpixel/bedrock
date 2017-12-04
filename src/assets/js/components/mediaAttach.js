@@ -147,6 +147,7 @@ class MediaAttach extends Plugin {
   /**
    * Opens media reveal to select attachments.
    * @param {Object} event - Event object passed from listener.
+   * @param {Array} data - Collection of image data objects to build items from.
    * @private
    */
   attach(event, data) {
@@ -159,7 +160,9 @@ class MediaAttach extends Plugin {
    * @private
    */
   _destroy() {
-
+    this.$element.off('.zf.trigger');
+    this.$reveal.off('insert.zf.media.reveal');
+    this.$grid.off('changed.zf.remove.list');
   }
 }
 
