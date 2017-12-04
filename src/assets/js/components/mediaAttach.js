@@ -37,6 +37,7 @@ class MediaAttach extends Plugin {
   _init() {
     this.id = this.$element.attr('id');
     this.template = $(`#${this.id}-item-template`).html();
+    this.$empty = this.$element.find('.no-content');
     this.$grid = this.$element.find('[data-list-remove]');
     this.$item = $(this.template);
     this.$reveal = $(`#${this.options.mediaAttach}`);
@@ -47,6 +48,7 @@ class MediaAttach extends Plugin {
     this.valueKey = this.$item.find('[data-value]').attr('data-value');
 
     this._events();
+    this._updateActiveItems();
   }
 
   /**
@@ -76,6 +78,12 @@ class MediaAttach extends Plugin {
   _updateActiveItems() {
     this.activeItems = this.$grid.children().toArray();
     this.$element.trigger('changed.zf.media.attach', [this.activeItems]);
+
+    if (this.activeItems.length > 0) {
+      this.$empty.addClass('hide');
+    } else {
+      this.$empty.removeClass('hide');
+    }
   }
 
   /**
