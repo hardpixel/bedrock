@@ -1,0 +1,31 @@
+$no-content-color: $medium-gray !default;
+
+// No Content Mixins
+
+@mixin no-content {
+  padding: $global-padding;
+  text-align: center;
+  color: $no-content-color;
+
+  > i {
+    font-size: 3rem;
+  }
+
+  > img {
+    height: 3rem;
+    margin-bottom: $global-margin;
+  }
+
+  > span {
+    display: block;
+  }
+}
+
+
+// No Content Component
+
+@mixin bedrock-no-content {
+  .no-content {
+    @include no-content;
+  }
+}
