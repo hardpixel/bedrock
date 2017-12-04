@@ -37,7 +37,7 @@ class MediaAttach extends Plugin {
   _init() {
     this.id = this.$element.attr('id');
     this.template = $(`#${this.id}-item-template`).html();
-    this.$empty = this.$element.find('.no-content');
+    this.$empty = this.$element.find('[data-empty-state]');
     this.$grid = this.$element.find('[data-list-remove]');
     this.$item = $(this.template);
     this.$reveal = $(`#${this.options.mediaAttach}`);
