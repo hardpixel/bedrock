@@ -1,25 +1,28 @@
 <div class="panel">
   <div class="panel-header border">
-    Media Gallery
+    Attachments Gallery
   </div>
 
   <div class="panel-content border padding-bottom-0">
-    <div class="attachments-grid removable" data-list-remove>
-      {{#repeat 8}}
-        <div class="attachment" data-list-item>
-          <div class="thumbnail">
-            <img src="https://picsum.photos/300?image=1{{ @index }}">
-            <small>Image title #{{ @index }}</small>
-            <span class="remove-button mdi mdi-close" data-remove></span>
-          </div>
-        </div>
-      {{/repeat}}
+    <div id="media-attachments" data-media-attach="media-modal" data-media-multiple="true">
+      <div class="attachments-grid removable" data-list-remove></div>
     </div>
   </div>
 
   <div class="panel-footer">
-    <button class="button success hollow margin-0" data-open="media-modal">Add Media</button>
+    <button class="button success hollow margin-0" data-open="media-attachments">Add Media</button>
   </div>
 </div>
+
+<script id="media-attachments-item-template" type="text/template">
+  <div class="attachment" data-list-item>
+    <input type="hidden" name="post[gallery_ids][]" data-value="id">
+    <div class="thumbnail">
+      <img data-src="id" data-url="https://picsum.photos/300?image=[src]">
+      <small data-text="author"></small>
+      <span class="remove-button mdi mdi-close" data-remove></span>
+    </div>
+  </div>
+</script>
 
 {{> media-modal }}
