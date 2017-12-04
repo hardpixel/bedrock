@@ -61,10 +61,6 @@ class MediaAttach extends Plugin {
       'open.zf.trigger': this.open.bind(this)
     });
 
-    this.$reveal.off('insert.zf.media.reveal').on({
-      'insert.zf.media.reveal': this.attach.bind(this)
-    });
-
     this.$grid.off('changed.zf.remove.list').on({
       'changed.zf.remove.list': this._updateActiveItems.bind(this)
     });
@@ -142,6 +138,10 @@ class MediaAttach extends Plugin {
   open(event) {
     this.$reveal.foundation('multiSelect', this.multiple);
     this.$reveal.foundation('open');
+
+    this.$reveal.off('insert.zf.media.reveal').on({
+      'insert.zf.media.reveal': this.attach.bind(this)
+    });
   }
 
   /**
