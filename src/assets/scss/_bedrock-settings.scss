@@ -7,6 +7,7 @@
 //   2. Logo Bar
 //   3. Offcanvas Menu
 //   4. Panel
+//   5. No Content
 
 
 // 1. Header
@@ -43,3 +44,9 @@ $panel-padding: $global-padding;
 $panel-font-color: $body-font-color;
 $panel-font-color-alt: $body-background;
 $panel-radius: $global-radius;
+
+
+// 5. No Content
+// ---------
+
+$no-content-color: $medium-gray;
