@@ -29,7 +29,7 @@ class MediaReveal extends Plugin {
     this.mediaKey = this.options.mediaKey;
     this.$insert = this.$element.find('[data-insert]');
     this.$grid = this.$element.find('[data-list-select]');
-    this.$item = this.$grid.find('[data-list-item]').detach();
+    this.$item = $($('#' + element.attr('id') + '-item-template').html());
     this.imageKey = this.$item.find('[data-src]').attr('data-src');
     this.imageUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
     this.titleKey = this.$item.find('[data-text]').attr('data-text');
