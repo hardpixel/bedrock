@@ -129,6 +129,15 @@ class MediaReveal extends Plugin {
   }
 
   /**
+   * Switches multi select mode.
+   * @param {Boolean} enable - Enable/disable multiple mode.
+   * @function
+   */
+  multiSelect(enable) {
+    this.$grid.foundation('multiSelect', enable);
+  }
+
+  /**
    * Opens media reveal.
    * @param {Object} event - Event object passed from listener.
    * @private
