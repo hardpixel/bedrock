@@ -135,6 +135,11 @@ class MediaReveal extends Plugin {
    */
   open(event) {
     this._getItems();
+
+    if (!this.reveal.isActive) {
+      this.reveal.open();
+    }
+
     this.$element.trigger('open.zf.media.reveal');
   }
 
@@ -146,6 +151,10 @@ class MediaReveal extends Plugin {
   close(event) {
     this.items = [];
     this.selectedItems = [];
+
+    if (this.reveal.isActive) {
+      this.reveal.close();
+    }
 
     this.$grid.empty();
     this.$grid.foundation('unselectAll');
