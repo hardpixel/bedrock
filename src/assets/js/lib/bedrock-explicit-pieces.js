@@ -5,6 +5,7 @@ import { ListSelect } from '../components/listSelect';
 import { ListRemove } from '../components/listRemove';
 import { MediaReveal } from '../components/mediaReveal';
 import { MediaAttach } from '../components/mediaAttach';
+import { DropzoneUpload } from '../components/dropzoneUpload';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
 Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
@@ -13,3 +14,4 @@ Foundation.plugin(ListSelect, 'ListSelect');
 Foundation.plugin(ListRemove, 'ListRemove');
 Foundation.plugin(MediaReveal, 'MediaReveal');
 Foundation.plugin(MediaAttach, 'MediaAttach');
+Foundation.plugin(DropzoneUpload, 'DropzoneUpload');
