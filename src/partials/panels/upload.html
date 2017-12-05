@@ -1,0 +1,32 @@
+<div class="panel">
+  <div class="panel-header border">
+    Dropzone Upload
+  </div>
+  <div class="panel-content border">
+    <form class="dropzone" id="media-upload" action="http://s9.tinypic.com/upload.php" method="post" data-dropzone-upload data-clickable=".button">
+      <input type="hidden" name="the_file">
+      <div class="dz-default dz-message">
+        <div class="no-content">
+          <i class="mdi mdi-upload"></i>
+          <span>Drop files here to upload</span>
+          <a class="button success hollow margin-top-1">Select Files</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script id="dropzone-preview-template" type="text/template">
+  <div class="dz-preview dz-file-preview">
+    <div class="dz-details">
+      <div class="dz-filename"><span data-dz-name></span></div>
+      <div class="dz-size" data-dz-size></div>
+      <img data-dz-thumbnail />
+    </div>
+
+    <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+    <div class="dz-success-mark"><i class="mdi mdi-check"></i></div>
+    <div class="dz-error-mark"><i class="mdi mdi-close"></i></div>
+    <div class="dz-error-message"><span data-dz-errormessage></span></div>
+  </div>
+</script>

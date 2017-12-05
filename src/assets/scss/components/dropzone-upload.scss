@@ -1,0 +1,14 @@
+// No Content Mixins
+
+@mixin dropzone-upload {
+
+}
+
+
+// No Content Component
+
+@mixin bedrock-dropzone-upload {
+  .dropzone {
+    @include dropzone-upload;
+  }
+}

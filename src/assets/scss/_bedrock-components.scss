@@ -7,6 +7,7 @@
 @import 'components/reveal-panel';
 @import 'components/attachments-grid';
 @import 'components/no-content';
+@import 'components/dropzone-upload';
 @import 'components/tiny-mce-editor';
 
 @include bedrock-global-styles;
@@ -18,4 +19,5 @@
 @include bedrock-reveal-panel;
 @include bedrock-attachments-grid;
 @include bedrock-no-content;
+@include bedrock-dropzone-upload;
 @include bedrock-tiny-mce-editor;
