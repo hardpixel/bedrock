@@ -53,6 +53,14 @@
     user-select: none;
     width: 100%;
     min-height: calc(100% - #{$global-margin});
+    font-size: $small-font-size;
+
+    > span {
+      display: block;
+      line-height: 1.2;
+      position: absolute;
+      background: white;
+    }
   }
 
   .remove-button {
@@ -69,15 +77,15 @@
     width: 100%;
   }
 
-  small {
-    display: block;
+  .filename {
     border-top: $thumbnail-border;
     line-height: 1.2;
-    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: white;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 
