@@ -52,7 +52,6 @@
     position: relative;
     user-select: none;
     width: 100%;
-    min-height: calc(100% - #{$global-margin});
     font-size: $small-font-size;
 
     > span {

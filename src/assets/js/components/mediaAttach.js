@@ -105,9 +105,9 @@ class MediaAttach extends Plugin {
     var title = this._getObjectValue(data, this.titleKey);
     var value = this._getObjectValue(data, this.valueKey);
 
-    item.find('img').attr('src', this.imageUrl.replace('[src]', url));
-    item.find('small').text(title);
-    item.find('input').val(value);
+    item.find('[data-src]').attr('src', this.imageUrl.replace('[src]', url));
+    item.find('[data-text]').text(title);
+    item.find('[data-value]').val(value);
 
     return item;
   }

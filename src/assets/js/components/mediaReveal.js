@@ -106,8 +106,8 @@ class MediaReveal extends Plugin {
     var url = this._getObjectValue(data, this.imageKey);
     var title = this._getObjectValue(data, this.titleKey);
 
-    item.find('img').attr('src', this.imageUrl.replace('[src]', url));
-    item.find('small').text(title);
+    item.find('[data-src]').attr('src', this.imageUrl.replace('[src]', url));
+    item.find('[data-text]').text(title);
     item.data('imageObject', data);
 
     return item;
