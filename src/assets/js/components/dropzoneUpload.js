@@ -8,12 +8,12 @@ Dropzone.autoDiscover = false;
 
 /**
  * DropzoneUpload module.
- * @module dropzone-upload
+ * @module dropzoneUpload
  */
 
 class DropzoneUpload extends Plugin {
   /**
-   * Creates a new instance of an dropzone-form.
+   * Creates a new instance of an dropzone-upload.
    * @class
    * @name DropzoneUpload
    * @fires DropzoneUpload#init
@@ -24,16 +24,13 @@ class DropzoneUpload extends Plugin {
     this.className = 'DropzoneUpload'; // ie9 back compat
     this.$element = element;
     this.id = this.$element.attr('id');
-    this.template = this._previewTemplate();
-    this.options = $.extend({}, DropzoneUpload.defaults, { previewTemplate: this.template }, this.$element.data(), options);
-
-    console.log(this.options);
+    this.options = $.extend(this._preview(), DropzoneUpload.defaults, this.$element.data(), options);
 
     this._init();
   }
 
   /**
-   * Initializes the dropzone-form wrapper.
+   * Initializes the dropzone-upload wrapper.
    * @function
    * @private
    */
@@ -46,19 +43,22 @@ class DropzoneUpload extends Plugin {
    * @function
    * @private
    */
-  _previewTemplate() {
+  _preview() {
     var fallback = $('#dropzone-preview-template');
     var current = $(`#${this.id}-preview-template`);
+    var template = null;
 
     if (current.length) {
-      return current.html();
-    } else {
-      return fallback.html();
+      template = current.html();
+    } else if (fallback.length) {
+      template = fallback.html();
     }
+
+    return { previewTemplate: template }
   }
 
   /**
-   * Adds event handlers to the dropzone-form.
+   * Adds event handlers to the dropzone-upload.
    * @function
    * @private
    */
@@ -67,7 +67,7 @@ class DropzoneUpload extends Plugin {
   }
 
   /**
-   * Destroys the dropzone-form plugin.
+   * Destroys the dropzone-upload plugin.
    * @function
    * @private
    */

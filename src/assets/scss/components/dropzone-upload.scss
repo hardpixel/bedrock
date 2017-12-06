@@ -1,7 +1,142 @@
+$dropzone-upload-border: 2px dashed $light-gray !default;
+$dropzone-upload-active-background: $primary-color !default;
+$dropzone-upload-active-border-color: $primary-color !default;
+
 // No Content Mixins
 
 @mixin dropzone-upload {
 
+  &.dz-drag-hover {
+
+    .dz-message {
+
+      &.bordered {
+        border-color: $dropzone-upload-active-border-color;
+      }
+
+      &:after {
+        opacity: .5;
+        visibility: visible;
+      }
+    }
+  }
+
+  .dz-message {
+    position: relative;
+    overflow: hidden;
+    transition-property: border;
+    transition-duration: .2s;
+
+    &.bordered {
+      border: $dropzone-upload-border;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: $dropzone-upload-active-background;
+      opacity: 0;
+      visibility: hidden;
+      transition-property: visibility opacity;
+      transition-duration: .2s;
+    }
+  }
+
+  .dz-complete {
+
+    .progress {
+      display: none;
+    }
+  }
+
+  .dz-success {
+
+    .thumbnail {
+
+      .success {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  .dz-error {
+
+    .thumbnail {
+
+      &:hover .message {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .error {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  .thumbnail {
+
+    .progress {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      right: 1rem;
+      height: 10px;
+      margin-top: -5px;
+    }
+
+    .size {
+      border-left: $thumbnail-border;
+      border-bottom: $thumbnail-border;
+      top: 0;
+      right: 0;
+    }
+
+    .message {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-height: 100%;
+      background: $alert-color;
+      color: white;
+      padding: 4px;
+      opacity: 0;
+      visibility: hidden;
+      line-height: 1.2;
+    }
+
+    .success, .error {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      padding: .5rem;
+      border-radius: 50%;
+      margin-top: -1.1rem;
+      margin-left: -1.1rem;
+      color: white;
+      font-size: 1.2rem;
+      width: 2.2rem;
+      height: 2.2rem;
+      line-height: 1.2rem;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .success {
+      background: $success-color;
+    }
+
+    .error {
+      background: $alert-color;
+    }
+  }
 }
 
 
