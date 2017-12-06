@@ -53,13 +53,6 @@
     user-select: none;
     width: 100%;
     font-size: $small-font-size;
-
-    > span {
-      display: block;
-      line-height: 1.2;
-      position: absolute;
-      background: white;
-    }
   }
 
   .remove-button {
@@ -77,6 +70,10 @@
   }
 
   .filename {
+    display: block;
+    line-height: 1.2;
+    position: absolute;
+    background: $white;
     border-top: $thumbnail-border;
     line-height: 1.2;
     bottom: 0;
