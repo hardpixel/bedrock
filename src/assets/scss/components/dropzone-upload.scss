@@ -58,8 +58,10 @@ $dropzone-upload-active-border-color: $primary-color !default;
     .thumbnail {
 
       .success {
-        opacity: 1;
+        opacity: 0;
         visibility: visible;
+        @include mui-animation(fade(0, 1), slide(out, up), fade(1, 0));
+        animation-duration: 1.5s;
       }
     }
   }
@@ -76,6 +78,8 @@ $dropzone-upload-active-border-color: $primary-color !default;
       .error {
         opacity: 1;
         visibility: visible;
+        @include mui-animation(fade(0, 1), wiggle(15deg));
+        animation-duration: 1.5s;
       }
     }
   }
