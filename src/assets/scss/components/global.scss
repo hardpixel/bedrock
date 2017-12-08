@@ -9,6 +9,15 @@
     }
   }
 
+  input {
+
+    &[type="checkbox"],
+    &[type="radio"] {
+      position: relative;
+      top: 2px;
+    }
+  }
+
   .top-bar,
   .logo-bar {
     min-height: 4rem;
