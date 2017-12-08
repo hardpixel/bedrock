@@ -1,7 +1,7 @@
 $login-box-width: 26rem !default;
 $login-box-logo-width: 16rem !default;
 
-// No Content Mixins
+// Login Box Mixins
 
 @mixin login-box {
   margin: ($global-margin * 3) auto;
@@ -39,7 +39,7 @@ $login-box-logo-width: 16rem !default;
 }
 
 
-// No Content Component
+// Login Box Component
 
 @mixin bedrock-login-box {
   .login-box {
