@@ -1,0 +1,48 @@
+$login-box-width: 26rem !default;
+$login-box-logo-width: 16rem !default;
+
+// No Content Mixins
+
+@mixin login-box {
+  margin: ($global-margin * 3) auto;
+  padding: $global-padding;
+  width: 100%;
+  max-width: $login-box-width;
+
+  .logo-image {
+    width: 100%;
+    display: block;
+
+    img {
+      display: block;
+      width: $login-box-logo-width;
+      margin: ($global-margin * 2) auto;
+    }
+  }
+
+  .footer-links {
+    font-size: $small-font-size;
+    text-align: center;
+
+    a {
+      color: $body-font-color;
+      white-space: nowrap;
+      margin: 0 .2rem;
+
+      &:not(:last-child):after {
+        content: "\2022";
+        font-size: 1rem;
+        margin-left: .4rem;
+      }
+    }
+  }
+}
+
+
+// No Content Component
+
+@mixin bedrock-login-box {
+  .login-box {
+    @include login-box;
+  }
+}
