@@ -69,7 +69,25 @@
   }
 }
 
+@mixin color-helpers {
+  @each $attr in (background, background-color, border-color, color) {
+    .#{$attr} {
+
+      &-none {
+        #{$attr}: none !important;
+      }
+
+      @each $name, $color in $foundation-palette {
+        &-#{$name} {
+          #{$attr}: $color !important;
+        }
+      }
+    }
+  }
+}
+
 @mixin bedrock-prototype-classes {
   @include table-helpers;
   @include form-helpers;
+  @include color-helpers;
 }
