@@ -6,6 +6,7 @@ import { ListRemove } from '../components/listRemove';
 import { MediaReveal } from '../components/mediaReveal';
 import { MediaAttach } from '../components/mediaAttach';
 import { DropzoneUpload } from '../components/dropzoneUpload';
+import { InlineEditBox } from '../components/inlineEditBox';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
 Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
@@ -15,3 +16,4 @@ Foundation.plugin(ListRemove, 'ListRemove');
 Foundation.plugin(MediaReveal, 'MediaReveal');
 Foundation.plugin(MediaAttach, 'MediaAttach');
 Foundation.plugin(DropzoneUpload, 'DropzoneUpload');
+Foundation.plugin(InlineEditBox, 'InlineEditBox');

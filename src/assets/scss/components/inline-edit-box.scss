@@ -1,0 +1,70 @@
+$inline-edit-box-color: $dark-gray !default;
+$inline-edit-box-background: $light-gray !default;
+$inline-edit-box-border: 1px solid darken($light-gray, 10) !default;
+
+// Inline Edit Box Mixins
+
+@mixin inline-edit-box {
+  position: relative;
+  padding: ($global-padding / 3) ($global-padding / 2);
+  padding-right: $global-padding * 2.5;
+  border: $inline-edit-box-border;
+  background: $inline-edit-box-background;
+  margin-top: -1px;
+
+  &.is-editing {
+
+    input, select, .save-button {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .edit-preview, .edit-button {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  input, select {
+    margin: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .edit-button,
+  .save-button {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    padding: ($global-padding / 2) ($global-padding / 1.5);
+    font-size: 1.2rem;
+  }
+
+  .edit-button {
+    color: $inline-edit-box-color;
+  }
+
+  .save-button {
+    color: $success-color;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .edit-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: $global-padding / 1.5;
+    color: $inline-edit-box-color;
+  }
+}
+
+
+// Inline Edit Box Component
+
+@mixin bedrock-inline-edit-box {
+  .inline-edit-box {
+    @include inline-edit-box;
+  }
+}
