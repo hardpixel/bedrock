@@ -5,7 +5,7 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
 // Offcanvas Menu Mixins
 
 @mixin off-canvas-menu-wrapper {
-  @include xy-grid;
+  @include xy-grid(horizontal, false);
   @include off-canvas-wrapper;
   min-height: 100vh;
 }
