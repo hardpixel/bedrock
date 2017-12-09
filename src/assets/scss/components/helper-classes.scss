@@ -48,6 +48,28 @@
   }
 }
 
+@mixin form-helpers {
+  #{text-inputs()}, select {
+
+    &.large {
+      $fsize: 1.2rem;
+      $height: ($fsize * unitless-calc($input-line-height)) + (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) - rem-calc(1);
+
+      font-size: $fsize;
+      height: $height;
+    }
+
+    &.small {
+      $fsize: .8rem;
+      $height: ($fsize * unitless-calc($input-line-height)) + (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) - rem-calc(1);
+
+      font-size: $fsize;
+      height: $height;
+    }
+  }
+}
+
 @mixin bedrock-prototype-classes {
   @include table-helpers;
+  @include form-helpers;
 }
