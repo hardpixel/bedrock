@@ -63,9 +63,7 @@ TinyMceEditor.toolbar = [
   'outdent indent',
   'link unlink',
   'formatselect',
-  'charmap',
   'removeformat pastetext',
-  'undo redo',
   'fullscreen'
 ];
 
