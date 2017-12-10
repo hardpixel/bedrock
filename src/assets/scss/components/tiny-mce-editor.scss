@@ -1,7 +1,7 @@
 // Text Editor Mixins
 
 @mixin tiny-mce-editor-basics {
-  border: 1px solid darken($panel-background, 10);
+  border: 1px solid smart-scale($panel-background, $panel-color-scale);
 
   .mce-tinymce {
     box-sizing: inherit;
@@ -9,7 +9,7 @@
   }
 
   .mce-container {
-    border-color: darken($panel-background, 10);
+    border-color: smart-scale($panel-background, $panel-color-scale);
   }
 
   .mce-edit-area {
@@ -30,7 +30,7 @@
   .mce-toolbar .mce-btn-group {
     margin: 0;
     padding: ($global-padding / 3) ($global-padding / 2);
-    border-color: darken($panel-background, 10);
+    border: 0;
 
     &:first-child {
       margin-left: -1px;

@@ -10,6 +10,7 @@
 @import 'components/login-box';
 @import 'components/dropzone-upload';
 @import 'components/inline-edit-box';
+@import 'components/page-content';
 @import 'components/tiny-mce-editor';
 
 @include bedrock-global-styles;
@@ -24,4 +25,5 @@
 @include bedrock-login-box;
 @include bedrock-dropzone-upload;
 @include bedrock-inline-edit-box;
+@include bedrock-page-content;
 @include bedrock-tiny-mce-editor;

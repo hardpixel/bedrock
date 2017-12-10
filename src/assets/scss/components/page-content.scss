@@ -1,0 +1,47 @@
+$page-content-sidebar-width: 340px !default;
+
+// Page Content Mixins
+
+@mixin page-content-gutter {
+  @each $name, $size in $grid-column-gutter {
+    @include breakpoint($name) {
+      padding-left: $size / 2;
+      padding-right: $size / 2;
+    }
+  }
+}
+
+@mixin page-content {
+  @include xy-grid;
+  min-height: 100vh;
+
+  @each $name, $size in $grid-column-gutter {
+    @include breakpoint($name) {
+      margin-left: -($size / 2);
+      margin-right: -($size / 2);
+    }
+  }
+
+  > .content {
+    @include xy-cell(auto, false);
+    @include page-content-gutter;
+  }
+
+  > .sidebar {
+    @include xy-cell(shrink, false);
+    @include page-content-gutter;
+
+    @include breakpoint(xlarge) {
+      width: $page-content-sidebar-width;
+    }
+  }
+}
+
+
+// Page Content Component
+
+@mixin bedrock-page-content {
+  .page-content {
+    @include page-content;
+  }
+}
