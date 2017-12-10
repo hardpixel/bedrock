@@ -67,6 +67,18 @@
       height: $height;
     }
   }
+
+  .input-group-list {
+
+    #{text-inputs()}, select, textarea {
+      margin-bottom: -1px;
+
+      &:active, &:focus {
+        position: relative;
+        z-index: 1;
+      }
+    }
+  }
 }
 
 @mixin color-helpers {
