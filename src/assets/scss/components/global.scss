@@ -41,18 +41,6 @@
     }
   }
 
-  table {
-
-    input {
-
-      &[type="radio"],
-      &[type="checkbox"] {
-        position: relative;
-        top: 2px;
-      }
-    }
-  }
-
   .menu {
 
     a {
