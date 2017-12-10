@@ -10,11 +10,10 @@ $inline-edit-box-border: 1px solid darken($light-gray, 10) !default;
   padding-right: $global-padding * 2.5;
   border: $inline-edit-box-border;
   background: $inline-edit-box-background;
-  margin-top: -1px;
 
   &.is-editing {
 
-    input, select, .save-button {
+    .edit-input, .save-button {
       opacity: 1;
       visibility: visible;
     }
@@ -26,6 +25,10 @@ $inline-edit-box-border: 1px solid darken($light-gray, 10) !default;
   }
 
   input, select {
+    margin: 0 !important;
+  }
+
+  .edit-input {
     margin: 0;
     opacity: 0;
     visibility: hidden;
@@ -53,9 +56,13 @@ $inline-edit-box-border: 1px solid darken($light-gray, 10) !default;
 
   .edit-preview {
     position: absolute;
-    top: 0;
-    left: 0;
-    padding: $global-padding / 1.5;
+    top: $global-padding / 1.5;
+    left: $global-padding / 1.5;
+    bottom: $global-padding / 1.5;
+    right: $global-padding * 2.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: $inline-edit-box-color;
   }
 }
