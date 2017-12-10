@@ -18,6 +18,10 @@
     }
   }
 
+  textarea {
+    resize: vertical;
+  }
+
   .top-bar,
   .logo-bar {
     min-height: 4rem;
