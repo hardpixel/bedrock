@@ -52,7 +52,7 @@
   #{text-inputs()}, select {
 
     &.large {
-      $fsize: 1.2rem;
+      $fsize: 1.292rem;
       $height: ($fsize * unitless-calc($input-line-height)) + (get-side($input-padding, 'top') + get-side($input-padding, 'bottom')) - rem-calc(1);
 
       font-size: $fsize;
@@ -98,8 +98,15 @@
   }
 }
 
+@mixin text-helpers {
+  .text-small {
+    font-size: $small-font-size;
+  }
+}
+
 @mixin bedrock-prototype-classes {
   @include table-helpers;
   @include form-helpers;
   @include color-helpers;
+  @include text-helpers;
 }
