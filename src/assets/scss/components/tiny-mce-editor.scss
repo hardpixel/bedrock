@@ -1,5 +1,12 @@
 // Text Editor Mixins
 
+@mixin tiny-mce-editor-input {
+  opacity: 0;
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
 @mixin tiny-mce-editor-basics {
   border: 1px solid smart-scale($panel-background, $panel-color-scale);
 
@@ -68,6 +75,10 @@
 // Text Editor Component
 
 @mixin bedrock-tiny-mce-editor {
+  [data-tiny-mce-editor] {
+    @include tiny-mce-editor-input;
+  }
+
   .tiny-mce-editor {
     @include tiny-mce-editor-basics;
   }
