@@ -22,6 +22,10 @@ $page-content-sidebar-width: 340px !default;
     }
   }
 
+  @include breakpoint(xlarge) {
+    flex-flow: row nowrap;
+  }
+
   > .content {
     @include xy-cell(auto, false);
     @include page-content-gutter;
