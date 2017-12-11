@@ -12,6 +12,7 @@
 @import 'components/inline-edit-box';
 @import 'components/page-content';
 @import 'components/tiny-mce-editor';
+@import 'components/select-box';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -27,3 +28,4 @@
 @include bedrock-inline-edit-box;
 @include bedrock-page-content;
 @include bedrock-tiny-mce-editor;
+@include bedrock-select-box;
