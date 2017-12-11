@@ -34,6 +34,7 @@ class TinyMceEditor extends Plugin {
   _init() {
     this.$element.wrap('<div class="tiny-mce-editor"></div>');
     this.options = $.extend({}, this.options, { target: this.$element.get(0) });
+    this.options = this._snakeCase(this.options);
 
     if (tinymce !== 'undefined') {
       this.editor = tinymce.init(this.options);
@@ -43,8 +44,25 @@ class TinyMceEditor extends Plugin {
   }
 
   /**
+   * Converts keys from PascalCase to snake_case.
+   * @function
+   * @private
+   */
+  _snakeCase(originalObject) {
+    var newObject = {};
+
+    for (var key in originalObject) {
+      var new_key = key.replace( /([A-Z])/g, "_$1" ).toLowerCase();
+      newObject[new_key] = originalObject[key];
+    }
+
+    return newObject;
+  }
+
+  /**
    * Destroys the tiny-mce-editor plugin.
    * @function
+   * @private
    */
   _destroy() {
     if (this.editor) {
