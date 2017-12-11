@@ -1,117 +1,11 @@
 // Select Box Mixins
 
-@mixin select-box-default-layout-single {
-  .select2-selection--single {
-    background-color: #fff;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-
-    .select2-selection__rendered {
-      color: #444;
-      line-height: 28px;
-    }
-
-    .select2-selection__clear {
-      cursor: pointer;
-      float: right;
-      font-weight: bold;
-    }
-
-    .select2-selection__placeholder {
-      color: #999;
-    }
-
-    .select2-selection__arrow {
-      height: 26px;
-
-      position: absolute;
-
-      top: 1px;
-      right: 1px;
-
-      width: 20px;
-
-      b {
-        border-color: #888 transparent transparent transparent;
-        border-style: solid;
-        border-width: 5px 4px 0 4px;
-
-        height: 0;
-        left: 50%;
-
-        margin-left: -4px;
-        margin-top: -2px;
-
-        position: absolute;
-
-        top: 50%;
-        width: 0;
-      }
-    }
-  }
-
-  &[dir="rtl"] {
-    .select2-selection--single {
-      .select2-selection__clear {
-        float: left;
-      }
-
-      .select2-selection__arrow {
-        left: 1px;
-        right: auto;
-      }
-    }
-  }
-
-  &.select2-container--disabled {
-    .select2-selection--single {
-      background-color: #eee;
-      cursor: default;
-
-      .select2-selection__clear {
-        display: none;
-      }
-    }
-  }
-
-  &.select2-container--open {
-    .select2-selection--single {
-      .select2-selection__arrow {
-        b {
-          border-color: transparent transparent #888 transparent;
-          border-width: 0 4px 5px 4px;
-        }
-      }
-    }
-  }
-}
-
 @mixin select-box-default-layout-multiple {
   .select2-selection--multiple {
     background-color: white;
     border: 1px solid #aaa;
     border-radius: 4px;
     cursor: text;
-
-    .select2-selection__rendered {
-      box-sizing: border-box;
-      list-style: none;
-      margin: 0;
-      padding: 0 5px;
-      width: 100%;
-
-      li {
-        list-style: none;
-      }
-    }
-
-    .select2-selection__placeholder {
-      color: #999;
-
-      margin-top: 5px;
-
-      float: left;
-    }
 
     .select2-selection__clear {
       cursor: pointer;
@@ -152,10 +46,6 @@
 
   &[dir="rtl"] {
     .select2-selection--multiple {
-      .select2-selection__choice, .select2-selection__placeholder, .select2-search--inline {
-        float: right;
-      }
-
       .select2-selection__choice {
         margin-left: 5px;
         margin-right: auto;
@@ -189,7 +79,6 @@
 
 @mixin select-box-default-layout {
   .select2-container--default {
-    @include select-box-default-layout-single;
     @include select-box-default-layout-multiple;
 
     &.select2-container--open.select2-container--above {
@@ -274,11 +163,6 @@
       }
     }
 
-    .select2-results__option--highlighted[aria-selected] {
-      background-color: #5897fb;
-      color: white;
-    }
-
     .select2-results__group {
       cursor: default;
       display: block;
@@ -289,32 +173,13 @@
 
 @mixin select-box-single {
   .select2-selection--single {
-    box-sizing: border-box;
-    cursor: pointer;
+    @include form-select;
     display: block;
-    height: 28px;
-    user-select: none;
-
-    .select2-selection__rendered {
-      display: block;
-      padding-left: 8px;
-      padding-right: 20px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+    width: 100%;
+    margin: 0;
 
     .select2-selection__clear {
       position: relative;
-    }
-  }
-
-  &[dir="rtl"] {
-    .select2-selection--single {
-      .select2-selection__rendered {
-        padding-right: 8px;
-        padding-left: 20px;
-      }
     }
   }
 }
@@ -326,14 +191,6 @@
     display: block;
     min-height: 32px;
     user-select: none;
-
-    .select2-selection__rendered {
-      display: inline-block;
-      overflow: hidden;
-      padding-left: 8px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
   }
 
   .select2-search--inline {
@@ -355,10 +212,9 @@
 
 @mixin select-box-dropdown {
   .select2-dropdown {
-    background-color: white;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    box-sizing: border-box;
+    background-color: $input-background;
+    border: $input-border;
+    border-radius: $input-radius;
     display: block;
     position: absolute;
     left: -100000px;
@@ -371,20 +227,23 @@
   }
 
   .select2-results__options {
-    list-style: none;
     margin: 0;
     padding: 0;
+    list-style: none;
   }
 
   .select2-results__option {
-    padding: 6px;
-
+    padding: $input-padding;
     user-select: none;
-    -webkit-user-select: none;
 
     &[aria-selected] {
       cursor: pointer;
     }
+  }
+
+  .select2-results__option--highlighted[aria-selected] {
+    background-color: $anchor-color;
+    color: white;
   }
 
   .select2-container--open .select2-dropdown {
@@ -408,9 +267,7 @@
     padding: 4px;
 
     .select2-search__field {
-      padding: 4px;
-      width: 100%;
-      box-sizing: border-box;
+      margin: 0;
 
       &::-webkit-search-cancel-button {
         -webkit-appearance: none;
@@ -441,25 +298,60 @@
     background-color: #fff;
   }
 
+  .select2-selection__rendered {
+    display: block;
+    padding: 0 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    list-style-type: none;
+    margin: 0;
+  }
+
+  .select2-selection__placeholder {
+    color: $input-placeholder-color;
+    display: inline-block;
+  }
+
   .select2-hidden-accessible {
-    border: 0 !important;
-    clip: rect(0 0 0 0) !important;
-    height: 1px !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    position: absolute !important;
-    width: 1px !important;
+    display: none !important;
+  }
+
+  .select2-selection__arrow {
+    display: none !important;
+  }
+
+  .select2-selection__clear {
+    cursor: pointer;
+    float: right;
+    font-weight: bold;
+  }
+
+  &[dir="rtl"] {
+    .select2-selection__clear {
+      float: left;
+    }
+  }
+
+  &.select2-container--disabled {
+
+    .select2-selection {
+      background-color: $input-background-disabled;
+      cursor: $input-cursor-disabled;
+      pointer-events: none;
+    }
+
+    .select2-selection__clear {
+      display: none !important;
+    }
   }
 }
 
 @mixin select-box-container {
   .select2-container {
-    box-sizing: border-box;
     display: inline-block;
-    margin: 0;
+    margin: 0 0 $form-spacing;
     position: relative;
-    vertical-align: middle;
 
     @include select-box-single;
     @include select-box-multiple;
