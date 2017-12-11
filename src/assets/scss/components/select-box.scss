@@ -200,10 +200,6 @@
       background-color: $anchor-color;
       color: white;
     }
-
-    &[aria-selected=true] {
-      background-color: $alert-color !important;
-    }
   }
 
   .select2-results__option {
@@ -215,11 +211,12 @@
     }
 
     &[aria-disabled=true] {
-      color: #999;
+      color: $dark-gray;
     }
 
     &[aria-selected=true] {
       background-color: $input-background-disabled;
+      color: inherit;
     }
 
     .select2-results__option {
