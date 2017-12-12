@@ -19,10 +19,6 @@
     border-color: smart-scale($panel-background, $panel-color-scale);
   }
 
-  .mce-edit-area {
-    padding: 0 ($global-padding / 2);
-  }
-
   .mce-path {
     padding-left: ($global-padding * 0.95);
   }
