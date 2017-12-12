@@ -32,7 +32,13 @@ class SelectBox extends Plugin {
    * @private
    */
   _init() {
-    this.$element.select2();
+    var options = {}
+
+    if (this.options.list) {
+      options['theme'] = 'list';
+    }
+
+    this.$element.select2(options);
   }
 
   /**
