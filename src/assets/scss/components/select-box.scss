@@ -64,7 +64,7 @@
     }
   }
 
-  &[dir="rtl"] {
+  [dir="rtl"] {
     .select2-selection--multiple {
       .select2-selection__choice {
         margin-left: 5px;
@@ -130,7 +130,7 @@
     font-weight: bold;
   }
 
-  &.select2-container--disabled {
+  .select2-container--disabled {
 
     .select2-selection {
       background-color: $input-background-disabled;
@@ -143,7 +143,7 @@
     }
   }
 
-  &[dir="rtl"] {
+  [dir="rtl"] {
     .select2-selection__clear {
       float: left;
     }
