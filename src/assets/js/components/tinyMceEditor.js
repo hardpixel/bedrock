@@ -100,8 +100,14 @@ TinyMceEditor.defaults = {
   menubar: false,
   branding: false,
   entity_encoding: 'raw',
+  max_height: 800,
+  min_height: 300,
+  autoresize_bottom_margin: 0,
+  autoresize_max_height: 800,
+  autoresize_min_height: 300,
   plugins: TinyMceEditor.plugins.join(' '),
-  toolbar: TinyMceEditor.toolbar.join(' | ')
+  toolbar: TinyMceEditor.toolbar.join(' | '),
+  content_style: "html { padding: 0 .5rem }"
 };
 
 export {TinyMceEditor};
