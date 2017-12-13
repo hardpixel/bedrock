@@ -40,8 +40,10 @@ class SelectBox extends Plugin {
 
     this.select2 = this.$element.data('select2');
     this.$container = this.select2.$container;
+    this.$dropdown = this.select2.$dropdown;
 
     this._events();
+    this._keepPlaceholder();
   }
 
   /**
@@ -50,12 +52,14 @@ class SelectBox extends Plugin {
    * @private
    */
   _events() {
-    this.$element.off(['select2:select', 'select2:unselect']).on({
+    this.$element.off(['select2:select', 'select2:unselect', 'select2:open']).on({
+      'select2:open': this._handleEvent.bind(this),
       'select2:select': this._handleEvent.bind(this),
       'select2:unselect': this._handleEvent.bind(this),
     });
 
     this.$element.off('.zf.trigger').on({
+      'open.zf.trigger': this.open.bind(this),
       'select.zf.trigger': this.select.bind(this),
       'unselect.zf.trigger': this.unselect.bind(this)
     });
@@ -75,6 +79,25 @@ class SelectBox extends Plugin {
   }
 
   /**
+   * Updates position on dropdown.
+   * @function
+   * @private
+   */
+  _updatePosition() {
+    var search   = this.$container.find('.select2-search__field');
+    var dropdown = this.$dropdown.find('.select2-dropdown');
+
+    if ( search.length && this.options.list) {
+      if (dropdown.hasClass('select2-dropdown--above')) {
+        var position = this.$container.innerHeight() - search.outerHeight();
+        dropdown.css('margin-top', position);
+      } else {
+        dropdown.css('margin-top', false);
+      }
+    }
+  }
+
+  /**
    * Handles events on element.
    * @param {Object} event - Event object passed from listener.
    * @function
@@ -86,12 +109,22 @@ class SelectBox extends Plugin {
   }
 
   /**
+   * Opens the select dropdown.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   */
+  open(event) {
+    this._updatePosition();
+    this.$element.trigger('open.zf.select.box');
+  }
+
+  /**
    * Selects a list item.
    * @param {Object} event - Event object passed from listener.
    * @function
    */
   select(event) {
-    this.$element.trigger('changed.zf.select.list');
+    this.$element.trigger('changed.zf.select.box');
   }
 
   /**
@@ -100,7 +133,7 @@ class SelectBox extends Plugin {
    * @function
    */
   unselect(event) {
-    this.$element.trigger('changed.zf.select.list');
+    this.$element.trigger('changed.zf.select.box');
   }
 
   /**
@@ -109,8 +142,8 @@ class SelectBox extends Plugin {
    * @private
    */
   _destroy() {
-    this.$element.select2('destroy');;
-    this.$element.off(['select2:select', 'select2:unselect']);
+    this.$element.select2('destroy');
+    this.$element.off(['select2:select', 'select2:unselect', 'select2:open']);
     this.$element.off('.zf.trigger');
   }
 }
