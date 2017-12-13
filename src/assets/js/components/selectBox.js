@@ -23,6 +23,10 @@ class SelectBox extends Plugin {
     this.$element = element;
     this.options = $.extend({}, SelectBox.defaults, this.$element.data(), options);
 
+    if (this.options.list) {
+      this.options['theme'] = 'list';
+    }
+
     this._init();
   }
 
@@ -32,13 +36,12 @@ class SelectBox extends Plugin {
    * @private
    */
   _init() {
-    var options = {}
+    this.$element.select2(this.options);
 
-    if (this.options.list) {
-      options['theme'] = 'list';
-    }
+    this.select2 = this.$element.data('select2');
+    this.$container = this.select2.$container;
 
-    this.$element.select2(options);
+    this._events();
   }
 
   /**
@@ -47,7 +50,57 @@ class SelectBox extends Plugin {
    * @private
    */
   _events() {
+    this.$element.off(['select2:select', 'select2:unselect']).on({
+      'select2:select': this._handleEvent.bind(this),
+      'select2:unselect': this._handleEvent.bind(this),
+    });
 
+    this.$element.off('.zf.trigger').on({
+      'select.zf.trigger': this.select.bind(this),
+      'unselect.zf.trigger': this.unselect.bind(this)
+    });
+  }
+
+  /**
+   * Keeps placeholder on search field.
+   * @function
+   * @private
+   */
+  _keepPlaceholder() {
+    var search = this.$container.find('.select2-search__field');
+
+    if ( search.length && this.options.list) {
+      search.attr('placeholder', this.options.placeholder);
+    }
+  }
+
+  /**
+   * Handles events on element.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   * @private
+   */
+  _handleEvent(event) {
+    this.$element.trigger(event.type.replace('select2:', ''));
+    this._keepPlaceholder();
+  }
+
+  /**
+   * Selects a list item.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   */
+  select(event) {
+    this.$element.trigger('changed.zf.select.list');
+  }
+
+  /**
+   * Unselects a list item.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   */
+  unselect(event) {
+    this.$element.trigger('changed.zf.select.list');
   }
 
   /**
@@ -56,7 +109,9 @@ class SelectBox extends Plugin {
    * @private
    */
   _destroy() {
-
+    this.$element.select2('destroy');;
+    this.$element.off(['select2:select', 'select2:unselect']);
+    this.$element.off('.zf.trigger');
   }
 }
 

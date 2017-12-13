@@ -92,6 +92,9 @@
       @include label;
       background: $label-background;
       color: $label-color;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .select2-selection__choice__remove {
