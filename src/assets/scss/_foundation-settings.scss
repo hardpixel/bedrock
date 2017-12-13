@@ -795,10 +795,10 @@ $table-stack-breakpoint: medium;
 
 $tab-margin: 0;
 $tab-background: $white;
-$tab-color: $primary-color;
+$tab-color: $body-font-color;
 $tab-background-active: $light-gray;
-$tab-active-color: $primary-color;
-$tab-item-font-size: rem-calc(12);
+$tab-active-color: $body-font-color;
+$tab-item-font-size: 1rem;
 $tab-item-background-hover: $white;
 $tab-item-padding: 1.25rem 1.5rem;
 $tab-expand-max: 6;
