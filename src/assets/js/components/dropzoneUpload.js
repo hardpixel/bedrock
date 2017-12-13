@@ -35,6 +35,7 @@ class DropzoneUpload extends Plugin {
    * @private
    */
   _init() {
+    this._handleEvents();
     this.dropzone = new Dropzone(`#${this.id}`, this.options);
   }
 
@@ -64,6 +65,25 @@ class DropzoneUpload extends Plugin {
    */
   _events() {
 
+  }
+
+  /**
+   * Handles events from the dropzone.
+   * @function
+   * @private
+   */
+  _handleEvents() {
+    this.options.queuecomplete = function () {
+      this.$element.trigger('queuecomplete.zf.dropzone.upload');
+    }.bind(this);
+  }
+
+  /**
+   * Removes all uploaded items.
+   * @function
+   */
+  clear() {
+    this.dropzone.removeAllFiles();
   }
 
   /**
