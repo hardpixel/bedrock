@@ -21,6 +21,7 @@ class MediaReveal extends Plugin {
   _setup(element, options) {
     this.className = 'MediaReveal'; // ie9 back compat
     this.$element = element;
+    this.$dropzone = this.$element.find('[data-dropzone-upload]');
     this.id = this.$element.attr('id');
     this.options = $.extend({}, MediaReveal.defaults, this.$element.data(), options);
     this.template = $(`#${this.id}-item-template`).html();
@@ -66,6 +67,10 @@ class MediaReveal extends Plugin {
 
     this.$insert.off('click').on({
       'click': this.insert.bind(this)
+    });
+
+    this.$dropzone.off('.zf.dropzone.upload').on({
+      'queuecomplete.zf.dropzone.upload': this._uploadComplete.bind(this)
     });
   }
 
@@ -126,6 +131,22 @@ class MediaReveal extends Plugin {
     }.bind(this));
 
     this.$grid.append(this.items);
+  }
+
+  /**
+   * Switches ui elements when uploads are completed.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   * @private
+   */
+  _uploadComplete(event) {
+    var tabs = this.$element.find('[data-tabs]');
+    var tab  = this.$grid.parents('.tabs-panel:first');
+
+    tabs.foundation('selectTab', tab);
+
+    this.open();
+    this.$dropzone.foundation('clear');
   }
 
   /**
@@ -214,6 +235,7 @@ class MediaReveal extends Plugin {
     this.$element.off('.zf.reveal');
     this.$grid.off('changed.zf.select.list');
     this.$insert.off('click');
+    this.$dropzone.off('.zf.dropzone.upload');
   }
 }
 
