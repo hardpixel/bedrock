@@ -57,7 +57,7 @@ $dropzone-upload-active-border-color: $primary-color !default;
 
     .thumbnail {
 
-      .success {
+      .icon-success {
         opacity: 0;
         visibility: visible;
         @include mui-animation(fade(0, 1), slide(out, up), fade(1, 0));
@@ -75,7 +75,7 @@ $dropzone-upload-active-border-color: $primary-color !default;
         visibility: visible;
       }
 
-      .error {
+      .icon-error {
         opacity: 1;
         visibility: visible;
         @include mui-animation(fade(0, 1), wiggle(15deg));
@@ -121,7 +121,7 @@ $dropzone-upload-active-border-color: $primary-color !default;
       visibility: hidden;
     }
 
-    .success, .error {
+    .icon-success, .icon-error {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -138,11 +138,11 @@ $dropzone-upload-active-border-color: $primary-color !default;
       visibility: hidden;
     }
 
-    .success {
+    .icon-success {
       background: $success-color;
     }
 
-    .error {
+    .icon-error {
       background: $alert-color;
     }
   }
