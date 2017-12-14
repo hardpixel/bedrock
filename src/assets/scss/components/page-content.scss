@@ -1,4 +1,7 @@
-$page-content-sidebar-width: 340px !default;
+$page-content-sidebar-sizes: (
+  small: 340px,
+  xlarge: 360px
+) !default;
 
 // Page Content Mixins
 
@@ -35,8 +38,14 @@ $page-content-sidebar-width: 340px !default;
     @include xy-cell(shrink, false);
     @include page-content-gutter;
 
-    @include breakpoint(xlarge) {
-      width: $page-content-sidebar-width;
+    @each $name, $size in $page-content-sidebar-sizes {
+      @include breakpoint($name) {
+        width: $size;
+      }
+    }
+
+    @include breakpoint(xlarge down) {
+      width: 100%;
     }
   }
 }

@@ -3,9 +3,9 @@
     Thumbnail
   </div>
 
-  <div class="panel-content padding-0">
+  <div class="panel-content">
     <div id="media-thumbnail" data-media-attach="media-modal">
-      <div class="no-content hide" data-empty-state>
+      <div class="no-content hide padding-0" data-empty-state>
         <i class="mdi mdi-camera-off"></i>
         <span>No thumbnail</span>
         <button class="button success small hollow margin-top-1" data-open="media-thumbnail">Add Thumbnail</button>
@@ -18,7 +18,7 @@
 <script id="media-thumbnail-item-template" type="text/template">
   <div class="attachment text-center" data-list-item>
     <input type="hidden" name="page[thumbnail_id]" data-value="id">
-    <img data-src="id" class="width-100 margin-bottom-1" data-url="https://picsum.photos/600/300?image=[src]">
-    <button class="button alert small hollow" data-remove>Remove Thumbnail</button>
+    <img data-src="id" class="width-100 margin-bottom-1" data-url="https://picsum.photos/600/400?image=[src]">
+    <button class="button alert small hollow margin-0" data-remove>Remove Thumbnail</button>
   </div>
 </script>
