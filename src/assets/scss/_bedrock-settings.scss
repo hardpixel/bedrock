@@ -8,7 +8,8 @@
 //   3. Offcanvas Menu
 //   4. Panel
 //   5. No Content
-//   6. Login Box
+//   6. Page Content
+//   7. Login Box
 
 
 // 1. Header
@@ -53,7 +54,16 @@ $panel-radius: $global-radius;
 $no-content-color: $medium-gray;
 
 
-// 6. Login Box
+// 6. Page Content
+// ---------
+
+$page-content-sidebar-sizes: (
+  small: 340px,
+  xlarge: 360px
+);
+
+
+// 7. Login Box
 // ---------
 
 $login-box-width: 26rem;
