@@ -7,9 +7,33 @@
       .select2-selection__choice {
         font-size: inherit;
         margin: 0 0 ($global-margin / 2);
-        padding: $global-margin / 2;
+        padding: $global-padding / 1.5;
         display: block;
         width: 100%;
+        color: $body-font-color;
+        background: $light-gray;
+        position: relative;
+        box-shadow: inset 0 0 0 1px $medium-gray;
+
+        &:hover {
+          padding-right: $global-padding * 2;
+
+          .select2-selection__choice__remove {
+            display: block;
+          }
+        }
+      }
+
+      .select2-selection__choice__remove {
+        color: $white;
+        background: $alert-color;
+        height: 100%;
+        padding: $global-padding / 1.5;
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: none;
+        margin: 0;
       }
 
       .select2-selection__rendered {
