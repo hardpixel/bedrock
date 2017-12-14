@@ -22,23 +22,12 @@ class MediaReveal extends Plugin {
     this.className = 'MediaReveal'; // ie9 back compat
     this.$element = element;
     this.$dropzone = this.$element.find('[data-dropzone-upload]');
-    this.id = this.$element.attr('id');
     this.options = $.extend({}, MediaReveal.defaults, this.$element.data(), options);
-    this.template = $(`#${this.id}-item-template`).html();
+    this.reveal = new Foundation.Reveal(element, this.options);
     this.items = [];
     this.selectedItems = [];
-    this.reveal = new Foundation.Reveal(element, this.options);
-    this.mediaUrl = this.options.mediaUrl;
-    this.mediaKey = this.options.mediaKey;
-    this.$insert = this.$element.find('[data-insert]');
-    this.$grid = this.$element.find('[data-list-select]');
-    this.$item = $(this.template);
-    this.imageKey = this.$item.find('[data-src]').attr('data-src');
-    this.imageUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
-    this.titleKey = this.$item.find('[data-text]').attr('data-text');
 
     this._init();
-    this._events();
   }
 
   /**
@@ -47,7 +36,21 @@ class MediaReveal extends Plugin {
    * @private
    */
   _init() {
+    this.id = this.$element.attr('id');
+    this.template = $(`#${this.id}-item-template`).html();
+    this.mediaUrl = this.options.mediaUrl;
+    this.mediaKey = this.options.mediaKey;
+    this.uniqueKey = this.options.uniqueKey || 'id';
+    this.$insert = this.$element.find('[data-insert]');
+    this.$grid = this.$element.find('[data-list-select]');
+    this.$item = $(this.template);
+    this.imageKey = this.$item.find('[data-src]').attr('data-src');
+    this.imageUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
+    this.titleKey = this.$item.find('[data-text]').attr('data-text');
+
     this.$insert.addClass('disabled');
+
+    this._events();
   }
 
   /**
@@ -108,12 +111,14 @@ class MediaReveal extends Plugin {
    */
   _buildItem(data) {
     var item = this.$item.clone();
+    var key = this._getObjectValue(data, this.uniqueKey);
     var url = this._getObjectValue(data, this.imageKey);
     var title = this._getObjectValue(data, this.titleKey);
 
     item.find('[data-src]').attr('src', this.imageUrl.replace('[src]', url));
     item.find('[data-text]').text(title);
     item.data('imageObject', data);
+    item.data('uniqueKey', key);
 
     return item;
   }
@@ -126,7 +131,7 @@ class MediaReveal extends Plugin {
    */
   _appendItems(data) {
     $.each(data, function(index, data) {
-      var item = this._buildItem(data)
+      var item = this._buildItem(data);
       this.items.push(item);
     }.bind(this));
 
@@ -144,8 +149,11 @@ class MediaReveal extends Plugin {
     var tab  = this.$grid.parents('.tabs-panel:first');
 
     tabs.foundation('selectTab', tab);
+    this.$grid.empty();
 
-    this.open();
+    this.items = [];
+    this._getItems();
+
     this.$dropzone.foundation('clear');
   }
 
