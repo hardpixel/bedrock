@@ -1,0 +1,25 @@
+<div class="panel">
+  <div class="panel-header border">
+    File Input
+  </div>
+  <div class="panel-content border">
+    <div class="dropzone" id="file-input" data-file-input data-thumbnail-width="600" data-thumbnail-height="400" data-previews-container="#file-input-preview">
+      <div class="dz-message bordered">
+        <div class="no-content">
+          <i class="mdi mdi-upload"></i>
+          <span>Drop file here</span>
+          <input type="file" id="file-upload-field">
+          <label for="file-upload-field" class="button small success hollow margin-top-1">Upload File</label>
+        </div>
+      </div>
+      <div id="file-input-preview"></div>
+    </div>
+  </div>
+</div>
+
+<script id="file-input-preview-template" type="text/template">
+  <div class="text-center">
+    <img src="{{root}}assets/img/upload-preview.svg" dz-thumbnail class="margin-bottom-1" />
+    <a class="button alert small hollow margin-0" dz-remove>Remove File</a>
+  </div>
+</script>

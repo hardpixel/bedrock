@@ -13,6 +13,7 @@
 @import 'components/page-content';
 @import 'components/tiny-mce-editor';
 @import 'components/select-box';
+@import 'components/file-input';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -29,3 +30,4 @@
 @include bedrock-page-content;
 @include bedrock-tiny-mce-editor;
 @include bedrock-select-box;
+@include bedrock-file-input;
