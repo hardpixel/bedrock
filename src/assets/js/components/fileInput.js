@@ -38,6 +38,10 @@ class FileInput extends Plugin {
     this.$empty = this.$element.find('.dz-message');
     this.$input = this.$element.find('input[type="file"]');
 
+    if (this.$preview.children().length) {
+      this.$empty.hide();
+    }
+
     this._events();
   }
 
