@@ -39,38 +39,30 @@ class SeoAnalysis extends Plugin {
     this.$output = this.$element.find('[data-seo-output]');
     this.$keywordField = this.$element.find('[data-seo-keyword]');
     this.$contentField = $(`#${this.options.content}`);
+    this.outputId = `${this.id}-output`;
 
-    this.$output.attr('id', `${this.id}-output`);
+    this.$output.attr('id', this.outputId);
 
-    var focusKeywordField = this.$keywordField.get(0);
-    var contentField = this.$contentField.get(0);
-
-    var snippetPreview = new SeoPreview({
+    this.seoPreview = new SeoPreview({
       targetElement: this.$preview.get(0)
     });
 
-    var app = new SeoApp({
-      snippetPreview: snippetPreview,
+    this.seoApp = new SeoApp({
+      snippetPreview: this.seoPreview,
       targets: {
-        output: this.$output.attr('id')
+        output: this.outputId
       },
       callbacks: {
-        getData: function() {
-          return {
-            keyword: focusKeywordField.value,
-            text: contentField.value
-          };
-        }
+        getData: this._dataCallback.bind(this)
       }
     });
 
-    app.refresh();
+    this.seoApp.refresh();
 
-    focusKeywordField.addEventListener('change', app.refresh.bind(app));
-    contentField.addEventListener('change', app.refresh.bind(app));
+    this._setPreviewWrappers();
+    this._setPreviewIcons();
 
-    this.$element.find('.snippet-editor__view').wrapAll('<div class="seo-preview-variants"></div>');
-    this.$element.find('.snippet-editor__edit-button, .snippet-editor__view-toggle').wrapAll('<div class="seo-preview-actions"></div>');
+    this._events();
   }
 
   /**
@@ -79,7 +71,56 @@ class SeoAnalysis extends Plugin {
    * @private
    */
   _events() {
+    this.$keywordField.off('change').on({
+      'change': this.seoApp.refresh.bind(this.seoApp)
+    });
 
+    this.$contentField.off('change').on({
+      'change': this.seoApp.refresh.bind(this.seoApp)
+    });
+  }
+
+  /**
+   * Sets custom icons in snippet preview.
+   * @function
+   * @private
+   */
+  _setPreviewIcons() {
+    var icons = $.extend({}, this.$preview.data());
+    var items = {
+      'iconDesktop': '.snippet-editor__view-icon-desktop',
+      'iconMobile': '.snippet-editor__view-icon-mobile',
+      'iconEdit': '.snippet-editor__edit-button'
+    };
+
+    $.each(items, function (index, value) {
+      this.$preview.find(value).html(`<i class="${icons[index]}"></i>`);
+    }.bind(this));
+  }
+
+  /**
+   * Sets snippet preview wrappers.
+   * @function
+   * @private
+   */
+  _setPreviewWrappers() {
+    var view = this.$element.find('.snippet-editor__view')
+    view.wrapAll('<div class="seo-preview-variants"></div>');
+
+    var btns = this.$element.find('.snippet-editor__edit-button, .snippet-editor__view-toggle');
+    btns.wrapAll('<div class="seo-preview-actions"></div>');
+  }
+
+  /**
+   * Callback for seo app data.
+   * @function
+   * @private
+   */
+  _dataCallback() {
+    return {
+      keyword: this.$keywordField.val(),
+      text: this.$contentField.val()
+    };
   }
 
   /**
@@ -88,7 +129,11 @@ class SeoAnalysis extends Plugin {
    * @private
    */
   _destroy() {
+    this.$preview.html('');
+    this.$output.html('');
 
+    this.$keywordField.off('change');
+    this.$contentField.off('change');
   }
 }
 

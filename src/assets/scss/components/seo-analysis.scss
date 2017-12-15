@@ -1,37 +1,10 @@
-$color_bad: $alert-color;
-$color_ok: $warning-color;
-$color_good: $success-color;
-
-$color_caret: #555555;
-$color_caret_hover: #bfbfbf;
-$color_caret_focus: #1074a8;
-
-$color_border: #f7f7f7;
-
-$color_input_border: #bfbfbf;
-$color_input_border_focus: #1074a8;
-
-$color_progress_background: #f7f7f7;
-
-$color_button: #f7f7f7;
-$color_button_border: #dbdbdb;
-
-$color_headings: #555555;
-$color_buttons: #555555;
-
-$color_marker_inactive: #555555;
-$color_marker_active: #ffffff;
-$color_marker_disabled: #e6e6e6;
-
-@import "snippet-editor";
-@import "analysis";
-@import "loading-dialog";
-@import "tooltips";
-
 $seo-analysis-background: $panel-background !default;
 $seo-analysis-color-scale: $panel-color-scale !default;
 $seo-analysis-color: $medium-gray !default;
 $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analysis-color-scale) !default;
+
+@import "snippet-editor";
+@import "analysis";
 
 // SEO Analysis Mixins
 
@@ -43,6 +16,8 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
   .snippet-editor__preview {
     margin: 0;
     padding: 0;
+    padding-right: $panel-padding * 4;
+    position: relative;
   }
 
   .snippet-editor__view {
@@ -54,32 +29,66 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
   }
 
   .snippet-editor__heading {
-    padding: $panel-padding;
-    border-bottom: $seo-analysis-border;
-    margin: 0;
-    font-size: 1rem;
-    font-weight: normal;
-    color: inherit;
-    background-position: left $panel-padding center;
-    background: none;
-    display: none;
+    display: none !important;
   }
 
   .seo-preview-variants {
     padding: $panel-padding;
-    border-bottom: $seo-analysis-border;
+    min-height: 10rem;
+    display: flex;
+    align-items: center;
   }
 
   .seo-preview-actions {
-    padding: $panel-padding;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: $panel-padding * 3;
+    height: 100%;
+    background: none;
+    border-left: $seo-analysis-border;
+  }
 
-    button, .snippet-editor__view-toggle {
-      background: none !important;
-      border: 0 !important;
-      width: auto;
-      height: auto;
-      margin: 0;
-      padding: 0;
+  .snippet-editor__view-toggle,
+  .snippet-editor__edit-button,
+  .snippet-editor__view-icon {
+    background: none;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    border-radius: 0;
+  }
+
+  .snippet-editor__view-toggle {
+    display: block;
+    height: (100% / 3) * 2;
+
+    .snippet-editor__view-icon {
+      height: 50%;
+      border-bottom: $seo-analysis-border;
+    }
+
+    .snippet-editor__view-icon--active {
+      opacity: 1;
+    }
+  }
+
+  .snippet-editor__edit-button,
+  .snippet-editor__view-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .5;
+  }
+
+  .snippet-editor__edit-button {
+    height: (100% / 3);
+
+    &[aria-expanded="true"] {
+      opacity: 1;
     }
   }
 }
@@ -88,11 +97,14 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
   .snippet-editor__form {
     padding: $panel-padding;
     border-top: $seo-analysis-border;
+  }
 
-    .snippet-editor__submit {
-      @include button;
-      margin: $global-margin 0 0;
-    }
+  .snippet-editor__submit {
+    display: none !important;
+  }
+
+  .snippet-editor__input {
+    @include form-element;
   }
 }
 
@@ -111,15 +123,15 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
   .seo-output {
     padding: $panel-padding;
     border-top: $seo-analysis-border;
+  }
 
-    .assessment-results {
-      margin: 0;
-      font-size: $small-font-size;
+  .assessment-results {
+    margin: 0;
+    font-size: $small-font-size;
+  }
 
-      .score:last-child {
-        margin-bottom: 0;
-      }
-    }
+  li.score:last-child {
+    margin-bottom: 0;
   }
 }
 
@@ -129,18 +141,19 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
 
   > * {
     font-family: inherit !important;
+    max-width: 100% !important;
   }
-
-  @include seo-analysis-keyword;
-  @include seo-analysis-preview;
-  @include seo-analysis-form;
-  @include seo-analysis-output;
 }
 
 
 // SEO Analysis Component
 
 @mixin bedrock-seo-analysis {
+  @include seo-analysis-keyword;
+  @include seo-analysis-preview;
+  @include seo-analysis-form;
+  @include seo-analysis-output;
+
   .seo-analysis {
     @include seo-analysis;
   }
