@@ -43,6 +43,7 @@ $dropzone-upload-active-border-color: $primary-color !default;
       visibility: hidden;
       transition-property: visibility opacity;
       transition-duration: .2s;
+      pointer-events: none;
     }
   }
 
