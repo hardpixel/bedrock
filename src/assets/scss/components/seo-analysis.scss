@@ -1,0 +1,96 @@
+$color_bad: $alert-color;
+$color_ok: $warning-color;
+$color_good: $success-color;
+
+$color_caret: #555555;
+$color_caret_hover: #bfbfbf;
+$color_caret_focus: #1074a8;
+
+$color_border: #f7f7f7;
+
+$color_input_border: #bfbfbf;
+$color_input_border_focus: #1074a8;
+
+$color_progress_background: #f7f7f7;
+
+$color_button: #f7f7f7;
+$color_button_border: #dbdbdb;
+
+$color_headings: #555555;
+$color_buttons: #555555;
+
+$color_marker_inactive: #555555;
+$color_marker_active: #ffffff;
+$color_marker_disabled: #e6e6e6;
+
+@import "sassdash";
+@import "snippet-editor";
+@import "analysis";
+@import "loading-dialog";
+@import "tooltips";
+
+$seo-analysis-background: $panel-background !default;
+$seo-analysis-color-scale: $panel-color-scale !default;
+$seo-analysis-color: $medium-gray !default;
+$seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analysis-color-scale) !default;
+
+// SEO Analysis Mixins
+
+@mixin seo-analysis-preview {
+  .yoast-section, .snippet-editor__preview {
+    max-width: 100%;
+  }
+
+  .snippet-editor__preview {
+    margin: 0;
+    padding: 0;
+  }
+
+  .snippet-editor__heading {
+    padding: $panel-padding;
+    border-bottom: $seo-analysis-border;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: normal;
+    color: inherit;
+    background-position: left $panel-padding center;
+    padding-left: $panel-padding * 2.5;
+  }
+
+  // .snippet-editor__view {
+  //   margin: $panel-padding;
+  // }
+}
+
+@mixin seo-analysis-form {
+  .snippet-editor__form {
+    padding: $panel-padding;
+    border-top: $seo-analysis-border;
+
+    .snippet-editor__submit {
+      @include button;
+      margin: $global-margin 0 0 !important;
+    }
+  }
+}
+
+@mixin seo-analysis {
+  background: $panel-background;
+  border: $seo-analysis-border;
+
+  > * {
+    font-family: inherit !important;
+  }
+
+  @include seo-analysis-preview;
+  @include seo-analysis-form;
+}
+
+
+// SEO Analysis Component
+
+@mixin bedrock-seo-analysis {
+  .seo-analysis {
+    @include seo-analysis;
+  }
+}

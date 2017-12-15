@@ -9,6 +9,7 @@ import { DropzoneUpload } from '../components/dropzoneUpload';
 import { InlineEditBox } from '../components/inlineEditBox';
 import { SelectBox } from '../components/selectBox';
 import { FileInput } from '../components/fileInput';
+import { SeoAnalysis } from '../components/seoAnalysis';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
 Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
@@ -21,3 +22,4 @@ Foundation.plugin(DropzoneUpload, 'DropzoneUpload');
 Foundation.plugin(InlineEditBox, 'InlineEditBox');
 Foundation.plugin(SelectBox, 'SelectBox');
 Foundation.plugin(FileInput, 'FileInput');
+Foundation.plugin(SeoAnalysis, 'SeoAnalysis');
