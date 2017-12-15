@@ -143,6 +143,10 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
     font-family: inherit !important;
     max-width: 100% !important;
   }
+
+  .yoast-measurement-elements-holder {
+    display: none !important;
+  }
 }
 
 
