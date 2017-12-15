@@ -34,10 +34,13 @@ class SeoAnalysis extends Plugin {
    * @private
    */
   _init() {
+    this.id = this.$element.attr('id');
     this.$preview = this.$element.find('[data-seo-preview]');
     this.$output = this.$element.find('[data-seo-output]');
     this.$keywordField = this.$element.find('[data-seo-keyword]');
     this.$contentField = $(`#${this.options.content}`);
+
+    this.$output.attr('id', `${this.id}-output`);
 
     var focusKeywordField = this.$keywordField.get(0);
     var contentField = this.$contentField.get(0);
@@ -49,7 +52,7 @@ class SeoAnalysis extends Plugin {
     var app = new SeoApp({
       snippetPreview: snippetPreview,
       targets: {
-        output: this.$output.get(0)
+        output: this.$output.attr('id')
       },
       callbacks: {
         getData: function() {
@@ -65,6 +68,9 @@ class SeoAnalysis extends Plugin {
 
     focusKeywordField.addEventListener('change', app.refresh.bind(app));
     contentField.addEventListener('change', app.refresh.bind(app));
+
+    this.$element.find('.snippet-editor__view').wrapAll('<div class="seo-preview-variants"></div>');
+    this.$element.find('.snippet-editor__edit-button, .snippet-editor__view-toggle').wrapAll('<div class="seo-preview-actions"></div>');
   }
 
   /**

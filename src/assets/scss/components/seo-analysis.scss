@@ -23,7 +23,6 @@ $color_marker_inactive: #555555;
 $color_marker_active: #ffffff;
 $color_marker_disabled: #e6e6e6;
 
-@import "sassdash";
 @import "snippet-editor";
 @import "analysis";
 @import "loading-dialog";
@@ -46,6 +45,14 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
     padding: 0;
   }
 
+  .snippet-editor__view {
+    margin: 0;
+  }
+
+  .snippet-editor__view--desktop {
+    padding: 10px 15px;
+  }
+
   .snippet-editor__heading {
     padding: $panel-padding;
     border-bottom: $seo-analysis-border;
@@ -54,12 +61,27 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
     font-weight: normal;
     color: inherit;
     background-position: left $panel-padding center;
-    padding-left: $panel-padding * 2.5;
+    background: none;
+    display: none;
   }
 
-  // .snippet-editor__view {
-  //   margin: $panel-padding;
-  // }
+  .seo-preview-variants {
+    padding: $panel-padding;
+    border-bottom: $seo-analysis-border;
+  }
+
+  .seo-preview-actions {
+    padding: $panel-padding;
+
+    button, .snippet-editor__view-toggle {
+      background: none !important;
+      border: 0 !important;
+      width: auto;
+      height: auto;
+      margin: 0;
+      padding: 0;
+    }
+  }
 }
 
 @mixin seo-analysis-form {
@@ -69,7 +91,34 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
 
     .snippet-editor__submit {
       @include button;
-      margin: $global-margin 0 0 !important;
+      margin: $global-margin 0 0;
+    }
+  }
+}
+
+@mixin seo-analysis-keyword {
+  .seo-keyword {
+    padding: $panel-padding;
+    border-bottom: $seo-analysis-border;
+
+    input {
+      margin: 0;
+    }
+  }
+}
+
+@mixin seo-analysis-output {
+  .seo-output {
+    padding: $panel-padding;
+    border-top: $seo-analysis-border;
+
+    .assessment-results {
+      margin: 0;
+      font-size: $small-font-size;
+
+      .score:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -82,8 +131,10 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
     font-family: inherit !important;
   }
 
+  @include seo-analysis-keyword;
   @include seo-analysis-preview;
   @include seo-analysis-form;
+  @include seo-analysis-output;
 }
 
 
