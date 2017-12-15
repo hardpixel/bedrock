@@ -31,6 +31,8 @@ PATHS:
   sass:
     - "node_modules/foundation-sites/scss"
     - "node_modules/motion-ui/src"
+    - "node_modules/yoastseo/css"
+    - "node_modules/sassdash/scss"
   # Paths to JavaScript entry points for webpack to bundle modules
   entries:
     - "src/assets/js/bedrock.js"
