@@ -106,6 +106,11 @@ class SelectBox extends Plugin {
   _handleEvent(event) {
     this.$element.trigger(event.type.replace('select2:', ''));
     this._keepPlaceholder();
+
+    if (this.options.list) {
+      var item = this.$container.find('.select2-selection__choice__remove');
+      item.text('').addClass(this.options.removeIcon);
+    }
   }
 
   /**
@@ -148,6 +153,8 @@ class SelectBox extends Plugin {
   }
 }
 
-SelectBox.defaults = {};
+SelectBox.defaults = {
+  removeIcon: 'mdi mdi-close'
+};
 
 export {SelectBox};
