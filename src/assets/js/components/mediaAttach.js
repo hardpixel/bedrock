@@ -126,7 +126,12 @@ class MediaAttach extends Plugin {
       items.push(item);
     }.bind(this));
 
-    this.$grid.append(items);
+    if (this.multiple) {
+      this.$grid.append(items);
+    } else {
+      this.$grid.html(items);
+    }
+
     this._updateActiveItems();
   }
 
