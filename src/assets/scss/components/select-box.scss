@@ -11,9 +11,13 @@
         display: block;
         width: 100%;
         color: $body-font-color;
-        background: $light-gray;
+        background: transparent;
         position: relative;
-        box-shadow: inset 0 0 0 1px $medium-gray;
+        border-bottom: $input-border;
+
+        &:nth-last-child(2) {
+          border-bottom: 0;
+        }
 
         &:hover {
           padding-right: $global-padding * 2;
@@ -25,19 +29,19 @@
       }
 
       .select2-selection__choice__remove {
-        color: $white;
-        background: $alert-color;
+        color: $alert-color;
         height: 100%;
         padding: $global-padding / 1.5;
         position: absolute;
         top: 0;
         right: 0;
-        display: none;
         margin: 0;
       }
 
       .select2-selection__rendered {
         padding: 0;
+        overflow: visible;
+        white-space: normal;
       }
     }
 
