@@ -99,6 +99,39 @@ $panel-radius: $global-radius !default;
   @include panel-fill;
 }
 
+@mixin panel-section($color) {
+  padding: $panel-padding;
+  @include panel-border($color);
+  @include panel-fill;
+  border-width: 1px 0;
+
+  &.first {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  &.last {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  &.expanded {
+    margin-top: $panel-padding;
+    margin-bottom: $panel-padding;
+    margin-left: -$panel-padding;
+    margin-right: -$panel-padding;
+    width: auto !important;
+
+    &.first {
+      margin-top: 0;
+    }
+
+    &.last {
+      margin-bottom: 0;
+    }
+  }
+}
+
 
 // Panel Component
 
@@ -109,6 +142,10 @@ $panel-radius: $global-radius !default;
 
   .panel-content {
     @include panel-content($panel-background);
+  }
+
+  .panel-section {
+    @include panel-section($panel-background);
   }
 
   .panel-header {
