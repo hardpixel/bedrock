@@ -86,7 +86,6 @@ class SeoAnalysis extends Plugin {
    * @private
    */
   _setPreviewIcons() {
-    var icons = $.extend({}, this.$preview.data());
     var items = {
       'iconDesktop': '.snippet-editor__view-icon-desktop',
       'iconMobile': '.snippet-editor__view-icon-mobile',
@@ -94,7 +93,7 @@ class SeoAnalysis extends Plugin {
     };
 
     $.each(items, function (index, value) {
-      this.$preview.find(value).html(`<i class="${icons[index]}"></i>`);
+      this.$preview.find(value).html(`<i class="${this.options[index]}"></i>`);
     }.bind(this));
   }
 
@@ -140,6 +139,10 @@ class SeoAnalysis extends Plugin {
   }
 }
 
-SeoAnalysis.defaults = {};
+SeoAnalysis.defaults = {
+  iconDesktop: 'mdi mdi-desktop-mac',
+  iconMobile: 'mdi mdi-cellphone',
+  iconEdit: 'mdi mdi-pencil'
+};
 
 export {SeoAnalysis};
