@@ -117,9 +117,12 @@ class SeoAnalysis extends Plugin {
    * @private
    */
   _dataCallback() {
+    var keyword = this.$keywordField.val();
+    var content = this.$contentField.val();
+
     return {
-      keyword: this.$keywordField.val(),
-      text: this.$contentField.val()
+      keyword: keyword,
+      text: content
     };
   }
 

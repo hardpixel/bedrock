@@ -22,6 +22,20 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
 
   .snippet-editor__view {
     margin: 0;
+
+    .snippet_container__url {
+
+      .urlFull {
+
+        cite {
+          display: inline;
+
+          &:before {
+            display: none;
+          }
+        }
+      }
+    }
   }
 
   .snippet-editor__view--desktop {
@@ -143,10 +157,6 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
     font-family: inherit !important;
     max-width: 100% !important;
   }
-
-  .yoast-measurement-elements-holder {
-    display: none !important;
-  }
 }
 
 
@@ -160,5 +170,9 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
 
   .seo-analysis {
     @include seo-analysis;
+  }
+
+  .yoast-measurement-elements-holder {
+    display: none !important;
   }
 }

@@ -33,11 +33,14 @@ class TinyMceEditor extends Plugin {
    */
   _init() {
     this.$element.wrap('<div class="tiny-mce-editor"></div>');
-    this.options = $.extend({}, this.options, { target: this.$element.get(0) });
+
+    this.id = this.$element.attr('id');
+    this.computed = { target: this.$element.get(0), setup: this._setupCallback.bind(this) };
+    this.options = $.extend({}, this.options, this.computed);
     this.options = this._snakeCase(this.options);
 
     if (tinymce !== 'undefined') {
-      this.editor = tinymce.init(this.options);
+      tinymce.init(this.options);
     } else {
       console.log('TinyMCE is not available! Please download and install TinyMCE.');
     }
@@ -60,13 +63,28 @@ class TinyMceEditor extends Plugin {
   }
 
   /**
+   * Sets setup callback.
+   * @param {Object} editor - Tiny mce editor instance.
+   * @function
+   * @private
+   */
+  _setupCallback(editor) {
+    this.editor = editor;
+
+    editor.on('change', function () {
+      tinymce.triggerSave();
+      this.$element.trigger('change');
+    }.bind(this));
+  }
+
+  /**
    * Destroys the tiny-mce-editor plugin.
    * @function
    * @private
    */
   _destroy() {
     if (this.editor) {
-      tinymce.remove('#' + this.$element.attr('id'));
+      tinymce.remove(`#${this.id}`);
       this.$element.unwrap();
     } else {
       console.log('No editor instance found! Maybe you are missing TinyMCE.');
