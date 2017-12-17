@@ -22,6 +22,10 @@ class TinyMceEditor extends Plugin {
     this.$element = element;
     this.options = $.extend({}, TinyMceEditor.defaults, this.$element.data(), options);
     this.editor = null;
+    this.mediaHandler = this.options.mediaHandler;
+    this.mediaSrc = this.options.mediaSrc
+    this.mediaAlt = this.options.mediaAlt
+    this.mediaUrl = this.options.mediaUrl
 
     this._init();
   }
@@ -44,6 +48,17 @@ class TinyMceEditor extends Plugin {
     } else {
       console.log('TinyMCE is not available! Please download and install TinyMCE.');
     }
+  }
+
+  /**
+   * Gets value from object by dot notation.
+   * @param {Object} obj - Object to get the key value from.
+   * @param {String} path - Dot notated path to the key.
+   * @function
+   * @private
+   */
+  _getObjectValue(obj, path) {
+    return new Function('_', `return _.${path}`)(obj);
   }
 
   /**
@@ -75,6 +90,45 @@ class TinyMceEditor extends Plugin {
       tinymce.triggerSave();
       this.$element.trigger('change');
     }.bind(this));
+
+    if (this.mediaHandler) {
+      editor.addButton('image', {
+        icon: 'image',
+        onclick: this._mediaButtonCallback.bind(this)
+      });
+    }
+  }
+
+  /**
+   * Custom media button click callback.
+   * @param {Object} event - Event passed from handler.
+   * @function
+   * @private
+   */
+  _mediaButtonCallback(event) {
+    this.$reveal = $(`#${this.mediaHandler}`);
+    this.$reveal.foundation('open');
+
+    this.$reveal.off('insert.zf.media.reveal').on({
+      'insert.zf.media.reveal': this._mediaAttach.bind(this)
+    });
+  }
+
+  /**
+   * Inserts media in the editor.
+   * @param {Object} event - Event object passed from listener.
+   * @param {Array} data - Collection of image data objects to build items from.
+   * @function
+   * @private
+   */
+  _mediaAttach(event, data) {
+    $.each(data, function(index, data) {
+      var url = this._getObjectValue(data, this.mediaSrc);
+      var alt = this._getObjectValue(data, this.mediaAlt);
+      var item = '<img src="' + this.mediaUrl.replace('[src]', url) + '" alt="' + alt + '" />';
+
+      this.editor.execCommand('mceInsertContent', false, item);
+    }.bind(this));
   }
 
   /**
@@ -95,6 +149,7 @@ class TinyMceEditor extends Plugin {
 TinyMceEditor.toolbar = [
   'bold italic underline strikethrough',
   'bullist numlist blockquote',
+  'image media',
   'alignleft aligncenter alignright alignjustify',
   'outdent indent',
   'link unlink',
@@ -111,6 +166,8 @@ TinyMceEditor.plugins = [
   'autoresize',
   'table',
   'wordcount',
+  // 'image',
+  'media',
   'fullscreen'
 ];
 
@@ -120,7 +177,7 @@ TinyMceEditor.defaults = {
   entity_encoding: 'raw',
   max_height: 800,
   min_height: 300,
-  autoresize_bottom_margin: 0,
+  autoresize_bottom_margin: 20,
   autoresize_max_height: 800,
   autoresize_min_height: 300,
   plugins: TinyMceEditor.plugins.join(' '),
