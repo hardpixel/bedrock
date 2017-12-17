@@ -22,6 +22,8 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
 
   .snippet-editor__view {
     margin: 0;
+    width: 40rem;
+    max-width: 100%;
 
     .snippet_container__url {
 
