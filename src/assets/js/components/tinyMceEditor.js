@@ -127,7 +127,7 @@ class TinyMceEditor extends Plugin {
       var alt = this._getObjectValue(data, this.mediaAlt);
       var item = '<img src="' + this.mediaUrl.replace('[src]', url) + '" alt="' + alt + '" />';
 
-      this.editor.execCommand('mceInsertContent', false, item);
+      this.editor.insertContent(item);
     }.bind(this));
   }
 
