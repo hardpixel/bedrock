@@ -44,6 +44,7 @@ class SelectBox extends Plugin {
 
     this._events();
     this._keepPlaceholder();
+    this._setIcons();
   }
 
   /**
@@ -79,6 +80,18 @@ class SelectBox extends Plugin {
   }
 
   /**
+   * Sets custom icons on multi select boxes.
+   * @function
+   * @private
+   */
+  _setIcons() {
+    if (this.options.list) {
+      var item = this.$container.find('.select2-selection__choice__remove');
+      item.text('').addClass(this.options.removeIcon);
+    }
+  }
+
+  /**
    * Updates position on dropdown.
    * @function
    * @private
@@ -106,11 +119,7 @@ class SelectBox extends Plugin {
   _handleEvent(event) {
     this.$element.trigger(event.type.replace('select2:', ''));
     this._keepPlaceholder();
-
-    if (this.options.list) {
-      var item = this.$container.find('.select2-selection__choice__remove');
-      item.text('').addClass(this.options.removeIcon);
-    }
+    this._setIcons();
   }
 
   /**
