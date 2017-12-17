@@ -34,6 +34,7 @@ class InlineEditBox extends Plugin {
     this.$input = this.$element.find(':input');
     this.$preview = this.$element.find('[data-preview]');
 
+    this._updatePreview();
     this._events();
   }
 
@@ -56,6 +57,7 @@ class InlineEditBox extends Plugin {
     }, ':input');
 
     this.$element.off('.zf.trigger').on({
+      'update.zf.trigger': this._updatePreview.bind(this),
       'edit.zf.trigger': this.edit.bind(this),
       'save.zf.trigger': this.save.bind(this),
       'toggle.zf.trigger': this.toggle.bind(this)

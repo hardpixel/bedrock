@@ -124,7 +124,7 @@ class SeoAnalysis extends Plugin {
     }.bind(this));
 
     this.$slugFieldProxy.on('input', function(event) {
-      this.$slugField.val(this.$slugFieldProxy.val());
+      this.$slugField.val(this.$slugFieldProxy.val()).trigger('update.zf.trigger');
       this.seoApp.refresh();
     }.bind(this));
 
