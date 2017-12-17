@@ -44,6 +44,11 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
     padding: 10px 15px;
   }
 
+  .snippet-editor__view--mobile {
+    box-shadow: none;
+    border: $seo-analysis-border;
+  }
+
   .snippet-editor__heading {
     display: none !important;
   }
@@ -53,6 +58,17 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
     min-height: 10rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+  }
+
+  .seo-preview-score {
+    text-align: center;
+    color: $medium-gray;
+
+    .score {
+      display: block;
+      white-space: nowrap;
+    }
   }
 
   .seo-preview-actions {
@@ -143,7 +159,11 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
 
   .assessment-results {
     margin: 0;
-    font-size: $small-font-size;
+    font-size: unset;
+
+    .wpseo-score-icon {
+      margin-top: 7px;
+    }
   }
 
   li.score:last-child {

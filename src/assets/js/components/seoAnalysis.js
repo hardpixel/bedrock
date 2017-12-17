@@ -44,6 +44,7 @@ class SeoAnalysis extends Plugin {
 
     this.$keywordField = this.$element.find('[data-seo-keyword]');
     this.$textField = $(`#${this.options.text}`);
+    this.$scoreField = $(`#${this.options.score}`);
 
     this.defaultValues = {
       title: this.$titleField.val() || this.$titleField.attr('data-default'),
@@ -67,7 +68,8 @@ class SeoAnalysis extends Plugin {
         output: this.outputId
       },
       callbacks: {
-        getData: this._dataCallback.bind(this)
+        getData: this._dataCallback.bind(this),
+        saveScores: this._scoreCallback.bind(this)
       }
     });
 
@@ -160,6 +162,8 @@ class SeoAnalysis extends Plugin {
 
     var btns = this.$element.find('.snippet-editor__edit-button, .snippet-editor__view-toggle');
     btns.wrapAll('<div class="seo-preview-actions"></div>');
+
+    $('.seo-preview-variants').append('<span class="seo-preview-score">Score<span class="score stat">0</span></span>');
   }
 
   /**
@@ -172,6 +176,34 @@ class SeoAnalysis extends Plugin {
       keyword: this.$keywordField.val(),
       text: this.$textField.val()
     };
+  }
+
+  /**
+   * Callback for seo app data when score is updated.
+   * @param {Integer} score - The calculated seo analysis total score.
+   * @function
+   * @private
+   */
+  _scoreCallback(score) {
+    var field = $('.seo-preview-score .score');
+
+    field.text(0);
+    field.addClass('color-alert');
+
+    if (score > 0) {
+      this.$scoreField.val(score);
+      field.text(score);
+
+      field.removeClass('color-alert color-success color-warning');
+
+      if (score < 40) {
+        field.addClass('color-alert');
+      } else if (score > 70) {
+        field.addClass('color-success');
+      } else {
+        field.addClass('color-warning');
+      }
+    }
   }
 
   /**
