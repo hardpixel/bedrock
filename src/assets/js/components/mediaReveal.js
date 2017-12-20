@@ -130,12 +130,14 @@ class MediaReveal extends Plugin {
    * @private
    */
   _appendItems(data) {
+    this.clear();
+
     $.each(data, function(index, data) {
       var item = this._buildItem(data);
       this.items.push(item);
     }.bind(this));
 
-    this.$grid.append(this.items);
+    this.$grid.html(this.items);
   }
 
   /**
@@ -167,6 +169,18 @@ class MediaReveal extends Plugin {
   }
 
   /**
+   * Clears media modal items and selected items.
+   * @function
+   */
+  clear() {
+    this.items = [];
+    this.selectedItems = [];
+
+    this.$grid.empty();
+    this.$grid.foundation('unselectAll');
+  }
+
+  /**
    * Opens media reveal.
    * @param {Object} event - Event object passed from listener.
    * @private
@@ -187,17 +201,12 @@ class MediaReveal extends Plugin {
    * @private
    */
   close(event) {
-    this.items = [];
-    this.selectedItems = [];
-
     if (this.reveal.isActive) {
       this.reveal.close();
     }
 
-    this.$grid.empty();
-    this.$grid.foundation('unselectAll');
-
     this.$element.trigger('closed.zf.media.reveal');
+    this.clear();
   }
 
   /**
