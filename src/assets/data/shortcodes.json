@@ -1,8 +1,8 @@
 [
   {
     "name": "background",
-    "icon": "mdi mdi-image-area-close",
-    "label": "Background Image"
+    "icon": "mdi mdi-image",
+    "label": "Background"
   },
   {
     "name": "postcard",
