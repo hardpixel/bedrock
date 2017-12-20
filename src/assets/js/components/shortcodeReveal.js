@@ -25,6 +25,7 @@ class ShortcodeReveal extends Plugin {
     this.reveal = new Foundation.Reveal(element, this.options);
     this.shortcodes = [];
     this.items = [];
+    this.activeShortcode = null;
 
     this._init();
   }
@@ -41,6 +42,8 @@ class ShortcodeReveal extends Plugin {
     this.$preview = this.$element.find('[data-preview]');
     this.$insert = this.$element.find('[data-insert]');
     this.shortcodesUrl = this.options.shortcodesUrl;
+    this.formUrl = this.options.formUrl;
+    this.previewUrl = this.options.previewUrl;
 
     // this.$insert.addClass('disabled');
 
@@ -61,17 +64,71 @@ class ShortcodeReveal extends Plugin {
     this.$insert.off('click').on({
       'click': this.insert.bind(this)
     });
+
+    this.$element.off('click', 'a[data-name]').on({
+      'click': this._loadShortcode.bind(this)
+    }, 'a[data-name]');
   }
 
   /**
-   * Gets media items JSON from url.
+   * Gets shortcodes items JSON from url.
    * @function
    * @private
    */
   _getItems() {
     $.ajax(this.shortcodesUrl).done(function(response) {
       this.shortcodes = response;
+
       this._appendMenuItems(response);
+      this._loadShortcode();
+    }.bind(this));
+  }
+
+  /**
+   * Gets shortcodes items JSON from url.
+   * @function
+   * @private
+   */
+  _loadShortcode(event) {
+    if (event) {
+      this.activeShortcode = $(event.currentTarget).attr('data-name');
+    } else {
+      this.activeShortcode = this.$menu.find('a[data-name]:first').attr('data-name');
+    }
+
+    this._getForm(this.activeShortcode);
+    this._getPreview(this.activeShortcode);
+  }
+
+  /**
+   * Gets shortcode form from url.
+   * @function
+   * @private
+   */
+  _getForm(shortcode) {
+    var url = this.formUrl.replace('[name]', shortcode);
+
+    $.ajax(url).done(function(response) {
+      this.$form.html(response);
+      this.$form.foundation();
+    }.bind(this));
+  }
+
+  /**
+   * Gets shortcode preview from url.
+   * @function
+   * @private
+   */
+  _getPreview(shortcode) {
+    var url = this.previewUrl.replace('[name]', shortcode);
+    var frame = $('<iframe frameborder="0"></iframe>');
+
+    $.ajax(url).done(function(response) {
+      this.$preview.html(frame);
+
+      frame.on('load', function(event) {
+        $(this).contents().find('html').html(response);
+      });
     }.bind(this));
   }
 
@@ -96,11 +153,11 @@ class ShortcodeReveal extends Plugin {
     this.clear();
 
     $.each(data, function(index, data) {
-      var item = $(`<li><a data-name="${data.name}"><i class="${data.icon}"></i> ${data.label}</a></li>`);
+      var item = $(`<li><a data-name="${data.name}"><i class="${data.icon}"></i><span>${data.label}</span></a></li>`);
       this.items.push(item);
     }.bind(this));
 
-    var menu = $('<ul class="menu vertical icons icons-left"></ul>');
+    var menu = $('<ul class="menu vertical icons icon-left"></ul>');
     menu.html(this.items);
 
     this.$menu.html(menu);
@@ -126,7 +183,7 @@ class ShortcodeReveal extends Plugin {
       this.reveal.open();
     }
 
-    this.$element.trigger('open.zf.shortcode.reveal');
+    // this.$element.trigger('open.zf.shortcode.reveal');
   }
 
   /**

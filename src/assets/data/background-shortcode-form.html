@@ -1,0 +1,27 @@
+<div id="shortcode-form">
+  <form>
+    <div id="shortcode-thumbnail" data-media-attach="media-modal">
+      <div class="no-content hide padding-0" data-empty-state>
+        <i class="mdi mdi-camera-off"></i>
+        <span>No thumbnail</span>
+        <a class="button success small hollow margin-top-1" data-open="shortcode-thumbnail">Add Thumbnail</a>
+      </div>
+      <div class="attachments" data-list-remove></div>
+    </div>
+
+    <script id="shortcode-thumbnail-item-template" type="text/template">
+      <div class="attachment text-center" data-list-item>
+        <input type="hidden" name="page[thumbnail_id]" data-value="id">
+        <img data-src="id" class="width-100 margin-bottom-1" data-url="https://picsum.photos/600/400?image=[src]">
+        <div class="panel-section expanded border last grid-x">
+          <div class="cell auto text-left">
+            <a class="button alert small hollow margin-0" data-remove>Remove</a>
+          </div>
+          <div class="cell shrink">
+            <a class="button small hollow margin-0" data-open="shortcode-thumbnail">Change</a>
+          </div>
+        </div>
+      </div>
+    </script>
+  </form>
+</div>

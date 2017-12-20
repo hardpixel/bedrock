@@ -1,22 +1,68 @@
-$shortcode-reveal-color: $medium-gray !default;
+$shortcode-reveal-alt-color: $dark-gray !default;
+$shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
 
 // Shortcode Reveal Mixins
 
 @mixin shortcode-reveal {
+  .shortcode-reveal {
+
+    .panel-content {
+      position: relative;
+      overflow: hidden;
+    }
+  }
+
   .shortcode-columns {
     @include xy-grid;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
   }
 
   .shortcode-menu {
-    @include xy-cell(auto, false);
+    @include xy-cell(shrink, false);
+    background: $shortcode-reveal-alt-background;
+    min-height: 100%;
+    min-width: 12rem;
+    border-color: smart-scale($shortcode-reveal-alt-background, 5%);
+    border-style: solid;
+    border-width: 0 1px 0 0;
+
+    .menu {
+
+      li:not(:last-child) {
+        border-bottom: 1px solid smart-scale($shortcode-reveal-alt-background, 5%);
+      }
+
+      a {
+        color: $shortcode-reveal-alt-color;
+        padding: $global-padding;
+      }
+    }
   }
 
   .shortcode-form {
     @include xy-cell(auto, false);
+    padding: $global-padding;
+    min-height: 100%;
   }
 
   .shortcode-preview {
     @include xy-cell(auto, false);
+    background: $shortcode-reveal-alt-background;
+    padding: $global-padding;
+    min-height: 100%;
+    border-color: smart-scale($shortcode-reveal-alt-background, 5%);
+    border-style: solid;
+    border-width: 0 0 0 1px;
+
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
   }
 }
 
