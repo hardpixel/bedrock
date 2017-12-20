@@ -15,6 +15,7 @@
 @import 'components/select-box';
 @import 'components/file-input';
 @import 'components/seo-analysis';
+@import 'components/shortcode-reveal';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -33,3 +34,4 @@
 @include bedrock-select-box;
 @include bedrock-file-input;
 @include bedrock-seo-analysis;
+@include bedrock-shortcode-reveal;

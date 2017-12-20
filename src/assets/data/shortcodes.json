@@ -1,0 +1,12 @@
+[
+  {
+    "name": "background",
+    "icon": "mdi mdi-image-area-close",
+    "label": "Background Image"
+  },
+  {
+    "name": "postcard",
+    "icon": "mdi mdi-cards-variant",
+    "label": "Post Card"
+  }
+]

@@ -1,0 +1,28 @@
+$shortcode-reveal-color: $medium-gray !default;
+
+// Shortcode Reveal Mixins
+
+@mixin shortcode-reveal {
+  .shortcode-columns {
+    @include xy-grid;
+  }
+
+  .shortcode-menu {
+    @include xy-cell(auto, false);
+  }
+
+  .shortcode-form {
+    @include xy-cell(auto, false);
+  }
+
+  .shortcode-preview {
+    @include xy-cell(auto, false);
+  }
+}
+
+
+// Shortcode Reveal Component
+
+@mixin bedrock-shortcode-reveal {
+  @include shortcode-reveal;
+}

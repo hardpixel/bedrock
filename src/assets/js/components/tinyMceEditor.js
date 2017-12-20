@@ -26,6 +26,7 @@ class TinyMceEditor extends Plugin {
     this.mediaSrc = this.options.mediaSrc
     this.mediaAlt = this.options.mediaAlt
     this.mediaUrl = this.options.mediaUrl
+    this.shortcodeHandler = this.options.shortcodeHandler;
 
     this._init();
   }
@@ -94,7 +95,16 @@ class TinyMceEditor extends Plugin {
     if (this.mediaHandler) {
       editor.addButton('image', {
         icon: 'image',
+        tooltip: 'Insert/edit media',
         onclick: this._mediaButtonCallback.bind(this)
+      });
+    }
+
+    if (this.shortcodeHandler) {
+      editor.addButton('shortcode', {
+        icon: 'template',
+        tooltip: 'Insert/edit shortcodes',
+        onclick: this._shortcodeButtonCallback.bind(this)
       });
     }
   }
@@ -132,6 +142,35 @@ class TinyMceEditor extends Plugin {
   }
 
   /**
+   * Custom shortcode button click callback.
+   * @param {Object} event - Event passed from handler.
+   * @function
+   * @private
+   */
+  _shortcodeButtonCallback(event) {
+    this.$shortcode = $(`#${this.shortcodeHandler}`);
+    this.$shortcode.foundation('open');
+
+    this.$shortcode.off('insert.zf.shortcode.reveal').on({
+      'insert.zf.shortcode.reveal': this._shortcodeInsert.bind(this)
+    });
+  }
+
+  /**
+   * Inserts shortcode in the editor.
+   * @param {Object} event - Event object passed from listener.
+   * @param {Array} data - Shortcode configuration data.
+   * @function
+   * @private
+   */
+  _shortcodeInsert(event, data) {
+    var item = '[]';
+
+    console.log(data);
+    this.editor.insertContent(item);
+  }
+
+  /**
    * Destroys the tiny-mce-editor plugin.
    * @function
    * @private
@@ -149,7 +188,7 @@ class TinyMceEditor extends Plugin {
 TinyMceEditor.toolbar = [
   'bold italic underline strikethrough',
   'bullist numlist blockquote',
-  'image media',
+  'image media shortcode',
   'alignleft aligncenter alignright alignjustify',
   'outdent indent',
   'link unlink',
