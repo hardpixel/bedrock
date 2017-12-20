@@ -110,7 +110,7 @@ class TinyMceEditor extends Plugin {
     this.$reveal.foundation('open');
 
     this.$reveal.off('insert.zf.media.reveal').on({
-      'insert.zf.media.reveal': this._mediaAttach.bind(this)
+      'insert.zf.media.reveal': this._mediaInsert.bind(this)
     });
   }
 
@@ -121,7 +121,7 @@ class TinyMceEditor extends Plugin {
    * @function
    * @private
    */
-  _mediaAttach(event, data) {
+  _mediaInsert(event, data) {
     $.each(data, function(index, data) {
       var url = this._getObjectValue(data, this.mediaSrc);
       var alt = this._getObjectValue(data, this.mediaAlt);
