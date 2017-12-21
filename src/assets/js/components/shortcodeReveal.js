@@ -124,7 +124,7 @@ class ShortcodeReveal extends Plugin {
 
     $.ajax(url).done(function(response) {
       this.$form.html(response);
-      // this.$form.foundation();
+      this.$form.foundation();
     }.bind(this));
   }
 
@@ -225,10 +225,34 @@ class ShortcodeReveal extends Plugin {
    * @private
    */
   insert(event) {
-    var items = [];
+    var params = '';
+    var items = {};
+    var values = this.$form.find('form').serializeArray();
+
+    $.each(values, function(index, object) {
+      var key = object.name.replace('[]', '');
+
+      if (/^.*\[\]$/.test(object.name)) {
+        if (items[key]) {
+          items[key] = `${items[key]},${object.value}`;
+        } else {
+          items[key] = object.value;
+        }
+      } else {
+        items[key] = object.value;
+      }
+    });
+
+    $.each(items, function(key, value) {
+      if (value) {
+        params += ` ${key}="${value}"`;
+      }
+    });
+
+    var snippet = `[${this.activeShortcode} ${params}]`;
 
     this.reveal.close();
-    this.$element.trigger('insert.zf.shortcode.reveal', [items]);
+    this.$element.trigger('insert.zf.shortcode.reveal', [snippet]);
   }
 
   /**

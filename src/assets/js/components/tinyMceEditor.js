@@ -164,9 +164,7 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _shortcodeInsert(event, data) {
-    var item = '[]';
-
-    console.log(data);
+    var item = data;
     this.editor.insertContent(item);
   }
 
