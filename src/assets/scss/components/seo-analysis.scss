@@ -64,6 +64,7 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
   .seo-preview-score {
     text-align: center;
     color: $medium-gray;
+    padding-left: $global-padding * 2;
 
     .score {
       display: block;

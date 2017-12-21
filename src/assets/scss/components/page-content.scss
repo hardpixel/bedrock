@@ -37,6 +37,9 @@ $page-content-sidebar-sizes: (large: 340px, xxlarge: 360px) !default;
   @include page-content-reset;
 
   > .content {
+    overflow-x: auto;
+    min-width: 240px;
+
     @include breakpoint(large) {
       @include xy-cell(auto, false);
       @include page-content-gutter;

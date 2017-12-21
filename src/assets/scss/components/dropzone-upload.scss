@@ -156,4 +156,8 @@ $dropzone-upload-active-border-color: $primary-color !default;
   .dropzone {
     @include dropzone-upload;
   }
+
+  .dz-hidden-input {
+    overflow: hidden;
+  }
 }
