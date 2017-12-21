@@ -65,9 +65,13 @@ class ShortcodeReveal extends Plugin {
       'click': this.insert.bind(this)
     });
 
-    this.$element.off('click', 'a[data-name]').on({
+    this.$menu.off('click', '[data-name]').on({
       'click': this._loadShortcode.bind(this)
-    }, 'a[data-name]');
+    }, '[data-name]');
+
+    this.$form.off('change', ':input:visible').on({
+      'change': this._loadPreview.bind(this)
+    }, ':input:visible');
   }
 
   /**
@@ -85,7 +89,7 @@ class ShortcodeReveal extends Plugin {
   }
 
   /**
-   * Gets shortcodes items JSON from url.
+   * Loads shortcode with updated options.
    * @function
    * @private
    */
@@ -93,11 +97,21 @@ class ShortcodeReveal extends Plugin {
     if (event) {
       this.activeShortcode = $(event.currentTarget).attr('data-name');
     } else {
-      this.activeShortcode = this.$menu.find('a[data-name]:first').attr('data-name');
+      this.activeShortcode = this.$menu.find('[data-name]:first').attr('data-name');
     }
 
     this._getForm(this.activeShortcode);
     this._getPreview(this.activeShortcode);
+  }
+
+  /**
+   * Loads preview with updated options.
+   * @function
+   * @private
+   */
+  _loadPreview(event) {
+    var data = this.$form.find('form').serialize();
+    this._getPreview(this.activeShortcode, data);
   }
 
   /**
@@ -110,7 +124,7 @@ class ShortcodeReveal extends Plugin {
 
     $.ajax(url).done(function(response) {
       this.$form.html(response);
-      this.$form.foundation();
+      // this.$form.foundation();
     }.bind(this));
   }
 
@@ -119,11 +133,11 @@ class ShortcodeReveal extends Plugin {
    * @function
    * @private
    */
-  _getPreview(shortcode) {
+  _getPreview(shortcode, data) {
     var url = this.previewUrl.replace('[name]', shortcode);
     var frame = $('<iframe frameborder="0"></iframe>');
 
-    $.ajax(url).done(function(response) {
+    $.ajax({url: url, data: data}).done(function(response) {
       this.$preview.html(frame);
 
       frame.on('load', function(event) {
@@ -150,16 +164,17 @@ class ShortcodeReveal extends Plugin {
    * @private
    */
   _appendMenuItems(data) {
+    var menu = $('<ul class="menu vertical icons icon-left"></ul>');
     this.clear();
 
     $.each(data, function(index, data) {
-      var item = $(`<li><a data-name="${data.name}"><i class="${data.icon}"></i><span>${data.label}</span></a></li>`);
+      var label = `<i class="${data.icon}"></i><span>${data.label}</span>`;
+      var item = $(`<li><a data-name="${data.name}">${label}</a></li>`);
+
       this.items.push(item);
     }.bind(this));
 
-    var menu = $('<ul class="menu vertical icons icon-left"></ul>');
     menu.html(this.items);
-
     this.$menu.html(menu);
   }
 
@@ -169,6 +184,10 @@ class ShortcodeReveal extends Plugin {
    */
   clear() {
     this.items = [];
+
+    this.$menu.html('');
+    this.$form.html('');
+    this.$preview.html('');
   }
 
   /**

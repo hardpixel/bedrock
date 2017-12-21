@@ -6,20 +6,26 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
 @mixin shortcode-reveal {
   .shortcode-reveal {
 
-    .panel-content {
-      position: relative;
-      overflow: hidden;
+    &.full {
+
+      .panel-content {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .shortcode-columns {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow-y: auto;
+      }
     }
   }
 
   .shortcode-columns {
     @include xy-grid;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
-    overflow-y: auto;
   }
 
   .shortcode-menu {

@@ -1,10 +1,10 @@
 <div id="shortcode-form">
   <form>
     <label>Input Label
-      <input type="text" placeholder="Placeholder...">
+      <input name="title" type="text" placeholder="Placeholder...">
     </label>
     <label>Select Menu
-      <select>
+      <select name="type">
         <option value="husker">Husker</option>
         <option value="starbuck">Starbuck</option>
         <option value="hotdog">Hot Dog</option>
@@ -12,7 +12,7 @@
       </select>
     </label>
     <label>Select 2 Multiple
-      <select data-select-box multiple="true" data-placeholder="Placeholder..." data-tags="true">
+      <select name="list[]" data-select-box multiple="true" data-placeholder="Placeholder..." data-tags="true">
         <option value="husker">Husker</option>
         <option value="starbuck">Starbuck</option>
         <option value="hotdog">Hot Dog</option>
