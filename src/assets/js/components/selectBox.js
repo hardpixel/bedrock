@@ -24,7 +24,7 @@ class SelectBox extends Plugin {
     this.options = $.extend({}, SelectBox.defaults, this.$element.data(), options);
 
     if (this.options.list) {
-      this.options['theme'] = 'list';
+      this.options.theme = 'list';
     }
 
     this._init();
@@ -54,15 +54,9 @@ class SelectBox extends Plugin {
    */
   _events() {
     this.$element.off(['select2:select', 'select2:unselect', 'select2:open']).on({
-      'select2:open': this._handleEvent.bind(this),
-      'select2:select': this._handleEvent.bind(this),
-      'select2:unselect': this._handleEvent.bind(this),
-    });
-
-    this.$element.off('.zf.trigger').on({
-      'open.zf.trigger': this.open.bind(this),
-      'select.zf.trigger': this.select.bind(this),
-      'unselect.zf.trigger': this.unselect.bind(this)
+      'select2:open': this.open.bind(this),
+      'select2:select': this.select.bind(this),
+      'select2:unselect': this.unselect.bind(this),
     });
   }
 
@@ -111,18 +105,6 @@ class SelectBox extends Plugin {
   }
 
   /**
-   * Handles events on element.
-   * @param {Object} event - Event object passed from listener.
-   * @function
-   * @private
-   */
-  _handleEvent(event) {
-    this.$element.trigger(event.type.replace('select2:', ''));
-    this._keepPlaceholder();
-    this._setIcons();
-  }
-
-  /**
    * Opens the select dropdown.
    * @param {Object} event - Event object passed from listener.
    * @function
@@ -130,6 +112,9 @@ class SelectBox extends Plugin {
   open(event) {
     this._updatePosition();
     this.$element.trigger('open.zf.select.box');
+
+    this._keepPlaceholder();
+    this._setIcons();
   }
 
   /**
@@ -139,6 +124,9 @@ class SelectBox extends Plugin {
    */
   select(event) {
     this.$element.trigger('changed.zf.select.box');
+
+    this._keepPlaceholder();
+    this._setIcons();
   }
 
   /**
@@ -148,6 +136,9 @@ class SelectBox extends Plugin {
    */
   unselect(event) {
     this.$element.trigger('changed.zf.select.box');
+
+    this._keepPlaceholder();
+    this._setIcons();
   }
 
   /**
