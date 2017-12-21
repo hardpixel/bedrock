@@ -13,6 +13,7 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
 @mixin off-canvas-menu-content {
   @include xy-cell(auto, false);
   @extend .#{$maincontent-class};
+  max-width: 100%;
 
   @include breakpoint(large) {
     margin: 0;

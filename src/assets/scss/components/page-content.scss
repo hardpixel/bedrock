@@ -1,9 +1,15 @@
-$page-content-sidebar-sizes: (
-  small: 340px,
-  xlarge: 360px
-) !default;
+$page-content-sidebar-sizes: (large: 340px, xxlarge: 360px) !default;
 
 // Page Content Mixins
+
+@mixin page-content-reset {
+  @include breakpoint(large down) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    flex-flow: row wrap;
+  }
+}
 
 @mixin page-content-gutter {
   @each $name, $size in $grid-column-gutter {
@@ -15,8 +21,11 @@ $page-content-sidebar-sizes: (
 }
 
 @mixin page-content {
-  @include xy-grid;
-  min-height: 100vh;
+  @include breakpoint(large) {
+    @include xy-grid;
+    min-height: 100vh;
+    flex-flow: row nowrap;
+  }
 
   @each $name, $size in $grid-column-gutter {
     @include breakpoint($name) {
@@ -25,18 +34,22 @@ $page-content-sidebar-sizes: (
     }
   }
 
-  @include breakpoint(xlarge) {
-    flex-flow: row nowrap;
-  }
+  @include page-content-reset;
 
   > .content {
-    @include xy-cell(auto, false);
-    @include page-content-gutter;
+    @include breakpoint(large) {
+      @include xy-cell(auto, false);
+      @include page-content-gutter;
+    }
+
+    @include page-content-reset;
   }
 
   > .sidebar {
-    @include xy-cell(shrink, false);
-    @include page-content-gutter;
+    @include breakpoint(large) {
+      @include page-content-gutter;
+      @include xy-cell(shrink, false);
+    }
 
     @each $name, $size in $page-content-sidebar-sizes {
       @include breakpoint($name) {
@@ -44,9 +57,7 @@ $page-content-sidebar-sizes: (
       }
     }
 
-    @include breakpoint(xlarge down) {
-      width: 100%;
-    }
+    @include page-content-reset;
   }
 }
 
