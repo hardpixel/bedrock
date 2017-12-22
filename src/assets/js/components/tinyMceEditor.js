@@ -92,6 +92,20 @@ class TinyMceEditor extends Plugin {
       this.$element.trigger('change');
     }.bind(this));
 
+    editor.addButton('mark', {
+      icon: 'backcolor',
+      tooltip: 'Mark/unmark text',
+      onclick: this._markButtonCallback.bind(this),
+      onPostRender: function() {
+        var _this = this;
+
+        editor.on('NodeChange', function(e) {
+          var is_active = $(editor.selection.getNode()).is('mark');
+          _this.active(is_active);
+        })
+      }
+    });
+
     if (this.mediaHandler) {
       editor.addButton('image', {
         icon: 'image',
@@ -135,7 +149,7 @@ class TinyMceEditor extends Plugin {
     $.each(data, function(index, data) {
       var url = this._getObjectValue(data, this.mediaSrc);
       var alt = this._getObjectValue(data, this.mediaAlt);
-      var item = '<img src="' + this.mediaUrl.replace('[src]', url) + '" alt="' + alt + '" />';
+      var item = '<img class="inline-image" src="' + this.mediaUrl.replace('[src]', url) + '" alt="' + alt + '" />';
 
       this.editor.insertContent(item);
     }.bind(this));
@@ -169,6 +183,16 @@ class TinyMceEditor extends Plugin {
   }
 
   /**
+   * Custom mark button click callback.
+   * @param {Object} event - Event passed from handler.
+   * @function
+   * @private
+   */
+  _markButtonCallback(event) {
+    this.editor.formatter.toggle('mark');
+  }
+
+  /**
    * Destroys the tiny-mce-editor plugin.
    * @function
    * @private
@@ -185,11 +209,9 @@ class TinyMceEditor extends Plugin {
 
 TinyMceEditor.toolbar = [
   'bold italic underline strikethrough',
-  'bullist numlist blockquote',
-  'image media shortcode',
-  'alignleft aligncenter alignright alignjustify',
-  'outdent indent',
-  'link unlink',
+  'bullist numlist blockquote mark',
+  'link image media shortcode',
+  'alignleft aligncenter alignright',
   'formatselect',
   'removeformat pastetext',
   'fullscreen'
@@ -219,7 +241,10 @@ TinyMceEditor.defaults = {
   autoresize_min_height: 300,
   plugins: TinyMceEditor.plugins.join(' '),
   toolbar: TinyMceEditor.toolbar.join(' | '),
-  content_style: "html { padding: 0 .5rem }"
+  content_style: "html { padding: 0 .5rem }",
+  formats: {
+    mark: { inline: 'mark' }
+  }
 };
 
 export {TinyMceEditor};
