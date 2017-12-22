@@ -197,10 +197,13 @@ class ShortcodeReveal extends Plugin {
 
     $.each(matches, function(index, match) {
       var groups = regex.exec(match);
-      var name = groups[1];
 
-      if ($.inArray(name, this.shortcodeNames) !== -1) {
-        valid = true;
+      if (groups) {
+        var name = groups[1];
+
+        if ($.inArray(name, this.shortcodeNames) !== -1) {
+          valid = true;
+        }
       }
     }.bind(this));
 
@@ -279,7 +282,7 @@ class ShortcodeReveal extends Plugin {
     var snippet = `[${this.activeShortcode} ${params}]`;
 
     this.reveal.close();
-    this.$element.trigger('insert.zf.shortcode.reveal', [snippet]);
+    this.$element.trigger('insert.zf.shortcode.reveal', [snippet, this.activeShortcode, items]);
   }
 
   /**
