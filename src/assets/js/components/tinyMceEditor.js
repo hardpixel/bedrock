@@ -329,6 +329,7 @@ TinyMceEditor.styles = `
     color: #888;
     white-space: nowrap;
     pointer-events: none;
+    font-size: .8rem;
   }
 
   .shortcode-name {
