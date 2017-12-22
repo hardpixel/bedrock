@@ -91,33 +91,20 @@ class TinyMceEditor extends Plugin {
     var _this = this;
     this.editor = editor;
 
-    editor.on('change', function () {
-      tinymce.triggerSave();
-      this.$element.trigger('change');
-    }.bind(this));
+    editor.on('change', function (event) {
+      editor.save();
+      _this.$element.trigger('change');
+    });
 
-    editor.on('getContent', function (event) {
-      if (_this.shortcodeHandler) {
-        editor.$('.shortcode').each(function (index, elm) {
-          var $elm = editor.$(elm);
-          var snippet = $elm.text();
-          var shortcode = snippet.split(' ')[0].replace('[', '');
-          var preview = _this._shortcodePreview(snippet, shortcode);
-
-          $elm.replaceWith(`<p>${preview}</p>`);
-        });
-      }
+    editor.on('preInit', function () {
+      editor.serializer.addAttributeFilter(
+        'data-mce-shortcode',
+        _this._shortcodeCleanup()
+      );
     });
 
     editor.on('setContent', function (event) {
-      if (_this.shortcodeHandler) {
-        editor.$('span.shortcode-preview').each(function (index, elm) {
-          var $elm = editor.$(elm);
-          var snipp = $elm.find('.shortcode-snippet').text();
-
-          $elm.parent().replaceWith(`<div class="shortcode">${snipp}</div>`);
-        });
-      }
+      _this._shortcodeSetup(event, editor);
     });
 
     editor.addButton('mark', {
@@ -216,11 +203,52 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _shortcodePreview(snippet, shortcode, options) {
-    var name = `<div class="shortcode-name">${shortcode}</div>`;
-    var preview = `<div class="shortcode-snippet">${snippet}</div>`;
-    var item  = `<div data-mce-shortcode class="shortcode-preview" contenteditable="false">${name}${preview}</div>`;
+    var name = `<span class="shortcode-name">${shortcode}</span>`;
+    var preview = `<span class="shortcode-snippet">${snippet}</span>`;
+    var item = `<span data-mce-shortcode class="shortcode-preview" contenteditable="false">${name}${preview}</span>`;
 
     return item;
+  }
+
+  /**
+   * Clears shortcode markup.
+   * @param {Object} event - Event object passed from listener.
+   * @param {Object} editor - Editor instance.
+   * @function
+   * @private
+   */
+  _shortcodeCleanup(event, editor) {
+    return function (nodes) {
+      for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        var text = node.lastChild;
+
+        text.name = 'div';
+        text.attr('class', 'shortcode');
+
+        nodes[i].parent.replace(text);
+      }
+    };
+  }
+
+  /**
+   * Replaces cleaned shortcodes to preview markup.
+   * @param {Object} event - Event object passed from listener.
+   * @param {Object} editor - Editor instance.
+   * @function
+   * @private
+   */
+  _shortcodeSetup(event, editor) {
+    if (this.shortcodeHandler) {
+      editor.$('.shortcode').each(function (index, elm) {
+        var $elm = editor.$(elm);
+        var snippet = $elm.text();
+        var shortcode = snippet.split(' ')[0].replace('[', '');
+        var preview = this._shortcodePreview(snippet, shortcode);
+
+        $elm.replaceWith(`<p>${preview}</p>`);
+      }.bind(this));
+    }
   }
 
   /**
@@ -278,7 +306,6 @@ TinyMceEditor.plugins = [
   'autoresize',
   'table',
   'wordcount',
-  // 'image',
   'media',
   'fullscreen'
 ];
@@ -289,22 +316,22 @@ TinyMceEditor.styles = `
   }
 
   .shortcode-preview {
-    display: table;
+    display: inline-block;
     background: #f0f0f0;
     border: 1px solid #cacaca;
-    margin: .5rem 0;
+    margin: 0;
     width: 100%;
   }
 
   .shortcode-name, .shortcode-snippet {
-    display: table-cell;
+    display: inline-block;
     padding: .5rem 1rem;
     color: #888;
     white-space: nowrap;
+    pointer-events: none;
   }
 
   .shortcode-name {
-    width: 3rem;
     color: #555;
     font-weight: bold;
     border-right: 1px solid #cacaca;

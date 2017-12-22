@@ -279,7 +279,7 @@ class ShortcodeReveal extends Plugin {
       }
     });
 
-    var snippet = `[${this.activeShortcode} ${params}]`;
+    var snippet = `[${this.activeShortcode}${params}]`;
 
     this.reveal.close();
     this.$element.trigger('insert.zf.shortcode.reveal', [snippet, this.activeShortcode, items]);
