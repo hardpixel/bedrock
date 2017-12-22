@@ -101,6 +101,9 @@ class ShortcodeReveal extends Plugin {
       this.activeShortcode = this.$menu.find('[data-name]:first').attr('data-name');
     }
 
+    this.$menu.find('li').removeClass('is-active');
+    this.$menu.find(`li a[data-name="${this.activeShortcode}"]`).parent().addClass('is-active');
+
     this._getForm(this.activeShortcode);
     this._getPreview(this.activeShortcode);
   }
@@ -226,7 +229,7 @@ class ShortcodeReveal extends Plugin {
       this.reveal.open();
     }
 
-    // this.$element.trigger('open.zf.shortcode.reveal');
+    this.$element.trigger('open.zf.shortcode.reveal');
   }
 
   /**

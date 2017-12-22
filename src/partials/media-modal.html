@@ -1,4 +1,4 @@
-<div class="reveal full reveal-panel" id="media-modal" data-media-reveal data-multiple-opened="true" data-media-url="{{root}}assets/data/images.json" data-unique-key="id">
+<div class="reveal full reveal-panel media-reveal" id="media-modal" data-media-reveal data-multiple-opened="true" data-media-url="{{root}}assets/data/images.json" data-unique-key="id">
   <div class="panel">
     <div class="panel-header border">
       Add Media
@@ -7,28 +7,32 @@
       </button>
     </div>
 
-    <div class="panel-header border padding-0">
-      <ul class="tabs padding-0 border-none" data-tabs id="media-modal-tabs">
-        <li class="tabs-title is-active"><a href="#media-modal-library" aria-selected="true"><i class="mdi mdi-play-circle-outline"></i> Library</a></li>
-        <li class="tabs-title"><a href="#media-modal-upload"><i class="mdi mdi-upload"></i> Upload</a></li>
-      </ul>
-    </div>
-
     <div class="panel-content border padding-0">
-      <div class="tabs-content border-none padding-0" data-tabs-content="media-modal-tabs">
-        <div class="tabs-panel is-active" id="media-modal-library">
-          <div class="attachments-grid" data-list-select></div>
+      <div class="media-columns">
+        <div class="media-menu">
+          <ul class="tabs menu vertical icons icon-left" data-tabs id="media-modal-tabs">
+            <li class="tabs-title is-active"><a href="#media-modal-library" aria-selected="true"><i class="mdi mdi-play-circle-outline"></i> Library</a></li>
+            <li class="tabs-title"><a href="#media-modal-upload"><i class="mdi mdi-upload"></i> Upload</a></li>
+          </ul>
         </div>
-        <div class="tabs-panel" id="media-modal-upload">
-          <div class="dropzone" id="media-modal-upload" data-dropzone-upload data-url="/" data-method="get" data-param-name="medium[file]" data-previews-container="#media-modal-upload-previews" data-thumbnail-width="300" data-thumbnail-height="300" data-clickable="#media-modal-upload-button">
-            <div class="dz-message bordered margin-bottom-1">
-              <div class="no-content">
-                <i class="mdi mdi-upload"></i>
-                <span>Drop files here to upload</span>
-                <a id="media-modal-upload-button" class="button success hollow margin-top-1">Select Files</a>
+
+        <div class="media-content">
+          <div class="tabs-content border-none padding-0" data-tabs-content="media-modal-tabs">
+            <div class="tabs-panel is-active" id="media-modal-library">
+              <div class="attachments-grid" data-list-select></div>
+            </div>
+            <div class="tabs-panel" id="media-modal-upload">
+              <div class="dropzone" id="media-modal-upload" data-dropzone-upload data-url="/" data-method="get" data-param-name="medium[file]" data-previews-container="#media-modal-upload-previews" data-thumbnail-width="300" data-thumbnail-height="300" data-clickable="#media-modal-upload-button">
+                <div class="dz-message bordered margin-bottom-1">
+                  <div class="no-content">
+                    <i class="mdi mdi-upload"></i>
+                    <span>Drop files here to upload</span>
+                    <a id="media-modal-upload-button" class="button success hollow margin-top-1">Select Files</a>
+                  </div>
+                </div>
+                <div id="media-modal-upload-previews" class="attachments-grid"></div>
               </div>
             </div>
-            <div id="media-modal-upload-previews" class="attachments-grid"></div>
           </div>
         </div>
       </div>

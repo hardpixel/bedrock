@@ -1,0 +1,88 @@
+$media-reveal-alt-color: $dark-gray !default;
+$media-reveal-alt-background: darken($reveal-background, 5) !default;
+
+// Media Reveal Mixins
+
+@mixin media-reveal {
+  .media-reveal {
+    z-index: 99999;
+
+    &.full {
+
+      .panel-content {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .media-columns {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .media-menu,
+      .media-content {
+        overflow-y: auto;
+        height: 100%;
+      }
+    }
+  }
+
+  .media-columns {
+    @include xy-grid;
+    height: 100%;
+  }
+
+  .media-menu {
+    @include xy-cell(shrink, false);
+    background: $media-reveal-alt-background;
+    min-height: 100%;
+    min-width: 12rem;
+    border-color: smart-scale($media-reveal-alt-background, 5%);
+    border-style: solid;
+    border-width: 0 1px 0 0;
+
+    .menu {
+      background: none;
+      border: 0;
+
+      li {
+
+        &:not(:last-child) {
+          border: 1px solid smart-scale($media-reveal-alt-background, 5%);
+          border-width: 0 0 1px;
+        }
+
+        &.is-active, &.active {
+
+          a {
+            background: smart-scale($media-reveal-alt-background, 5%);
+            color: $media-reveal-alt-color;
+          }
+        }
+      }
+
+      a {
+        color: $media-reveal-alt-color;
+        padding: $global-padding;
+        background: none;
+        outline: none;
+      }
+    }
+  }
+
+  .media-content {
+    @include xy-cell(auto, false);
+    padding: $global-padding;
+    min-height: 100%;
+  }
+}
+
+
+// Media Reveal Component
+
+@mixin bedrock-media-reveal {
+  @include media-reveal;
+}

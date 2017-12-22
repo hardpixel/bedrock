@@ -37,16 +37,27 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
     border-style: solid;
     border-width: 0 1px 0 0;
 
-    .menu {
+    li {
 
-      li:not(:last-child) {
-        border-bottom: 1px solid smart-scale($shortcode-reveal-alt-background, 5%);
+      &:not(:last-child) {
+        border: 1px solid smart-scale($media-reveal-alt-background, 5%);
+        border-width: 0 0 1px;
       }
 
-      a {
-        color: $shortcode-reveal-alt-color;
-        padding: $global-padding;
+      &.is-active, &.active {
+
+        a {
+          background: smart-scale($media-reveal-alt-background, 5%);
+          color: $media-reveal-alt-color;
+        }
       }
+    }
+
+    a {
+      color: $media-reveal-alt-color;
+      padding: $global-padding;
+      background: none;
+      outline: none;
     }
   }
 

@@ -16,6 +16,7 @@
 @import 'components/file-input';
 @import 'components/seo-analysis';
 @import 'components/shortcode-reveal';
+@import 'components/media-reveal';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -35,3 +36,4 @@
 @include bedrock-file-input;
 @include bedrock-seo-analysis;
 @include bedrock-shortcode-reveal;
+@include bedrock-media-reveal;
