@@ -44,6 +44,9 @@ class TinyMceEditor extends Plugin {
     this.options = $.extend({}, this.options, this.computed);
     this.options = this._snakeCase(this.options);
 
+    this.$media = $(`#${this.mediaHandler}`);
+    this.$shortcode = $(`#${this.shortcodeHandler}`);
+
     if (tinymce !== 'undefined') {
       tinymce.init(this.options);
     } else {
@@ -100,8 +103,8 @@ class TinyMceEditor extends Plugin {
         var _this = this;
 
         editor.on('NodeChange', function(e) {
-          var is_active = $(editor.selection.getNode()).is('mark');
-          _this.active(is_active);
+          var isActive = $(editor.selection.getNode()).is('mark');
+          _this.active(isActive);
         })
       }
     });
@@ -115,10 +118,22 @@ class TinyMceEditor extends Plugin {
     }
 
     if (this.shortcodeHandler) {
+      var shortcode = this.$shortcode.data('zfPlugin');
+
       editor.addButton('shortcode', {
         icon: 'template',
         tooltip: 'Insert/edit shortcodes',
-        onclick: this._shortcodeButtonCallback.bind(this)
+        onclick: this._shortcodeButtonCallback.bind(this),
+        onPostRender: function() {
+          var _this = this;
+
+          editor.on('NodeChange', function(e) {
+            var text = $(editor.selection.getNode()).text();
+            var isActive = shortcode.isValid(text);
+
+            _this.active(isActive);
+          })
+        }
       });
     }
   }
@@ -130,10 +145,9 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _mediaButtonCallback(event) {
-    this.$reveal = $(`#${this.mediaHandler}`);
-    this.$reveal.foundation('open');
+    this.$media.foundation('open');
 
-    this.$reveal.off('insert.zf.media.reveal').on({
+    this.$media.off('insert.zf.media.reveal').on({
       'insert.zf.media.reveal': this._mediaInsert.bind(this)
     });
   }
@@ -162,7 +176,6 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _shortcodeButtonCallback(event) {
-    this.$shortcode = $(`#${this.shortcodeHandler}`);
     this.$shortcode.foundation('open');
 
     this.$shortcode.off('insert.zf.shortcode.reveal').on({
