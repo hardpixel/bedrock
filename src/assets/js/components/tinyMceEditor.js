@@ -318,7 +318,7 @@ TinyMceEditor.styles = `
   .shortcode-preview {
     display: inline-block;
     background: #f0f0f0;
-    border: 1px solid #cacaca;
+    border: 1px dashed #cacaca;
     margin: 0;
     width: 100%;
   }
@@ -334,7 +334,7 @@ TinyMceEditor.styles = `
   .shortcode-name {
     color: #555;
     font-weight: bold;
-    border-right: 1px solid #cacaca;
+    border-right: 1px dashed #cacaca;
     text-transform: capitalize;
   }
 `
