@@ -1,24 +1,32 @@
 <div id="shortcode-form">
   <form>
-    <div id="shortcode-thumbnail" data-media-attach="media-modal">
-      <div class="no-content hide padding-0" data-empty-state>
-        <i class="mdi mdi-camera-off"></i>
-        <span>No thumbnail</span>
-        <a class="button success small hollow margin-top-1" data-open="shortcode-thumbnail">Add Thumbnail</a>
+    <div class="panel">
+      <div class="panel-header border">
+        Attributes
       </div>
-      <div class="attachments" data-list-remove></div>
+
+      <div class="panel-content">
+        <div id="background-media-thumbnail" data-media-attach="media-modal">
+          <div class="no-content hide padding-0" data-empty-state>
+            <i class="mdi mdi-camera-off"></i>
+            <span>No thumbnail</span>
+            <button class="button success small hollow margin-top-1" data-open="background-media-thumbnail">Add Thumbnail</button>
+          </div>
+          <div class="attachments" data-list-remove></div>
+        </div>
+      </div>
     </div>
 
-    <script id="shortcode-thumbnail-item-template" type="text/template">
+    <script id="background-media-thumbnail-item-template" type="text/template">
       <div class="attachment text-center" data-list-item>
-        <input type="hidden" name="id" data-value="id">
+        <input type="hidden" name="page[thumbnail_id]" data-attribute="id" data-value="id">
         <img data-src="id" class="width-100 margin-bottom-1" data-url="https://picsum.photos/600/400?image=[src]">
         <div class="panel-section expanded border last grid-x">
           <div class="cell auto text-left">
-            <a class="button alert small hollow margin-0" data-remove>Remove</a>
+            <button class="button alert small hollow margin-0" data-remove>Remove</button>
           </div>
           <div class="cell shrink">
-            <a class="button small hollow margin-0" data-open="shortcode-thumbnail">Change</a>
+            <button class="button small hollow margin-0" data-open="background-media-thumbnail">Change</button>
           </div>
         </div>
       </div>

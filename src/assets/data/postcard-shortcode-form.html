@@ -1,23 +1,38 @@
 <div id="shortcode-form">
   <form>
-    <label>Input Label
-      <input name="title" type="text" placeholder="Placeholder...">
-    </label>
-    <label>Select Menu
-      <select name="type">
-        <option value="husker">Husker</option>
-        <option value="starbuck">Starbuck</option>
-        <option value="hotdog">Hot Dog</option>
-        <option value="apollo">Apollo</option>
-      </select>
-    </label>
-    <label>Select 2 Multiple
-      <select name="list[]" data-select-box multiple="true" data-placeholder="Placeholder..." data-tags="true">
-        <option value="husker">Husker</option>
-        <option value="starbuck">Starbuck</option>
-        <option value="hotdog">Hot Dog</option>
-        <option value="apollo">Apollo</option>
-      </select>
-    </label>
+    <div class="panel">
+      <div class="panel-header border">
+        Attributes
+      </div>
+      <div class="panel-content border padding-bottom-0">
+        <label>Input Label
+          <input name="shortcode[title]" data-attribute="title" type="text" placeholder="Placeholder...">
+        </label>
+        <label>Input Label
+          <textarea name="shortcode[text]" data-attribute="text" rows="3" placeholder="Placeholder..."></textarea>
+        </label>
+        <label>Select 2
+          <select name="shortcode[car]" data-attribute="car" data-select-box data-placeholder="Placeholder...">
+            <optgroup label="Swedish Cars">
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+            </optgroup>
+            <optgroup label="German Cars">
+              <option value="mercedes">Mercedes</option>
+              <option value="audi" disabled="disabled">Audi</option>
+              <option value="vw">Volkswagen</option>
+            </optgroup>
+          </select>
+        </label>
+        <label>Select 2 Multiple
+          <select name="shortcode[names][]" data-attribute="names" data-select-box multiple="true" data-placeholder="Placeholder..." data-tags="true">
+            <option value="husker">Husker</option>
+            <option value="starbuck">Starbuck</option>
+            <option value="hotdog">Hot Dog</option>
+            <option value="apollo">Apollo</option>
+          </select>
+        </label>
+      </div>
+    </div>
   </form>
 </div>
