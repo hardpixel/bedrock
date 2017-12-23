@@ -44,7 +44,7 @@ $panel-font-color-alt: $body-background !default;
     top: .8rem;
   }
 
-  .panel {
+  > .panel {
     @include xy-grid(vertical, false);
     @include xy-grid-frame(true);
 
@@ -53,27 +53,27 @@ $panel-font-color-alt: $body-background !default;
         color: color-pick-contrast($color, ($panel-font-color, $panel-font-color-alt));
       }
     }
+
+    > .panel-header {
+      @include reveal-panel-header;
+    }
+
+    > .panel-content {
+      @include reveal-panel-content;
+    }
+
+    > .panel-footer {
+      @include reveal-panel-footer;
+    }
   }
 
-  .panel-header {
-    @include reveal-panel-header;
-  }
-
-  .panel-content {
-    @include reveal-panel-content;
-  }
-
-  .panel-footer {
-    @include reveal-panel-footer;
-  }
-
-  .panel, .panel-content {
+  > .panel, > .panel > .panel-content {
     @include reveal-panel-size;
   }
 
   &.full {
 
-    .panel, .panel-content {
+    > .panel, > .panel > .panel-content {
       @include reveal-panel-size(true);
     }
   }
