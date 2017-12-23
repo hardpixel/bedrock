@@ -62,13 +62,13 @@ $media-reveal-alt-background: darken($reveal-background, 5) !default;
             color: $media-reveal-alt-color;
           }
         }
-      }
 
-      a {
-        color: $media-reveal-alt-color;
-        padding: $global-padding;
-        background: none;
-        outline: none;
+        a {
+          color: $media-reveal-alt-color;
+          padding: $global-padding;
+          background: none;
+          outline: none;
+        }
       }
     }
   }
