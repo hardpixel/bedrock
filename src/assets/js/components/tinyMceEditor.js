@@ -88,8 +88,11 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _setupCallback(editor) {
-    var _this = this;
     this.editor = editor;
+    this.shortcode = this.$shortcode.data('zfPlugin');
+
+    var _this = this;
+    var shortcode = this.shortcode;
 
     editor.on('change', function (event) {
       editor.save();
@@ -130,8 +133,6 @@ class TinyMceEditor extends Plugin {
     }
 
     if (this.shortcodeHandler) {
-      var shortcode = this.$shortcode.data('zfPlugin');
-
       editor.addButton('shortcode', {
         icon: 'template',
         tooltip: 'Insert/edit shortcodes',
@@ -203,7 +204,15 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _shortcodePreview(snippet, shortcode, options) {
-    var name = `<span class="shortcode-name">${shortcode}</span>`;
+    var data = this.shortcode.getInfo(shortcode);
+
+    if (data) {
+      var label = data.label;
+    } else {
+      var label = shortcode;
+    }
+
+    var name = `<span class="shortcode-name">${label}</span>`;
     var preview = `<span class="shortcode-snippet">${snippet}</span>`;
     var item = `<span data-mce-shortcode class="shortcode-preview" contenteditable="false">${name}${preview}</span>`;
 

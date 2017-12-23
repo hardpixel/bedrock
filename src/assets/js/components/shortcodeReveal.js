@@ -23,8 +23,7 @@ class ShortcodeReveal extends Plugin {
     this.$element = element;
     this.options = $.extend({}, ShortcodeReveal.defaults, this.$element.data(), options);
     this.reveal = new Foundation.Reveal(element, this.options);
-    this.shortcodes = [];
-    this.shortcodeNames = [];
+    this.shortcodes = {};
     this.items = [];
     this.activeShortcode = null;
 
@@ -46,8 +45,7 @@ class ShortcodeReveal extends Plugin {
     this.formUrl = this.options.formUrl;
     this.previewUrl = this.options.previewUrl;
 
-    // this.$insert.addClass('disabled');
-
+    this._getItems();
     this._events();
   }
 
@@ -81,8 +79,12 @@ class ShortcodeReveal extends Plugin {
    * @private
    */
   _getItems() {
+    this.shortcodes = {};
+
     $.ajax(this.shortcodesUrl).done(function(response) {
-      this.shortcodes = response;
+      $.each(response, function(index, el) {
+        this.shortcodes[el.name] = el;
+      }.bind(this));
 
       this._appendMenuItems(response);
       this._loadShortcode();
@@ -173,7 +175,6 @@ class ShortcodeReveal extends Plugin {
    */
   _appendMenuItems(data) {
     this.items = [];
-    this.shortcodeNames = [];
 
     var menu = $('<ul class="menu vertical icons icon-left"></ul>');
     this.clear();
@@ -182,7 +183,6 @@ class ShortcodeReveal extends Plugin {
       var label = `<i class="${data.icon}"></i><span>${data.label}</span>`;
       var item = $(`<li><a data-name="${data.name}">${label}</a></li>`);
 
-      this.shortcodeNames.push(data.name);
       this.items.push(item);
     }.bind(this));
 
@@ -202,16 +202,20 @@ class ShortcodeReveal extends Plugin {
     $.each(matches, function(index, match) {
       var groups = regex.exec(match);
 
-      if (groups) {
-        var name = groups[1];
-
-        if ($.inArray(name, this.shortcodeNames) !== -1) {
-          valid = true;
-        }
+      if (groups && this.shortcodes[groups[1]]) {
+        valid = true;
       }
     }.bind(this));
 
     return valid;
+  }
+
+  /**
+   * Gets shortcode extended information
+   * @function
+   */
+  getInfo(shortcode) {
+    return this.shortcodes[shortcode];
   }
 
   /**
@@ -289,9 +293,10 @@ class ShortcodeReveal extends Plugin {
     });
 
     var snippet = `[${this.activeShortcode}${params}]`;
+    var active  = this.activeShortcode;
 
     this.reveal.close();
-    this.$element.trigger('insert.zf.shortcode.reveal', [snippet, this.activeShortcode, items]);
+    this.$element.trigger('insert.zf.shortcode.reveal', [snippet, active, items]);
   }
 
   /**
