@@ -269,7 +269,7 @@ class ShortcodeReveal extends Plugin {
     var values = form.find('form').serializeArray();
 
     $.each(values, function(index, object) {
-      var input = form.find(`[name="${object.name}"]`);
+      var input = form.find(`[name="${object.name}"][data-attribute]`);
       var key = input.attr('data-attribute');
 
       if (key) {
