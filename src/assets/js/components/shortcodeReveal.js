@@ -129,6 +129,10 @@ class ShortcodeReveal extends Plugin {
     $.ajax(url).done(function(response) {
       this.$form.html(response);
       this.$form.foundation();
+
+      this.$form.find('form').on('submit', function(event) {
+        event.preventDefault();
+      });
     }.bind(this));
   }
 
@@ -257,19 +261,24 @@ class ShortcodeReveal extends Plugin {
   insert(event) {
     var params = '';
     var items = {};
-    var values = this.$form.find('form').serializeArray();
+    var form = this.$form;
+    var values = form.find('form').serializeArray();
 
     $.each(values, function(index, object) {
-      var key = object.name.replace('[]', '');
+      var input = form.find(`[name="${object.name}"]`);
 
-      if (/^.*\[\]$/.test(object.name)) {
-        if (items[key]) {
-          items[key] = `${items[key]},${object.value}`;
+      if (input.length) {
+        var key = input.attr('data-attribute');
+
+        if (/^.*\[\]$/.test(object.name)) {
+          if (items[key]) {
+            items[key] = `${items[key]},${object.value}`;
+          } else {
+            items[key] = object.value;
+          }
         } else {
           items[key] = object.value;
         }
-      } else {
-        items[key] = object.value;
       }
     });
 
