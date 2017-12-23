@@ -5,7 +5,7 @@
     "label": "Background"
   },
   {
-    "name": "post-card",
+    "name": "post_card",
     "icon": "mdi mdi-cards-variant",
     "label": "Post Card"
   }
