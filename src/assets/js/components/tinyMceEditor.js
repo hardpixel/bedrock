@@ -88,11 +88,10 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _setupCallback(editor) {
+    var _this = this;
+
     this.editor = editor;
     this.shortcode = this.$shortcode.data('zfPlugin');
-
-    var _this = this;
-    var shortcode = this.shortcode;
 
     editor.on('change', function (event) {
       editor.save();
@@ -149,9 +148,7 @@ class TinyMceEditor extends Plugin {
           var _this = this;
 
           editor.on('NodeChange', function(e) {
-            var text = $(editor.selection.getNode()).text();
-            var isActive = shortcode.isValid(text);
-
+            var isActive = $(editor.selection.getNode()).hasClass('shortcode-preview');
             _this.active(isActive);
           })
         }

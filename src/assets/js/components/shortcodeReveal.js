@@ -125,7 +125,7 @@ class ShortcodeReveal extends Plugin {
     if (data != this.formValues) {
       this.formValues = data;
 
-      this._getPreview(this.activeShortcode, this.formValues);
+      this._getPreview(this.activeShortcode);
     }
   }
 
@@ -154,10 +154,11 @@ class ShortcodeReveal extends Plugin {
    * @function
    * @private
    */
-  _getPreview(shortcode, data) {
+  _getPreview(shortcode) {
     var height = 320;
+    var snippet = encodeURIComponent(this._buildShortcode(shortcode));
     var url = this.previewUrl.replace('[name]', shortcode);
-    var frame = $(`<iframe frameborder="0" src="${url}?${data}"></iframe>`);
+    var frame = $(`<iframe frameborder="0" src="${url}?shortcode=${snippet}"></iframe>`);
     var styles = `
       html, body {
         background: transparent !important;
@@ -225,6 +226,57 @@ class ShortcodeReveal extends Plugin {
 
     menu.html(this.items);
     this.$menu.html(menu);
+  }
+
+  /**
+   * Parses form values into key/value object.
+   * @function
+   * @private
+   */
+  _getValues() {
+    var options = {};
+    var form = this.$form;
+    var values = form.find('form').serializeArray();
+
+    $.each(values, function(index, object) {
+      var input = form.find(`[name="${object.name}"][data-attribute]`);
+      var key = input.attr('data-attribute');
+
+      if (key) {
+        if (/^.*\[\]$/.test(object.name)) {
+          if (options[key]) {
+            options[key] = `${options[key]},${object.value}`;
+          } else {
+            options[key] = object.value;
+          }
+        } else {
+          options[key] = object.value;
+        }
+      }
+    });
+
+    return options;
+  }
+
+  /**
+   * Builds shortcode string.
+   * @function
+   * @private
+   */
+  _buildShortcode(name, values) {
+    var params = '';
+
+    if (!values) {
+      values = this._getValues();
+    }
+
+    $.each(values, function(key, value) {
+      if (value) {
+        params += ` ${key}="${value}"`;
+      }
+    });
+
+    return `[${name}${params}]`;
   }
 
   /**
@@ -300,39 +352,12 @@ class ShortcodeReveal extends Plugin {
    * @private
    */
   insert(event) {
-    var params = '';
-    var items = {};
-    var form = this.$form;
-    var values = form.find('form').serializeArray();
-
-    $.each(values, function(index, object) {
-      var input = form.find(`[name="${object.name}"][data-attribute]`);
-      var key = input.attr('data-attribute');
-
-      if (key) {
-        if (/^.*\[\]$/.test(object.name)) {
-          if (items[key]) {
-            items[key] = `${items[key]},${object.value}`;
-          } else {
-            items[key] = object.value;
-          }
-        } else {
-          items[key] = object.value;
-        }
-      }
-    });
-
-    $.each(items, function(key, value) {
-      if (value) {
-        params += ` ${key}="${value}"`;
-      }
-    });
-
-    var snippet = `[${this.activeShortcode}${params}]`;
-    var active  = this.activeShortcode;
+    var values = this._getValues();
+    var active = this.activeShortcode;
+    var snippet = this._buildShortcode(active, values);
 
     this.reveal.close();
-    this.$element.trigger('insert.zf.shortcode.reveal', [snippet, active, items]);
+    this.$element.trigger('insert.zf.shortcode.reveal', [snippet, active, values]);
   }
 
   /**
