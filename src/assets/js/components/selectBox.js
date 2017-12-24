@@ -123,6 +123,7 @@ class SelectBox extends Plugin {
    * @function
    */
   select(event) {
+    this.$element.trigger('change');
     this.$element.trigger('changed.zf.select.box');
 
     this._keepPlaceholder();
@@ -135,6 +136,7 @@ class SelectBox extends Plugin {
    * @function
    */
   unselect(event) {
+    this.$element.trigger('change');
     this.$element.trigger('changed.zf.select.box');
 
     this._keepPlaceholder();

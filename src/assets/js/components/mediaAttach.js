@@ -132,6 +132,8 @@ class MediaAttach extends Plugin {
       this.$grid.html(items);
     }
 
+    this.$grid.find(':input').trigger('change');
+
     this._updateActiveItems();
   }
 
