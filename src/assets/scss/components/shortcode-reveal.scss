@@ -87,6 +87,8 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: $global-padding;
+      border: 2px dashed smart-scale($media-reveal-alt-background, 8%);
     }
 
     iframe {

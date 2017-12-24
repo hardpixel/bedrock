@@ -128,7 +128,15 @@ class TinyMceEditor extends Plugin {
       editor.addButton('image', {
         icon: 'image',
         tooltip: 'Insert/edit media',
-        onclick: this._mediaButtonCallback.bind(this)
+        onclick: this._mediaButtonCallback.bind(this),
+        onPostRender: function() {
+          var _this = this;
+
+          editor.on('NodeChange', function(e) {
+            var isActive = $(editor.selection.getNode()).hasClass('inline-image');
+            _this.active(isActive);
+          })
+        }
       });
     }
 
@@ -299,10 +307,9 @@ class TinyMceEditor extends Plugin {
 
 TinyMceEditor.toolbar = [
   'bold italic underline strikethrough',
-  'blockquote shortcode link bullist numlist mark',
+  'blockquote shortcode link image bullist numlist mark',
   'alignleft aligncenter alignright',
-  'formatselect',
-  'removeformat pastetext',
+  'formatselect removeformat pastetext',
   'fullscreen'
 ];
 
