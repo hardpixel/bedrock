@@ -135,7 +135,7 @@ class TinyMceEditor extends Plugin {
     if (this.shortcodeHandler) {
       editor.addButton('shortcode', {
         icon: 'template',
-        tooltip: 'Insert/edit shortcodes',
+        tooltip: 'Insert/edit shortcode',
         onclick: this._shortcodeButtonCallback.bind(this),
         onPostRender: function() {
           var _this = this;
@@ -299,8 +299,7 @@ class TinyMceEditor extends Plugin {
 
 TinyMceEditor.toolbar = [
   'bold italic underline strikethrough',
-  'bullist numlist blockquote mark',
-  'link image media shortcode',
+  'blockquote shortcode link bullist numlist mark',
   'alignleft aligncenter alignright',
   'formatselect',
   'removeformat pastetext',
@@ -315,7 +314,6 @@ TinyMceEditor.plugins = [
   'autoresize',
   'table',
   'wordcount',
-  'media',
   'fullscreen'
 ];
 
@@ -353,10 +351,8 @@ TinyMceEditor.defaults = {
   menubar: false,
   branding: false,
   entity_encoding: 'raw',
-  max_height: 800,
   min_height: 300,
   autoresize_bottom_margin: 20,
-  autoresize_max_height: 800,
   autoresize_min_height: 300,
   plugins: TinyMceEditor.plugins.join(' '),
   toolbar: TinyMceEditor.toolbar.join(' | '),
