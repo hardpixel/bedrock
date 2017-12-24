@@ -7,6 +7,7 @@
 
       <div class="panel-content">
         <div id="background-media-thumbnail" data-media-attach="media-modal">
+          <input type="hidden" name="page[thumbnail_id]">
           <div class="no-content hide padding-0" data-empty-state>
             <i class="mdi mdi-camera-off"></i>
             <span>No thumbnail</span>
@@ -19,7 +20,7 @@
 
     <script id="background-media-thumbnail-item-template" type="text/template">
       <div class="attachment text-center" data-list-item>
-        <input type="hidden" name="page[thumbnail_id]" data-attribute="id" data-value="id">
+        <input type="hidden" name="page[thumbnail_id]" required data-attribute="id" data-value="id">
         <img data-src="id" class="width-100 margin-bottom-1" data-url="https://picsum.photos/600/400?image=[src]">
         <div class="panel-section expanded border last grid-x">
           <div class="cell auto text-left">
