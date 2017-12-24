@@ -19,6 +19,7 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
         left: 0;
         width: 100%;
         overflow-y: auto;
+        overflow-x: hidden;
       }
     }
   }
@@ -32,7 +33,7 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
     @include xy-cell(shrink, false);
     background: $shortcode-reveal-alt-background;
     min-height: 100%;
-    min-width: 12rem;
+    min-width: 15rem;
     border-color: smart-scale($shortcode-reveal-alt-background, 5%);
     border-style: solid;
     border-width: 0 1px 0 0;
@@ -65,8 +66,9 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
   }
 
   .shortcode-form {
-    @include xy-cell(auto, false);
+    @include xy-cell(shrink, false);
     padding: $global-padding;
+    width: 30rem;
     min-height: 100%;
   }
 
@@ -79,9 +81,39 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
     border-style: solid;
     border-width: 0 0 0 1px;
 
+    .shortcode-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     iframe {
-      height: 100%;
-      width: 100%;
+      margin: 0;
+      display: block;
+    }
+  }
+
+  .shortcode-inner {
+    @include xy-grid(vertical, false);
+    min-height: 100%;
+
+    .shortcode-title {
+      @include xy-cell(shrink, false);
+    }
+
+    .shortcode-content {
+      @include xy-cell(auto, false);
+    }
+  }
+
+  .shortcode-title {
+    padding-bottom: $global-padding;
+  }
+
+  .shortcode-content {
+
+    .panel:last-child {
+      margin-bottom: 0;
     }
   }
 }
