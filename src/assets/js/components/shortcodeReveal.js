@@ -104,6 +104,11 @@ class ShortcodeReveal extends Plugin {
    * @private
    */
   _loadShortcode(event) {
+    this.formValues = null;
+
+    this.$form.html('');
+    this.$preview.html('');
+
     if (event) {
       this.activeShortcode = $(event.currentTarget).attr('data-name');
     } else {
@@ -123,8 +128,10 @@ class ShortcodeReveal extends Plugin {
    */
   _loadPreview(event) {
     var data = this.$form.find('form').serialize();
+    var change = event && event.type == 'change';
+    var changed = this.formValues && data != this.formValues;
 
-    if (event && event.type == 'change' && data != this.formValues) {
+    if (change && changed) {
       this.formValues = data;
       this._getPreview(this.activeShortcode);
     }
@@ -139,9 +146,6 @@ class ShortcodeReveal extends Plugin {
    */
   _getForm(shortcode) {
     var url = this.formUrl.replace('[name]', shortcode);
-
-    this.formValues = null;
-    this.$form.html('');
 
     $.ajax(url).done(function(response) {
       this.$form.html(response);
@@ -162,8 +166,6 @@ class ShortcodeReveal extends Plugin {
    * @private
    */
   _getPreview(shortcode) {
-    this.$preview.html('');
-
     var height = 320;
     var snippet = encodeURIComponent(this._buildShortcode(shortcode));
     var url = this.previewUrl.replace('[name]', shortcode);
