@@ -111,7 +111,6 @@ class ShortcodeReveal extends Plugin {
     this.$menu.find(`li a[data-name="${this.activeShortcode}"]`).parent().addClass('is-active');
 
     this._getForm(this.activeShortcode);
-    this._getPreview(this.activeShortcode);
   }
 
   /**
@@ -137,6 +136,9 @@ class ShortcodeReveal extends Plugin {
   _getForm(shortcode) {
     var url = this.formUrl.replace('[name]', shortcode);
 
+    this.formValues = null;
+    this.$form.html('');
+
     $.ajax(url).done(function(response) {
       this.$form.html(response);
       this.$form.foundation();
@@ -146,6 +148,7 @@ class ShortcodeReveal extends Plugin {
       });
 
       this.formValues = this.$form.find('form').serialize();
+      this._getPreview(shortcode);
     }.bind(this));
   }
 
@@ -155,6 +158,8 @@ class ShortcodeReveal extends Plugin {
    * @private
    */
   _getPreview(shortcode) {
+    this.$preview.html('');
+
     var height = 320;
     var snippet = encodeURIComponent(this._buildShortcode(shortcode));
     var url = this.previewUrl.replace('[name]', shortcode);
@@ -270,13 +275,17 @@ class ShortcodeReveal extends Plugin {
       values = this._getValues();
     }
 
-    $.each(values, function(key, value) {
-      if (value) {
-        params += ` ${key}="${value}"`;
-      }
-    });
+    if (values) {
+      $.each(values, function(key, value) {
+        if (value) {
+          params += ` ${key}="${value}"`;
+        }
+      });
 
-    return `[${name}${params}]`;
+      return `[${name}${params}]`;
+    } else {
+      return '';
+    }
   }
 
   /**
