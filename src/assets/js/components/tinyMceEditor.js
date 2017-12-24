@@ -273,8 +273,8 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _shortcodeInsert(event, snippet, shortcode, options) {
-    var item = this._shortcodePreview(snippet, shortcode, options);
-    this.editor.insertContent(item);
+    var preview = this._shortcodePreview(snippet, shortcode, options);
+    this.editor.insertContent(`<p>${preview}</p>`);
   }
 
   /**

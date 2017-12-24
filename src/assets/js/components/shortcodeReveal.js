@@ -46,6 +46,8 @@ class ShortcodeReveal extends Plugin {
     this.previewUrl = this.options.previewUrl;
     this.formParams = '';
 
+    this.$insert.addClass('disabled');
+
     this._getItems();
     this._events();
   }
@@ -69,7 +71,8 @@ class ShortcodeReveal extends Plugin {
       'click': this._loadShortcode.bind(this)
     }, '[data-name]');
 
-    this.$form.off('change', ':input').on({
+    this.$form.off('input change', ':input').on({
+      'input': this._loadPreview.bind(this),
       'change': this._loadPreview.bind(this)
     }, ':input');
   }
@@ -121,11 +124,12 @@ class ShortcodeReveal extends Plugin {
   _loadPreview(event) {
     var data = this.$form.find('form').serialize();
 
-    if (data != this.formValues) {
+    if (event && event.type == 'change' && data != this.formValues) {
       this.formValues = data;
-
       this._getPreview(this.activeShortcode);
     }
+
+    this._toggleInsert();
   }
 
   /**
@@ -148,7 +152,7 @@ class ShortcodeReveal extends Plugin {
       });
 
       this.formValues = this.$form.find('form').serialize();
-      this._getPreview(shortcode);
+      this._loadPreview();
     }.bind(this));
   }
 
@@ -208,6 +212,19 @@ class ShortcodeReveal extends Plugin {
    */
   _getObjectValue(obj, path) {
     return new Function('_', `return _.${path}`)(obj);
+  }
+
+  /**
+   * Toggles insert button if form is valid.
+   * @function
+   * @private
+   */
+  _toggleInsert() {
+    if (this.formValid()) {
+      this.$insert.removeClass('disabled');
+    } else {
+      this.$insert.addClass('disabled');
+    }
   }
 
   /**
@@ -286,6 +303,23 @@ class ShortcodeReveal extends Plugin {
     } else {
       return '';
     }
+  }
+
+  /**
+   * Checks if form is valid to insert shortcode
+   * @function
+   */
+  formValid() {
+    var valid = true;
+    var required = this.$form.find(':input[required]');
+
+    $.each(required, function(index, el) {
+      if (!$(el).val()) {
+        valid = false;
+      }
+    });
+
+    return valid;
   }
 
   /**

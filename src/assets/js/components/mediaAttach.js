@@ -42,6 +42,9 @@ class MediaAttach extends Plugin {
     this.$item = $(this.template);
     this.$reveal = $(`#${this.options.mediaAttach}`);
     this.$anchor = $(`[data-open="${this.id}"]`).length ? $(`[data-open="${this.id}"]`) : $(`[data-toggle="${this.id}"]`);
+    this.fieldName = this.$item.find('[data-value]').attr('name');
+    this.$hidden = this.$element.find(`[name="${this.fieldName}"]`);
+    this.required = this.$item.find('[data-value]').is('[required]');
     this.imageKey = this.$item.find('[data-src]').attr('data-src');
     this.imageUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
     this.titleKey = this.$item.find('[data-text]').attr('data-text');
@@ -77,9 +80,16 @@ class MediaAttach extends Plugin {
 
     if (this.activeItems.length > 0) {
       this.$empty.addClass('hide');
+      this.$hidden.removeAttr('required');
     } else {
+      if (this.required) {
+        this.$hidden.attr('required', 'required');
+      }
+
       this.$empty.removeClass('hide');
     }
+
+    this.$hidden.trigger('change');
   }
 
   /**
@@ -131,8 +141,6 @@ class MediaAttach extends Plugin {
     } else {
       this.$grid.html(items);
     }
-
-    this.$grid.find(':input').trigger('change');
 
     this._updateActiveItems();
   }
