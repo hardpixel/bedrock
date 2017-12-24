@@ -44,6 +44,7 @@ class ShortcodeReveal extends Plugin {
     this.shortcodesUrl = this.options.shortcodesUrl;
     this.formUrl = this.options.formUrl;
     this.previewUrl = this.options.previewUrl;
+    this.formParams = '';
 
     this._getItems();
     this._events();
@@ -68,9 +69,9 @@ class ShortcodeReveal extends Plugin {
       'click': this._loadShortcode.bind(this)
     }, '[data-name]');
 
-    this.$form.off('change', ':input:visible').on({
+    this.$form.off('change', ':input').on({
       'change': this._loadPreview.bind(this)
-    }, ':input:visible');
+    }, ':input');
   }
 
   /**
@@ -87,7 +88,10 @@ class ShortcodeReveal extends Plugin {
       }.bind(this));
 
       this._appendMenuItems(response);
-      this._loadShortcode();
+
+      if (this.reveal.isActive) {
+        this.$menu.find('[data-name]:first').click();
+      }
     }.bind(this));
   }
 
@@ -117,7 +121,12 @@ class ShortcodeReveal extends Plugin {
    */
   _loadPreview(event) {
     var data = this.$form.find('form').serialize();
-    this._getPreview(this.activeShortcode, data);
+
+    if (data != this.formValues) {
+      this.formValues = data;
+
+      this._getPreview(this.activeShortcode, this.formValues);
+    }
   }
 
   /**
@@ -135,6 +144,8 @@ class ShortcodeReveal extends Plugin {
       this.$form.find('form').on('submit', function(event) {
         event.preventDefault();
       });
+
+      this.formValues = this.$form.find('form').serialize();
     }.bind(this));
   }
 
@@ -144,16 +155,42 @@ class ShortcodeReveal extends Plugin {
    * @private
    */
   _getPreview(shortcode, data) {
+    var height = 320;
     var url = this.previewUrl.replace('[name]', shortcode);
-    var frame = $('<iframe frameborder="0"></iframe>');
+    var frame = $(`<iframe frameborder="0" src="${url}?${data}"></iframe>`);
+    var styles = `
+      html, body {
+        background: transparent !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+      }
 
-    $.ajax({url: url, data: data}).done(function(response) {
-      this.$preview.html(frame);
+      #shortcode-preview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 800px;
+        min-width: 400px;
+        margin: auto;
+      }
+    `;
 
-      frame.on('load', function(event) {
-        $(this).contents().find('html').html(response);
-      });
-    }.bind(this));
+    this.$preview.html(frame);
+    frame.css('opacity', 0);
+
+    frame.on('load', function(event) {
+      var content = frame.contents();
+      var preview = content.find('body');
+
+      content.find('head').append(`<style>${styles}</style>`);
+
+      setTimeout(function () {
+        height = preview.outerHeight();
+
+        frame.css('min-height', height);
+        frame.css('opacity', 1);
+      }, 500);
+    });
   }
 
   /**

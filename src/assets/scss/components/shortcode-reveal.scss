@@ -70,6 +70,7 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
     padding: $global-padding;
     width: 30rem;
     min-height: 100%;
+    min-width: 20rem;
   }
 
   .shortcode-preview {
@@ -80,6 +81,7 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
     border-color: smart-scale($shortcode-reveal-alt-background, 5%);
     border-style: solid;
     border-width: 0 0 0 1px;
+    min-width: 20rem;
 
     .shortcode-content {
       display: flex;
@@ -90,6 +92,9 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
     iframe {
       margin: 0;
       display: block;
+      width: 100%;
+      pointer-events: none;
+      user-select: none;
     }
   }
 
