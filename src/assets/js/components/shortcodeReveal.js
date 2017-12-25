@@ -41,6 +41,7 @@ class ShortcodeReveal extends Plugin {
     this.$form = this.$element.find('[data-form]');
     this.$preview = this.$element.find('[data-preview]');
     this.$insert = this.$element.find('[data-insert]');
+    this.$empty = this.$element.find('[data-empty]').clone();
     this.shortcodesUrl = this.options.shortcodesUrl;
     this.formUrl = this.options.formUrl;
     this.previewUrl = this.options.previewUrl;
@@ -107,7 +108,7 @@ class ShortcodeReveal extends Plugin {
     this.formValues = null;
 
     this.$form.html('');
-    this.$preview.html('');
+    this.$preview.html(this.$empty);
 
     if (event) {
       this.activeShortcode = $(event.currentTarget).attr('data-name');
@@ -359,7 +360,7 @@ class ShortcodeReveal extends Plugin {
   clear() {
     this.$menu.html('');
     this.$form.html('');
-    this.$preview.html('');
+    this.$preview.html(this.$empty);
   }
 
   /**
