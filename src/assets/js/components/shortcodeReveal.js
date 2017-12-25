@@ -134,7 +134,12 @@ class ShortcodeReveal extends Plugin {
 
     if (change && changed) {
       this.formValues = data;
-      this._getPreview(this.activeShortcode);
+
+      if (this.formValid()) {
+        this._getPreview(this.activeShortcode);
+      } else {
+        this.$preview.html(this.$empty);
+      }
     }
 
     this._toggleInsert();
@@ -317,7 +322,9 @@ class ShortcodeReveal extends Plugin {
     var required = this.$form.find(':input[required]');
 
     $.each(required, function(index, el) {
-      if (!$(el).val()) {
+      var value = $(el).val();
+
+      if (!value || value == '') {
         valid = false;
       }
     });
