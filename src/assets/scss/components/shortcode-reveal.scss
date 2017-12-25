@@ -106,6 +106,14 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
       align-items: center;
     }
 
+    .no-content {
+      font-size: 2rem;
+
+      i {
+        font-size: 5rem;
+      }
+    }
+
     iframe {
       margin: 0;
       display: block;
