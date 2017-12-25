@@ -68,27 +68,42 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
   .shortcode-form {
     @include xy-cell(shrink, false);
     padding: $global-padding;
-    width: 30rem;
+    background: $shortcode-reveal-alt-background;
+    width: 24rem;
     min-height: 100%;
     min-width: 20rem;
+    border-color: smart-scale($shortcode-reveal-alt-background, 5%);
+    border-style: solid;
+    border-width: 0 0 0 1px;
+
+    .panel-section {
+
+      &.last {
+        margin-bottom: $global-margin;
+
+        &.border {
+          border-bottom-width: 1px;
+        }
+      }
+    }
+
+    .shortcode-title {
+      margin: (-$global-padding) (-$global-padding) $global-padding;
+      padding: $global-padding;
+      border-bottom: 1px solid smart-scale($shortcode-reveal-alt-background, 5%);
+    }
   }
 
   .shortcode-preview {
     @include xy-cell(auto, false);
-    background: $shortcode-reveal-alt-background;
     padding: $global-padding;
     min-height: 100%;
-    border-color: smart-scale($shortcode-reveal-alt-background, 5%);
-    border-style: solid;
-    border-width: 0 0 0 1px;
     min-width: 20rem;
 
     .shortcode-content {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: $global-padding;
-      border: 2px dashed smart-scale($media-reveal-alt-background, 8%);
     }
 
     iframe {
