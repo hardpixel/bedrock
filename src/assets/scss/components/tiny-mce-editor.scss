@@ -1,10 +1,15 @@
 // Text Editor Mixins
 
 @mixin tiny-mce-editor-input {
-  opacity: 0;
   display: block;
   width: 100%;
   margin: 0;
+  border-color: smart-scale($panel-background, $panel-color-scale) !important;
+  box-shadow: none !important;
+  resize: none;
+  color: transparent;
+  min-height: 200px;
+  overflow: hidden;
 }
 
 @mixin tiny-mce-editor-basics {
