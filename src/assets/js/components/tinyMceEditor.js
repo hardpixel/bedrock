@@ -110,7 +110,7 @@ class TinyMceEditor extends Plugin {
 
     buttons.addClass('sticky');
 
-    if (position > offset && !limit && !full) {
+    if (position > offset && !limit) {
       toolbar.css('height', toolbar.height());
       buttons.css('width', toolbar.width());
 
