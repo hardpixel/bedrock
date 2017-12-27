@@ -154,15 +154,17 @@ class ShortcodeReveal extends Plugin {
     var url = this.formUrl.replace('[name]', shortcode);
 
     $.ajax(url).done(function(response) {
-      this.$form.html(response);
-      this.$form.foundation();
+      if (this.activeShortcode == shortcode) {
+        this.$form.html(response);
+        this.$form.foundation();
 
-      this.$form.find('form').on('submit', function(event) {
-        event.preventDefault();
-      });
+        this.$form.find('form').on('submit', function(event) {
+          event.preventDefault();
+        });
 
-      this.formValues = this.$form.find('form').serialize();
-      this._loadPreview();
+        this.formValues = this.$form.find('form').serialize();
+        this._loadPreview();
+      }
     }.bind(this));
   }
 
