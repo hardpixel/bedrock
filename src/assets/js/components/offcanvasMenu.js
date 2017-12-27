@@ -37,11 +37,15 @@ class OffCanvasMenu extends Plugin {
    * @private
    */
   _init() {
-    var id = this.$element.attr('id');
-
-    this.$exiter = $('[data-toggle=' + id + '], [data-open="' + id + '"], [data-close="' + id + '"]');
+    this.id = this.$element.attr('id');
+    this.$exiter = $(`[data-toggle=${this.id}], [data-open="${this.id}"], [data-close="${this.id}"]`);
     this.$wrapper = $('.off-canvas-wrapper');
-    this.$collapsed = this.$element.hasClass('is-collapsed');
+    this.collapsed = this.$element.hasClass('is-collapsed');
+    this.cookie = `${this.id}-collapsed`;
+
+    if (!this.collapsed && Cookies.get(this.cookie)) {
+      this.collapse(true);
+    }
 
     this._setMQChecker();
     this._menus(this);
@@ -137,12 +141,14 @@ class OffCanvasMenu extends Plugin {
    * @function
    */
   collapse(isCollapsed) {
-    this.$collapsed = isCollapsed;
+    this.collapsed = isCollapsed;
 
     if (isCollapsed) {
       this.$element.addClass('is-collapsed');
+      Cookies.set(this.cookie, isCollapsed);
     } else {
       this.$element.removeClass('is-collapsed');
+      Cookies.remove(this.cookie);
     }
   }
 
@@ -182,7 +188,7 @@ class OffCanvasMenu extends Plugin {
    */
   toggle(event, trigger) {
     if (MediaQuery.atLeast('large')) {
-      this.collapse(!this.$collapsed);
+      this.collapse(!this.collapsed);
     } else {
       this.offcanvas.toggle();
     }
