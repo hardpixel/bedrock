@@ -11,6 +11,7 @@ import { InlineEditBox } from '../components/inlineEditBox';
 import { SelectBox } from '../components/selectBox';
 import { FileInput } from '../components/fileInput';
 import { SeoAnalysis } from '../components/seoAnalysis';
+import { ResizeWatcher } from '../components/resizeWatcher';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
 Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
@@ -25,3 +26,4 @@ Foundation.plugin(InlineEditBox, 'InlineEditBox');
 Foundation.plugin(SelectBox, 'SelectBox');
 Foundation.plugin(FileInput, 'FileInput');
 Foundation.plugin(SeoAnalysis, 'SeoAnalysis');
+Foundation.plugin(ResizeWatcher, 'ResizeWatcher');

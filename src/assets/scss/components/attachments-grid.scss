@@ -91,40 +91,19 @@
   margin-left: -.625rem;
   margin-right: -.625rem;
 
-  @include breakpoint(320px) {
-    @include xy-grid-layout(2, '.attachment');
-  }
+  @for $i from 1 through 9 {
+    &[data-grid-columns="#{$i}"] {
+      @include xy-grid-layout($i, '.attachment');
 
-  @include breakpoint(480px) {
-    @include xy-grid-layout(3, '.attachment');
-  }
-
-  @include breakpoint(680px) {
-    @include xy-grid-layout(4, '.attachment');
-  }
-
-  @include breakpoint(800px) {
-    @include xy-grid-layout(5, '.attachment');
-  }
-
-  @include breakpoint(1280px) {
-    @include xy-grid-layout(6, '.attachment');
-  }
-
-  @include breakpoint(1366px) {
-    @include xy-grid-layout(7, '.attachment');
-  }
-
-  @include breakpoint(1440px) {
-    @include xy-grid-layout(8, '.attachment');
-  }
-
-  @include breakpoint(1600px) {
-    @include xy-grid-layout(9, '.attachment');
+      .attachment {
+        max-width: 100% !important;
+      }
+    }
   }
 
   .attachment {
     @include attachments-grid-item;
+    max-width: 170px;
   }
 }
 
