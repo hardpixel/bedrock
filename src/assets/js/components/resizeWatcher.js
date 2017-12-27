@@ -35,7 +35,7 @@ class ResizeWatcher extends Plugin {
       if (e.target.innerHTML.length > 0) {
         $(document).trigger('contentchanged');
       }
-    }, 500);
+    }, 250);
 
     this._events();
   }

@@ -186,12 +186,11 @@ class MediaReveal extends Plugin {
    * @private
    */
   open(event) {
-    this._getItems();
-
     if (!this.reveal.isActive) {
       this.reveal.open();
     }
 
+    setTimeout(this._getItems.bind(this), 300);
     this.$element.trigger('open.zf.media.reveal');
   }
 
