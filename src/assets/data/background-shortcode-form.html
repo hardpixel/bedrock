@@ -1,7 +1,7 @@
 <form>
   <div id="background-media-thumbnail" data-media-attach="media-modal">
     <input type="hidden" name="page[thumbnail_id]">
-    <div class="no-content hide padding-0" data-empty-state>
+    <div class="no-content hide padding-horizontal-0 panel-section expanded border first margin-bottom-1" data-empty-state>
       <i class="mdi mdi-camera-off"></i>
       <span>No thumbnail</span>
       <button class="button success small hollow margin-top-1" data-open="background-media-thumbnail">Add Thumbnail</button>
@@ -20,6 +20,29 @@
         <div class="cell shrink">
           <button class="button small hollow margin-0" data-open="background-media-thumbnail">Change</button>
         </div>
+      </div>
+    </div>
+  </script>
+
+  <div id="background-media-attachments" data-media-attach="media-modal" data-media-multiple="true">
+    <input type="hidden" name="post[gallery_ids][]">
+    <div class="no-content margin-bottom-1 hide"  data-empty-state>
+      <i class="mdi mdi-camera-off"></i>
+      <span>No media attached</span>
+    </div>
+    <div class="attachments-grid removable" data-list-remove></div>
+    <div class="panel-section expanded border last text-center">
+      <button class="button small success hollow margin-0" data-open="background-media-attachments">Add Media</button>
+    </div>
+  </div>
+
+  <script id="background-media-attachments-item-template" type="text/template">
+    <div class="attachment" data-list-item>
+      <input type="hidden" name="post[gallery_ids][]" required data-attribute="ids" data-value="id">
+      <div class="thumbnail">
+        <img data-src="id" data-url="https://picsum.photos/300?image=[src]">
+        <span class="filename" data-text="author"></span>
+        <span class="remove-button mdi mdi-close" data-remove></span>
       </div>
     </div>
   </script>

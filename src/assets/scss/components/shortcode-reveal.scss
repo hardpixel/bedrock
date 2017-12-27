@@ -18,8 +18,6 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
         top: 0;
         left: 0;
         width: 100%;
-        overflow-y: auto;
-        overflow-x: hidden;
       }
     }
   }
@@ -29,10 +27,18 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
     height: 100%;
   }
 
+  .shortcode-form,
+  .shortcode-menu,
+  .shortcode-preview {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    min-height: 100%;
+  }
+
   .shortcode-menu {
     @include xy-cell(shrink, false);
     background: $shortcode-reveal-alt-background;
-    min-height: 100%;
     min-width: 15rem;
     border-color: smart-scale($shortcode-reveal-alt-background, 5%);
     border-style: solid;
@@ -70,7 +76,6 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
     padding: $global-padding;
     background: $shortcode-reveal-alt-background;
     width: 24rem;
-    min-height: 100%;
     min-width: 20rem;
     border-color: smart-scale($shortcode-reveal-alt-background, 5%);
     border-style: solid;
@@ -97,7 +102,6 @@ $shortcode-reveal-alt-background: darken($reveal-background, 5) !default;
   .shortcode-preview {
     @include xy-cell(auto, false);
     padding: $global-padding;
-    min-height: 100%;
     min-width: 20rem;
 
     .shortcode-content {
