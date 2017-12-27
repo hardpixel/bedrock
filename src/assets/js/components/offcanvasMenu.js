@@ -41,7 +41,7 @@ class OffCanvasMenu extends Plugin {
     this.$exiter = $(`[data-toggle=${this.id}], [data-open="${this.id}"], [data-close="${this.id}"]`);
     this.$wrapper = $('.off-canvas-wrapper');
     this.collapsed = this.$element.hasClass('is-collapsed');
-    this.cookie = `${this.id}-collapsed`;
+    this.cookie = `_${this.id}-collapsed`;
 
     if (!this.collapsed && Cookies.get(this.cookie)) {
       this.collapse(true);
