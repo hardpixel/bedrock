@@ -2,6 +2,7 @@
 
 import $ from 'jquery';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
+import { Sticky } from 'foundation-sites/js/foundation.sticky';
 
 /**
  * TinyMceEditor module.
@@ -40,6 +41,7 @@ class TinyMceEditor extends Plugin {
     this.$element.wrap('<div class="tiny-mce-editor"></div>');
 
     this.id = this.$element.attr('id');
+    this.$wrapper = this.$element.parents('.tiny-mce-editor:first');
     this.computed = { target: this.$element.get(0), setup: this._setupCallback.bind(this) };
     this.options = $.extend({}, this.options, this.computed);
     this.options = this._snakeCase(this.options);
@@ -49,9 +51,21 @@ class TinyMceEditor extends Plugin {
 
     if (tinymce !== 'undefined') {
       tinymce.init(this.options);
+      this._events();
     } else {
       console.log('TinyMCE is not available! Please download and install TinyMCE.');
     }
+  }
+
+  /**
+   * Adds event handlers to the tinymce-editor.
+   * @function
+   * @private
+   */
+  _events() {
+    $(document).on({
+      'scroll': this._stickyToolbar.bind(this)
+    });
   }
 
   /**
@@ -79,6 +93,34 @@ class TinyMceEditor extends Plugin {
     }
 
     return newObject;
+  }
+
+  /**
+   * Make editor toolbar sticky.
+   * @function
+   * @private
+   */
+  _stickyToolbar() {
+    var toolbar = this.$wrapper.find('.mce-top-part:first');
+    var buttons = toolbar.find('.mce-container-body:first');
+    var offset = this.$wrapper.offset().top;
+    var height = this.$wrapper.height();
+    var position = $(document).scrollTop();
+    var limit = position > (offset + height - 100);
+
+    buttons.addClass('sticky');
+
+    if (position > offset && !limit && !full) {
+      toolbar.css('height', toolbar.height());
+      buttons.css('width', toolbar.width());
+
+      buttons.addClass('is-stuck');
+    } else {
+      buttons.removeClass('is-stuck');
+
+      toolbar.css('height', '');
+      buttons.css('width', '');
+    }
   }
 
   /**

@@ -51,6 +51,11 @@
     }
   }
 
+  .is-stuck {
+    top: 0;
+    border-bottom: 1px solid smart-scale($panel-background, $panel-color-scale);
+  }
+
   .mce-menubtn.mce-fixed-width span {
     position: relative;
     top: 1px;
