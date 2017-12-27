@@ -19,8 +19,8 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
 
   @include breakpoint(large) {
     margin: 0;
-    transform: none;
-    transition: none;
+    transform: none !important;
+    transition: none !important;
   }
 }
 
@@ -305,9 +305,9 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
   @include breakpoint(large) {
     @include in-canvas;
     background: $offcanvas-menu-background;
-    visibility: visible;
-    transition: none;
-    overflow: visible;
+    visibility: visible !important;
+    transition: none !important;
+    overflow: visible !important;
 
     @each $name, $size in $offcanvas-sizes {
       width: $size;
