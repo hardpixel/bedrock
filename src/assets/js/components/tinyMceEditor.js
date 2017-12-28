@@ -190,7 +190,7 @@ class TinyMceEditor extends Plugin {
           var _this = this;
 
           editor.on('NodeChange', function(e) {
-            var isActive = $(editor.selection.getNode()).hasClass('shortcode-preview');
+            var isActive = $(editor.selection.getNode()).hasClass('mce-shortcode-preview');
             _this.active(isActive);
           })
         }
@@ -259,9 +259,9 @@ class TinyMceEditor extends Plugin {
       var label = shortcode;
     }
 
-    var name = `<span class="shortcode-name">${label}</span>`;
-    var preview = `<span class="shortcode-snippet">${snippet}</span>`;
-    var item = `<span data-mce-shortcode class="shortcode-preview" contenteditable="false">${name}${preview}</span>`;
+    var name = `<span class="mce-shortcode-name">${label}</span>`;
+    var preview = `<span class="mce-shortcode-snippet">${snippet}</span>`;
+    var item = `<span data-mce-shortcode class="mce-shortcode-preview" contenteditable="false">${name}${preview}</span>`;
 
     return item;
   }
@@ -365,10 +365,16 @@ TinyMceEditor.plugins = [
 
 TinyMceEditor.styles = `
   html {
-    padding: 0 .5rem;
+    padding: 1rem;
   }
 
-  .shortcode-preview {
+  body, html {
+    background: white;
+    margin: 0;
+    font-size: 100%;
+  }
+
+  .mce-shortcode-preview {
     display: inline-block;
     background: #f0f0f0;
     border: 1px dashed #cacaca;
@@ -376,7 +382,7 @@ TinyMceEditor.styles = `
     width: 100%;
   }
 
-  .shortcode-name, .shortcode-snippet {
+  .mce-shortcode-name, .mce-shortcode-snippet {
     display: inline-block;
     padding: .5rem 1rem;
     color: #888;
@@ -385,7 +391,7 @@ TinyMceEditor.styles = `
     font-size: .8rem;
   }
 
-  .shortcode-name {
+  .mce-shortcode-name {
     color: #555;
     font-weight: bold;
     border-right: 1px dashed #cacaca;
@@ -403,6 +409,7 @@ TinyMceEditor.defaults = {
   plugins: TinyMceEditor.plugins.join(' '),
   toolbar: TinyMceEditor.toolbar.join(' | '),
   content_style: TinyMceEditor.styles,
+  invalid_elements: 'br',
   formats: {
     mark: { inline: 'mark' }
   }
