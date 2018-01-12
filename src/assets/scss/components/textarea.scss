@@ -53,7 +53,7 @@
 // No Content Component
 
 @mixin bedrock-textarea {
-  .textarea {
+  .textarea-container {
     @include textarea-container;
   }
 }
