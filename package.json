@@ -10,6 +10,7 @@
   "author": "Hardpixel <info@hardpixel.eu>",
   "license": "MIT",
   "dependencies": {
+    "autosize": "^4.0.0",
     "clndr": "^1.4.7",
     "dropzone": "^5.2.0",
     "foundation-sites": "^6.4.3",

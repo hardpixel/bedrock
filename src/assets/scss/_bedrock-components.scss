@@ -12,6 +12,7 @@
 @import 'components/inline-edit-box';
 @import 'components/page-content';
 @import 'components/tiny-mce-editor';
+@import 'components/textarea';
 @import 'components/select-box';
 @import 'components/file-input';
 @import 'components/seo-analysis';
@@ -32,6 +33,7 @@
 @include bedrock-inline-edit-box;
 @include bedrock-page-content;
 @include bedrock-tiny-mce-editor;
+@include bedrock-textarea;
 @include bedrock-select-box;
 @include bedrock-file-input;
 @include bedrock-seo-analysis;
