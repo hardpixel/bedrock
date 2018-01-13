@@ -57,6 +57,38 @@ $page-content-sidebar-sizes: (large: 340px, xxlarge: 360px) !default;
         order: 99 * 99;
       }
     }
+
+    > .menu {
+
+      li {
+
+        &:not(:last-child) {
+          border: 1px solid smart-scale($body-background, 5%);
+          border-width: 0 0 1px;
+        }
+
+        &.is-active, &.active {
+
+          a {
+            background: smart-scale($body-background, 5%);
+            color: smart-scale($body-background, 50%);
+          }
+        }
+      }
+
+      a {
+        color: smart-scale($body-background, 50%);
+        padding: $global-padding;
+        background: none;
+        outline: none;
+
+        i {
+          font-size: 1.2rem;
+          margin-right: .7rem;
+          width: 1.2rem;
+        }
+      }
+    }
   }
 }
 

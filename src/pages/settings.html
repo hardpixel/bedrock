@@ -1,18 +1,22 @@
+<div class="header">
+  <h1 class="h3 title">Settings</h1>
+  <div class="actions">
+    <a href="#" class="button small alert" title="Delete"><i class="mdi mdi-reload"></i> Reset</a>
+  </div>
+</div>
+
 <div class="page-content">
   <div class="sidebar">
     <ul class="menu vertical icons icon-left">
-      <li><a href="#"><i class="mdi mdi-tune"></i> General</a></li>
+      <li class="active"><a href="#"><i class="mdi mdi-tune"></i> General</a></li>
       <li><a href="#"><i class="mdi mdi-email-outline"></i> Email</a></li>
       <li><a href="#"><i class="mdi mdi-webhook"></i> Webmaster</a></li>
       <li><a href="#"><i class="mdi mdi-compare"></i> System</a></li>
     </ul>
   </div>
   <div class="content">
-    <div class="header">
-      <h1 class="h3 title">Settings</h1>
-      <div class="actions">
-        <a href="#" class="button small alert" title="Delete"><i class="mdi mdi-reload"></i> Reset</a>
-      </div>
-    </div>
+    {{> textarea }}
+    {{> upload }}
+    <button class="button">Update Settings</button>
   </div>
 </div>
