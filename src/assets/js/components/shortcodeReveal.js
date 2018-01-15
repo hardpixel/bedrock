@@ -134,8 +134,13 @@ class ShortcodeReveal extends Plugin {
    */
   _loadPreview(event) {
     var data = this.$form.find('form').serialize();
+    var init = event && event.type == 'init';
     var change = event && event.type == 'change';
     var changed = this.formValues && data != this.formValues;
+
+    if (init && this.formValid()) {
+      this._getPreview(this.activeShortcode);
+    }
 
     if (change && changed) {
       this.formValues = data;
@@ -170,7 +175,7 @@ class ShortcodeReveal extends Plugin {
         });
 
         this.formValues = this.$form.find('form').serialize();
-        this._loadPreview();
+        this._loadPreview({ type: 'init' });
       }
     }.bind(this));
   }
