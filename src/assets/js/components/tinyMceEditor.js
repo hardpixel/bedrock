@@ -205,11 +205,13 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _mediaButtonCallback(event) {
-    this.$media.foundation('open');
+    this.$media.addClass('mce-in');
 
     this.$media.off('insert.zf.media.reveal').on({
       'insert.zf.media.reveal': this._mediaInsert.bind(this)
     });
+
+    this.$media.foundation('open');
   }
 
   /**
@@ -227,6 +229,8 @@ class TinyMceEditor extends Plugin {
 
       this.editor.insertContent(item);
     }.bind(this));
+
+    this.$media.removeClass('mce-in');
   }
 
   /**
@@ -236,11 +240,19 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _shortcodeButtonCallback(event) {
-    this.$shortcode.foundation('open');
+    this.$shortcode.addClass('mce-in');
+
+    this.activeShortcode = this.editor.selection.getNode();
+    this.$activeShortcode = $(this.activeShortcode);
+
+    var snippet = this.$activeShortcode.find('.mce-shortcode-snippet').text();
+    this.shortcode.setSnippet(snippet);
 
     this.$shortcode.off('insert.zf.shortcode.reveal').on({
       'insert.zf.shortcode.reveal': this._shortcodeInsert.bind(this)
     });
+
+    this.$shortcode.foundation('open');
   }
 
   /**
@@ -316,7 +328,15 @@ class TinyMceEditor extends Plugin {
    */
   _shortcodeInsert(event, snippet, shortcode, options) {
     var preview = this._shortcodePreview(snippet, shortcode, options);
-    this.editor.insertContent(`<p>${preview}</p>`);
+    var selected = this.$activeShortcode.hasClass('mce-shortcode-preview');
+
+    if (selected) {
+      this.editor.$(this.activeShortcode).replaceWith(preview);
+    } else {
+      this.editor.insertContent(`<p>${preview}</p>`);
+    }
+
+    this.$shortcode.removeClass('mce-in');
   }
 
   /**

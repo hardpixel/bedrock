@@ -26,6 +26,7 @@ class ShortcodeReveal extends Plugin {
     this.shortcodes = {};
     this.items = [];
     this.activeShortcode = null;
+    this.activeSnippet = null;
 
     this._init();
   }
@@ -94,7 +95,11 @@ class ShortcodeReveal extends Plugin {
       this._appendMenuItems(response);
 
       if (this.reveal.isActive) {
-        this.$menu.find('[data-name]:first').click();
+        if (this.activeShortcode) {
+          this.$menu.find(`[data-name="${this.activeShortcode}"]`).click();
+        } else {
+          this.$menu.find('[data-name]:first').click();
+        }
       }
     }.bind(this));
   }
@@ -151,9 +156,11 @@ class ShortcodeReveal extends Plugin {
    * @private
    */
   _getForm(shortcode) {
+    var snippet = encodeURIComponent(this.activeSnippet);
     var url = this.formUrl.replace('[name]', shortcode);
+    var data = { shortcode: snippet };
 
-    $.ajax(url).done(function(response) {
+    $.ajax({ url: url, data: data }).done(function(response) {
       if (this.activeShortcode == shortcode) {
         this.$form.html(response);
         this.$form.foundation();
@@ -360,6 +367,15 @@ class ShortcodeReveal extends Plugin {
    */
   getInfo(shortcode) {
     return this.shortcodes[shortcode];
+  }
+
+  /**
+   * Sets the active shortcode snippet
+   * @function
+   */
+  setSnippet(snippet) {
+    this.activeShortcode = snippet.split(' ')[0].replace('[', '');
+    this.activeSnippet = snippet;
   }
 
   /**
