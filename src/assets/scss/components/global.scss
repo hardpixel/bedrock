@@ -22,6 +22,10 @@
     resize: vertical;
   }
 
+  select {
+    padding-#{$global-right}: ($form-spacing * 1.7);
+  }
+
   .top-bar,
   .logo-bar {
     min-height: 4rem;

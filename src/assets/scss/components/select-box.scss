@@ -67,6 +67,7 @@
     display: block;
     width: 100%;
     margin: 0;
+    padding-#{$global-right}: ($form-spacing * 1.7);
 
     .select2-selection__clear {
       position: relative;
