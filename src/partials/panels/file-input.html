@@ -20,6 +20,13 @@
 <script id="file-input-preview-template" type="text/template">
   <div class="text-center">
     <img src="{{root}}assets/img/upload-preview.svg" data-dz-thumbnail class="margin-bottom-1" />
-    <a class="button alert small hollow margin-0" data-dz-remove>Remove File</a>
+    <div class="panel-section expanded border last grid-x">
+      <div class="cell auto text-left">
+        <button class="button alert small hollow margin-0" data-dz-remove>Remove</button>
+      </div>
+      <div class="cell shrink">
+        <button class="button small hollow margin-0" data-dz-change="media-thumbnail">Change</button>
+      </div>
+    </div>
   </div>
 </script>

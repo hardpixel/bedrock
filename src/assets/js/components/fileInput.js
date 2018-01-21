@@ -49,12 +49,16 @@ class FileInput extends Plugin {
    */
   _events() {
     this.$input.off('change').on({
-      'change': this._change.bind(this)
+      'change': this._update.bind(this)
     });
 
     this.$element.off('click', '[data-dz-remove]').on({
       'click': this._remove.bind(this)
     }, '[data-dz-remove]');
+
+    this.$element.off('click', '[data-dz-change]').on({
+      'click': this._change.bind(this)
+    }, '[data-dz-change]');
 
     this.$element.off('dragover').on({
       'dragover': this._activate.bind(this)
@@ -149,7 +153,7 @@ class FileInput extends Plugin {
    * @function
    * @private
    */
-  _change(event) {
+  _update(event) {
     var input = event.target;
 
     if (input.files && input.files[0]) {
@@ -158,6 +162,17 @@ class FileInput extends Plugin {
       reader.onload = this._updatePreview.bind(this);
       reader.readAsDataURL(input.files[0]);
     }
+  }
+
+  /**
+   * Reopens file select dialog.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   * @private
+   */
+  _change(event) {
+    event.preventDefault();
+    this.$input.click();
   }
 
   /**
@@ -182,6 +197,7 @@ class FileInput extends Plugin {
   _destroy() {
     this.$input.off('change');
     this.$element.off('click', '[data-dz-remove]');
+    this.$element.off('click', '[data-dz-change]');
     this.$element.off(['dragover', 'dragleave', 'dragend']);
   }
 }
