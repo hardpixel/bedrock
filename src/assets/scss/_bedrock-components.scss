@@ -18,6 +18,7 @@
 @import 'components/seo-analysis';
 @import 'components/shortcode-reveal';
 @import 'components/media-reveal';
+@import 'components/date-picker';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -39,3 +40,4 @@
 @include bedrock-seo-analysis;
 @include bedrock-shortcode-reveal;
 @include bedrock-media-reveal;
+@include bedrock-date-picker;

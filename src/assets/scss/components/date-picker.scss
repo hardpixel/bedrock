@@ -1,0 +1,127 @@
+$datepicker-width: 8rem !default;
+$datepicker-background: $white !default;
+$datepicker-color: inherit !default;
+
+// Date Picker Mixins
+
+@mixin date-picker-clndr {
+  background: $datepicker-background;
+  color: $datepicker-color;
+
+  .clndr-controls {
+    @include xy-grid;
+    text-align: center;
+    align-items: center;
+
+    .month {
+      @include xy-cell(auto, false);
+      padding: .5rem;
+      cursor: default;
+    }
+
+    .clndr-control-button {
+      @include xy-cell(shrink, false);
+
+      span {
+        font-size: 0;
+        white-space: nowrap;
+        width: 2rem;
+        overflow: hidden;
+        padding: .6rem;
+        display: block;
+        cursor: pointer;
+
+        &:before {
+          display: inline-block !important;
+          vertical-align: middle;
+        }
+
+        &.inactive {
+          opacity: .5;
+          cursor: default;
+        }
+      }
+
+      .clndr-previous-button:before {
+        @include css-triangle(8px, $medium-gray, left);
+      }
+
+      .clndr-next-button:before {
+        @include css-triangle(8px, $medium-gray, right);
+      }
+    }
+  }
+
+  .clndr-table {
+    max-width: 100%;
+    margin: 0;
+    border: 0;
+    background: none;
+
+    tbody {
+      border-width: 0;
+      background: none;
+    }
+
+    thead, tfoot {
+      border-width: 1px 0;
+      background: none;
+    }
+
+    tr {
+      background: none;
+    }
+
+    td {
+      padding: .5rem;
+      text-align: center;
+      background: none;
+    }
+
+    tbody td {
+
+      &:hover {
+        background: $dark-gray;
+        color: $white;
+      }
+    }
+
+    .day {
+      cursor: pointer;
+
+      &.today:not(:hover):not(.selected) {
+        background: $light-gray;
+      }
+
+      &.adjacent-month, &.inactive {
+        opacity: .5;
+        pointer-events: none;
+        cursor: default;
+      }
+
+      &.selected {
+        background: $anchor-color;
+        color: $white;
+      }
+    }
+  }
+}
+
+@mixin date-picker {
+  border-top-width: 0;
+  min-width: $datepicker-width;
+  padding: 0;
+
+  .clndr {
+    @include date-picker-clndr;
+  }
+}
+
+
+// Date Picker Component
+
+@mixin bedrock-date-picker {
+  .datepicker {
+    @include date-picker;
+  }
+}
