@@ -113,7 +113,7 @@ $datepicker-color: inherit !default;
   }
 }
 
-@mixin date-picker {
+@mixin date-picker-dropdown {
   border-top-width: 0;
   min-width: $datepicker-width;
   padding: 0;
@@ -136,8 +136,8 @@ $datepicker-color: inherit !default;
 // Date Picker Component
 
 @mixin bedrock-date-picker {
-  div.datepicker {
-    @include date-picker;
+  .datepicker-dropdown {
+    @include date-picker-dropdown;
   }
 
   input.datepicker {

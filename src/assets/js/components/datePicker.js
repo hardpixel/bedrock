@@ -38,9 +38,11 @@ class DatePicker extends Plugin {
    * @private
    */
   _init() {
-    this.$dropdown = $('<div id="datepicker" class="dropdown-pane datepicker"></div>');
+    this.id = this.$element.attr('id');
+    this.$dropdown = $(`<div id="${this.id}-datepicker-dropdown" class="dropdown-pane datepicker-dropdown"></div>`);
+
     this.$dropdown.insertAfter(this.$element);
-    this.$element.attr('data-open', 'datepicker');
+    this.$element.attr('data-open', `${this.id}-datepicker-dropdown`);
 
     this.selected = this.$element.val() || this.today;
     this.dropdown = new Foundation.Dropdown(this.$dropdown, { closeOnClick: true });
