@@ -124,7 +124,7 @@ $datepicker-color: inherit !default;
 }
 
 @mixin date-picker-input {
-  @include background-calendar($select-triangle-color);
+  @include background-calendar($medium-gray);
   padding-right: ($form-spacing / 2) + 1.8rem;
   background-size: 24px;
   background-position: $global-right (-1.8rem) top;
