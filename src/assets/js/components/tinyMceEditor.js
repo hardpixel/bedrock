@@ -38,18 +38,18 @@ class TinyMceEditor extends Plugin {
    * @private
    */
   _init() {
-    this.$element.wrap('<div class="tiny-mce-editor"></div>');
-
-    this.id = this.$element.attr('id');
-    this.$wrapper = this.$element.parents('.tiny-mce-editor:first');
-    this.computed = { target: this.$element.get(0), setup: this._setupCallback.bind(this) };
-    this.options = $.extend({}, this.options, this.computed);
-    this.options = this._snakeCase(this.options);
-
-    this.$media = $(`#${this.mediaHandler}`);
-    this.$shortcode = $(`#${this.shortcodeHandler}`);
-
     if (tinymce !== 'undefined') {
+      this.$element.wrap('<div class="tiny-mce-editor"></div>');
+
+      this.id = this.$element.attr('id');
+      this.$wrapper = this.$element.parents('.tiny-mce-editor:first');
+      this.computed = { target: this.$element.get(0), setup: this._setupCallback.bind(this) };
+      this.options = $.extend({}, this.options, this.computed);
+      this.options = this._snakeCase(this.options);
+
+      this.$media = $(`#${this.mediaHandler}`);
+      this.$shortcode = $(`#${this.shortcodeHandler}`);
+
       tinymce.init(this.options);
       this._events();
     } else {

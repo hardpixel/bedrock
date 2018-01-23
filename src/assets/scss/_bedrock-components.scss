@@ -19,6 +19,7 @@
 @import 'components/shortcode-reveal';
 @import 'components/media-reveal';
 @import 'components/date-picker';
+@import 'components/ace-editor';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -41,3 +42,4 @@
 @include bedrock-shortcode-reveal;
 @include bedrock-media-reveal;
 @include bedrock-date-picker;
+@include bedrock-ace-editor;
