@@ -41,6 +41,7 @@ class AceEditor extends Plugin {
       this.$element.parent().append(this.$editor);
 
       this.editor = ace.edit(this.eid);
+      this.editor.setOptions(this.options);
       this.editor.setValue(this.$element[0].value, 1);
       this.editor.setTheme(`ace/theme/${this.options.theme}`);
       this.editor.session.setMode(`ace/mode/${this.options.mode}`);
@@ -92,6 +93,8 @@ class AceEditor extends Plugin {
 AceEditor.defaults = {
   theme: 'monokai',
   mode: 'html',
+  maxLines: Infinity,
+  minLines: 10
 };
 
 export {AceEditor};
