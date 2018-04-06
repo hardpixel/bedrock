@@ -1,4 +1,8 @@
 $offcanvas-menu-background: $secondary-color !default;
+$offcanvas-menu-color: $white !default;
+$offcanvas-menu-item-color-active: $menu-item-color-active !default;
+$offcanvas-menu-item-background-active: $menu-item-background-active !default;
+$offcanvas-menu-border: none !default;
 $offcanvas-menu-collapsed-size: 4.1rem !default;
 $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !default;
 
@@ -64,7 +68,7 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba($white, 0.1);
+  background: rgba($offcanvas-menu-color, 0.1);
 }
 
 @mixin offcanvas-menu-basics {
@@ -74,7 +78,7 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
       &:hover, &.is-active {
 
         > a {
-          color: $menu-item-color-active;
+          color: $offcanvas-menu-item-color-active;
           background: transparent;
         }
       }
@@ -82,20 +86,20 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
       &.is-current {
 
         > a {
-          color: $menu-item-color-active;
-          background: $menu-item-background-active;
+          color: $offcanvas-menu-item-color-active;
+          background: $offcanvas-menu-item-background-active;
         }
       }
     }
 
     a {
-      color: rgba($white, .6);
+      color: rgba($offcanvas-menu-color, .6);
       text-transform: uppercase;
     }
   }
 
   a {
-    color: $white;
+    color: $offcanvas-menu-color;
     font-size: .9rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -184,13 +188,13 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
 
 @mixin off-canvas-menu-style {
   > li {
-    border-bottom: 1px solid rgba(white, .04);
+    border-bottom: 1px solid rgba($offcanvas-menu-color, .04);
 
     &:hover, &.is-active {
 
       > a {
-        box-shadow: inset 3px 0 0 $white;
-        color: $menu-item-color-active;
+        box-shadow: inset 3px 0 0 $offcanvas-menu-color;
+        color: $offcanvas-menu-item-color-active;
         background: transparent;
       }
     }
@@ -198,8 +202,8 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
     &.is-current {
 
       > a {
-        box-shadow: inset 3px 0 0 $menu-item-background-active;
-        color: $menu-item-color-active;
+        box-shadow: inset 3px 0 0 $offcanvas-menu-item-background-active;
+        color: $offcanvas-menu-item-color-active;
         background: transparent;
       }
     }
@@ -228,17 +232,17 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
     &:last-child {
 
       > .submenu {
-        box-shadow: 0 1px 0 rgba(white, .04), 0 -1px 0 rgba(white, .04);
+        box-shadow: 0 1px 0 rgba($offcanvas-menu-color, .04), 0 -1px 0 rgba($offcanvas-menu-color, .04);
       }
     }
 
     > .submenu {
       padding: .5rem 0;
-      box-shadow: 0 -1px 0 rgba(white, .04);
+      box-shadow: 0 -1px 0 rgba($offcanvas-menu-color, .04);
 
       .submenu {
         background: rgba(darken($offcanvas-menu-background, 15), 0.1);
-        box-shadow: 0 -1px 0 rgba(white, .02), 0 1px 0 rgba(white, .02);
+        box-shadow: 0 -1px 0 rgba($offcanvas-menu-color, .02), 0 1px 0 rgba($offcanvas-menu-color, .02);
       }
     }
 
@@ -275,7 +279,7 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
   }
 
   .is-active > a {
-    color: $white;
+    color: $offcanvas-menu-item-color-active;
   }
 
   .is-dropdown-submenu .is-dropdown-submenu-parent > a::after {
@@ -324,6 +328,14 @@ $offcanvas-menu-submenu-background: darken($offcanvas-menu-background, 3) !defau
 
   .collapse-show {
     display: none;
+  }
+
+  &.position-right {
+    border-left: $offcanvas-menu-border;
+  }
+
+  &.position-left {
+    border-right: $offcanvas-menu-border;
   }
 }
 
