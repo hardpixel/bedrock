@@ -31,13 +31,17 @@ class PlaceMap extends Plugin {
    * @private
    */
   _init() {
-    if (this.options.height) {
-      this.$element.height(this.options.height);
-    } else {
-      this.$element.addClass(`responsive-embed ${this.options.ratio}`);
-    }
+    if (google !== 'undefined') {
+      if (this.options.height) {
+        this.$element.height(this.options.height);
+      } else {
+        this.$element.addClass(`responsive-embed ${this.options.ratio}`);
+      }
 
-    this.map = new google.maps.Map(this.$element[0], this.options.map);
+      this.map = new google.maps.Map(this.$element[0], this.options.map);
+    } else {
+      console.log('Google Maps is not available! Please add Google Maps API.');
+    }
   }
 
   /**

@@ -31,13 +31,17 @@ class PlaceAutocomplete extends Plugin {
    * @private
    */
   _init() {
-    this.$element.addClass('pac-input');
+    if (google !== 'undefined') {
+      this.$element.addClass('pac-input');
 
-    this.autocomplete = new google.maps.places.Autocomplete(this.$element[0], Object.assign({
-      types: ['geocode']
-    }, this.options));
+      this.autocomplete = new google.maps.places.Autocomplete(this.$element[0], Object.assign({
+        types: ['geocode']
+      }, this.options));
 
-    this._handleEvents();
+      this._handleEvents();
+    } else {
+      console.log('Google Maps is not available! Please add Google Maps API.');
+    }
   }
 
   /**
