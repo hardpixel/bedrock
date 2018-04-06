@@ -1,0 +1,108 @@
+{
+  "data": [
+    {
+      "id": "5",
+      "type": "activities",
+      "attributes": {
+        "name": "Climbing",
+        "description": "Annihilate? No. No violence. I won't stand for it. Not now, not ever, do you understand me?! I'm the Doctor, the Oncoming Storm - and you basically meant beat them in a football match, didn't you? I'm the Doctor. Well, they call me the Doctor. I don't know why. I call me the Doctor too. I still don't know why.\r\n\r\nYou know when grown-ups tell you 'everything's going to be fine' and you think they're probably lying to make you feel better? I'm the Doctor, I'm worse than everyone's aunt. *catches himself* And that is not how I'm introducing myself.\r\n\r\nYou hate me; you want to kill me! Well, go on! Kill me! KILL ME! Aw, you're all Mr. Grumpy Face today. I'm the Doctor, I'm worse than everyone's aunt. *catches himself* And that is not how I'm introducing myself.",
+        "category": "Climbing",
+        "duration": "4 hours",
+        "latitude": 37.96418,
+        "longitude": 23.72259,
+        "location": "Athens"
+      }
+    },
+    {
+      "id": "9",
+      "type": "activities",
+      "attributes": {
+        "name": "Surfing",
+        "description": "",
+        "category": "Surfing",
+        "duration": "2 hours",
+        "latitude": 37.1182,
+        "longitude": 25.3945,
+        "location": "Athens"
+      }
+    },
+    {
+      "id": "3",
+      "type": "activities",
+      "attributes": {
+        "name": "Kayaking",
+        "description": "Annihilate? No. No violence. I won't stand for it. Not now, not ever, do you understand me?! I'm the Doctor, the Oncoming Storm - and you basically meant beat them in a football match, didn't you? I'm the Doctor. Well, they call me the Doctor. I don't know why. I call me the Doctor too. I still don't know why.\r\n\r\nYou know when grown-ups tell you 'everything's going to be fine' and you think they're probably lying to make you feel better? I'm the Doctor, I'm worse than everyone's aunt. *catches himself* And that is not how I'm introducing myself.\r\n\r\nYou hate me; you want to kill me! Well, go on! Kill me! KILL ME! Aw, you're all Mr. Grumpy Face today. I'm the Doctor, I'm worse than everyone's aunt. *catches himself* And that is not how I'm introducing myself.",
+        "category": "Kayaking",
+        "duration": "5 hours",
+        "latitude": 37.96542,
+        "longitude": 23.72476,
+        "location": "Athens"
+      }
+    },
+    {
+      "id": "11",
+      "type": "activities",
+      "attributes": {
+        "name": "Mountain Biking",
+        "description": "",
+        "category": "Adventure",
+        "duration": "2 hours",
+        "latitude": null,
+        "longitude": null,
+        "location": "Naxos"
+      }
+    },
+    {
+      "id": "2",
+      "type": "activities",
+      "attributes": {
+        "name": "Trekking",
+        "description": "Annihilate? No. No violence. I won't stand for it. Not now, not ever, do you understand me?! I'm the Doctor, the Oncoming Storm - and you basically meant beat them in a football match, didn't you? I'm the Doctor. Well, they call me the Doctor. I don't know why. I call me the Doctor too. I still don't know why.\r\n\r\nYou know when grown-ups tell you 'everything's going to be fine' and you think they're probably lying to make you feel better? I'm the Doctor, I'm worse than everyone's aunt. *catches himself* And that is not how I'm introducing myself.\r\n\r\nYou hate me; you want to kill me! Well, go on! Kill me! KILL ME! Aw, you're all Mr. Grumpy Face today. I'm the Doctor, I'm worse than everyone's aunt. *catches himself* And that is not how I'm introducing myself.",
+        "category": "Trekking",
+        "duration": "4 hours",
+        "latitude": 37.96692,
+        "longitude": 23.72421,
+        "location": "Athens"
+      }
+    },
+    {
+      "id": "6",
+      "type": "activities",
+      "attributes": {
+        "name": "Windsurfing",
+        "description": "Annihilate? No. No violence. I won't stand for it. Not now, not ever, do you understand me?! I'm the Doctor, the Oncoming Storm - and you basically meant beat them in a football match, didn't you? I'm the Doctor. Well, they call me the Doctor. I don't know why. I call me the Doctor too. I still don't know why.",
+        "category": "Windsurfing",
+        "duration": "2 hours",
+        "latitude": 37.97024,
+        "longitude": 23.71057,
+        "location": "Athens"
+      }
+    },
+    {
+      "id": "7",
+      "type": "activities",
+      "attributes": {
+        "name": "Sky  Diving",
+        "description": "",
+        "category": "Skydiving",
+        "duration": "6 hours",
+        "latitude": 38.0451,
+        "longitude": 23.5754,
+        "location": "Athens"
+      }
+    },
+    {
+      "id": "1",
+      "type": "activities",
+      "attributes": {
+        "name": "Kitesurf",
+        "description": "Annihilate? No. No violence. I won't stand for it. Not now, not ever, do you understand me?! I'm the Doctor, the Oncoming Storm - and you basically meant beat them in a football match, didn't you? I'm the Doctor. Well, they call me the Doctor. I don't know why. I call me the Doctor too. I still don't know why.\r\n\r\nYou know when grown-ups tell you 'everything's going to be fine' and you think they're probably lying to make you feel better? I'm the Doctor, I'm worse than everyone's aunt. *catches himself* And that is not how I'm introducing myself.\r\n\r\nYou hate me; you want to kill me! Well, go on! Kill me! KILL ME! Aw, you're all Mr. Grumpy Face today. I'm the Doctor, I'm worse than everyone's aunt. *catches himself* And that is not how I'm introducing myself.",
+        "category": "Kitesurfing",
+        "duration": "1 hour",
+        "latitude": 37.9631011,
+        "longitude": 23.720767,
+        "location": "Athens"
+      }
+    }
+  ]
+}
