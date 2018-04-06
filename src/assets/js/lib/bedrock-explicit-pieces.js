@@ -16,6 +16,7 @@ import { Textarea } from '../components/textarea';
 import { DatePicker } from '../components/datePicker';
 import { AceEditor } from '../components/aceEditor';
 import { PlaceAutocomplete } from '../components/placeAutocomplete';
+import { PlaceMap } from '../components/placeMap';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
 Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
@@ -35,3 +36,4 @@ Foundation.plugin(Textarea, 'Textarea');
 Foundation.plugin(DatePicker, 'DatePicker');
 Foundation.plugin(AceEditor, 'AceEditor');
 Foundation.plugin(PlaceAutocomplete, 'PlaceAutocomplete');
+Foundation.plugin(PlaceMap, 'PlaceMap');
