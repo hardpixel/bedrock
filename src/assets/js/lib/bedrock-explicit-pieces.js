@@ -15,6 +15,7 @@ import { ResizeWatcher } from '../components/resizeWatcher';
 import { Textarea } from '../components/textarea';
 import { DatePicker } from '../components/datePicker';
 import { AceEditor } from '../components/aceEditor';
+import { PlaceAutocomplete } from '../components/placeAutocomplete';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
 Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
@@ -33,3 +34,4 @@ Foundation.plugin(ResizeWatcher, 'ResizeWatcher');
 Foundation.plugin(Textarea, 'Textarea');
 Foundation.plugin(DatePicker, 'DatePicker');
 Foundation.plugin(AceEditor, 'AceEditor');
+Foundation.plugin(PlaceAutocomplete, 'PlaceAutocomplete');

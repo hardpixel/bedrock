@@ -20,6 +20,7 @@
 @import 'components/media-reveal';
 @import 'components/date-picker';
 @import 'components/ace-editor';
+@import 'components/place-autocomplete';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -43,3 +44,4 @@
 @include bedrock-media-reveal;
 @include bedrock-date-picker;
 @include bedrock-ace-editor;
+@include bedrock-place-autocomplete;
