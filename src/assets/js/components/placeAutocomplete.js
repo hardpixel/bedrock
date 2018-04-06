@@ -37,8 +37,6 @@ class PlaceAutocomplete extends Plugin {
       types: ['geocode']
     }, this.options));
 
-    console.log(this.autocomplete);
-
     this._handleEvents();
   }
 
