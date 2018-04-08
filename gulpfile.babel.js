@@ -96,6 +96,7 @@ function sass() {
 }
 
 let webpackConfig = {
+  mode: 'development',
   module: {
     rules: [
       {
