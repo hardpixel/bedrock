@@ -34,6 +34,7 @@ class PlaceAutocomplete extends Plugin {
     if (google !== 'undefined') {
       this.$element.addClass('pac-input');
 
+      this.geocoder = new google.maps.Geocoder();
       this.autocomplete = new google.maps.places.Autocomplete(this.$element[0], Object.assign({
         types: ['geocode']
       }, this.options));
@@ -60,7 +61,23 @@ class PlaceAutocomplete extends Plugin {
    */
   _handleEvents() {
     this.autocomplete.addListener('place_changed', function() {
-      this.$element.trigger('place_changed', [this.autocomplete]);
+      var pac = this.autocomplete
+      var place = pac.getPlace();
+
+      this.$element.trigger('place_changed', [place, pac]);
+    }.bind(this));
+  }
+
+  /**
+   * Updates the address input with reverse geocoding.
+   * @param {Object} location - Location position data.
+   * @function
+   */
+  update(position) {
+    this.geocoder.geocode({ latLng: position }, function (results, status) {
+      if (status == google.maps.GeocoderStatus.OK && results[0]) {
+        this.$element.val(results[0].formatted_address);
+      }
     }.bind(this));
   }
 
