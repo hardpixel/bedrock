@@ -3,7 +3,17 @@
     Location Picker
   </div>
   <div class="panel-content">
-    <input type="text" name="autocomplete" value="" data-place-autocomplete>
-    <div class="place-map margin-bottom-0" data-place-map data-markers-url="{{root}}assets/data/locations.json" data-markers-key="data" data-lng-key="attributes.longitude" data-lat-key="attributes.latitude"></div>
+    <div class="location-picker" data-location-picker>
+      <input type="text" name="autocomplete" value="" data-place-autocomplete>
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-6">
+          <input type="text" value="0" data-location-lat>
+        </div>
+        <div class="cell small-6">
+          <input type="text" value="0" data-location-lng>
+        </div>
+      </div>
+      <div class="place-map margin-bottom-0" data-place-map></div>
+    </div>
   </div>
 </div>

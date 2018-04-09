@@ -116,6 +116,8 @@ class PlaceMap extends Plugin {
     if (data.position && data.position.lat && data.position.lng) {
       var marker = new google.maps.Marker(data);
       marker.setMap(this.map);
+
+      return marker;
     }
   }
 
