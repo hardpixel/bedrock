@@ -3,6 +3,8 @@
 import $ from 'jquery';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
+var downscale = require('downscale');
+
 /**
  * FileInput module.
  * @module fileInput
@@ -37,6 +39,10 @@ class FileInput extends Plugin {
     this.$preview = $(this.options.previewsContainer);
     this.$empty = this.$element.find('.dz-message');
     this.$input = this.$element.find('input[type="file"]');
+    this.$controls = this.$element.find('[data-dz-controls]');
+    this.multiple = this.$input.is('[multiple]');
+    this.thumbWidth = parseInt(this.options.thumbnailWidth);
+    this.thumbHeight = parseInt(this.options.thumbnailHeight);
 
     this._toggleEmpty();
     this._events();
@@ -76,6 +82,7 @@ class FileInput extends Plugin {
    * @private
    */
   _hideEmpty() {
+    this.$controls.removeClass('hide');
     this.$empty.hide();
     this.$empty.addClass('hide');
   }
@@ -86,6 +93,7 @@ class FileInput extends Plugin {
    * @private
    */
   _showEmpty() {
+    this.$controls.addClass('hide');
     this.$empty.show();
     this.$empty.removeClass('hide');
   }
@@ -106,17 +114,28 @@ class FileInput extends Plugin {
 
   /**
    * Creates preview for loaded file.
-   * @param {Object} event - Event object passed from listener.
+   * @param {Integer} index - File index.
+   * @param {String} file - File object from input results.
    * @function
    * @private
    */
-  _updatePreview(event) {
+  _updatePreview(index, file) {
     var preview = this.$item.clone();
-    preview.find('[data-dz-thumbnail]').attr('src', event.target.result);
+    preview.find('[data-dz-name]').text(file.name);
 
-    this._deactivate();
-    this._hideEmpty();
-    this.$preview.html(preview);
+    downscale(file, this.thumbWidth, this.thumbHeight).then(function (data) {
+      preview.find('[data-dz-thumbnail]').attr('src', data);
+
+      this._deactivate();
+
+      if (this.multiple) {
+        this.$preview.append(preview);
+      } else {
+        this.$preview.html(preview);
+      }
+
+      this._hideEmpty();
+    }.bind(this));
   }
 
   /**
@@ -156,11 +175,8 @@ class FileInput extends Plugin {
   _update(event) {
     var input = event.target;
 
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = this._updatePreview.bind(this);
-      reader.readAsDataURL(input.files[0]);
+    if (input.files) {
+      $.each(input.files, this._updatePreview.bind(this));
     }
   }
 
@@ -202,6 +218,9 @@ class FileInput extends Plugin {
   }
 }
 
-FileInput.defaults = {};
+FileInput.defaults = {
+  thumbnailWidth: 0,
+  thumbnailHeight: 0
+};
 
 export {FileInput};

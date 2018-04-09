@@ -1,0 +1,36 @@
+<div class="panel">
+  <div class="panel-header border">
+    File Input Multiple
+  </div>
+
+  <div class="panel-content border">
+    <div class="dropzone" id="file-input-multiple" data-file-input data-thumbnail-width="400" data-thumbnail-height="400" data-previews-container="#file-input-multiple-preview">
+      <div class="dz-message bordered hide">
+        <div class="no-content">
+          <i class="mdi mdi-upload"></i>
+          <span>Drop files here to upload</span>
+          <input type="file" multiple id="file-upload-field-multiple">
+          <label for="file-upload-field-multiple" class="button success hollow margin-top-1">Select Files</label>
+        </div>
+      </div>
+      <div id="file-input-multiple-preview" class="attachments-grid"></div>
+      <div class="panel-section expanded border last grid-x hide" data-dz-controls>
+        <div class="cell auto text-left">
+          <button class="button alert hollow margin-0" data-dz-remove>Remove</button>
+        </div>
+        <div class="cell shrink">
+          <button class="button hollow margin-0" data-dz-change>Change</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script id="file-input-multiple-preview-template" type="text/template">
+  <div class="attachment">
+    <div class="thumbnail">
+      <img src="{{root}}assets/img/upload-preview.svg" data-dz-thumbnail>
+      <span class="filename" data-dz-name></span>
+    </div>
+  </div>
+</script>
