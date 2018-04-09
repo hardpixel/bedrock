@@ -165,8 +165,8 @@ PlaceMap.defaults = {
   ratio: 'panorama',
   map: {
     center: {
-      lat: 37.96418,
-      lng: 23.72259
+      lat: 37.983,
+      lng: 23.727
     },
     zoom: 13
   }
