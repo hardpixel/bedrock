@@ -115,7 +115,7 @@ class FileInput extends Plugin {
   /**
    * Creates preview for loaded file.
    * @param {Integer} index - File index.
-   * @param {String} file - File object from input results.
+   * @param {Object} file - File object from input results.
    * @function
    * @private
    */
@@ -123,19 +123,59 @@ class FileInput extends Plugin {
     var preview = this.$item.clone();
     preview.find('[data-dz-name]').text(file.name);
 
-    downscale(file, this.thumbWidth, this.thumbHeight).then(function (data) {
+    if (this.thumbWidth > 0 && this.thumbHeight > 0) {
+      this._resizeImage(file, preview);
+    } else {
+      this._previewImage(file, preview);
+    }
+  }
+
+  /**
+   * Resizes image thumbnail.
+   * @param {Object} file - File object from input results.
+   * @param {Object} preview - Preview template object.
+   * @private
+   * @function
+   */
+  _resizeImage(file, preview) {
+    downscale(file, this.thumbWidth, this.thumbHeight, { imageType: 'png' })
+
+    .then(function (data) {
       preview.find('[data-dz-thumbnail]').attr('src', data);
-
-      this._deactivate();
-
-      if (this.multiple) {
-        this.$preview.append(preview);
-      } else {
-        this.$preview.html(preview);
-      }
-
-      this._hideEmpty();
+      this._appendPreview(preview);
     }.bind(this));
+  }
+
+  /**
+   * Previews image.
+   * @param {Object} file - File object from input results.
+   * @param {Object} preview - Preview template object.
+   * @private
+   * @function
+   */
+  _previewImage(file, preview) {
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+      preview.find('[data-dz-thumbnail]').attr('src', event.target.result);
+      this._appendPreview(preview);
+    }.bind(this);
+
+    reader.readAsDataURL(file);
+  }
+
+  /**
+   * Append image preview to preview container.
+   * @param {Object} preview - Preview template object.
+   * @private
+   * @function
+   */
+  _appendPreview(preview) {
+    if (this.multiple) {
+      this.$preview.append(preview);
+    } else {
+      this.$preview.html(preview);
+    }
   }
 
   /**
@@ -178,6 +218,9 @@ class FileInput extends Plugin {
     if (input.files) {
       $.each(input.files, this._updatePreview.bind(this));
     }
+
+    this._deactivate();
+    this._hideEmpty();
   }
 
   /**
