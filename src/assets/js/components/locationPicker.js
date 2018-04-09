@@ -63,6 +63,20 @@ class LocationPicker extends Plugin {
   }
 
   /**
+   * Gets location data from form inputs
+   * @function
+   * @private
+   */
+  _getInputLocation() {
+    var lat = parseFloat(this.$lat.val());
+    var lng = parseFloat(this.$lng.val());
+
+    if (lat && lng) {
+      return { lat: lat, lng: lng };
+    }
+  }
+
+  /**
    * Updates all components and form inputs on autocomplete place change.
    * @param {Object} event - Event object passed from listener.
    * @function
@@ -82,12 +96,12 @@ class LocationPicker extends Plugin {
    * @private
    */
   _inputChange(event) {
-    var lat = parseFloat(this.$lat.val());
-    var lng = parseFloat(this.$lng.val());
-    var pos = { lat: lat, lng: lng };
+    var position = this._getInputLocation();
 
-    this._updateAddress(pos);
-    this._updateMarker(pos);
+    if (position) {
+      this._updateAddress(position);
+      this._updateMarker(position);
+    }
   }
 
   /**
@@ -108,11 +122,10 @@ class LocationPicker extends Plugin {
    * @private
    */
   _createMarker(data) {
-    var lat = parseFloat(this.$lat.val());
-    var lng = parseFloat(this.$lng.val());
+    var position = this._getInputLocation();
 
-    if (lat && lng) {
-      this._addMarker({ position: { lat: lat, lng: lng } });
+    if (position) {
+      this._updateMarker(position);
     }
   }
 
@@ -144,6 +157,8 @@ class LocationPicker extends Plugin {
     } else {
       this._addMarker({ position: position });
     }
+
+    this.map.panTo(position);
   }
 
   /**
