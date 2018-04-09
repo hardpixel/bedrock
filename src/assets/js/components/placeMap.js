@@ -122,6 +122,15 @@ class PlaceMap extends Plugin {
   }
 
   /**
+   * Pans the map to the specified position.
+   * @param {Object} position - Marker data object to build item from.
+   * @function
+   */
+  panTo(position) {
+    this.map.panTo(position);
+  }
+
+  /**
    * Destroys the place-map plugin.
    * @function
    * @private
