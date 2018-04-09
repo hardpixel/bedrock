@@ -83,7 +83,9 @@ class LocationPicker extends Plugin {
    * @private
    */
   _placeChange(event, place) {
-    if (place.geometry) {
+    if (!this.$pac.val()) {
+      this._removeMarker(this.marker);
+    } else if (place.geometry) {
       this._updateInputs(place.geometry.location);
       this._updateMarker(place.geometry.location);
     }
@@ -146,6 +148,21 @@ class LocationPicker extends Plugin {
   }
 
   /**
+   * Removes a marker from the map.
+   * @param {Object} marker - Marker object to remove.
+   * @function
+   * @private
+   */
+  _removeMarker(marker) {
+    this.map.removeMarker(marker);
+
+    this.$lat.val('');
+    this.$lng.val('');
+
+    delete this.marker;
+  }
+
+  /**
    * Updates the map marker position.
    * @param {Object} position - Marker data and options.
    * @function
@@ -153,7 +170,7 @@ class LocationPicker extends Plugin {
    */
   _updateMarker(position) {
     if (this.marker) {
-      this.marker.setPosition(position);
+      this.map.updateMarker(this.marker, position);
     } else {
       this._addMarker({ position: position });
     }

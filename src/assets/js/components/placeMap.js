@@ -122,6 +122,25 @@ class PlaceMap extends Plugin {
   }
 
   /**
+   * Removes a marker from the map.
+   * @param {Object} marker - Marker object to remove.
+   * @function
+   */
+  removeMarker(marker) {
+    marker.setMap(null);
+  }
+
+  /**
+   * Updates a marker position to the map.
+   * @param {Object} marker - Marker object change position.
+   * @param {Object} position - New position object apply.
+   * @function
+   */
+  updateMarker(marker, position) {
+    marker.setPosition(position);
+  }
+
+  /**
    * Pans the map to the specified position.
    * @param {Object} position - Marker data object to build item from.
    * @function
