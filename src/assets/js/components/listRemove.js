@@ -42,6 +42,13 @@ class ListRemove extends Plugin {
    * @private
    */
   _events() {
+    this.id = this.$element.attr('id');
+    this.$clear = $(`[data-clear="${this.id}"]`);
+
+    this.$clear.off('click').on({
+      'click': this.removeAll.bind(this)
+    });
+
     this.$element.off('click', '[data-remove]').on({
       'click': this._handleClick.bind(this)
     }, '[data-remove]');

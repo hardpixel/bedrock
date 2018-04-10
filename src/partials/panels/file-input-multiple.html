@@ -13,13 +13,13 @@
           <label for="file-upload-field-multiple" class="button success hollow margin-top-1">Select Files</label>
         </div>
       </div>
-      <div id="file-input-multiple-preview" class="attachments-grid"></div>
+      <div id="file-input-multiple-preview" class="attachments-grid removable" data-list-remove></div>
       <div class="panel-section expanded border last grid-x hide" data-dz-controls>
         <div class="cell auto text-left">
-          <button class="button alert hollow margin-0" data-dz-remove>Remove</button>
+          <button class="button alert hollow margin-0" data-dz-remove>Clear</button>
         </div>
         <div class="cell shrink">
-          <button class="button hollow margin-0" data-dz-change>Change</button>
+          <button class="button success hollow margin-0" data-dz-change>Add Files</button>
         </div>
       </div>
     </div>
@@ -27,10 +27,11 @@
 </div>
 
 <script id="file-input-multiple-preview-template" type="text/template">
-  <div class="attachment">
+  <div class="attachment" data-list-item>
     <div class="thumbnail">
       <img src="{{root}}assets/img/upload-preview.svg" data-dz-thumbnail>
       <span class="filename" data-dz-name></span>
+      <span class="remove-button mdi mdi-close" data-remove></span>
     </div>
   </div>
 </script>

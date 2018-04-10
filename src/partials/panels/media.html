@@ -9,12 +9,19 @@
         <i class="mdi mdi-camera-off"></i>
         <span>No media attached</span>
       </div>
-      <div class="attachments-grid removable" data-list-remove></div>
+      <div id="media-attachments-preview" class="attachments-grid removable" data-list-remove></div>
     </div>
   </div>
 
   <div class="panel-footer">
-    <button class="button success hollow margin-0" data-open="media-attachments">Add Media</button>
+    <div class="grid-x" data-dz-controls>
+      <div class="cell auto text-left">
+        <button class="button alert hollow margin-0" data-clear="media-attachments-preview">Clear</button>
+      </div>
+      <div class="cell shrink">
+        <button class="button success hollow margin-0" data-open="media-attachments">Add Media</button>
+      </div>
+    </div>
   </div>
 </div>
 
