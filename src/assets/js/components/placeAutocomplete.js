@@ -40,6 +40,7 @@ class PlaceAutocomplete extends Plugin {
       }, this.options));
 
       this._handleEvents();
+      this._events();
     } else {
       console.log('Google Maps is not available! Please add Google Maps API.');
     }
@@ -51,7 +52,11 @@ class PlaceAutocomplete extends Plugin {
    * @private
    */
   _events() {
-
+    this.$element.off('keypress').on('keypress', function (event) {
+      if (event.keyCode == 13) {
+        return false;
+      }
+    });
   }
 
   /**
