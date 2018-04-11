@@ -4,6 +4,7 @@ import $ from 'jquery';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 var downscale = require('downscale');
+var fileSize = require('filesize');
 
 /**
  * FileInput module.
@@ -121,7 +122,11 @@ class FileInput extends Plugin {
    */
   _updatePreview(index, file) {
     var preview = this.$item.clone();
+    var filesize = fileSize(file.size, { exponent: 2, output: 'object' });
+    var sizestr = '<strong>' + filesize.value + '</strong> ' + filesize.symbol;
+
     preview.find('[data-dz-name]').text(file.name);
+    preview.find('[data-dz-size]').html(sizestr);
 
     if (this.thumbWidth > 0 && this.thumbHeight > 0) {
       this._resizeImage(file, preview);
