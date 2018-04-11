@@ -39,6 +39,7 @@ class FileInput extends Plugin {
     this.$item = $(this.template);
     this.$preview = $(this.options.previewsContainer);
     this.$empty = this.$element.find('.dz-message');
+    this.$grid = this.$element.find('[data-list-remove]');
     this.$input = this.$element.find('input[type="file"]');
     this.$controls = this.$element.find('[data-dz-controls]');
     this.multiple = this.$input.is('[multiple]');
@@ -58,6 +59,10 @@ class FileInput extends Plugin {
   _events() {
     this.$input.off('change').on({
       'change': this._update.bind(this)
+    });
+
+    this.$grid.off('changed.zf.remove.list').on({
+      'changed.zf.remove.list': this._toggleEmpty.bind(this)
     });
 
     this.$element.off('click', '[data-dz-remove]').on({
@@ -258,6 +263,8 @@ class FileInput extends Plugin {
       this.$preview.html('');
     }
 
+    this.$input.val('');
+
     this._deactivate();
     this._toggleEmpty();
   }
@@ -269,6 +276,7 @@ class FileInput extends Plugin {
    */
   _destroy() {
     this.$input.off('change');
+    this.$grid.off('changed.zf.remove.list');
     this.$element.off('click', '[data-dz-remove]');
     this.$element.off('click', '[data-dz-change]');
     this.$element.off(['dragover', 'dragleave', 'dragend']);
