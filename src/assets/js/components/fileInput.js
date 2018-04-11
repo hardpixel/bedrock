@@ -42,6 +42,7 @@ class FileInput extends Plugin {
     this.$grid = this.$element.find('[data-list-remove]');
     this.$input = this.$element.find('input[type="file"]');
     this.$controls = this.$element.find('[data-dz-controls]');
+    this.$removeInput = this.$element.find('[data-dz-remove-input]');
     this.multiple = this.$input.is('[multiple]');
     this.thumbWidth = parseInt(this.options.thumbnailWidth);
     this.thumbHeight = parseInt(this.options.thumbnailHeight);
@@ -228,6 +229,8 @@ class FileInput extends Plugin {
 
     if (input.files) {
       this.$preview.find('.input-added').remove();
+      this.$removeInput.prop('checked', false);
+
       $.each(input.files, this._updatePreview.bind(this));
     }
 
@@ -264,6 +267,7 @@ class FileInput extends Plugin {
     }
 
     this.$input.val('');
+    this.$removeInput.prop('checked', true);
 
     this._deactivate();
     this._toggleEmpty();
