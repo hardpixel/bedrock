@@ -31,7 +31,7 @@ class PlaceMap extends Plugin {
    * @private
    */
   _init() {
-    if (google !== 'undefined') {
+    if (typeof google !== 'undefined') {
       this.$map = $('<div class="place-map-container"></div>');
       this.markersUrl = this.options.markersUrl;
 

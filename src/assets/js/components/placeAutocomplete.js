@@ -31,7 +31,7 @@ class PlaceAutocomplete extends Plugin {
    * @private
    */
   _init() {
-    if (google !== 'undefined') {
+    if (typeof google !== 'undefined') {
       this.$element.addClass('pac-input');
 
       this.geocoder = new google.maps.Geocoder();
