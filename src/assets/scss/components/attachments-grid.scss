@@ -28,6 +28,15 @@
     }
   }
 
+  &.is-new .thumbnail {
+    box-shadow: 0 0 0 2px $success-color !important;
+
+    .new-button {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
   @at-root .removable#{&} {
 
     &:hover, &:focus {
@@ -57,6 +66,10 @@
 
   .remove-button {
     @include attachments-grid-button($alert-color);
+  }
+
+  .new-button {
+    @include attachments-grid-button($success-color);
   }
 
   .check-button {

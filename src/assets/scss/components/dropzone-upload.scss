@@ -108,6 +108,13 @@ $dropzone-upload-active-border-color: $primary-color !default;
       background: $white;
       top: 0;
       right: 0;
+
+      &.left {
+        right: auto;
+        left: 0;
+        border-right: $thumbnail-border;
+        border-left: 0;
+      }
     }
 
     .message {

@@ -45,6 +45,7 @@ class FileInput extends Plugin {
     this.thumbWidth = parseInt(this.options.thumbnailWidth);
     this.thumbHeight = parseInt(this.options.thumbnailHeight);
 
+    this._hideEmpty();
     this._toggleEmpty();
     this._events();
   }
@@ -106,7 +107,6 @@ class FileInput extends Plugin {
    */
   _toggleEmpty() {
     var children = this.$preview.children().length;
-    this._hideEmpty();
 
     if (!children) {
       this._showEmpty();
@@ -127,6 +127,7 @@ class FileInput extends Plugin {
 
     preview.find('[data-dz-name]').text(file.name);
     preview.find('[data-dz-size]').html(sizestr);
+    preview.addClass('input-added');
 
     if (this.thumbWidth > 0 && this.thumbHeight > 0) {
       this._resizeImage(file, preview);
@@ -221,6 +222,7 @@ class FileInput extends Plugin {
     var input = event.target;
 
     if (input.files) {
+      this.$preview.find('.input-added').remove();
       $.each(input.files, this._updatePreview.bind(this));
     }
 
@@ -248,9 +250,16 @@ class FileInput extends Plugin {
   _remove(event) {
     event.preventDefault();
 
+    var added = this.$preview.find('.input-added');
+
+    if (added.length) {
+      added.remove();
+    } else {
+      this.$preview.html('');
+    }
+
     this._deactivate();
-    this._showEmpty();
-    this.$preview.html('');
+    this._toggleEmpty();
   }
 
   /**
