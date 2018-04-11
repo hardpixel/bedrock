@@ -1,5 +1,11 @@
 // No Content Mixins
 
+@mixin background-resize-grip($color: $black) {
+  $rgb: 'rgb%28#{red($color)}, #{green($color)}, #{blue($color)}%29';
+  $path: 'M 14.22222,0 H 16 v 1.77778 h -1.77778 z m -3.55555,3.55556 h 1.77777 v 1.77777 h -1.77777 z m 0,3.55555 h 1.77777 v 1.77778 h -1.77777 z m 0,3.55556 h 1.77777 v 1.77777 H 10.66667 Z M 7.11111,7.11111 H 8.88889 V 8.88889 H 7.11111 Z m 0,3.55556 h 1.77778 v 1.77777 H 7.11111 Z m -3.55555,0 h 1.77777 v 1.77777 H 3.55556 Z M 14.22222,3.55556 H 16 v 1.77777 h -1.77778 z m 0,3.55555 H 16 v 1.77778 h -1.77778 z m 0,3.55556 H 16 v 1.77777 h -1.77778 z m 0,3.55555 H 16 V 16 h -1.77778 z m -3.55555,0 h 1.77777 V 16 h -1.77777 z m -3.55556,0 H 8.88889 V 16 H 7.11111 Z m -3.55555,0 H 5.33333 V 16 H 3.55556 Z M 0,14.22222 H 1.77778 V 16 H 0 Z';
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='16' height='16' viewBox='0 0 16 16'><path style='fill:#{$rgb}' d='#{$path}'></path></svg>");
+}
+
 @mixin textarea-container {
   position: relative;
   border: 1px solid smart-scale($panel-background, $panel-color-scale);
@@ -38,9 +44,15 @@
   pointer-events: none;
 
   .resize-grip {
+    @include background-resize-grip;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 2px;
+    right: 03px;
+    width: 9px;
+    height: 9px;
+    background-repeat: no-repeat;
+    background-size: 9px;
+    background-position: 0 0;
   }
 
   span {

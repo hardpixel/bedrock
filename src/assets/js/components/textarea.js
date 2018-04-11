@@ -36,7 +36,7 @@ class Textarea extends Plugin {
     this.$element.wrap('<div class="textarea-container"></div>');
     this.$wrapper = this.$element.parent();
 
-    var icon = `<i class="resize-grip ${this.options.resizeIcon}"></i>`;
+    var icon = `<i class="resize-grip"></i>`;
     var text = '<span>Characters</span>';
     var count = '<span class="count"></span>';
 
