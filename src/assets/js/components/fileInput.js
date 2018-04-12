@@ -93,6 +93,8 @@ class FileInput extends Plugin {
     this.$controls.removeClass('hide');
     this.$empty.hide();
     this.$empty.addClass('hide');
+
+    this.$removeInput.prop('checked', false);
   }
 
   /**
@@ -104,6 +106,9 @@ class FileInput extends Plugin {
     this.$controls.addClass('hide');
     this.$empty.show();
     this.$empty.removeClass('hide');
+
+    this.$input.val('');
+    this.$removeInput.prop('checked', true);
   }
 
   /**
@@ -229,8 +234,6 @@ class FileInput extends Plugin {
 
     if (input.files) {
       this.$preview.find('.input-added').remove();
-      this.$removeInput.prop('checked', false);
-
       $.each(input.files, this._updatePreview.bind(this));
     }
 
@@ -265,9 +268,6 @@ class FileInput extends Plugin {
     } else {
       this.$preview.html('');
     }
-
-    this.$input.val('');
-    this.$removeInput.prop('checked', true);
 
     this._deactivate();
     this._toggleEmpty();
