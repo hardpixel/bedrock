@@ -1,7 +1,6 @@
 'use strict';
 
 import $ from 'jquery';
-import Select2 from 'select2/dist/js/select2';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 /**
@@ -23,10 +22,6 @@ class SelectBox extends Plugin {
     this.$element = element;
     this.options = $.extend({}, SelectBox.defaults, this.$element.data(), options);
 
-    if (this.options.list) {
-      this.options.theme = 'list';
-    }
-
     this._init();
   }
 
@@ -36,15 +31,10 @@ class SelectBox extends Plugin {
    * @private
    */
   _init() {
-    this.$element.select2(this.options);
-
-    this.select2 = this.$element.data('select2');
-    this.$container = this.select2.$container;
-    this.$dropdown = this.select2.$dropdown;
+    this.$input = this.$element.find('input');
+    this.$dropdown = this.$element.find('[data-dropdown]');
 
     this._events();
-    this._keepPlaceholder();
-    this._setIcons();
   }
 
   /**
@@ -53,55 +43,9 @@ class SelectBox extends Plugin {
    * @private
    */
   _events() {
-    this.$element.off(['select2:select', 'select2:unselect', 'select2:open']).on({
-      'select2:open': this.open.bind(this),
-      'select2:select': this.select.bind(this),
-      'select2:unselect': this.unselect.bind(this),
-    });
-  }
-
-  /**
-   * Keeps placeholder on search field.
-   * @function
-   * @private
-   */
-  _keepPlaceholder() {
-    var search = this.$container.find('.select2-search__field');
-
-    if ( search.length && this.options.list) {
-      search.attr('placeholder', this.options.placeholder);
-    }
-  }
-
-  /**
-   * Sets custom icons on multi select boxes.
-   * @function
-   * @private
-   */
-  _setIcons() {
-    if (this.options.list) {
-      var item = this.$container.find('.select2-selection__choice__remove');
-      item.text('').addClass(this.options.removeIcon);
-    }
-  }
-
-  /**
-   * Updates position on dropdown.
-   * @function
-   * @private
-   */
-  _updatePosition() {
-    var search   = this.$container.find('.select2-search__field');
-    var dropdown = this.$dropdown.find('.select2-dropdown');
-
-    if ( search.length && this.options.list) {
-      if (dropdown.hasClass('select2-dropdown--above')) {
-        var position = this.$container.innerHeight() - search.outerHeight();
-        dropdown.css('margin-top', position);
-      } else {
-        dropdown.css('margin-top', false);
-      }
-    }
+    this.$element.off('click', 'li').on({
+      'click': this.select.bind(this)
+    }, 'li');
   }
 
   /**
@@ -110,11 +54,7 @@ class SelectBox extends Plugin {
    * @function
    */
   open(event) {
-    this._updatePosition();
     this.$element.trigger('open.zf.select.box');
-
-    this._keepPlaceholder();
-    this._setIcons();
   }
 
   /**
@@ -123,11 +63,13 @@ class SelectBox extends Plugin {
    * @function
    */
   select(event) {
+    var text = $(event.target).text();
+
+    this.$input.val(text);
+    this.$dropdown.foundation('close');
+
     this.$element.trigger('change');
     this.$element.trigger('changed.zf.select.box');
-
-    this._keepPlaceholder();
-    this._setIcons();
   }
 
   /**
@@ -138,9 +80,6 @@ class SelectBox extends Plugin {
   unselect(event) {
     this.$element.trigger('change');
     this.$element.trigger('changed.zf.select.box');
-
-    this._keepPlaceholder();
-    this._setIcons();
   }
 
   /**
@@ -149,14 +88,10 @@ class SelectBox extends Plugin {
    * @private
    */
   _destroy() {
-    this.$element.select2('destroy');
-    this.$element.off(['select2:select', 'select2:unselect', 'select2:open']);
     this.$element.off('.zf.trigger');
   }
 }
 
-SelectBox.defaults = {
-  removeIcon: 'mdi mdi-close'
-};
+SelectBox.defaults = {};
 
 export {SelectBox};

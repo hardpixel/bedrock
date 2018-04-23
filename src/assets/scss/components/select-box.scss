@@ -1,359 +1,47 @@
 // Select Box Mixins
 
-@mixin select-box-list {
-  &.select2-container--list {
-    .select2-selection--multiple {
-
-      .select2-selection__choice {
-        font-size: inherit;
-        margin: 0 0 ($global-margin / 2);
-        padding: $global-padding / 1.5;
-        display: block;
-        width: 100%;
-        color: $body-font-color;
-        background: transparent;
-        position: relative;
-        border-bottom: $input-border;
-
-        &:nth-last-child(2) {
-          border-bottom: 0;
-        }
-
-        &:hover {
-          padding-right: $global-padding * 2;
-
-          .select2-selection__choice__remove {
-            display: block;
-          }
-        }
-      }
-
-      .select2-selection__choice__remove {
-        color: $alert-color;
-        height: 100%;
-        padding: $global-padding / 1.5;
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin: 0;
-      }
-
-      .select2-selection__rendered {
-        padding: 0;
-        overflow: visible;
-        white-space: normal;
-      }
-    }
-
-    .select2-search--inline {
-      display: block;
-      width: 100%;
-
-      .select2-search__field {
-        margin: 0;
-        width: 100% !important;
-      }
-    }
-  }
-
-  .select2-dropdown:not(.select2-dropdown--above) {
-    margin-top: 0 !important;
-  }
-}
-
-@mixin select-box-single {
-  .select2-selection--single {
-    @include form-select;
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding-#{$global-right}: ($form-spacing * 1.7);
-
-    .select2-selection__clear {
-      position: relative;
-    }
-  }
-}
-
-@mixin select-box-multiple {
-  &.select2-container--default {
-
-    .select2-selection--multiple {
-      @include form-element;
-
-      .select2-selection__choice {
-        float: left;
-        margin-right: 5px;
-        margin-top: 5px;
-      }
-
-      .select2-selection__rendered {
-        margin: -5px;
-      }
-    }
-
-    .select2-search--inline {
-      float: left;
-
-      .select2-search__field {
-        margin: 5px 0;
-        padding: 0;
-        border: none;
-        height: auto;
-        background: transparent;
-        outline: 0;
-        box-shadow: none;
-      }
-    }
-  }
-
-  .select2-selection--multiple {
-    display: block;
-    width: 100%;
-    height: auto !important;
-    margin: 0 !important;
-
-    .select2-selection__clear {
-      cursor: pointer;
-      float: right;
-      font-weight: bold;
-      margin-top: 5px;
-      margin-right: 10px;
-    }
-
-    .select2-selection__choice {
-      @include label;
-      background: $label-background;
-      color: $label-color;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .select2-selection__choice__remove {
-      cursor: pointer;
-      display: inline-block;
-      font-weight: bold;
-      margin-right: 5px;
-    }
-  }
-
-  [dir="rtl"] {
-    .select2-selection--multiple {
-      .select2-selection__choice {
-        margin-left: 5px;
-        margin-right: auto;
-      }
-
-      .select2-selection__choice__remove {
-        margin-left: 2px;
-        margin-right: auto;
-      }
-    }
-  }
-}
-
-@mixin select-box-basics {
-  .select2-close-mask {
-    border: 0;
-    margin: 0;
-    padding: 0;
-    display: block;
-    position: fixed;
-    left: 0;
-    top: 0;
-    min-height: 100%;
-    min-width: 100%;
-    height: auto;
-    width: auto;
-    opacity: 0;
-    z-index: 99;
-    background-color: #fff;
-  }
-
-  .select2-selection__rendered {
-    display: block;
-    padding: 0 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    list-style-type: none;
-    margin: 0;
-  }
-
-  .select2-selection__placeholder {
-    color: $input-placeholder-color;
-    display: inline-block;
-  }
-
-  .select2-hidden-accessible {
-    display: none !important;
-
-    + .select2-container {
-      width: 100% !important;
-    }
-  }
-
-  .select2-selection__arrow {
-    display: none !important;
-  }
-
-  .select2-selection__clear {
-    cursor: pointer;
-    float: right;
-    font-weight: bold;
-  }
-
-  .select2-container--disabled {
-
-    .select2-selection {
-      background-color: $input-background-disabled;
-      cursor: $input-cursor-disabled;
-      pointer-events: none;
-    }
-
-    .select2-selection__clear {
-      display: none !important;
-    }
-  }
-
-  [dir="rtl"] {
-    .select2-selection__clear {
-      float: left;
-    }
-  }
-}
-
-@mixin select-box-container {
-  .select2-container {
-    display: inline-block;
-    margin: 0 0 $form-spacing;
+@mixin select-box {
+  .select-box {
     position: relative;
 
-    @include select-box-single;
-    @include select-box-multiple;
-    @include select-box-list;
-  }
-}
-
-@mixin select-box-dropdown {
-  .select2-dropdown {
-    background-color: $input-background;
-    border: $input-border;
-    border-radius: $input-radius;
-    display: block;
-    position: absolute;
-    left: -100000px;
-    width: 100%;
-    z-index: 1051;
-  }
-
-  .select2-results {
-    display: block;
-
-    > .select2-results__options {
-      max-height: 200px;
-      overflow-y: auto;
+    input {
+      @include form-select;
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding-#{$global-right}: ($form-spacing * 1.7);
     }
-  }
 
-  .select2-results__group {
-    cursor: default;
-    display: block;
-    padding: 4px;
-  }
-
-  .select2-results__options {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .select2-results__option--highlighted {
-
-    &[aria-selected] {
-      background-color: $anchor-color;
-      color: white;
-    }
-  }
-
-  .select2-results__option {
-    padding: $input-padding;
-    user-select: none;
-
-    &[role=group] {
+    .dropdown-pane {
+      background: none;
+      margin: 0;
       padding: 0;
-    }
+      width: 100%;
 
-    &[aria-disabled=true] {
-      color: $dark-gray;
-    }
-
-    &[aria-selected=true] {
-      background-color: $input-background-disabled;
-      color: inherit;
-    }
-
-    .select2-results__option {
-      padding-left: 1rem;
-
-      .select2-results__group {
-        padding-left: 0;
+      &.bottom {
+        border-top: 0;
       }
+    }
 
-      .select2-results__option {
-        margin-left: -1rem;
-        padding-left: 2rem;
+    .select-dropdown {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      display: block;
+      background: $input-background;
+      max-height: 12rem;
+      overflow-y: auto;
 
-        .select2-results__option {
-          margin-left: -2rem;
-          padding-left: 3rem;
+      > li {
+        display: block;
+        padding: $input-padding;
+        cursor: pointer;
 
-          .select2-results__option {
-            margin-left: -3rem;
-            padding-left: 4rem;
-
-            .select2-results__option {
-              margin-left: -4rem;
-              padding-left: 5rem;
-
-              .select2-results__option {
-                margin-left: -5rem;
-                padding-left: 6rem;
-              }
-            }
-          }
+        &:hover, &.is-active {
+          background-color: $anchor-color;
+          color: white;
         }
       }
-    }
-  }
-
-  .select2-container--open .select2-dropdown {
-    left: 0;
-  }
-
-  .select2-container--open .select2-dropdown--above {
-    border-bottom: none;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  .select2-container--open .select2-dropdown--below {
-    border-top: none;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
-
-  .select2-search--dropdown {
-    display: block;
-    padding: 4px;
-
-    .select2-search__field {
-      margin: 0;
-    }
-
-    &.select2-search--hide {
-      display: none;
     }
   }
 }
@@ -362,7 +50,5 @@
 // Select Box Component
 
 @mixin bedrock-select-box {
-  @include select-box-container;
-  @include select-box-dropdown;
-  @include select-box-basics;
+  @include select-box;
 }
