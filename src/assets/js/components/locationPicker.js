@@ -2,6 +2,7 @@
 
 import $ from 'jquery';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
+import { PlaceAutocomplete } from './placeAutocomplete';
 
 /**
  * LocationPicker module.
@@ -36,8 +37,26 @@ class LocationPicker extends Plugin {
     this.$lat = this.$element.find('[data-location-lat]');
     this.$lng = this.$element.find('[data-location-lng]');
 
-    this.pac = this.$pac.data('zfPlugin');
     this.map = this.$map.data('zfPlugin');
+
+    if (!this.$pac.length) {
+      this.$pac = $('<input type="text" name="autocomplete" value="">');
+      this.map.map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.$pac[0]);
+
+      this.$pac.on('input.locationpicker', function () {
+        var container = $('.pac-container:visible');
+
+        if (container.hasClass('pac-inline')) {
+          this.$pac.off('input.locationpicker')
+        } else {
+          container.addClass('pac-inline');
+        }
+      }.bind(this));
+
+      this.pac = new PlaceAutocomplete(this.$pac);
+    } else {
+      this.pac = this.$pac.data('zfPlugin');
+    }
 
     this._createMarker();
     this._events();
