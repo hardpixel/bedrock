@@ -152,6 +152,7 @@ class ListSelect extends Plugin {
     }
 
     target.addClass('is-active');
+    this.$element.trigger('selected.zf.select.list', [target]);
     this._updateActiveItems();
   }
 
@@ -164,6 +165,7 @@ class ListSelect extends Plugin {
     var target = $(event.currentTarget);
 
     target.removeClass('is-active');
+    this.$element.trigger('unselected.zf.select.list', [target]);
     this._updateActiveItems();
   }
 
