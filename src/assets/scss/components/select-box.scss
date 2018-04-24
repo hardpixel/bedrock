@@ -37,7 +37,11 @@
         padding: $input-padding;
         cursor: pointer;
 
-        &:hover, &.is-active {
+        &.is-active {
+          background-color: $light-gray;
+        }
+
+        &:hover, &.is-focus {
           background-color: $anchor-color;
           color: white;
         }
