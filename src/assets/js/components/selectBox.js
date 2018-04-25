@@ -191,13 +191,13 @@ class SelectBox extends Plugin {
     var current = this.$list.find('.is-focused');
 
     if (!current.length) {
-      this.$list.find('[data-list-item]:first').addClass('.is-focused');
+      this.$list.find('[data-list-item]:visible:first').addClass('.is-focused');
     }
 
     if (dir == 'prev') {
-      var sibling = current.prev();
+      var sibling = current.prev('[data-list-item]:visible');
     } else {
-      var sibling = current.next();
+      var sibling = current.next('[data-list-item]:visible');
     }
 
     if (sibling.length) {
@@ -287,6 +287,8 @@ class SelectBox extends Plugin {
     if (text) {
       this.$list.find('[data-list-item]').hide();
       this.$list.find('[data-value*="' + text + '"]').show();
+      this.$list.find('.is-focused').removeClass('is-focused');
+      this.$list.find('[data-list-item]:visible:first').addClass('is-focused');
     } else {
       this.$list.find('[data-list-item]').show();
     }
