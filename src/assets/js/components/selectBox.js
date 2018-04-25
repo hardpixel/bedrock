@@ -190,6 +190,10 @@ class SelectBox extends Plugin {
 
     var current = this.$list.find('.is-focused');
 
+    if (!current.length) {
+      this.$list.find('[data-list-item]:first').addClass('.is-focused');
+    }
+
     if (dir == 'prev') {
       var sibling = current.prev();
     } else {
