@@ -237,9 +237,17 @@ class SelectBox extends Plugin {
    * @function
    */
   open(event) {
+    var active = this.$list.find('.is-active');
+
     this.$selected.hide();
     this.$input.val('').show().trigger('focus');
-    this.$list.find('.is-active').addClass('is-focused');
+
+    if (active.length) {
+      active.addClass('is-focused');
+    } else {
+      this.$list.find('[data-list-item]:visible:first').addClass('is-focused');
+    }
+
     this.$list.find('[data-list-item]').show();
     this.$element.trigger('open.zf.select.box');
   }
