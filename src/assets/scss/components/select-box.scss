@@ -41,7 +41,7 @@
           background-color: $light-gray;
         }
 
-        &:hover, &.is-focus {
+        &.is-focused {
           background-color: $anchor-color;
           color: white;
         }
