@@ -210,6 +210,9 @@ class SelectBox extends Plugin {
     if (sibling.length) {
       current.removeClass('is-focused');
       sibling.addClass('is-focused');
+
+      var topPos = sibling.position().top + 1;
+      this.$list.scrollTop(topPos);
     }
   }
 
