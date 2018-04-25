@@ -42,9 +42,7 @@ class SelectBox extends Plugin {
    */
   _init() {
     this.id = this.$element.attr('id');
-    this.$input = this.$element.find('input');
-    this.$dropdown = this.$element.find('[data-dropdown]');
-    this.$list = this.$element.find('[data-list-select]');
+    this.placeholder = this.options.placeholder || this.$element.attr('placeholder');
     this.data = [];
     this.selected = null;
 
@@ -142,7 +140,8 @@ class SelectBox extends Plugin {
    */
   _buildItems() {
     this.$box = $('<div class="select-box"></div>');
-    this.$input = $('<input type="text" placeholder="' + this.options.placeholder + '" data-close="' + this.id + '-dropdown">');
+    this.$placeholder = $('<span class="placeholder">' + this.placeholder + '</span>');
+    this.$input = $('<input type="text" placeholder="' + this.placeholder + '" data-close="' + this.id + '-dropdown">');
     this.$selected = $('<span class="selected-value" data-open="' + this.id + '-dropdown"></span>');
     this.$dropdown = $('<div class="dropdown-pane bottom" id="' + this.id + '-dropdown"></div>');
     this.$list = $('<ul class="select-dropdown"></ul>');
@@ -167,6 +166,8 @@ class SelectBox extends Plugin {
     if (this.selected) {
       this.$selected.text(this.selected.name);
       this.$list.find('[data-value="' + this.selected.value + '"]').addClass('is-active');
+    } else {
+      this.$selected.html(this.$placeholder);
     }
   }
 
