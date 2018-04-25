@@ -6,7 +6,6 @@ import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Dropdown } from 'foundation-sites/js/foundation.dropdown';
 import { ListSelect } from './listSelect';
 
-
 /**
  * SelectBox module.
  * @module selectBox
@@ -51,24 +50,7 @@ class SelectBox extends Plugin {
 
     this.$element.hide();
 
-    if (this.$element.is('select')) {
-      var currValue = this.$element.val();
-      var currText = this.$element.find('option[value="' + currValue + '"]').text();
-
-      if (currValue && currText) {
-        this.selected = { name: currText, value: currValue }
-      }
-
-      this.$element.find('option').each(function (index, el) {
-        var item = {
-          name: el.innerText || el.textContent,
-          value: el.value
-        };
-
-        this.data.push(item);
-      }.bind(this));
-    }
-
+    this._getData();
     this._buildItems();
     this._events();
   }
@@ -100,44 +82,56 @@ class SelectBox extends Plugin {
       'unselected.zf.select.list': this.select.bind(this)
     });
 
+    this.$list.off('mouseenter.zf.select.list', '[data-list-item]').on({
+      'mouseenter.zf.select.list': this._highlight.bind(this)
+    }, '[data-list-item]');
+
     this.$input.off('input').on({
       'input': this.filter.bind(this)
     });
 
-    this.$input.off('keydown.zf.select.box').on('keydown.zf.select.box', function(e) {
-      Keyboard.handleKey(e, 'SelectBox', {
+    this.$input.off('keydown.zf.select.box').on('keydown.zf.select.box', function(event) {
+      Keyboard.handleKey(event, 'SelectBox', {
         select: function() {
-          if (_this.$dropdown.is(':visible')) {
-            console.log('select');
-          } else {
-            _this.$dropdown.foundation('open');
-          }
-
-          e.preventDefault();
+          event.preventDefault();
+          _this._selectHighlighted();
         },
         prev: function() {
-          var current = _this.$list.find('.is-focus');
-          var prev = current.prev();
-
-          if (prev.length) {
-            current.removeClass('is-focus');
-            prev.addClass('is-focus');
-          }
+          _this._highlightSibling('prev');
         },
         next: function() {
-          var current = _this.$list.find('.is-focus');
-          var next = current.next();
-
-          if (next.length) {
-            current.removeClass('is-focus');
-            next.addClass('is-focus');
-          }
+          _this._highlightSibling('next');
         },
         close: function() {
           _this.$dropdown.foundation('close');
         }
       });
     });
+  }
+
+  /**
+   * Gets select items data.
+   * @function
+   * @private
+   */
+  _getData() {
+    if (this.$element.is('select')) {
+      var currValue = this.$element.val();
+      var currText = this.$element.find('option[value="' + currValue + '"]').text();
+
+      if (currValue && currText) {
+        this.selected = { name: currText, value: currValue }
+      }
+
+      this.$element.find('option').each(function (index, el) {
+        var item = {
+          name: el.innerText || el.textContent,
+          value: el.value
+        };
+
+        this.data.push(item);
+      }.bind(this));
+    }
   }
 
   /**
@@ -171,13 +165,66 @@ class SelectBox extends Plugin {
   }
 
   /**
+   * Highlights dropdown list item.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   * @private
+   */
+  _highlight(event) {
+    var item = $(event.target);
+    this.$list.find('.is-focused').removeClass('is-focused');
+    item.addClass('is-focused');
+  }
+
+  /**
+   * Highlights prev/next dropdown list item.
+   * @param {String} dir - Highlight direction, prev or next.
+   * @function
+   * @private
+   */
+  _highlightSibling(dir) {
+    if (!this.$dropdown.is(':visible')) {
+      this.$dropdown.foundation('open');
+      return;
+    }
+
+    var current = this.$list.find('.is-focused');
+
+    if (dir == 'prev') {
+      var sibling = current.prev();
+    } else {
+      var sibling = current.next();
+    }
+
+    if (sibling.length) {
+      current.removeClass('is-focused');
+      sibling.addClass('is-focused');
+    }
+  }
+
+  /**
+   * Selects the highlighted dropdown list item.
+   * @function
+   * @private
+   */
+  _selectHighlighted() {
+    if (!this.$dropdown.is(':visible')) {
+      this.$dropdown.foundation('open');
+      return;
+    }
+
+    this.$list.find('.is-focused:not(.is-active)').trigger('select.zf.trigger');
+    this.$dropdown.foundation('close');
+  }
+
+  /**
    * Opens the select dropdown.
    * @param {Object} event - Event object passed from listener.
    * @function
    */
   open(event) {
     this.$input.val('');
-    this.$list.find('.is-active').addClass('is-focus');
+    this.$list.find('.is-active').addClass('is-focused');
     this.$list.find('[data-list-item]').show();
     this.$element.trigger('open.zf.select.box');
   }
@@ -189,7 +236,7 @@ class SelectBox extends Plugin {
    */
   close(event) {
     this.$input.val(this.selected.name);
-    this.$list.find('.is-focus').removeClass('is-focus');
+    this.$list.find('.is-focused').removeClass('is-focused');
     this.$list.find('[data-list-item]').show();
     this.$element.trigger('close.zf.select.box');
   }
