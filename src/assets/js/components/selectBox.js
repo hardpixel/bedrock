@@ -64,6 +64,7 @@ class SelectBox extends Plugin {
     var _this = this;
 
     this.$input.off('keydown.zf.dropdown');
+    this.$selected.off('keydown.zf.dropdown');
     this.$dropdown.off('keydown.zf.dropdown');
 
     this.$dropdown.off('show.zf.dropdown').on({
@@ -90,7 +91,7 @@ class SelectBox extends Plugin {
       'input': this.filter.bind(this)
     });
 
-    this.$input.off('keydown.zf.select.box').on('keydown.zf.select.box', function(event) {
+    this.$input.add(this.$selected).off('keydown.zf.select.box').on('keydown.zf.select.box', function(event) {
       Keyboard.handleKey(event, 'SelectBox', {
         select: function() {
           event.preventDefault();
@@ -141,12 +142,17 @@ class SelectBox extends Plugin {
    */
   _buildItems() {
     this.$box = $('<div class="select-box"></div>');
-    this.$input = $('<input type="text" placeholder="' + this.options.placeholder + '" data-toggle="' + this.id + '-dropdown">');
+    this.$input = $('<input type="text" placeholder="' + this.options.placeholder + '" data-close="' + this.id + '-dropdown">');
+    this.$selected = $('<span class="selected-value" data-open="' + this.id + '-dropdown"></span>');
     this.$dropdown = $('<div class="dropdown-pane bottom" id="' + this.id + '-dropdown"></div>');
     this.$list = $('<ul class="select-dropdown"></ul>');
 
+    this.$input.hide();
+    this.$selected.attr('tabindex', 0);
+
     this.$element.after(this.$box);
     this.$box.append(this.$input);
+    this.$box.append(this.$selected);
     this.$box.append(this.$dropdown);
     this.$dropdown.append(this.$list);
 
@@ -159,7 +165,7 @@ class SelectBox extends Plugin {
     }.bind(this));
 
     if (this.selected) {
-      this.$input.val(this.selected.name);
+      this.$selected.text(this.selected.name);
       this.$list.find('[data-value="' + this.selected.value + '"]').addClass('is-active');
     }
   }
@@ -227,7 +233,8 @@ class SelectBox extends Plugin {
    * @function
    */
   open(event) {
-    this.$input.val('');
+    this.$selected.hide();
+    this.$input.val('').show().trigger('focus');
     this.$list.find('.is-active').addClass('is-focused');
     this.$list.find('[data-list-item]').show();
     this.$element.trigger('open.zf.select.box');
@@ -239,7 +246,8 @@ class SelectBox extends Plugin {
    * @function
    */
   close(event) {
-    this.$input.val(this.selected.name);
+    this.$selected.show().trigger('focus');
+    this.$input.val('').hide();
     this.$list.find('.is-focused').removeClass('is-focused');
     this.$list.find('[data-list-item]').show();
     this.$element.trigger('close.zf.select.box');
@@ -257,7 +265,8 @@ class SelectBox extends Plugin {
 
     this.selected = { name: text, value: value }
 
-    this.$input.val(text);
+    this.$selected.text(text).show();
+    this.$input.hide();
     this.$element.val(value);
     this.$dropdown.foundation('close');
 

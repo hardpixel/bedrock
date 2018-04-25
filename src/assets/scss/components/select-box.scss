@@ -4,12 +4,17 @@
   .select-box {
     position: relative;
 
-    input {
+    input, .selected-value {
       @include form-select;
       display: block;
       width: 100%;
       margin: 0;
       padding-#{$global-right}: ($form-spacing * 1.7);
+    }
+
+    .selected-value {
+      cursor: pointer;
+      line-height: 1.3;
     }
 
     .dropdown-pane {
