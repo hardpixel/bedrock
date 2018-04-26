@@ -408,12 +408,12 @@ class SelectBox extends Plugin {
     var text = $(event.target).val().toLowerCase();
 
     if (text) {
-      this.$list.find('[data-list-item]').hide();
-      this.$list.find('[data-value*="' + text + '"]').show();
+      this.$list.find('[data-list-item], .select-group').hide();
+      this.$list.find('[data-value*="' + text + '"]').show().parents('.select-group:first').show();
       this.$list.find('.is-focused').removeClass('is-focused');
       this.$list.find('[data-list-item]:visible:first').addClass('is-focused');
     } else {
-      this.$list.find('[data-list-item]').show();
+      this.$list.find('[data-list-item], .select-group').show();
     }
   }
 
