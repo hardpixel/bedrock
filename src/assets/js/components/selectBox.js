@@ -118,8 +118,7 @@ class SelectBox extends Plugin {
         this.hasGroups = true;
         optGroup.each(this._getDataGroupOptions.bind(this));
       } else {
-        var opts = this._getDataOptions(this.$element);
-        this.data.concat(opts);
+        this.data = this._getDataOptions(this.$element);
       }
     }
   }
