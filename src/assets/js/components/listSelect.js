@@ -148,7 +148,7 @@ class ListSelect extends Plugin {
     var target = $(event.currentTarget);
 
     if (!this.multiple) {
-      target.siblings().removeClass('is-active');
+      this.$element.find('.is-active').removeClass('is-active');
     }
 
     target.addClass('is-active');

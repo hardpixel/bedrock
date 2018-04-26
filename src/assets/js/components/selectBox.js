@@ -338,7 +338,7 @@ class SelectBox extends Plugin {
    * @function
    */
   open(event) {
-    var active = this.$list.find('.is-active');
+    var active = this.$list.find('.is-active:first');
 
     this.$selected.hide();
     this.$input.val('').show().trigger('focus');
@@ -349,7 +349,8 @@ class SelectBox extends Plugin {
       this.$list.find('[data-list-item]:visible:first').addClass('is-focused');
     }
 
-    this.$list.find('[data-list-item]').show();
+    this.$list.scrollTop(0);
+    this.$list.find('[data-list-item], .select-group').show();
     this.$element.trigger('open.zf.select.box');
   }
 
@@ -362,7 +363,7 @@ class SelectBox extends Plugin {
     this.$selected.show().trigger('focus');
     this.$input.val('').hide();
     this.$list.find('.is-focused').removeClass('is-focused');
-    this.$list.find('[data-list-item]').show();
+    this.$list.find('[data-list-item], .select-group').show();
     this.$element.trigger('close.zf.select.box');
   }
 
