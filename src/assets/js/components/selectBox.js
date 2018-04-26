@@ -59,8 +59,6 @@ class SelectBox extends Plugin {
    * @private
    */
   _events() {
-    var _this = this;
-
     this.$input.off('keydown.zf.dropdown');
     this.$selected.off('keydown.zf.dropdown');
     this.$dropdown.off('keydown.zf.dropdown');
@@ -89,22 +87,8 @@ class SelectBox extends Plugin {
       'input': this.filter.bind(this)
     });
 
-    this.$input.add(this.$selected).off('keydown.zf.select.box').on('keydown.zf.select.box', function(event) {
-      Keyboard.handleKey(event, 'SelectBox', {
-        select: function() {
-          event.preventDefault();
-          _this._selectHighlighted();
-        },
-        prev: function() {
-          _this._highlightSibling('prev');
-        },
-        next: function() {
-          _this._highlightSibling('next');
-        },
-        close: function() {
-          _this.$dropdown.foundation('close');
-        }
-      });
+    this.$input.add(this.$selected).off('keydown.zf.select.box').on({
+      'keydown.zf.select.box': this._handleKeyboard.bind(this)
     });
   }
 
@@ -169,6 +153,32 @@ class SelectBox extends Plugin {
     } else {
       this.$selected.html(this.$placeholder);
     }
+  }
+
+  /**
+   * Handles keyboard events.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   * @private
+   */
+  _handleKeyboard(event) {
+    var _this = this;
+
+    Keyboard.handleKey(event, 'SelectBox', {
+      select: function() {
+        event.preventDefault();
+        _this._selectHighlighted();
+      },
+      prev: function() {
+        _this._highlightSibling('prev');
+      },
+      next: function() {
+        _this._highlightSibling('next');
+      },
+      close: function() {
+        _this.$dropdown.foundation('close');
+      }
+    });
   }
 
   /**
