@@ -45,6 +45,8 @@ class SelectBox extends Plugin {
     this.placeholder = this.options.placeholder || this.$element.attr('placeholder');
     this.data = [];
     this.selected = null;
+    this.$label = this.$element.parents('label:first');
+    this.$trigger = $('label[for="' + this.id + '"]');
 
     this.$element.hide();
 
@@ -89,6 +91,10 @@ class SelectBox extends Plugin {
 
     this.$input.add(this.$selected).off('keydown.zf.select.box').on({
       'keydown.zf.select.box': this._handleKeyboard.bind(this)
+    });
+
+    this.$label.add(this.$trigger).off('click').on({
+      'click': this._focusControl.bind(this)
     });
   }
 
@@ -179,6 +185,17 @@ class SelectBox extends Plugin {
         _this.$dropdown.foundation('close');
       }
     });
+  }
+
+  /**
+   * Focuses select box control.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   * @private
+   */
+  _focusControl(event) {
+    this.$selected.trigger('focus');
+    event.preventDefault();
   }
 
   /**
