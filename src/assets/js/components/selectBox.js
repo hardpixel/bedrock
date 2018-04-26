@@ -44,6 +44,7 @@ class SelectBox extends Plugin {
     this.id = this.$element.attr('id');
     this.placeholder = this.options.placeholder || this.$element.attr('placeholder');
     this.data = [];
+    this.hasGroups = false;
     this.selected = null;
     this.$label = this.$element.parents('label:first');
     this.$trigger = $('label[for="' + this.id + '"]');
@@ -51,7 +52,7 @@ class SelectBox extends Plugin {
     this.$element.hide();
 
     this._getData();
-    this._buildItems();
+    this._buildControl();
     this._events();
   }
 
@@ -105,6 +106,7 @@ class SelectBox extends Plugin {
    */
   _getData() {
     if (this.$element.is('select')) {
+      var optGroup = this.$element.find('optgroup');
       var currValue = this.$element.val();
       var currText = this.$element.find('option[value="' + currValue + '"]').text();
 
@@ -112,23 +114,50 @@ class SelectBox extends Plugin {
         this.selected = { name: currText, value: currValue }
       }
 
-      this.$element.find('option').each(function (index, el) {
-        var item = {
-          name: el.innerText || el.textContent,
-          value: el.value
-        };
-
-        this.data.push(item);
-      }.bind(this));
+      if (optGroup.length) {
+        this.hasGroups = true;
+        optGroup.each(this._getDataGroupOptions.bind(this));
+      } else {
+        var opts = this._getDataOptions(this.$element);
+        this.data.concat(opts);
+      }
     }
   }
 
   /**
-   * Adds event handlers to the select-box.
+   * Gets select item option data.
    * @function
    * @private
    */
-  _buildItems() {
+  _getDataOptions(container) {
+    var options = [];
+
+    container.find('option').each(function (index, el) {
+      var item = { name: el.innerText || el.textContent, value: el.value };
+      options.push(item);
+    });
+
+    return options;
+  }
+
+  /**
+   * Gets select item optgroup option data.
+   * @function
+   * @private
+   */
+  _getDataGroupOptions(index, el) {
+    var opts = this._getDataOptions($(el));
+    var item = { label: el.label, options: opts };
+
+    this.data.push(item);
+  }
+
+  /**
+   * Builds select-box dropdown control with items.
+   * @function
+   * @private
+   */
+  _buildControl() {
     this.$box = $('<div class="select-box"></div>');
     this.$placeholder = $('<span class="placeholder">' + this.placeholder + '</span>');
     this.$input = $('<input type="text" placeholder="' + this.placeholder + '" data-close="' + this.id + '-dropdown">');
@@ -148,10 +177,7 @@ class SelectBox extends Plugin {
     this.list = new ListSelect(this.$list);
     this.dropdown = new Dropdown(this.$dropdown, { closeOnClick: true, parentClass: 'select-box' });
 
-    $.each(this.data, function (index, item) {
-      var option = $('<li data-list-item data-value="' + item.value + '">' + item.name + '</li>');
-      this.$list.append(option);
-    }.bind(this));
+    $.each(this.data, this._buildItems.bind(this));
 
     if (this.selected) {
       this.$selected.text(this.selected.name);
@@ -159,6 +185,38 @@ class SelectBox extends Plugin {
     } else {
       this.$selected.html(this.$placeholder);
     }
+  }
+
+  /**
+   * Builds select-box dropdown items.
+   * @function
+   * @private
+   */
+  _buildItems(index, data) {
+    if (this.hasGroups) {
+      var group = $('<li class="select-group"><strong class="select-group-label">' + data.label + '</strong></li>');
+      var list = $('<ul class="select-group-items"></ul>');
+
+      $.each(data.options, function(idx, el) {
+        var item = this._buildItem(el);
+        list.append(item);
+      }.bind(this));
+
+      group.append(list);
+      this.$list.append(group);
+    } else {
+      var item = this._buildItem(data);
+      this.$list.append(item);
+    }
+  }
+
+  /**
+   * Builds select-box dropdown item.
+   * @function
+   * @private
+   */
+  _buildItem(data) {
+    return $('<li data-list-item data-value="' + data.value + '">' + data.name + '</li>');
   }
 
   /**
@@ -223,6 +281,7 @@ class SelectBox extends Plugin {
     }
 
     var current = this.$list.find('.is-focused');
+    var group = null;
 
     if (!current.length) {
       this.$list.find('[data-list-item]:visible:first').addClass('.is-focused');
@@ -230,16 +289,32 @@ class SelectBox extends Plugin {
 
     if (dir == 'prev') {
       var sibling = current.prev('[data-list-item]:visible');
+
+      if (!sibling.length) {
+        group = current.parents('.select-group:first').prev();
+        sibling = group.find('[data-list-item]:visible:last');
+      }
     } else {
       var sibling = current.next('[data-list-item]:visible');
+
+      if (!sibling.length) {
+        group = current.parents('.select-group:first').next();
+        sibling = group.find('[data-list-item]:visible:first');
+      }
     }
 
     if (sibling.length) {
       current.removeClass('is-focused');
       sibling.addClass('is-focused');
 
-      var topPos = sibling.position().top + 1;
-      this.$list.scrollTop(topPos);
+      var curPos = this.$list.scrollTop();
+      var minPos = sibling.innerHeight();
+
+      if (dir == 'prev') {
+        this.$list.scrollTop(curPos - minPos);
+      } else {
+        this.$list.scrollTop(curPos + minPos);
+      }
     }
   }
 
