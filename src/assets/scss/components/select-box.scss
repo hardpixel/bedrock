@@ -41,7 +41,28 @@
       max-height: 12rem;
       overflow-y: auto;
 
-      > li {
+      .select-group {
+        border-bottom: $input-border;
+
+        &:last-child {
+          border-bottom: 0;
+        }
+      }
+
+      .select-group-label {
+        padding: $input-padding;
+        display: block;
+        border-bottom: $input-border;
+        background: rgba(black, 0.02);
+        color: $dark-gray;
+      }
+
+      .select-group-items {
+        margin: 0;
+        padding: 0;
+      }
+
+      [data-list-item] {
         display: block;
         padding: $input-padding;
         cursor: pointer;
