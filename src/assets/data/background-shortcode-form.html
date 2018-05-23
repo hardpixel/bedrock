@@ -9,7 +9,7 @@
     <div class="attachments" data-list-remove></div>
   </div>
 
-  <script id="background-media-thumbnail-item-template" type="text/template">
+  <template id="background-media-thumbnail-item-template">
     <div class="attachment text-center" data-list-item>
       <input type="hidden" name="page[thumbnail_id]" required data-attribute="id" data-value="id">
       <img data-src="id" class="width-100 margin-bottom-1" data-url="https://picsum.photos/600/400?image=[src]">
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-  </script>
+  </template>
 
   <div id="background-media-attachments" data-media-attach="media-modal" data-media-multiple="true">
     <input type="hidden" name="post[gallery_ids][]">
@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <script id="background-media-attachments-item-template" type="text/template">
+  <template id="background-media-attachments-item-template">
     <div class="attachment" data-list-item>
       <input type="hidden" name="post[gallery_ids][]" required data-attribute="ids" data-value="id">
       <div class="thumbnail">
@@ -45,5 +45,5 @@
         <span class="remove-button mdi mdi-close" data-remove></span>
       </div>
     </div>
-  </script>
+  </template>
 </form>
