@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 var downscale = require('downscale');
@@ -34,7 +35,7 @@ class FileInput extends Plugin {
    * @private
    */
   _init() {
-    this.id = this.$element.attr('id');
+    this.id = GetOrSetId(this.$element, 'fin');
     this.template = $(`#${this.id}-preview-template`).html();
     this.$item = $(this.template);
     this.$preview = $(this.options.previewsContainer);

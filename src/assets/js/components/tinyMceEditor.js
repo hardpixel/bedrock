@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Sticky } from 'foundation-sites/js/foundation.sticky';
 
@@ -41,7 +42,7 @@ class TinyMceEditor extends Plugin {
     if (tinymce !== 'undefined') {
       this.$element.wrap('<div class="tiny-mce-editor"></div>');
 
-      this.id = this.$element.attr('id');
+      this.id = GetOrSetId(this.$element, 'tme');
       this.$wrapper = this.$element.parents('.tiny-mce-editor:first');
       this.computed = { target: this.$element.get(0), setup: this._setupCallback.bind(this) };
       this.options = $.extend({}, this.options, this.computed);

@@ -2,6 +2,7 @@
 
 import $ from 'jquery';
 import Dropzone from 'dropzone/dist/dropzone';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 Dropzone.autoDiscover = false;
@@ -23,7 +24,6 @@ class DropzoneUpload extends Plugin {
   _setup(element, options) {
     this.className = 'DropzoneUpload'; // ie9 back compat
     this.$element = element;
-    this.id = this.$element.attr('id');
     this.options = $.extend(this._preview(), DropzoneUpload.defaults, this.$element.data(), options);
 
     this._init();
@@ -35,6 +35,8 @@ class DropzoneUpload extends Plugin {
    * @private
    */
   _init() {
+    this.id = GetOrSetId(this.$element, 'dzu');
+
     this._handleEvents();
     this.dropzone = new Dropzone(`#${this.id}`, this.options);
   }

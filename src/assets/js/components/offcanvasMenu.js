@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { OffCanvas } from 'foundation-sites/js/foundation.offcanvas';
 import { AccordionMenu } from 'foundation-sites/js/foundation.accordionMenu';
@@ -37,7 +38,7 @@ class OffCanvasMenu extends Plugin {
    * @private
    */
   _init() {
-    this.id = this.$element.attr('id');
+    this.id = GetOrSetId(this.$element, 'ocm');
     this.$exiter = $(`[data-toggle=${this.id}], [data-open="${this.id}"], [data-close="${this.id}"]`);
     this.$wrapper = $('.off-canvas-wrapper');
     this.collapsed = this.$element.hasClass('is-collapsed');

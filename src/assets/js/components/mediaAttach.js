@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Triggers } from 'foundation-sites/js/foundation.util.triggers';
 
@@ -35,7 +36,7 @@ class MediaAttach extends Plugin {
    * @private
    */
   _init() {
-    this.id = this.$element.attr('id');
+    this.id = GetOrSetId(this.$element, 'mda');
     this.template = $(`#${this.id}-item-template`).html();
     this.$empty = this.$element.find('[data-empty-state]');
     this.$grid = this.$element.find('[data-list-remove]');

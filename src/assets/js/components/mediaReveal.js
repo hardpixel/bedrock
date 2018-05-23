@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Reveal } from 'foundation-sites/js/foundation.reveal';
 
@@ -36,7 +37,7 @@ class MediaReveal extends Plugin {
    * @private
    */
   _init() {
-    this.id = this.$element.attr('id');
+    this.id = GetOrSetId(this.$element, 'mrv');
     this.template = $(`#${this.id}-item-template`).html();
     this.mediaUrl = this.options.mediaUrl;
     this.mediaKey = this.options.mediaKey;

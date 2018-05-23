@@ -3,6 +3,7 @@
 import $ from 'jquery';
 import _ from 'lodash';
 import clndr from 'clndr';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Dropdown } from 'foundation-sites/js/foundation.dropdown';
 
@@ -38,7 +39,7 @@ class DatePicker extends Plugin {
    * @private
    */
   _init() {
-    this.id = this.$element.attr('id');
+    this.id = GetOrSetId(this.$element, 'dtp');
     this.$dropdown = $(`<div id="${this.id}-datepicker-dropdown" class="dropdown-pane datepicker-dropdown"></div>`);
 
     this.$dropdown.insertAfter(this.$element);

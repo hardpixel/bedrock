@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Reveal } from 'foundation-sites/js/foundation.reveal';
 
@@ -37,7 +38,7 @@ class ShortcodeReveal extends Plugin {
    * @private
    */
   _init() {
-    this.id = this.$element.attr('id');
+    this.id = GetOrSetId(this.$element, 'scr');
     this.$menu = this.$element.find('[data-menu]');
     this.$form = this.$element.find('[data-form]');
     this.$preview = this.$element.find('[data-preview]');

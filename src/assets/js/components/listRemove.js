@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 /**
@@ -42,7 +43,7 @@ class ListRemove extends Plugin {
    * @private
    */
   _events() {
-    this.id = this.$element.attr('id');
+    this.id = GetOrSetId(this.$element, 'lsr');
     this.$clear = $(`[data-clear="${this.id}"]`);
 
     this.$clear.off('click').on({

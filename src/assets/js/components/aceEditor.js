@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 /**
@@ -42,7 +43,7 @@ class AceEditor extends Plugin {
         ace.config.set('themePath', this.basePath);
       }
 
-      this.id = this.$element.attr('id');
+      this.id = GetOrSetId(this.$element, 'ace');
       this.eid = `${this.id}-ace-editor`;
       this.$element.wrap('<div class="ace-editor"></div>');
       this.$element.hide();

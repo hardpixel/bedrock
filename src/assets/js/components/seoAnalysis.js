@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 var SeoPreview = require('yoastseo').SnippetPreview;
@@ -34,7 +35,7 @@ class SeoAnalysis extends Plugin {
    * @private
    */
   _init() {
-    this.id = this.$element.attr('id');
+    this.id = GetOrSetId(this.$element, 'seo');
     this.$preview = this.$element.find('[data-seo-preview]');
     this.$output = this.$element.find('[data-seo-output]');
 

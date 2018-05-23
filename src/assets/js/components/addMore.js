@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 /**
@@ -32,7 +33,7 @@ class AddMore extends Plugin {
    * @private
    */
   _init() {
-    this.id = this.$element.attr('id');
+    this.id = GetOrSetId(this.$element, 'adm');
     this.template = $(`#${this.id}-item-template`).html();
     this.$empty = this.$element.find('[data-empty-state]');
     this.$grid = this.$element.find('[data-list-remove]');
