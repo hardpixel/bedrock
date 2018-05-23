@@ -1,19 +1,12 @@
 // Text Editor Mixins
 
-@mixin tiny-mce-editor-input {
-  display: block;
-  width: 100%;
-  margin: 0;
-  border-color: smart-scale($panel-background, $panel-color-scale) !important;
-  box-shadow: none !important;
-  resize: none;
-  color: transparent;
-  min-height: 200px;
-  overflow: hidden;
-}
-
 @mixin tiny-mce-editor-basics {
   border: 1px solid smart-scale($panel-background, $panel-color-scale);
+
+  textarea {
+    opacity: 0;
+    min-height: 200px;
+  }
 
   .mce-tinymce {
     box-sizing: inherit;
@@ -81,10 +74,6 @@
 // Text Editor Component
 
 @mixin bedrock-tiny-mce-editor {
-  [data-tiny-mce-editor] {
-    @include tiny-mce-editor-input;
-  }
-
   .tiny-mce-editor {
     @include tiny-mce-editor-basics;
   }

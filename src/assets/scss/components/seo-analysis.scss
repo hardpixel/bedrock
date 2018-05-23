@@ -58,6 +58,10 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
     display: none !important;
   }
 
+  .seo-preview {
+    display: none;
+  }
+
   .seo-preview-variants {
     padding: $panel-padding;
     min-height: 10rem;
@@ -161,6 +165,7 @@ $seo-analysis-border: 1px solid smart-scale($seo-analysis-background, $seo-analy
   .seo-output {
     padding: $panel-padding;
     border-top: $seo-analysis-border;
+    display: none;
   }
 
   .assessment-results {

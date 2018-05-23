@@ -86,6 +86,9 @@ class SeoAnalysis extends Plugin {
     this._setPreviewWrappers();
     this._setPreviewIcons();
 
+    this.$preview.show();
+    this.$output.show();
+
     this._events();
   }
 
@@ -212,8 +215,8 @@ class SeoAnalysis extends Plugin {
    * @private
    */
   _destroy() {
-    this.$preview.html('');
-    this.$output.html('');
+    this.$preview.html('').hide();
+    this.$output.html('').hide();
 
     this.$keywordField.off('change');
     this.$textField.off('change');
