@@ -1,0 +1,66 @@
+// Item-list Mixins
+
+@mixin item-list {
+  counter-reset: list-counter;
+
+  .item {
+    display: flex;
+    margin-bottom: $global-margin;
+
+    .counter, .remove {
+      display: flex;
+      align-items: center;
+      width: 3rem;
+      justify-content: center;
+      background: darken($panel-background, 3);
+      color: $medium-gray;
+      border: $input-border;
+      z-index: 0;
+    }
+
+    .counter:before {
+      content: counter(list-counter);
+      counter-increment: list-counter;
+      font-weight: bold;
+    }
+
+    .remove {
+      cursor: pointer;
+
+      &:hover, &:active, &:focus {
+        background: $alert-color;
+        color: white;
+        border-color: darken($alert-color, 10);
+        z-index: 2;
+      }
+    }
+
+    .content {
+      flex-basis: 100%;
+      margin: 0 -1px;
+
+      input {
+        margin: 0;
+        height: 100%;
+        z-index: 0;
+
+        &:focus, &:active {
+          z-index: 1;
+        }
+
+        ~ input {
+          margin-left: -1px;
+        }
+      }
+    }
+  }
+}
+
+
+// Item-list Component
+
+@mixin bedrock-item-list {
+  .item-list {
+    @include item-list;
+  }
+}

@@ -1,0 +1,37 @@
+<div class="panel">
+  <div class="panel-header border">
+    Add More
+  </div>
+
+  <div class="panel-content border padding-bottom-0">
+    <div id="add-more" data-add-more="">
+      <div class="no-content margin-bottom-1 hide" data-empty-state>
+        <i class="mdi mdi-playlist-plus"></i>
+        <span>No items created</span>
+      </div>
+      <div id="add-more-preview" class="item-list" data-list-remove></div>
+    </div>
+  </div>
+
+  <div class="panel-footer">
+    <div class="grid-x">
+      <div class="cell auto text-left">
+        <button class="button alert hollow margin-0" data-clear="add-more-preview">Clear</button>
+      </div>
+      <div class="cell shrink">
+        <button class="button success hollow margin-0" data-add="add-more">Add Item</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<template id="add-more-item-template">
+  <div class="item" data-list-item>
+    <span class="counter"></span>
+    <div class="content grid-x">
+      <input data-date-picker class="cell shrink datepicker" type="text" name="post[items][][date]" placeholder="Select date...">
+      <input class="cell auto" type="text" name="post[items][][comment]" placeholder="Add comment...">
+    </div>
+    <span class="remove mdi mdi-close" data-remove></span>
+  </div>
+</template>

@@ -17,6 +17,7 @@ import { AceEditor } from '../components/aceEditor';
 import { PlaceAutocomplete } from '../components/placeAutocomplete';
 import { PlaceMap } from '../components/placeMap';
 import { LocationPicker } from '../components/locationPicker';
+import { AddMore } from '../components/addMore';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
 Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
@@ -37,3 +38,4 @@ Foundation.plugin(AceEditor, 'AceEditor');
 Foundation.plugin(PlaceAutocomplete, 'PlaceAutocomplete');
 Foundation.plugin(PlaceMap, 'PlaceMap');
 Foundation.plugin(LocationPicker, 'LocationPicker');
+Foundation.plugin(AddMore, 'AddMore');
