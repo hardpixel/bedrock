@@ -1,7 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-import { GetOrSetId } from './helpers';
+import { GetOrSetId, GetObjectValue } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Reveal } from 'foundation-sites/js/foundation.reveal';
 
@@ -86,22 +86,11 @@ class MediaReveal extends Plugin {
   _getItems() {
     $.ajax(this.mediaUrl).done(function(response) {
       if (this.mediaKey) {
-        response = this._getObjectValue(response, this.mediaKey);
+        response = GetObjectValue(response, this.mediaKey);
       }
 
       this._appendItems(response);
     }.bind(this));
-  }
-
-  /**
-   * Gets value from object by dot notation.
-   * @param {Object} obj - Object to get the key value from.
-   * @param {String} path - Dot notated path to the key.
-   * @function
-   * @private
-   */
-  _getObjectValue(obj, path) {
-    return new Function('_', `return _.${path}`)(obj);
   }
 
   /**
@@ -112,9 +101,9 @@ class MediaReveal extends Plugin {
    */
   _buildItem(data) {
     var item = this.$item.clone();
-    var key = this._getObjectValue(data, this.uniqueKey);
-    var url = this._getObjectValue(data, this.imageKey);
-    var title = this._getObjectValue(data, this.titleKey);
+    var key = GetObjectValue(data, this.uniqueKey);
+    var url = GetObjectValue(data, this.imageKey);
+    var title = GetObjectValue(data, this.titleKey);
 
     item.find('[data-src]').attr('src', this.imageUrl.replace('[src]', url));
     item.find('[data-text]').text(title);

@@ -1,7 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-import { GetOrSetId } from './helpers';
+import { GetOrSetId, GetObjectValue } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Sticky } from 'foundation-sites/js/foundation.sticky';
 
@@ -67,17 +67,6 @@ class TinyMceEditor extends Plugin {
     $(document).on({
       'scroll': this._stickyToolbar.bind(this)
     });
-  }
-
-  /**
-   * Gets value from object by dot notation.
-   * @param {Object} obj - Object to get the key value from.
-   * @param {String} path - Dot notated path to the key.
-   * @function
-   * @private
-   */
-  _getObjectValue(obj, path) {
-    return new Function('_', `return _.${path}`)(obj);
   }
 
   /**
@@ -224,8 +213,8 @@ class TinyMceEditor extends Plugin {
    */
   _mediaInsert(event, data) {
     $.each(data, function(index, data) {
-      var url = this._getObjectValue(data, this.mediaSrc);
-      var alt = this._getObjectValue(data, this.mediaAlt);
+      var url = GetObjectValue(data, this.mediaSrc);
+      var alt = GetObjectValue(data, this.mediaAlt);
       var item = '<img class="inline-image" src="' + this.mediaUrl.replace('[src]', url) + '" alt="' + alt + '" />';
 
       this.editor.insertContent(item);

@@ -1,7 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-import { GetOrSetId } from './helpers';
+import { GetOrSetId, GetObjectValue } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Triggers } from 'foundation-sites/js/foundation.util.triggers';
 
@@ -94,17 +94,6 @@ class MediaAttach extends Plugin {
   }
 
   /**
-   * Gets value from object by dot notation.
-   * @param {Object} obj - Object to get the key value from.
-   * @param {String} path - Dot notated path to the key.
-   * @function
-   * @private
-   */
-  _getObjectValue(obj, path) {
-    return new Function('_', `return _.${path}`)(obj);
-  }
-
-  /**
    * Builds single attachment item.
    * @param {Object} data - Image data object to build item from.
    * @function
@@ -112,9 +101,9 @@ class MediaAttach extends Plugin {
    */
   _buildItem(data) {
     var item = this.$item.clone();
-    var url = this._getObjectValue(data, this.imageKey);
-    var title = this._getObjectValue(data, this.titleKey);
-    var value = this._getObjectValue(data, this.valueKey);
+    var url = GetObjectValue(data, this.imageKey);
+    var title = GetObjectValue(data, this.titleKey);
+    var value = GetObjectValue(data, this.valueKey);
 
     item.find('[data-src]').attr('src', this.imageUrl.replace('[src]', url));
     item.find('[data-text]').text(title);

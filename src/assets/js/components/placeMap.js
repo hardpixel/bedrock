@@ -1,6 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
+import { GetObjectValue } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 /**
@@ -63,17 +64,6 @@ class PlaceMap extends Plugin {
   }
 
   /**
-   * Gets value from object by dot notation.
-   * @param {Object} obj - Object to get the key value from.
-   * @param {String} path - Dot notated path to the key.
-   * @function
-   * @private
-   */
-  _getObjectValue(obj, path) {
-    return new Function('_', `return _.${path}`)(obj);
-  }
-
-  /**
    * Gets markers JSON from url.
    * @function
    * @private
@@ -81,7 +71,7 @@ class PlaceMap extends Plugin {
   _getMarkers() {
     $.ajax(this.markersUrl).done(function(response) {
       if (this.options.markersKey) {
-        response = this._getObjectValue(response, this.options.markersKey);
+        response = GetObjectValue(response, this.options.markersKey);
       }
 
       this._addMarkers(response);
@@ -98,8 +88,8 @@ class PlaceMap extends Plugin {
     $.each(data, function(index, data) {
       var item = {
         position: {
-          lat: this._getObjectValue(data, this.options.latKey),
-          lng: this._getObjectValue(data, this.options.lngKey)
+          lat: GetObjectValue(data, this.options.latKey),
+          lng: GetObjectValue(data, this.options.lngKey)
         }
       };
 
