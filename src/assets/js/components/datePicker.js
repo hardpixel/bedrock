@@ -1,7 +1,6 @@
 'use strict';
 
 import $ from 'jquery';
-import _ from 'lodash';
 import clndr from 'clndr';
 import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
@@ -58,7 +57,40 @@ class DatePicker extends Plugin {
       },
       clickEvents: {
         click: this.close.bind(this)
-      }
+      },
+      render: function (data) {
+        var prev = '<div class="clndr-control-button"><span class="clndr-previous-button">&lsaquo;</span></div>';
+        var next = '<div class="clndr-control-button"><span class="clndr-next-button">&rsaquo;</span></div>';
+        var text = '<div class="month">'+ data.month +' '+ data.year +'</div>';
+        var head = '<div class="clndr-controls">'+ prev + text + next +'</div>';
+
+        var thead = '<thead><tr class="header-days">';
+
+        for (var i = 0; i < data.daysOfTheWeek.length; i++) {
+          thead += '<td class="header-day">'+ data.daysOfTheWeek[i] +'</td>';
+        }
+
+        thead += '</tr></thead>';
+
+        var tbody = '<tbody><tr class="header-days">';
+
+        for (var i = 0; i < data.numberOfRows; i++) {
+          tbody += '<tr>';
+
+          for (var j = 0; j < 7; j++) {
+            var d = j + i * 7;
+            tbody += '<td class="'+ data.days[d].classes +'"><div class="day-contents">'+ data.days[d].day +'</div></td>';
+          }
+
+          tbody += '</tr>';
+        }
+
+        tbody += '</tr></tbody>';
+
+        var table = '<table class="clndr-table" border="0" cellspacing="0" cellpadding="0">'+ thead + tbody +'</table>';
+
+        return head + table
+      },
     });
 
     this._events();
