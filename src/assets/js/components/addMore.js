@@ -38,9 +38,7 @@ class AddMore extends Plugin {
     this.$empty = this.$element.find('[data-empty-state]');
     this.$grid = this.$element.find('[data-list-remove]');
     this.$item = $(this.template);
-    this.fieldName = this.$item.find('[data-value]').attr('name');
-    this.$hidden = this.$element.find(`[name="${this.fieldName}"]`);
-    this.required = this.$item.find('[data-value]').is('[required]');
+    this.$removeInput = this.$element.find('[data-remove-input]');
     this.$anchor = $(`[data-add="${this.id}"]`);
 
     this._events();
@@ -57,8 +55,8 @@ class AddMore extends Plugin {
       'changed.zf.remove.list': this._updateActiveItems.bind(this)
     });
 
-    this.$anchor.off('click.zf.add.more').on({
-      'click.zf.add.more': this.add.bind(this)
+    this.$anchor.off('click').on({
+      'click': this.add.bind(this)
     });
   }
 
@@ -73,16 +71,11 @@ class AddMore extends Plugin {
 
     if (this.activeItems.length > 0) {
       this.$empty.addClass('hide');
-      this.$hidden.removeAttr('required');
+      this.$removeInput.prop('checked', false);
     } else {
-      if (this.required) {
-        this.$hidden.attr('required', 'required');
-      }
-
       this.$empty.removeClass('hide');
+      this.$removeInput.prop('checked', true);
     }
-
-    this.$hidden.trigger('change');
   }
 
   /**
