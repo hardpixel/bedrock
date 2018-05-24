@@ -92,8 +92,7 @@ class DatePicker extends Plugin {
         html += '</table>';
 
         return html
-      },
-      moment: window.moment
+      }
     });
 
     this._events();
