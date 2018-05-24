@@ -62,35 +62,38 @@ class DatePicker extends Plugin {
         var prev = '<div class="clndr-control-button"><span class="clndr-previous-button">&lsaquo;</span></div>';
         var next = '<div class="clndr-control-button"><span class="clndr-next-button">&rsaquo;</span></div>';
         var text = '<div class="month">'+ data.month +' '+ data.year +'</div>';
-        var head = '<div class="clndr-controls">'+ prev + text + next +'</div>';
+        var html = '<div class="clndr-controls">'+ prev + text + next +'</div>';
 
-        var thead = '<thead><tr class="header-days">';
+        html += '<table class="clndr-table" border="0" cellspacing="0" cellpadding="0">';
+        html += '<thead><tr class="header-days">';
 
         for (var i = 0; i < data.daysOfTheWeek.length; i++) {
-          thead += '<td class="header-day">'+ data.daysOfTheWeek[i] +'</td>';
+          html += '<td class="header-day">'+ data.daysOfTheWeek[i] +'</td>';
         }
 
-        thead += '</tr></thead>';
-
-        var tbody = '<tbody><tr class="header-days">';
+        html += '</tr></thead>';
+        html += '<tbody><tr class="header-days">';
 
         for (var i = 0; i < data.numberOfRows; i++) {
-          tbody += '<tr>';
+          html += '<tr>';
 
           for (var j = 0; j < 7; j++) {
             var d = j + i * 7;
-            tbody += '<td class="'+ data.days[d].classes +'"><div class="day-contents">'+ data.days[d].day +'</div></td>';
+
+            html += '<td class="'+ data.days[d].classes +'">';
+            html += '<div class="day-contents">'+ data.days[d].day +'</div>';
+            html += '</td>';
           }
 
-          tbody += '</tr>';
+          html += '</tr>';
         }
 
-        tbody += '</tr></tbody>';
+        html += '</tr></tbody>';
+        html += '</table>';
 
-        var table = '<table class="clndr-table" border="0" cellspacing="0" cellpadding="0">'+ thead + tbody +'</table>';
-
-        return head + table
+        return html
       },
+      moment: window.moment
     });
 
     this._events();
