@@ -86,6 +86,27 @@ class AddMore extends Plugin {
    */
   _buildItem(data) {
     var item = this.$item.clone();
+    var regex = /\[\d\]/;
+    var index = 0;
+
+    if (this.activeItems.length > 0) {
+      var field = this.activeItems[this.activeItems.length - 1];
+      var fname = $(field).find(':input:last').attr('name');
+      var match = fname.match(/\[\d\]/);
+
+      if (match && match.length > 0) {
+        index = match[0].replace(/\D/, '');
+        index = parseInt(index) + 1;
+      }
+    }
+
+    item.find(':input').each(function(item_index, el) {
+      var oname = $(el).attr('name');
+      var nname = oname.replace(regex, '['+ index +']');
+
+      $(el).attr('name', nname);
+    });
+
     return item;
   }
 
