@@ -22,6 +22,8 @@
   }
 
   .mce-top-part {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 
     &:before {
       display: none !important;
