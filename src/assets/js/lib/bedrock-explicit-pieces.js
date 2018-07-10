@@ -18,6 +18,7 @@ import { PlaceAutocomplete } from '../components/placeAutocomplete';
 import { PlaceMap } from '../components/placeMap';
 import { LocationPicker } from '../components/locationPicker';
 import { AddMore } from '../components/addMore';
+import { RruleGenerator } from '../components/rruleGenerator';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
 Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
@@ -39,3 +40,4 @@ Foundation.plugin(PlaceAutocomplete, 'PlaceAutocomplete');
 Foundation.plugin(PlaceMap, 'PlaceMap');
 Foundation.plugin(LocationPicker, 'LocationPicker');
 Foundation.plugin(AddMore, 'AddMore');
+Foundation.plugin(RruleGenerator, 'RruleGenerator');
