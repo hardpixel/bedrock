@@ -5,29 +5,71 @@
 
   <div class="panel-content border padding-bottom-0">
     <div class="grid-x grid-margin-x">
-      <div class="cell small-4">
-        <label for="schedule-start-date">
-          Date Start
-          <input id="schedule-start-date" class="datepicker" type="text" name="start-date" value="" placeholder="Select Start Date" data-date-picker>
-        </label>
-      </div>
-      <div class="cell small-4">
-        <label for="schedule-end-date">
-          Date End
-          <input id="schedule-end-date" class="datepicker" type="text" name="end-date" value="" placeholder="Select End Date" data-date-picker>
-        </label>
-      </div>
-      <div class="cell small-4">
-        <label for="schedule-recurrence">
-          Recurrence
-          <select id="schedule-recurrence" name="recurrence">
-            <option value="">Non Recurring</option>
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-            <option value="yearly">Yearly</option>
-          </select>
-        </label>
+      <div class="cell small-6">
+        <div class="grid-x grid-margin-x rrule-generator" data-rrule-generator>
+
+          <div class="cell small-6">
+            <label>
+              Date Start
+              <input class="datepicker" type="text" data-rrule="dateStart" placeholder="Select Start Date" data-date-picker>
+            </label>
+          </div>
+
+          <div class="cell small-6">
+            <label>
+              Date End
+              <input class="datepicker" type="text" data-rrule="dateEnd" placeholder="Select End Date" data-date-picker>
+            </label>
+          </div>
+
+          <div class="cell small-6">
+            <label>
+              Time Start
+              <input class="timepicker" type="text" data-rrule="timeStart" placeholder="Select Start Time" data-time-picker>
+            </label>
+          </div>
+
+          <div class="cell small-6">
+            <label>
+              Time End
+              <input class="timepicker" type="text" data-rrule="timeEnd" placeholder="Select End Time" data-time-picker>
+            </label>
+          </div>
+
+          <div class="cell small-12">
+            <label>
+              Repeat
+              <select data-rrule="repeat">
+                <option value="">No Repeat</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="cell small-12">
+            <div class="schedule-controls" data-rrule-controls="daily">
+              Daily controls
+            </div>
+
+            <div class="schedule-controls" data-rrule-controls="weekly">
+              Weekly controls
+            </div>
+
+            <div class="schedule-controls" data-rrule-controls="monthly">
+              Monthly controls
+            </div>
+
+            <div class="schedule-controls" data-rrule-controls="yearly">
+              Yearly controls
+            </div>
+
+            <p class="help-text" data-rrule-text></p>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
