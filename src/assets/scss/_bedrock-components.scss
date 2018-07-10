@@ -22,6 +22,7 @@
 @import 'components/ace-editor';
 @import 'components/place-autocomplete';
 @import 'components/item-list';
+@import 'components/rrule-generator';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -47,3 +48,4 @@
 @include bedrock-ace-editor;
 @include bedrock-place-autocomplete;
 @include bedrock-item-list;
+@include bedrock-rrule-generator;

@@ -1,0 +1,16 @@
+// Rrule Generator Mixins
+
+@mixin rrule-generator {
+  .schedule-controls {
+    display: none;
+  }
+}
+
+
+// Rrule Generator Component
+
+@mixin bedrock-rrule-generator {
+  .rrule-generator {
+    @include rrule-generator;
+  }
+}
