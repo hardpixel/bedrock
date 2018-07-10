@@ -151,7 +151,7 @@ class DatePicker extends Plugin {
     var day = $(event.element);
 
     if (!day.hasClass('inactive')) {
-      this.$element.val(event.date._i);
+      this.$element.val(event.date._i).trigger('change');
       this.$dropdown.foundation('close');
     }
   }
