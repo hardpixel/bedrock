@@ -125,7 +125,29 @@ class RruleGenerator extends Plugin {
     var html = '';
     var $el = $(el);
 
-    html += 'Monthday Picker';
+    html += '<table class="monthday-table"><tbody>';
+      for (var r = 0; r < 5; r++) {
+        html += '<tr>';
+
+        for (var c = 1; c < 8; c++) {
+          var day = (r * 7) + c;
+
+          if (day < 32) {
+            html += '<td><label>';
+            html += '<input type="checkbox" data-rrule="bymonthday" value="' + day + '" />';
+            html += '<span>' + day + '</span>';
+            html += '</label></td>';
+          } else if (day == 32) {
+            html += '<td colspan="4" class="last-day"><label>';
+            html += '<input type="checkbox" data-rrule="bymonthday" value="-1" />';
+            html += '<span>Last Day</span>';
+            html += '</label></td>';
+          }
+        }
+
+        html += '</tr>';
+      }
+    html += '</tbody></table>';
 
     $el.html(html);
     $el.addClass('monthday-picker');
