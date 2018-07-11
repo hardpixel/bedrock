@@ -90,8 +90,6 @@ class RruleGenerator extends Plugin {
       var value = options[item];
       var valid = value !== null && value !== '' && value.toString().length > 0;
 
-      console.log([value, valid]);
-
       if (!valid) {
         delete(options[item]);
       }
@@ -230,10 +228,7 @@ class RruleGenerator extends Plugin {
       }
     });
 
-    console.log(options);
-
     options = this._parseRules(options);
-    console.log(options);
     this._createRule(options);
   }
 
