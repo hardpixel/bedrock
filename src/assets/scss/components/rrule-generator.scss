@@ -15,11 +15,33 @@
 
   tr {
     background: none !important;
+
+    &:first-child {
+
+      td {
+        border-top: $input-border;
+      }
+    }
+
+    &:last-child {
+
+      td {
+        border-bottom: $input-border;
+      }
+    }
   }
 
   td {
     border: $table-border;
     padding: 0;
+
+    &:first-child {
+      border-left: $input-border;
+    }
+
+    &:last-child {
+      border-right: $input-border;
+    }
 
     &.last-day {
       background: rgba(black, .03);
