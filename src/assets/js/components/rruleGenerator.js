@@ -14,7 +14,7 @@ window.rrule = RRule;
 
 class RruleGenerator extends Plugin {
   /**
-   * Creates a new instance of an custom-plugin.
+   * Creates a new instance of an rrule-generator.
    * @class
    * @name RruleGenerator
    * @fires RruleGenerator#init
@@ -42,7 +42,7 @@ class RruleGenerator extends Plugin {
   }
 
   /**
-   * Initializes the custom-plugin wrapper.
+   * Initializes the rrule-generator wrapper.
    * @function
    * @private
    */
@@ -61,7 +61,7 @@ class RruleGenerator extends Plugin {
   }
 
   /**
-   * Adds event handlers to the custom-plugin.
+   * Adds event handlers to the rrule-generator.
    * @function
    * @private
    */
@@ -260,7 +260,7 @@ class RruleGenerator extends Plugin {
   }
 
   /**
-   * Destroys the custom-plugin plugin.
+   * Destroys the rrule-generator plugin.
    * @function
    * @private
    */
