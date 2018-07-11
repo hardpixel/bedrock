@@ -6,11 +6,58 @@
   }
 }
 
+@mixin rrule-monthday-picker {
+  text-align: center;
+
+  table {
+    background: white;
+  }
+
+  tr {
+    background: none !important;
+  }
+
+  td {
+    border: $table-border;
+    padding: 0;
+
+    &.last-day {
+      background: rgba(black, .03);
+    }
+  }
+
+  input {
+    display: none;
+
+    &:checked + span {
+      background: $anchor-color;
+      color: white;
+    }
+  }
+
+  label {
+    display: block;
+    padding: 0;
+    margin: 0;
+  }
+
+  span {
+    display: block;
+    padding: .5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+}
+
 
 // Rrule Generator Component
 
 @mixin bedrock-rrule-generator {
   .rrule-generator {
     @include rrule-generator;
+  }
+
+  .monthday-picker {
+    @include rrule-monthday-picker;
   }
 }
