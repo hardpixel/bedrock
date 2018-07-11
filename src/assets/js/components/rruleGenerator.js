@@ -4,8 +4,8 @@ import $ from 'jquery';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 var RRule = require('rrule').RRule;
+var moment = require('moment');
 
-window.rrule = RRule;
 
 /**
  * RruleGenerator module.
@@ -107,10 +107,26 @@ class RruleGenerator extends Plugin {
    * @function
    */
   _bymonthElement(el) {
+    var months = moment.monthsShort();
     var html = '';
     var $el = $(el);
 
-    html += 'Month Picker';
+    html += '<table><tbody>';
+      for (var r = 0; r < 2; r++) {
+        html += '<tr>';
+
+        for (var c = 1; c < 7; c++) {
+          var month = (r * 6) + c;
+
+          html += '<td><label>';
+          html += '<input type="checkbox" data-rrule="bymonth" value="' + month + '" />';
+          html += '<span>' + months[month - 1] + '</span>';
+          html += '</label></td>';
+        }
+
+        html += '</tr>';
+      }
+    html += '</tbody></table>';
 
     $el.html(html);
     $el.addClass('month-picker rrule-picker');
@@ -161,10 +177,18 @@ class RruleGenerator extends Plugin {
    * @function
    */
   _byweekdayElement(el) {
+    var days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
     var html = '';
     var $el = $(el);
 
-    html += 'Weekday Picker';
+    html += '<table><tbody><tr>';
+      days.forEach(function(day) {
+        html += '<td><label>';
+        html += '<input type="checkbox" data-rrule="byweekday" value="' + day.toLowerCase() + '" />';
+        html += '<span>' + day + '</span>';
+        html += '</label></td>';
+      });
+    html += '</tr></tbody></table>';
 
     $el.html(html);
     $el.addClass('weekday-picker rrule-picker');
@@ -316,6 +340,8 @@ class RruleGenerator extends Plugin {
     options['wkst'] = this._parseConstant(options['wkst']);
     options['bymonthday'] = this._parseMultiple(options['bymonthday'], this._parseNumber);
     options['byweekday'] = this._parseMultiple(options['byweekday'], this._parseConstant);
+    options['byhour'] = this._parseMultiple(options['byhour'], this._parseNumber);
+    options['byminute'] = this._parseMultiple(options['byminute'], this._parseNumber);
 
     return this._cleanupOptions(options);
   }
