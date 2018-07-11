@@ -50,10 +50,12 @@ class RruleGenerator extends Plugin {
     this.$input = this.$element.find('[data-rrule]');
     this.$repeat = this.$element.find('[data-rrule="freq"]');
     this.$controls = this.$element.find('[data-rrule-controls]');
+    this.$elements = this.$element.find('[data-rrule-element]');
     this.$text = this.$element.find('[data-rrule-text]');
 
     this.$controls.hide();
 
+    this._mountElements();
     this._toggleControls();
     this._updateRules();
     this._update();
@@ -77,6 +79,104 @@ class RruleGenerator extends Plugin {
     this.$element.off('.zf.trigger').on({
       'update.zf.trigger': this._update.bind(this)
     });
+  }
+
+  /**
+   * Mounts custom plugin elements.
+   * @function
+   * @private
+   */
+  _mountElements() {
+    var plugin = this;
+
+    this.$elements.each(function(index, el) {
+      var elName = $(el).attr('data-rrule-element');
+      var elFunction = plugin[`_${elName}Element`];
+
+      if (elFunction) {
+        elFunction(el);
+      }
+    });
+  }
+
+  /**
+   * Creates a month picker element.
+   * @param {Object} el - Html element object.
+   * @private
+   * @function
+   */
+  _bymonthElement(el) {
+    var html = '';
+    var $el = $(el);
+
+    html += 'Month Picker';
+
+    $el.html(html);
+    $el.addClass('month-picker');
+  }
+
+  /**
+   * Creates a monthday picker element.
+   * @param {Object} el - Html element object.
+   * @private
+   * @function
+   */
+  _bymonthdayElement(el) {
+    var html = '';
+    var $el = $(el);
+
+    html += 'Monthday Picker';
+
+    $el.html(html);
+    $el.addClass('monthday-picker');
+  }
+
+  /**
+   * Creates a weekday picker element.
+   * @param {Object} el - Html element object.
+   * @private
+   * @function
+   */
+  _byweekdayElement(el) {
+    var html = '';
+    var $el = $(el);
+
+    html += 'Weekday Picker';
+
+    $el.html(html);
+    $el.addClass('weekday-picker');
+  }
+
+  /**
+   * Creates a hour picker element.
+   * @param {Object} el - Html element object.
+   * @private
+   * @function
+   */
+  _byhourElement(el) {
+    var html = '';
+    var $el = $(el);
+
+    html += 'Hour Picker';
+
+    $el.html(html);
+    $el.addClass('hour-picker');
+  }
+
+  /**
+   * Creates a minute picker element.
+   * @param {Object} el - Html element object.
+   * @private
+   * @function
+   */
+  _byminuteElement(el) {
+    var html = '';
+    var $el = $(el);
+
+    html += 'Minute Picker';
+
+    $el.html(html);
+    $el.addClass('minute-picker');
   }
 
   /**

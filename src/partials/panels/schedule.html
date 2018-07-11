@@ -20,35 +20,57 @@
       <div class="cell small-3">
         <label>
           Start
-          <input class="datepicker" type="text" data-rrule="dtstart" placeholder="Select Start Date" data-date-picker>
-        </label>
-      </div>
-
-      <div class="cell small-3">
-        <label>
-          Count
-          <input type="number" step="1" data-rrule="count" placeholder="Select Count">
+          <input class="datepicker" type="text" data-rrule="dtstart" placeholder="Select date" data-date-picker>
         </label>
       </div>
 
       <div class="cell small-3">
         <label>
           Until
-          <input class="datepicker" type="text" data-rrule="until" placeholder="Select End Date" data-date-picker>
+          <input class="datepicker" type="text" data-rrule="until" placeholder="Select date" data-date-picker>
+        </label>
+      </div>
+
+      <div class="cell small-2">
+        <label>
+          Interval
+          <input type="number" step="1" data-rrule="interval" placeholder="1">
+        </label>
+      </div>
+
+      <div class="cell small-1">
+        <label>
+          Count
+          <input type="number" step="1" data-rrule="count" placeholder="1">
         </label>
       </div>
 
       <div class="cell small-12">
-        <div class="schedule-controls" data-rrule-controls="daily">
-        </div>
+        <div class="schedule-controls" data-rrule-controls="daily weekly monthly yearly">
+          <label>
+            By Month
+            <div data-rrule-element="bymonth"></div>
+          </label>
 
-        <div class="schedule-controls" data-rrule-controls="weekly">
-        </div>
+          <label>
+            By Monthday
+            <div data-rrule-element="bymonthday"></div>
+          </label>
 
-        <div class="schedule-controls" data-rrule-controls="monthly">
-        </div>
+          <label>
+            By Weekday
+            <div data-rrule-element="byweekday"></div>
+          </label>
 
-        <div class="schedule-controls" data-rrule-controls="yearly">
+          <label>
+            By Hour
+            <div data-rrule-element="byhour"></div>
+          </label>
+
+          <label>
+            By Minute
+            <div data-rrule-element="byminute"></div>
+          </label>
         </div>
       </div>
     </div>
