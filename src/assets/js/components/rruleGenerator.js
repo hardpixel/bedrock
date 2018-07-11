@@ -180,10 +180,25 @@ class RruleGenerator extends Plugin {
     var html = '';
     var $el = $(el);
 
-    html += 'Hour Picker';
+    html += '<table><tbody>';
+      for (var r = 0; r < 4; r++) {
+        html += '<tr>';
+
+        for (var c = 1; c < 7; c++) {
+          var hour = (r * 6) + c;
+
+          html += '<td><label>';
+          html += '<input type="checkbox" data-rrule="byhour" value="' + hour + '" />';
+          html += '<span>' + hour + '</span>';
+          html += '</label></td>';
+        }
+
+        html += '</tr>';
+      }
+    html += '</tbody></table>';
 
     $el.html(html);
-    $el.addClass('hour-picker');
+    $el.addClass('hour-picker rrule-picker');
   }
 
   /**
