@@ -235,7 +235,22 @@ class RruleGenerator extends Plugin {
     var html = '';
     var $el = $(el);
 
-    html += 'Minute Picker';
+    html += '<table><tbody>';
+      for (var r = 0; r < 2; r++) {
+        html += '<tr>';
+
+        for (var c = 0; c < 6; c++) {
+          var hour = ((r * 6) + c) * 5;
+
+          html += '<td><label>';
+          html += '<input type="radio" data-rrule="byminute" value="' + hour + '" />';
+          html += '<span>' + hour + '</span>';
+          html += '</label></td>';
+        }
+
+        html += '</tr>';
+      }
+    html += '</tbody></table>';
 
     $el.html(html);
     $el.addClass('minute-picker rrule-picker');
