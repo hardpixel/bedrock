@@ -113,7 +113,7 @@ class RruleGenerator extends Plugin {
     html += 'Month Picker';
 
     $el.html(html);
-    $el.addClass('month-picker');
+    $el.addClass('month-picker rrule-picker');
   }
 
   /**
@@ -167,7 +167,7 @@ class RruleGenerator extends Plugin {
     html += 'Weekday Picker';
 
     $el.html(html);
-    $el.addClass('weekday-picker');
+    $el.addClass('weekday-picker rrule-picker');
   }
 
   /**
@@ -214,7 +214,7 @@ class RruleGenerator extends Plugin {
     html += 'Minute Picker';
 
     $el.html(html);
-    $el.addClass('minute-picker');
+    $el.addClass('minute-picker rrule-picker');
   }
 
   /**
