@@ -5,6 +5,8 @@ import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 var RRule = require('rrule').RRule;
 
+window.rrule = RRule;
+
 /**
  * RruleGenerator module.
  * @module rrule-generator
@@ -23,6 +25,18 @@ class RruleGenerator extends Plugin {
     this.className = 'RruleGenerator'; // ie9 back compat
     this.$element = element;
     this.options = $.extend({}, RruleGenerator.defaults, this.$element.data(), options);
+    this.rrule = null;
+    this.arrayOpts = [
+      'byweekday',
+      'bymonth',
+      'bysetpos',
+      'bymonthday',
+      'byyearday',
+      'byweekno',
+      'byhour',
+      'byminute',
+      'bysecond'
+    ];
 
     this._init();
   }
@@ -42,6 +56,7 @@ class RruleGenerator extends Plugin {
 
     this._toggleControls();
     this._updateRules();
+    this._update();
     this._events();
   }
 
@@ -51,13 +66,38 @@ class RruleGenerator extends Plugin {
    * @private
    */
   _events() {
+    this.$repeat.off('change.zf.rrule.repeat').on({
+      'change.zf.rrule.repeat': this._toggleControls.bind(this)
+    });
+
     this.$input.off('change.zf.rrule.update').on({
       'change.zf.rrule.update': this._updateRules.bind(this)
     });
 
-    this.$repeat.off('change.zf.rrule.repeat').on({
-      'change.zf.rrule.repeat': this._toggleControls.bind(this)
+    this.$element.off('.zf.trigger').on({
+      'update.zf.trigger': this._update.bind(this)
     });
+  }
+
+  /**
+   * Remove empty arrays, strings and null values from object.
+   * @param {Object} options - Options object.
+   * @private
+   * @function
+   */
+  _cleanupOptions(options) {
+    Object.keys(options).forEach(function(item) {
+      var value = options[item];
+      var valid = value !== null && value !== '' && value.toString().length > 0;
+
+      console.log([value, valid]);
+
+      if (!valid) {
+        delete(options[item]);
+      }
+    });
+
+    return options;
   }
 
   /**
@@ -75,20 +115,72 @@ class RruleGenerator extends Plugin {
   }
 
   /**
+   * Converts a string to RRule constant.
+   * @param {String} string - Constant name.
+   * @private
+   * @function
+   */
+  _parseConstant(string) {
+    if (string && string !== '') {
+      var name = string.toUpperCase();
+      var value = RRule[name];
+
+      return value;
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * Converts a string to number.
+   * @param {String} string - Number string.
+   * @private
+   * @function
+   */
+  _parseNumber(string) {
+    if (string && string !== '') {
+      return parseInt(string);
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * Parses a multiple value rule.
+   * @param {Array} array - Array of string values.
+   * @private
+   * @function
+   */
+  _parseMultiple(array, callback) {
+    if (array && array !== '') {
+      var items = array.map(function(item) {
+        return callback(item);
+      });
+
+      return items;
+    } else {
+      return null;
+    }
+  }
+
+  /**
    * Parses options from inputs to RRule options.
    * @param {Object} options - Raw options object.
    * @private
    * @function
    */
   _parseRules(options) {
-    var freq = options['freq'].toUpperCase();
-    options['freq'] = RRule[freq];
-
     options['dtstart'] = this._parseDate(options['dtstart']);
     options['until'] = this._parseDate(options['until']);
-    options['count'] = parseInt(options['count']);
 
-    return options;
+    options['count'] = this._parseNumber(options['count']);
+    options['interval'] = this._parseNumber(options['interval']);
+
+    options['freq'] = this._parseConstant(options['freq']);
+    options['wkst'] = this._parseConstant(options['wkst']);
+    options['byweekday'] = this._parseMultiple(options['byweekday'], this._parseConstant.bind(this));
+
+    return this._cleanupOptions(options);
   }
 
   /**
@@ -98,8 +190,8 @@ class RruleGenerator extends Plugin {
    * @function
    */
   _createRule(options) {
-    var rule = new RRule(options);
-    this.$text.text(rule.toText());
+    this.rrule = new RRule(options);
+    this.$element.trigger('update.zf.trigger', [this.rrule]);
   }
 
   /**
@@ -109,16 +201,39 @@ class RruleGenerator extends Plugin {
    * @function
    */
   _updateRules(event) {
+    var arrayOpts = this.arrayOpts;
     var options = {};
 
-    this.$input.each(function(index, el) {
-      var attr = $(el).attr('data-rrule');
-      var value = $(el).val();
-
-      options[attr] = value;
+    arrayOpts.forEach(function(item) {
+      options[item] = [];
     });
 
+    this.$input.filter(':not(.disabled)').each(function(index, el) {
+      var input = $(el);
+      var attr = input.attr('data-rrule');
+      var value = input.val();
+      var multiple = $.inArray(attr, arrayOpts) !== -1;
+      var save = false;
+
+      if (input.is(':checkbox')) {
+        save = input.is(':checked');
+      } else {
+        save = true;
+      }
+
+      if (save) {
+        if (multiple) {
+          options[attr].push(value);
+        } else {
+          options[attr] = value;
+        }
+      }
+    });
+
+    console.log(options);
+
     options = this._parseRules(options);
+    console.log(options);
     this._createRule(options);
   }
 
@@ -130,9 +245,23 @@ class RruleGenerator extends Plugin {
    */
   _toggleControls(event) {
     var value = this.$repeat.val();
+    var active = this.$element.find(`[data-rrule-controls*="${value}"]`);
 
     this.$controls.hide();
-    this.$element.find('[data-rrule-controls="' + value + '"]').show();
+    this.$controls.find('[data-rrule]').addClass('disabled');
+
+    active.show();
+    active.find('[data-rrule]').removeClass('disabled');
+  }
+
+  /**
+   * Updates ui on rrule update.
+   * @param {Object} event - Event object passed from listener.
+   * @private
+   * @function
+   */
+  _update(event) {
+    this.$text.text(this.rrule.toText());
   }
 
   /**
@@ -141,8 +270,9 @@ class RruleGenerator extends Plugin {
    * @private
    */
   _destroy() {
-    this.$input.off('change.zf.rrule.update');
     this.$repeat.off('change.zf.rrule.repeat');
+    this.$input.off('change.zf.rrule.update');
+    this.$element.off('.zf.trigger');
   }
 }
 
