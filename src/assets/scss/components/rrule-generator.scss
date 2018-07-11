@@ -6,7 +6,7 @@
   }
 }
 
-@mixin rrule-monthday-picker {
+@mixin rrule-picker {
   text-align: center;
 
   table {
@@ -57,7 +57,7 @@
     @include rrule-generator;
   }
 
-  .monthday-picker {
-    @include rrule-monthday-picker;
+  .rrule-picker {
+    @include rrule-picker;
   }
 }

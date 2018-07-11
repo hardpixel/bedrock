@@ -126,7 +126,7 @@ class RruleGenerator extends Plugin {
     var html = '';
     var $el = $(el);
 
-    html += '<table class="monthday-table"><tbody>';
+    html += '<table><tbody>';
       for (var r = 0; r < 5; r++) {
         html += '<tr>';
 
@@ -151,7 +151,7 @@ class RruleGenerator extends Plugin {
     html += '</tbody></table>';
 
     $el.html(html);
-    $el.addClass('monthday-picker');
+    $el.addClass('monthday-picker rrule-picker');
   }
 
   /**
