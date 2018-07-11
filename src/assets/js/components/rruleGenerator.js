@@ -47,15 +47,16 @@ class RruleGenerator extends Plugin {
    * @private
    */
   _init() {
-    this.$input = this.$element.find('[data-rrule]');
-    this.$repeat = this.$element.find('[data-rrule="freq"]');
-    this.$controls = this.$element.find('[data-rrule-controls]');
     this.$elements = this.$element.find('[data-rrule-element]');
-    this.$text = this.$element.find('[data-rrule-text]');
+    this._mountElements();
 
+    this.$controls = this.$element.find('[data-rrule-controls]');
     this.$controls.hide();
 
-    this._mountElements();
+    this.$input = this.$element.find('[data-rrule]');
+    this.$repeat = this.$element.find('[data-rrule="freq"]');
+    this.$text = this.$element.find('[data-rrule-text]');
+
     this._toggleControls();
     this._updateRules();
     this._update();
@@ -298,7 +299,8 @@ class RruleGenerator extends Plugin {
 
     options['freq'] = this._parseConstant(options['freq']);
     options['wkst'] = this._parseConstant(options['wkst']);
-    options['byweekday'] = this._parseMultiple(options['byweekday'], this._parseConstant.bind(this));
+    options['bymonthday'] = this._parseMultiple(options['bymonthday'], this._parseNumber);
+    options['byweekday'] = this._parseMultiple(options['byweekday'], this._parseConstant);
 
     return this._cleanupOptions(options);
   }
