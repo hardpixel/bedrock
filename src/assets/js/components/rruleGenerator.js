@@ -240,7 +240,7 @@ class RruleGenerator extends Plugin {
           var hour = ((r * 6) + c) * 5;
 
           html += '<td><label>';
-          html += '<input type="radio" data-rrule="byminute" value="' + hour + '" />';
+          html += '<input type="checkbox" data-rrule="byminute" value="' + hour + '" />';
           html += '<span>' + hour + '</span>';
           html += '</label></td>';
         }
