@@ -60,6 +60,7 @@ class RruleGenerator extends Plugin {
     this.$input = this.$element.find('[data-rrule-input]');
     this.$output = this.$element.find('[data-rrule-output]');
 
+    this._readInput();
     this._toggleControls();
 
     if (!this.rrule) {
@@ -487,6 +488,54 @@ class RruleGenerator extends Plugin {
   _updateInput() {
     if (this.$input.length) {
       this.$input.val(this.rrule.toString());
+    }
+  }
+
+  /**
+   * Create rrule from input value.
+   * @private
+   * @function
+   */
+  _readInput() {
+    if (this.$input.length) {
+      var arrayOpts = this.arrayOpts;
+      var controls = this.$rule;
+      var string = this.$input.val();
+
+      if (string && string !== '') {
+        this.rrule = RRule.fromString(string);
+        var options = RRule.parseString(string);
+
+        $.each(options, function(key, value) {
+          var multiple = $.inArray(key, arrayOpts) !== -1;
+          var control = controls.filter(`[data-rrule="${key}"]`);
+
+          if (value && value !== '') {
+            if (multiple) {
+              if (Array.isArray(value)) {
+                value.forEach(function(item) {
+                  control.filter(`[value="${item}"]`).prop('checked', true);
+                });
+              }
+            } else {
+              if (key == 'freq') {
+                var freqs = {};
+
+                RRule.FREQUENCIES.forEach(function(freq) {
+                  var freqKey = RRule[freq]
+                  freqs[freqKey] = freq;
+                });
+
+                value = freqs[value].toLowerCase();
+              }
+
+              control.val(value);
+            }
+          }
+        });
+
+        this._updateControls();
+      }
     }
   }
 
