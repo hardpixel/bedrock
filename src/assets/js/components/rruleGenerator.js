@@ -59,7 +59,6 @@ class RruleGenerator extends Plugin {
 
     this._toggleControls();
     this._updateRules();
-    this._update();
     this._events();
   }
 
@@ -75,10 +74,6 @@ class RruleGenerator extends Plugin {
 
     this.$input.off('change.zf.rrule.update').on({
       'change.zf.rrule.update': this._updateRules.bind(this)
-    });
-
-    this.$element.off('.zf.trigger').on({
-      'update.zf.trigger': this._update.bind(this)
     });
   }
 
@@ -362,17 +357,6 @@ class RruleGenerator extends Plugin {
   }
 
   /**
-   * Creates an RRule object from input values.
-   * @param {Object} options - Options object.
-   * @private
-   * @function
-   */
-  _createRule(options) {
-    this.rrule = new RRule(options);
-    this.$element.trigger('update.zf.trigger', [this.rrule]);
-  }
-
-  /**
    * Updates the generated rule from inputs
    * @param {Object} event - Event object passed from listener.
    * @private
@@ -409,7 +393,11 @@ class RruleGenerator extends Plugin {
     });
 
     options = this._parseRules(options);
-    this._createRule(options);
+    this.rrule = new RRule(options);
+
+    this._updateText();
+
+    this.$element.trigger('update.zf.trigger', [this.rrule]);
   }
 
   /**
@@ -430,13 +418,14 @@ class RruleGenerator extends Plugin {
   }
 
   /**
-   * Updates ui on rrule update.
-   * @param {Object} event - Event object passed from listener.
+   * Updates rrule text presentation.
    * @private
    * @function
    */
-  _update(event) {
-    this.$text.text(this.rrule.toText());
+  _updateText() {
+    if (this.$text.length) {
+      this.$text.text(this.rrule.toText());
+    }
   }
 
   /**
