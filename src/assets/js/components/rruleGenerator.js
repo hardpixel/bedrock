@@ -259,8 +259,25 @@ class RruleGenerator extends Plugin {
    * @private
    * @function
    */
-  _cleanupOptions(options) {
+  _normalizeOptions(options) {
     var config = {};
+    var wkst = options['wkst'];
+    var intval = options['interval'];
+    var byhour = options['byhour'];
+    var byminute = options['byminute'];
+    var bysecond = options['bysecond'];
+
+    if (!wkst) {
+      options['wkst'] = RRule.MO;
+    }
+
+    if (intval < 2) {
+      delete(options['interval']);
+    }
+
+    if (!bysecond.length && (byhour.length || byminute.length)) {
+      options['bysecond'] = [0];
+    }
 
     Object.keys(RRule.DEFAULT_OPTIONS).forEach(function(item) {
       var value = options[item];
@@ -352,12 +369,15 @@ class RruleGenerator extends Plugin {
 
     options['freq'] = this._parseConstant(options['freq']);
     options['wkst'] = this._parseConstant(options['wkst']);
+
+    options['bymonth'] = this._parseMultiple(options['bymonth'], this._parseNumber);
     options['bymonthday'] = this._parseMultiple(options['bymonthday'], this._parseNumber);
     options['byweekday'] = this._parseMultiple(options['byweekday'], this._parseConstant);
     options['byhour'] = this._parseMultiple(options['byhour'], this._parseNumber);
     options['byminute'] = this._parseMultiple(options['byminute'], this._parseNumber);
+    options['bysecond'] = this._parseMultiple(options['bysecond'], this._parseNumber);
 
-    return this._cleanupOptions(options);
+    return this._normalizeOptions(options);
   }
 
   /**
