@@ -260,16 +260,18 @@ class RruleGenerator extends Plugin {
    * @function
    */
   _cleanupOptions(options) {
-    Object.keys(options).forEach(function(item) {
-      var value = options[item];
-      var valid = value !== null && value !== '' && value.toString().length > 0;
+    var config = {};
 
-      if (!valid) {
-        delete(options[item]);
+    Object.keys(RRule.DEFAULT_OPTIONS).forEach(function(item) {
+      var value = options[item];
+
+      if (value) {
+        var valid = value !== null && value !== '' && value.toString().length > 0;
+        if (valid) config[item] = value;
       }
     });
 
-    return options;
+    return config;
   }
 
   /**
