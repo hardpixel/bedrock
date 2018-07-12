@@ -10,7 +10,7 @@
           Repeat
           <select data-rrule="freq">
             <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
+            <option value="weekly" selected>Weekly</option>
             <option value="monthly">Monthly</option>
             <option value="yearly">Yearly</option>
           </select>
@@ -30,13 +30,13 @@
           <div class="cell small-6">
             <label>
               Interval
-              <input type="number" step="1" data-rrule="interval" placeholder="1">
+              <input type="number" step="1" data-rrule="interval" value="1" placeholder="Number">
             </label>
           </div>
           <div class="cell small-6">
             <label>
               Count
-              <input type="number" step="1" data-rrule="count" placeholder="1">
+              <input type="number" step="1" data-rrule="count" value="30" placeholder="Number">
             </label>
           </div>
         </div>
