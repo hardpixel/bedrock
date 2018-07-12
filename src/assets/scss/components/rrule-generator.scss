@@ -1,7 +1,7 @@
 // Rrule Generator Mixins
 
 @mixin rrule-generator {
-  .schedule-controls {
+  [data-rrule-controls] {
     display: none;
   }
 }
@@ -66,7 +66,7 @@
   span {
     display: block;
     padding: .5rem;
-    line-height: 1;
+    line-height: 1.272;
     cursor: pointer;
   }
 }
@@ -75,7 +75,7 @@
 // Rrule Generator Component
 
 @mixin bedrock-rrule-generator {
-  .rrule-generator {
+  [data-rrule-generator] {
     @include rrule-generator;
   }
 

@@ -393,7 +393,7 @@ class RruleGenerator extends Plugin {
       var multiple = $.inArray(attr, arrayOpts) !== -1;
       var save = false;
 
-      if (input.is(':checkbox')) {
+      if (multiple) {
         save = input.is(':checked');
       } else {
         save = true;

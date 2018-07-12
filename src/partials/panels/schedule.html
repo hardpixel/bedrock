@@ -4,8 +4,8 @@
   </div>
 
   <div class="panel-content border" data-rrule-generator>
-    <div class="grid-x grid-margin-x rrule-generator">
-      <div class="cell small-2">
+    <div class="grid-x grid-margin-x">
+      <div class="cell small-3">
         <label>
           Repeat
           <select data-rrule="freq">
@@ -15,63 +15,65 @@
             <option value="yearly">Yearly</option>
           </select>
         </label>
-      </div>
 
-      <div class="cell small-3">
         <label>
           Start
           <input class="datepicker" type="text" data-rrule="dtstart" placeholder="Select date" data-date-picker>
         </label>
-      </div>
 
-      <div class="cell small-2">
-        <label>
-          Interval
-          <input type="number" step="1" data-rrule="interval" placeholder="1">
-        </label>
-      </div>
-
-      <div class="cell small-2">
-        <label>
-          Count
-          <input type="number" step="1" data-rrule="count" placeholder="1">
-        </label>
-      </div>
-
-      <div class="cell small-3">
         <label>
           Until
           <input class="datepicker" type="text" data-rrule="until" placeholder="Select date" data-date-picker>
         </label>
+
+        <div class="grid-x grid-margin-x">
+          <div class="cell small-6">
+            <label>
+              Interval
+              <input type="number" step="1" data-rrule="interval" placeholder="1">
+            </label>
+          </div>
+          <div class="cell small-6">
+            <label>
+              Count
+              <input type="number" step="1" data-rrule="count" placeholder="1">
+            </label>
+          </div>
+        </div>
+
+        <label>
+          By Weekday
+          <div data-rrule-element="byweekday"></div>
+        </label>
+
+        <label>
+          By Month
+          <div data-rrule-element="bymonth"></div>
+        </label>
       </div>
 
-      <div class="cell small-12">
-        <div class="schedule-controls" data-rrule-controls="daily weekly monthly yearly">
-          <label>
-            By Month
-            <div data-rrule-element="bymonth"></div>
-          </label>
+      <div class="cell small-3" data-rrule-controls="daily weekly monthly yearly">
+        <label>
+          By Monthday
+          <div data-rrule-element="bymonthday"></div>
+        </label>
 
-          <label>
-            By Monthday
-            <div data-rrule-element="bymonthday"></div>
-          </label>
+        <label>
+          By Hour
+          <div data-rrule-element="byhour"></div>
+        </label>
 
-          <label>
-            By Weekday
-            <div data-rrule-element="byweekday"></div>
-          </label>
+        <label>
+          By Minute
+          <div data-rrule-element="byminute"></div>
+        </label>
+      </div>
 
-          <label>
-            By Hour
-            <div data-rrule-element="byhour"></div>
-          </label>
-
-          <label>
-            By Minute
-            <div data-rrule-element="byminute"></div>
-          </label>
-        </div>
+      <div class="cell small-6">
+        <label>
+          Output
+          <div data-rrule-output></div>
+        </label>
       </div>
     </div>
 
