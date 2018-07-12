@@ -55,6 +55,7 @@ class RruleGenerator extends Plugin {
 
     this.$input = this.$element.find('[data-rrule]');
     this.$repeat = this.$element.find('[data-rrule="freq"]');
+    this.$string = this.$element.find('[data-rrule-string]');
     this.$text = this.$element.find('[data-rrule-text]');
     this.$output = this.$element.find('[data-rrule-output]');
 
@@ -396,6 +397,7 @@ class RruleGenerator extends Plugin {
     options = this._parseRules(options);
     this.rrule = new RRule(options);
 
+    this._updateString();
     this._updateText();
     this._updateOutput();
 
@@ -417,6 +419,17 @@ class RruleGenerator extends Plugin {
 
     active.show();
     active.find('[data-rrule]').removeClass('disabled');
+  }
+
+  /**
+   * Updates rrule string presentation.
+   * @private
+   * @function
+   */
+  _updateString() {
+    if (this.$string.length) {
+      this.$string.text(this.rrule.toString());
+    }
   }
 
   /**
