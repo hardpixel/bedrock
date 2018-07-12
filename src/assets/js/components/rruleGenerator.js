@@ -186,7 +186,7 @@ class RruleGenerator extends Plugin {
     html += '<table><tbody><tr>';
       days.forEach(function(day) {
         html += '<td><label>';
-        html += '<input type="checkbox" data-rrule="byweekday" value="' + day.toLowerCase() + '" />';
+        html += '<input type="checkbox" data-rrule="byweekday" value="' + day.toUpperCase() + '" />';
         html += '<span>' + day + '</span>';
         html += '</label></td>';
       });
@@ -424,11 +424,7 @@ class RruleGenerator extends Plugin {
     options = this._parseRules(options);
     this.rrule = new RRule(options);
 
-    this._updateString();
-    this._updateText();
-    this._updateInput();
-    this._updateOutput();
-
+    this._updateControls();
     this.$element.trigger('update.zf.trigger', [this.rrule]);
   }
 
@@ -447,6 +443,18 @@ class RruleGenerator extends Plugin {
 
     active.show();
     active.find('[data-rrule]').removeClass('disabled');
+  }
+
+  /**
+   * Updates all rrule controls.
+   * @private
+   * @function
+   */
+  _updateControls() {
+    this._updateString();
+    this._updateText();
+    this._updateInput();
+    this._updateOutput();
   }
 
   /**
