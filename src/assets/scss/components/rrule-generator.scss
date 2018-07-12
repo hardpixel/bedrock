@@ -6,6 +6,19 @@
   }
 }
 
+@mixin rrule-output {
+  td {
+    border: $table-border;
+    padding: .5rem;
+    line-height: 1.012;
+
+    &:first-child {
+      text-align: right;
+      color: $cite-color;
+    }
+  }
+}
+
 @mixin rrule-picker {
   text-align: center;
 
@@ -77,6 +90,10 @@
 @mixin bedrock-rrule-generator {
   [data-rrule-generator] {
     @include rrule-generator;
+  }
+
+  [data-rrule-output] {
+    @include rrule-output;
   }
 
   .rrule-picker {

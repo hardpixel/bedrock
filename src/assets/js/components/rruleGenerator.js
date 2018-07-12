@@ -438,6 +438,23 @@ class RruleGenerator extends Plugin {
   _updateOutput() {
     if (this.$output.length) {
       var html = '';
+      var data = this.rrule.all(function(date, index) {
+        return index < 15;
+      });
+
+      html += '<table><tbody>';
+        data.forEach(function(item, index) {
+          var parts = item.toString().split(' ');
+
+          html += '<tr><td>' + (index + 1) + '</td>';
+
+            parts.forEach(function(part) {
+              html += '<td>' + part + '</td>';
+            });
+
+          html += '</tr>';
+        })
+      html += '</tbody></table>';
 
       this.$output.html(html);
     }
