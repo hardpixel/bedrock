@@ -539,6 +539,10 @@ class RruleGenerator extends Plugin {
                 value = freqs[value].toLowerCase();
               }
 
+              if (key == 'dtstart' || key == 'until') {
+                value = moment(value).format('YYYY-MM-DD');
+              }
+
               control.val(value);
             }
           }
