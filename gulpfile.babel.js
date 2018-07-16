@@ -108,7 +108,10 @@ let webpackConfig = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack2.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  ]
 }
 // Combine JavaScript into one file
 // In production, the file is minified
