@@ -83,6 +83,10 @@ class RruleGenerator extends Plugin {
     this.$rule.off('change.zf.rrule.update').on({
       'change.zf.rrule.update': this._updateRules.bind(this)
     });
+
+    this.$input.off('change.zf.rrule.update').on({
+      'change.zf.rrule.update': this._readInput.bind(this)
+    });
   }
 
   /**
@@ -288,7 +292,7 @@ class RruleGenerator extends Plugin {
     Object.keys(RRule.DEFAULT_OPTIONS).forEach(function(item) {
       var value = options[item];
 
-      if (value) {
+      if (typeof value != 'undefined') {
         var valid = value !== null && value !== '' && value.toString().length > 0;
         if (valid) config[item] = value;
       }
@@ -500,11 +504,15 @@ class RruleGenerator extends Plugin {
     if (this.$input.length) {
       var arrayOpts = this.arrayOpts;
       var controls = this.$rule;
+      var interval = controls.filter('[data-rrule="interval"]');
       var string = this.$input.val();
 
       if (string && string !== '') {
         this.rrule = RRule.fromString(string);
         var options = RRule.parseString(string);
+
+        controls.filter(':checkbox').prop('checked', false);
+        controls.filter(':not(:checkbox)').val('');
 
         $.each(options, function(key, value) {
           var multiple = $.inArray(key, arrayOpts) !== -1;
@@ -516,6 +524,8 @@ class RruleGenerator extends Plugin {
                 value.forEach(function(item) {
                   control.filter(`[value="${item}"]`).prop('checked', true);
                 });
+              } else {
+                control.filter(`[value="${value}"]`).prop('checked', true);
               }
             } else {
               if (key == 'freq') {
@@ -533,6 +543,10 @@ class RruleGenerator extends Plugin {
             }
           }
         });
+
+        if (interval.val() == '') {
+          interval.val('1');
+        }
 
         this._updateControls();
       }
@@ -577,7 +591,7 @@ class RruleGenerator extends Plugin {
   _destroy() {
     this.$repeat.off('change.zf.rrule.repeat');
     this.$rule.off('change.zf.rrule.update');
-    this.$element.off('.zf.trigger');
+    this.$input.off('change.zf.rrule.update')
   }
 }
 
