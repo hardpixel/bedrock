@@ -1,0 +1,14 @@
+// RRule Reveal Mixins
+
+@mixin rrule-reveal {
+  z-index: 99999;
+}
+
+
+// RRule Reveal Component
+
+@mixin bedrock-rrule-reveal {
+  .rrule-reveal {
+    @include rrule-reveal;
+  }
+}

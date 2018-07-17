@@ -19,6 +19,7 @@ import { PlaceMap } from '../components/placeMap';
 import { LocationPicker } from '../components/locationPicker';
 import { AddMore } from '../components/addMore';
 import { RruleGenerator } from '../components/rruleGenerator';
+import { RruleReveal } from '../components/rruleReveal';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
 Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
@@ -41,3 +42,4 @@ Foundation.plugin(PlaceMap, 'PlaceMap');
 Foundation.plugin(LocationPicker, 'LocationPicker');
 Foundation.plugin(AddMore, 'AddMore');
 Foundation.plugin(RruleGenerator, 'RruleGenerator');
+Foundation.plugin(RruleReveal, 'RruleReveal');

@@ -1,0 +1,94 @@
+<div class="reveal reveal-panel rrule-reveal" id="rrule-modal" data-rrule-reveal data-multiple-opened="true">
+  <div class="panel">
+    <div class="panel-header border">
+      Add Rule
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="panel-content border padding-bottom-0" data-rrule-generator>
+      <div class="grid-x grid-margin-x">
+        <div class="cell small-6">
+          <label>
+            Repeat
+            <select data-rrule="freq">
+              <option value="daily">Daily</option>
+              <option value="weekly" selected>Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </label>
+
+          <label>
+            Start
+            <input class="datepicker" type="text" data-rrule="dtstart" placeholder="Select date" data-date-picker>
+          </label>
+
+          <label>
+            Until
+            <input class="datepicker" type="text" data-rrule="until" placeholder="Select date" data-date-picker>
+          </label>
+
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-6">
+              <label>
+                Interval
+                <input type="number" step="1" data-rrule="interval" value="1" placeholder="Number">
+              </label>
+            </div>
+            <div class="cell small-6">
+              <label>
+                Count
+                <input type="number" step="1" data-rrule="count" value="30" placeholder="Number">
+              </label>
+            </div>
+          </div>
+
+          <label>
+            By Weekday
+            <div data-rrule-element="byweekday"></div>
+          </label>
+
+          <label>
+            By Month
+            <div data-rrule-element="bymonth"></div>
+          </label>
+        </div>
+
+        <div class="cell small-6" data-rrule-controls="daily weekly monthly yearly">
+          <label>
+            By Monthday
+            <div data-rrule-element="bymonthday"></div>
+          </label>
+
+          <label>
+            By Hour
+            <div data-rrule-element="byhour"></div>
+          </label>
+
+          <label>
+            By Minute
+            <div data-rrule-element="byminute"></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <strong>Summary: </strong>
+        <span data-rrule-text></span>
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <div class="grid-x">
+        <div class="cell auto">
+          <button class="button hollow alert margin-0" data-close aria-label="Close modal" type="button">Close</button>
+        </div>
+        <div class="cell shrink">
+          <button class="button margin-0" data-insert aria-label="Insert Media" type="button">Add Rule</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

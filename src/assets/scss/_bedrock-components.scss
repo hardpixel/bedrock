@@ -23,6 +23,7 @@
 @import 'components/place-autocomplete';
 @import 'components/item-list';
 @import 'components/rrule-generator';
+@import 'components/rrule-reveal';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -49,3 +50,4 @@
 @include bedrock-place-autocomplete;
 @include bedrock-item-list;
 @include bedrock-rrule-generator;
+@include bedrock-rrule-reveal;
