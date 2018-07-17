@@ -430,7 +430,7 @@ class RruleGenerator extends Plugin {
     this.rrule = new RRule(options);
 
     this._updateControls();
-    this.$element.trigger('update.zf.trigger', [this.rrule]);
+    this.$element.trigger('update.zf.rrule', [this.rrule]);
   }
 
   /**
@@ -553,6 +553,7 @@ class RruleGenerator extends Plugin {
         }
 
         this._updateControls();
+        this.$element.trigger('update.zf.rrule', [this.rrule]);
       }
     }
   }
