@@ -582,6 +582,19 @@ class RruleGenerator extends Plugin {
   }
 
   /**
+   * Resets the rrule-generator form fields.
+   * @function
+   * @private
+   */
+  _reset() {
+    this.$rule.filter('input').val('');
+    this.$rule.filter(':checkbox').prop('checked', false);
+    this.$rule.filter(':radio').prop('checked', false);
+
+    this._updateRules();
+  }
+
+  /**
    * Destroys the rrule-generator plugin.
    * @function
    * @private
@@ -589,7 +602,7 @@ class RruleGenerator extends Plugin {
   _destroy() {
     this.$repeat.off('change.zf.rrule.repeat');
     this.$rule.off('change.zf.rrule.update');
-    this.$input.off('change.zf.rrule.update')
+    this.$input.off('change.zf.rrule.update');
   }
 }
 

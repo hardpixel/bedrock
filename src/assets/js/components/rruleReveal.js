@@ -73,6 +73,7 @@ class RruleReveal extends Plugin {
       this.reveal.open();
     }
 
+    this.generator._reset();
     this.rrule = this.generator.rrule;
     this.$element.trigger('open.zf.rrule.reveal');
   }

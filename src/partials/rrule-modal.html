@@ -21,29 +21,19 @@
           </label>
 
           <label>
-            Start
-            <input class="datepicker" type="text" data-rrule="dtstart" placeholder="Select date" data-date-picker>
+            Interval
+            <input type="number" step="1" data-rrule="interval" value="1" placeholder="Repeat every">
+          </label>
+
+          <label>
+            Count
+            <input type="number" step="1" data-rrule="count" value="30" placeholder="Repeat times">
           </label>
 
           <label>
             Until
-            <input class="datepicker" type="text" data-rrule="until" placeholder="Select date" data-date-picker>
+            <input class="datepicker" type="text" data-rrule="until" placeholder="Repeat until" data-date-picker>
           </label>
-
-          <div class="grid-x grid-margin-x">
-            <div class="cell small-6">
-              <label>
-                Interval
-                <input type="number" step="1" data-rrule="interval" value="1" placeholder="Number">
-              </label>
-            </div>
-            <div class="cell small-6">
-              <label>
-                Count
-                <input type="number" step="1" data-rrule="count" value="30" placeholder="Number">
-              </label>
-            </div>
-          </div>
 
           <label>
             By Weekday
