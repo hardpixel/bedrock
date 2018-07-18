@@ -64,4 +64,9 @@
       }
     }
   }
+
+  .input {
+    @include form-element;
+    line-height: initial;
+  }
 }
