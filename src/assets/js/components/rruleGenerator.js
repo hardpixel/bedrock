@@ -273,9 +273,6 @@ class RruleGenerator extends Plugin {
     var config = {};
     var wkst = options['wkst'];
     var intval = options['interval'];
-    var byhour = options['byhour'];
-    var byminute = options['byminute'];
-    var bysecond = options['bysecond'];
 
     if (!wkst) {
       options['wkst'] = RRule.MO;
@@ -283,10 +280,6 @@ class RruleGenerator extends Plugin {
 
     if (intval < 2) {
       delete(options['interval']);
-    }
-
-    if (!bysecond.length && (byhour.length || byminute.length)) {
-      options['bysecond'] = [0];
     }
 
     Object.keys(RRule.DEFAULT_OPTIONS).forEach(function(item) {
