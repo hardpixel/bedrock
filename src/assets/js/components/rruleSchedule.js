@@ -4,6 +4,7 @@ import $ from 'jquery';
 import { GetOrSetId } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
+var RRule = require('rrule').RRule;
 var RRuleSet = require('rrule').RRuleSet;
 
 /**
@@ -68,12 +69,19 @@ class RruleSchedule extends Plugin {
    * @private
    */
   _updateRuleSet() {
-    var rruleItems = this.$grid.children().toArray();
+    var rruleItems = this.$grid.children();
     this.$element.trigger('changed.zf.rrule.schedule', [this.rruleSet]);
 
-    console.log(rruleItems);
-
     if (rruleItems.length > 0) {
+      this.rruleSet = new RRuleSet();
+
+      rruleItems.each(function(index, el) {
+        var string = $(el).attr('data-rrule-string');
+        var rrule = RRule.fromString(string);
+
+        this.rruleSet.rrule(rrule);
+      }.bind(this));
+
       this.$empty.addClass('hide');
     } else {
       this.rruleSet = new RRuleSet();
@@ -89,7 +97,12 @@ class RruleSchedule extends Plugin {
    */
   _buildItem(rrule) {
     var item = this.$item.clone();
-    item.find('[data-rrule-text]').text(rrule.toText());
+    var string = rrule.toString();
+    var text = rrule.toText();
+
+    item.attr('title', string);
+    item.attr('data-rrule-string', string);
+    item.find('[data-rrule-text]').text(text);
 
     return item;
   }
