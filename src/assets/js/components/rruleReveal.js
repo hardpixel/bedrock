@@ -87,7 +87,6 @@ class RruleReveal extends Plugin {
       this.reveal.close();
     }
 
-    this.rrule = null;
     this.$element.trigger('closed.zf.rrule.reveal');
   }
 
@@ -99,6 +98,8 @@ class RruleReveal extends Plugin {
   insert(event) {
     this.reveal.close();
     this.$element.trigger('insert.zf.rrule.reveal', [this.rrule]);
+
+    this.rrule = null;
   }
 
   /**
