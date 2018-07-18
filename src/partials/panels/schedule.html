@@ -5,6 +5,7 @@
 
   <div class="panel-content border padding-bottom-0">
     <div id="rrule-schedule" data-rrule-schedule="rrule-modal">
+      <input type="hidden" value="" data-rrule-input name="schedule">
       <div class="no-content margin-bottom-1" data-empty-state>
         <i class="mdi mdi-calendar-clock"></i>
         <span>No rules created</span>
@@ -30,6 +31,7 @@
     <span class="counter"></span>
     <div class="content grid-x">
       <span class="input" data-rrule-text></span>
+      <input type="hidden" name="rrule[]" data-rrule-input>
     </div>
     <span class="remove mdi mdi-close" data-remove></span>
   </div>

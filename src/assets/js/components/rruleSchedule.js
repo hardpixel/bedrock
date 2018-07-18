@@ -40,6 +40,7 @@ class RruleSchedule extends Plugin {
     this.template = $(`#${this.id}-item-template`).html();
     this.$empty = this.$element.find('[data-empty-state]');
     this.$grid = this.$element.find('[data-list-remove]');
+    this.$input = this.$element.find('[data-rrule-input]');
     this.$item = $(this.template);
     this.$reveal = $(`#${this.options.rruleSchedule}`);
     this.$anchor = $(`[data-open="${this.id}"]`).length ? $(`[data-open="${this.id}"]`) : $(`[data-toggle="${this.id}"]`);
@@ -87,6 +88,11 @@ class RruleSchedule extends Plugin {
       this.rruleSet = new RRuleSet();
       this.$empty.removeClass('hide');
     }
+
+    if (this.$input.length) {
+      var rules = this.rruleSet.valueOf();
+      this.$input.val(rules.join("\n"));
+    }
   }
 
   /**
@@ -103,6 +109,7 @@ class RruleSchedule extends Plugin {
     item.attr('title', string);
     item.attr('data-rrule-string', string);
     item.find('[data-rrule-text]').text(text);
+    item.find('[data-rrule-input]').val(string);
 
     return item;
   }
