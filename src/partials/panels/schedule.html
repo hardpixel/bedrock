@@ -4,33 +4,32 @@
   </div>
 
   <div class="panel-content border padding-bottom-0">
-    <div id="schedule" data-rrule-schedule>
+    <div id="rrule-schedule" data-rrule-schedule="rrule-modal">
       <div class="no-content margin-bottom-1" data-empty-state>
         <i class="mdi mdi-calendar-clock"></i>
         <span>No rules created</span>
       </div>
-      <div id="schedule-preview" class="item-list" data-list-remove></div>
+      <div id="rrule-schedule-preview" class="item-list" data-list-remove></div>
     </div>
   </div>
 
   <div class="panel-footer">
     <div class="grid-x">
       <div class="cell auto text-left">
-        <button class="button alert hollow margin-0" data-clear="schedule-preview">Clear</button>
+        <button class="button alert hollow margin-0" data-clear="rrule-schedule-preview">Clear</button>
       </div>
       <div class="cell shrink">
-        <button class="button success hollow margin-0" data-add="schedule">Add Rule</button>
+        <button class="button success hollow margin-0" data-open="rrule-schedule">Add Rule</button>
       </div>
     </div>
   </div>
 </div>
 
-<template id="schedule-item-template">
+<template id="rrule-schedule-item-template">
   <div class="item" data-list-item>
     <span class="counter"></span>
     <div class="content grid-x">
-      <input data-date-picker class="cell shrink datepicker" type="text" name="post[items][0][date]" placeholder="Select date...">
-      <input class="cell auto" type="text" name="post[items][0][comment]" placeholder="Add comment...">
+      <span class="input" data-rrule-text></span>
     </div>
     <span class="remove mdi mdi-close" data-remove></span>
   </div>
