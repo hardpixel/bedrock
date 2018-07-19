@@ -587,9 +587,8 @@ class RruleGenerator extends Plugin {
    * @private
    */
   _reset() {
-    this.$rule.filter('input').val('');
-    this.$rule.filter(':checkbox').prop('checked', false);
-    this.$rule.filter(':radio').prop('checked', false);
+    this.$rule.filter('input:not(:checkbox):not(:radio)').val('');
+    this.$rule.filter(':checkbox, :radio').prop('checked', false);
 
     this._updateRules();
   }
