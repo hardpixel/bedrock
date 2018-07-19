@@ -108,6 +108,7 @@ class RruleSchedule extends Plugin {
 
     item.attr('title', string);
     item.attr('data-rrule-string', string);
+    item.find('[data-rrule-string]').text(string);
     item.find('[data-rrule-text]').text(text);
     item.find('[data-rrule-input]').val(string);
 
