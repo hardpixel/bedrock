@@ -46,6 +46,7 @@ class MediaReveal extends Plugin {
     this.$grid = this.$element.find('[data-list-select]');
     this.$item = $(this.template);
     this.imageKey = this.$item.find('[data-src]').attr('data-src');
+    this.imageKeyFallback = this.$item.find('[data-src-fallback]').attr('data-src-fallback');
     this.imageUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
     this.titleKey = this.$item.find('[data-text]').attr('data-text');
 
@@ -102,15 +103,17 @@ class MediaReveal extends Plugin {
   _buildItem(data) {
     var item = this.$item.clone();
     var key = GetObjectValue(data, this.uniqueKey);
-    var url = GetObjectValue(data, this.imageKey);
+    var url = GetObjectValue(data, this.imageKey) || GetObjectValue(data, this.imageKeyFallback);
     var title = GetObjectValue(data, this.titleKey);
 
-    item.find('[data-src]').attr('src', this.imageUrl.replace('[src]', url));
-    item.find('[data-text]').text(title);
-    item.data('imageObject', data);
-    item.data('uniqueKey', key);
+    if (url) {
+      item.find('[data-src]').attr('src', this.imageUrl.replace('[src]', url));
+      item.find('[data-text]').text(title);
+      item.data('imageObject', data);
+      item.data('uniqueKey', key);
 
-    return item;
+      return item;
+    }
   }
 
   /**
@@ -124,7 +127,7 @@ class MediaReveal extends Plugin {
 
     $.each(data, function(index, data) {
       var item = this._buildItem(data);
-      this.items.push(item);
+      if (item) this.items.push(item);
     }.bind(this));
 
     this.$grid.html(this.items);
