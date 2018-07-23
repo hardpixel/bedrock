@@ -24,6 +24,7 @@
 @import 'components/item-list';
 @import 'components/rrule-generator';
 @import 'components/rrule-reveal';
+@import 'components/frame-embed';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -51,3 +52,4 @@
 @include bedrock-item-list;
 @include bedrock-rrule-generator;
 @include bedrock-rrule-reveal;
+@include bedrock-frame-embed;

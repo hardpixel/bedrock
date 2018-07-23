@@ -21,6 +21,7 @@ import { AddMore } from '../components/addMore';
 import { RruleGenerator } from '../components/rruleGenerator';
 import { RruleReveal } from '../components/rruleReveal';
 import { RruleSchedule } from '../components/rruleSchedule';
+import { FrameEmbed } from '../components/frameEmbed';
 
 Foundation.plugin(OffCanvasMenu, 'OffCanvasMenu');
 Foundation.plugin(TinyMceEditor, 'TinyMceEditor');
@@ -45,3 +46,4 @@ Foundation.plugin(AddMore, 'AddMore');
 Foundation.plugin(RruleGenerator, 'RruleGenerator');
 Foundation.plugin(RruleReveal, 'RruleReveal');
 Foundation.plugin(RruleSchedule, 'RruleSchedule');
+Foundation.plugin(FrameEmbed, 'FrameEmbed');
