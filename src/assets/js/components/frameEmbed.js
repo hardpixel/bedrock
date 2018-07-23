@@ -65,7 +65,15 @@ class FrameEmbed extends Plugin {
    */
   _setMinHeight(event) {
     if (this.options.fillParent) {
+      var top = this.$parent.offset().top;
+      var vport = $(window).height();
+      var min = vport - top;
       var height = this.$parent.innerHeight();
+
+      if (min > height) {
+        height = min;
+      }
+
       this.$frame.css('min-height', height);
     }
   }
