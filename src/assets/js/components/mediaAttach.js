@@ -47,6 +47,7 @@ class MediaAttach extends Plugin {
     this.$hidden = this.$element.find(`[name="${this.fieldName}"]`);
     this.required = this.$item.find('[data-value]').is('[required]');
     this.imageKey = this.$item.find('[data-src]').attr('data-src');
+    this.imageKeyFallback = this.$item.find('[data-src-fallback]').attr('data-src-fallback');
     this.imageUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
     this.titleKey = this.$item.find('[data-text]').attr('data-text');
     this.valueKey = this.$item.find('[data-value]').attr('data-value');
@@ -101,7 +102,7 @@ class MediaAttach extends Plugin {
    */
   _buildItem(data) {
     var item = this.$item.clone();
-    var url = GetObjectValue(data, this.imageKey);
+    var url = GetObjectValue(data, this.imageKey) || GetObjectValue(data, this.imageKeyFallback);
     var title = GetObjectValue(data, this.titleKey);
     var value = GetObjectValue(data, this.valueKey);
 
