@@ -69,4 +69,11 @@
     @include form-element;
     line-height: initial;
   }
+
+  .table-scroll {
+
+    table {
+      width: 100%;
+    }
+  }
 }
