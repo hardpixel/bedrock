@@ -42,14 +42,14 @@ class TinyMceEditor extends Plugin {
     if (tinymce !== 'undefined') {
       this.$element.wrap('<div class="tiny-mce-editor"></div>');
 
+      this.$media = $(`#${this.mediaHandler}`);
+      this.$shortcode = $(`#${this.shortcodeHandler}`);
+
       this.id = GetOrSetId(this.$element, 'tme');
       this.$wrapper = this.$element.parents('.tiny-mce-editor:first');
       this.computed = { target: this.$element.get(0), setup: this._setupCallback.bind(this) };
       this.options = $.extend({}, this.options, this.computed);
       this.options = this._snakeCase(this.options);
-
-      this.$media = $(`#${this.mediaHandler}`);
-      this.$shortcode = $(`#${this.shortcodeHandler}`);
 
       tinymce.init(this.options);
       this._events();
@@ -155,7 +155,7 @@ class TinyMceEditor extends Plugin {
       }
     });
 
-    if (this.mediaHandler) {
+    if (this.$media.length) {
       editor.addButton('image', {
         icon: 'image',
         tooltip: 'Insert/edit media',
@@ -171,7 +171,7 @@ class TinyMceEditor extends Plugin {
       });
     }
 
-    if (this.shortcodeHandler) {
+    if (this.$shortcode.length) {
       editor.addButton('shortcode', {
         icon: 'template',
         tooltip: 'Insert/edit shortcode',
