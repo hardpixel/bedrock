@@ -9,8 +9,14 @@ import { GetYoDigits } from 'foundation-sites/js/foundation.util.core';
  * @param {Object} obj - Object to get value from.
  * @param {String} path - Dot separated object key path.
  */
-function GetObjectValue(obj, path) {
-  return new Function('_', `return _.${path}`)(obj);
+function GetObjectValue(obj, path, alt_path = null) {
+  var value = new Function('_', `return _.${path}`)(obj);
+
+  if (typeof value == 'undefined' || value == null) {
+    value = new Function('_', `return _.${alt_path}`)(obj);
+  }
+
+  return value;
 }
 
 /**
