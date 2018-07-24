@@ -3,6 +3,9 @@
 import $ from 'jquery';
 import { GetYoDigits } from 'foundation-sites/js/foundation.util.core';
 
+const extName = require('ext-name');
+const mimeMatch = require('mime-match');
+
 /**
  * Gets an element ID or generates a random one.
  * @function
@@ -36,4 +39,23 @@ function GetOrSetId(element, namespace = 'random') {
   return id;
 };
 
-export { GetObjectValue, GetOrSetId };
+/**
+ * Checks if a filename matches a mimetype regex.
+ * @function
+ * @param {jQuery} element - jQuery object to test for id.
+ * @param {String} namespace - Namespace for the generated id.
+ */
+function MatchMimeType(filename, match_regex) {
+  var type = null;
+  var match = false;
+  var info = extName(filename);
+
+  if (info.length && match_regex) {
+    type = info[0]['mime'];
+    match = mimeMatch(type, match_regex);
+  }
+
+  return match;
+};
+
+export { GetObjectValue, GetOrSetId, MatchMimeType };
