@@ -46,11 +46,6 @@ class MediaAttach extends Plugin {
     this.fieldName = this.$item.find('[data-value]').attr('name');
     this.$hidden = this.$element.find(`[name="${this.fieldName}"]`);
     this.required = this.$item.find('[data-value]').is('[required]');
-    this.imageKey = this.$item.find('[data-src]').attr('data-src');
-    this.imageKeyFallback = this.$item.find('[data-src-fallback]').attr('data-src-fallback');
-    this.imageUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
-    this.titleKey = this.$item.find('[data-text]').attr('data-text');
-    this.valueKey = this.$item.find('[data-value]').attr('data-value');
 
     this._events();
     this._updateActiveItems();
@@ -101,12 +96,18 @@ class MediaAttach extends Plugin {
    * @private
    */
   _buildItem(data) {
-    var item = this.$item.clone();
-    var url = GetObjectValue(data, this.imageKey) || GetObjectValue(data, this.imageKeyFallback);
-    var title = GetObjectValue(data, this.titleKey);
-    var value = GetObjectValue(data, this.valueKey);
+    var mediumKey = this.$item.find('[data-src]').attr('data-src');
+    var mediumAltKey = this.$item.find('[data-src-alt]').attr('data-src-alt');
+    var mediumUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
+    var titleKey = this.$item.find('[data-text]').attr('data-text');
+    var valueKey = this.$item.find('[data-value]').attr('data-value');
 
-    item.find('[data-src]').attr('src', this.imageUrl.replace('[src]', url));
+    var item = this.$item.clone();
+    var url = GetObjectValue(data, mediumKey, mediumAltKey);
+    var title = GetObjectValue(data, titleKey);
+    var value = GetObjectValue(data, valueKey);
+
+    item.find('[data-src]').attr('src', mediumUrl.replace('[src]', url));
     item.find('[data-text]').text(title);
     item.find('[data-value]').val(value);
 
