@@ -48,7 +48,13 @@ function GetOrSetId(element, namespace = 'random') {
 function MatchMimeType(filename, match_regex) {
   var type = null;
   var match = false;
-  var info = extName(filename);
+  var info = null;
+
+  try {
+    info = extName(filename);
+  } catch (e) {
+    info = [];
+  }
 
   if (info.length && match_regex) {
     try {

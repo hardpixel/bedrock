@@ -128,8 +128,11 @@ class MediaReveal extends Plugin {
     if (url) {
       var mediumSrc = mediumUrl.replace('[src]', url);
 
-      item.find('[data-src]').attr('src', mediumSrc);
-      item.find('[data-replace="src"]').attr('src', mediumSrc);
+      if (previews.length) {
+        item.find('[data-replace="src"]').attr('src', mediumSrc);
+      } else {
+        item.find('[data-src]').attr('src', mediumSrc);
+      }
     }
 
     item.find('[data-text]').text(title);
