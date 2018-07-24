@@ -1,7 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-import { GetOrSetId, GetObjectValue } from './helpers';
+import { GetOrSetId, GetObjectValue, MatchMimeType } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Triggers } from 'foundation-sites/js/foundation.util.triggers';
 
@@ -101,13 +101,40 @@ class MediaAttach extends Plugin {
     var mediumUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
     var titleKey = this.$item.find('[data-text]').attr('data-text');
     var valueKey = this.$item.find('[data-value]').attr('data-value');
+    var fnameKey = this.$item.find('[data-filename]').attr('data-filename');
 
     var item = this.$item.clone();
     var url = GetObjectValue(data, mediumKey, mediumAltKey);
     var title = GetObjectValue(data, titleKey);
     var value = GetObjectValue(data, valueKey);
+    var fname = GetObjectValue(data, fnameKey);
+    var previews = item.find('[data-mime-match]');
 
-    item.find('[data-src]').attr('src', mediumUrl.replace('[src]', url));
+    if (previews.length) {
+      var find = fname || url;
+      var match = null;
+
+      previews.each(function(index, el) {
+        var regex = $(el).attr('data-mime-match');
+
+        if (match == null && MatchMimeType(find, regex)) {
+          match = regex;
+        }
+      });
+
+      item.find(`[data-mime-match]:not([data-mime-match="${match}"])`).remove();
+    }
+
+    if (url) {
+      var mediumSrc = mediumUrl.replace('[src]', url);
+
+      if (previews.length) {
+        item.find('[data-replace="src"]').attr('src', mediumSrc);
+      } else {
+        item.find('[data-src]').attr('src', mediumSrc);
+      }
+    }
+
     item.find('[data-text]').text(title);
     item.find('[data-value]').val(value);
 
