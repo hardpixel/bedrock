@@ -51,8 +51,12 @@ function MatchMimeType(filename, match_regex) {
   var info = extName(filename);
 
   if (info.length && match_regex) {
-    type = info[0]['mime'];
-    match = mimeMatch(type, match_regex);
+    try {
+      type = info[0]['mime'];
+      match = mimeMatch(type, match_regex);
+    } catch (e) {
+      match = false;
+    }
   }
 
   return match;
