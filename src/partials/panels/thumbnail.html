@@ -18,7 +18,11 @@
 <template id="media-thumbnail-item-template">
   <div class="attachment text-center" data-list-item>
     <input type="hidden" name="page[thumbnail_id]" data-value="id">
-    <img data-src="id" class="width-100 margin-bottom-1" data-url="https://picsum.photos/600/400?image=[src]">
+    <div class="margin-bottom-1" data-src="id" data-url="https://picsum.photos/600/400?image=[src]">
+      <img class="width-100" data-mime-match="image/*" data-replace="src">
+      <video class="width-100" data-mime-match="video/*" data-replace="src" controls></video>
+      <img class="width-100" data-mime-match="*/*" src="{{root}}assets/img/generic-preview.svg">
+    </div>
     <div class="panel-section expanded border last grid-x">
       <div class="cell auto text-left">
         <button class="button alert small hollow margin-0" data-remove>Remove</button>
