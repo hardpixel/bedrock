@@ -108,21 +108,21 @@ class MediaReveal extends Plugin {
     var url = GetObjectValue(data, mediumKey, mediumAltKey);
     var title = GetObjectValue(data, titleKey);
     var fname = GetObjectValue(data, fnameKey);
-    var previews = item.find('[data-type-match]');
+    var previews = item.find('[data-mime-match]');
 
     if (previews.length) {
       var find = fname || url;
       var match = null;
 
       previews.each(function(index, el) {
-        var regex = $(el).attr('data-type-match');
+        var regex = $(el).attr('data-mime-match');
 
         if (match == null && MatchMimeType(find, regex)) {
           match = regex;
         }
       });
 
-      item.find(`[data-type-match]:not([data-type-match="${match}"])`).remove();
+      item.find(`[data-mime-match]:not([data-mime-match="${match}"])`).remove();
     }
 
     if (url) {

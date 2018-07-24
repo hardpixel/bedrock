@@ -54,9 +54,9 @@
 <template id="media-modal-item-template">
   <div class="attachment" data-list-item>
     <div class="thumbnail" data-filename="filename" data-src="id" data-url="https://picsum.photos/300?image=[src]">
-      <img src="{{root}}assets/img/upload-preview.svg" data-type-match="image/*" data-replace="src">
-      <img src="{{root}}assets/img/video-preview.svg" data-type-match="video/*">
-      <img src="{{root}}assets/img/generic-preview.svg" data-type-match="*/*">
+      <img src="{{root}}assets/img/upload-preview.svg" data-mime-match="image/*" data-replace="src">
+      <img src="{{root}}assets/img/video-preview.svg" data-mime-match="video/*">
+      <img src="{{root}}assets/img/generic-preview.svg" data-mime-match="*/*">
       <span class="filename" data-text="author"></span>
       <span class="check-button mdi mdi-check"></span>
     </div>
