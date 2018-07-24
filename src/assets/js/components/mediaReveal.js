@@ -1,7 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-import { GetOrSetId, GetObjectValue } from './helpers';
+import { GetOrSetId, GetObjectValue, MatchMimeType } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 import { Reveal } from 'foundation-sites/js/foundation.reveal';
 
@@ -45,10 +45,6 @@ class MediaReveal extends Plugin {
     this.$insert = this.$element.find('[data-insert]');
     this.$grid = this.$element.find('[data-list-select]');
     this.$item = $(this.template);
-    this.imageKey = this.$item.find('[data-src]').attr('data-src');
-    this.imageKeyFallback = this.$item.find('[data-src-fallback]').attr('data-src-fallback');
-    this.imageUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
-    this.titleKey = this.$item.find('[data-text]').attr('data-text');
 
     this.$insert.addClass('disabled');
 
@@ -101,19 +97,46 @@ class MediaReveal extends Plugin {
    * @private
    */
   _buildItem(data) {
+    var mediumKey = this.$item.find('[data-src]').attr('data-src');
+    var mediumAltKey = this.$item.find('[data-src-alt]').attr('data-src-alt');
+    var mediumUrl = this.$item.find('[data-url]').attr('data-url') || '[src]';
+    var titleKey = this.$item.find('[data-text]').attr('data-text');
+    var fnameKey = this.$item.find('[data-filename]').attr('data-filename');
+
     var item = this.$item.clone();
     var key = GetObjectValue(data, this.uniqueKey);
-    var url = GetObjectValue(data, this.imageKey) || GetObjectValue(data, this.imageKeyFallback);
-    var title = GetObjectValue(data, this.titleKey);
+    var url = GetObjectValue(data, mediumKey, mediumAltKey);
+    var title = GetObjectValue(data, titleKey);
+    var fname = GetObjectValue(data, fnameKey);
+    var previews = item.find('[data-type-match]');
+
+    if (previews.length) {
+      var find = fname || url;
+      var match = null;
+
+      previews.each(function(index, el) {
+        var regex = $(el).attr('data-type-match');
+
+        if (match == null && MatchMimeType(find, regex)) {
+          match = regex;
+        }
+      });
+
+      item.find(`[data-type-match]:not([data-type-match="${match}"])`).remove();
+    }
 
     if (url) {
-      item.find('[data-src]').attr('src', this.imageUrl.replace('[src]', url));
-      item.find('[data-text]').text(title);
-      item.data('imageObject', data);
-      item.data('uniqueKey', key);
+      var mediumSrc = mediumUrl.replace('[src]', url);
 
-      return item;
+      item.find('[data-src]').attr('src', mediumSrc);
+      item.find('[data-replace="src"]').attr('src', mediumSrc);
     }
+
+    item.find('[data-text]').text(title);
+    item.data('imageObject', data);
+    item.data('uniqueKey', key);
+
+    return item;
   }
 
   /**
