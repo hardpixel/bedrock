@@ -1,7 +1,7 @@
 'use strict';
 
 import $ from 'jquery';
-import { GetOrSetId } from './helpers';
+import { GetOrSetId, MatchMimeType } from './helpers';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 var downscale = require('downscale');
@@ -136,10 +136,27 @@ class FileInput extends Plugin {
     var preview = this.$item.clone();
     var filesize = fileSize(file.size, { exponent: 2, output: 'object' });
     var sizestr = '<strong>' + filesize.value + '</strong> ' + filesize.symbol;
+    var previews = preview.find('[data-mime-match]');
+
+    if (previews.length) {
+      var match = null;
+
+      previews.each(function(index, el) {
+        var regex = $(el).attr('data-mime-match');
+
+        if (match == null && MatchMimeType(file.name, regex)) {
+          match = regex;
+        }
+      });
+
+      preview.find(`[data-mime-match]:not([data-mime-match="${match}"])`).remove();
+    }
 
     preview.find('[data-dz-name]').text(file.name);
     preview.find('[data-dz-size]').html(sizestr);
     preview.addClass('input-added');
+
+    this._previewVideo(file, preview);
 
     if (this.thumbWidth > 0 && this.thumbHeight > 0) {
       this._resizeImage(file, preview);
@@ -172,14 +189,40 @@ class FileInput extends Plugin {
    * @function
    */
   _previewImage(file, preview) {
-    var reader = new FileReader();
+    var target = preview.find('[data-dz-thumbnail]');
 
-    reader.onload = function (event) {
-      preview.find('[data-dz-thumbnail]').attr('src', event.target.result);
-      this._appendPreview(preview);
-    }.bind(this);
+    if (target.length) {
+      var reader = new FileReader();
 
-    reader.readAsDataURL(file);
+      reader.onload = function (event) {
+        target.attr('src', event.target.result);
+        this._appendPreview(preview);
+      }.bind(this);
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  /**
+   * Previews video.
+   * @param {Object} file - File object from input results.
+   * @param {Object} preview - Preview template object.
+   * @private
+   * @function
+   */
+  _previewVideo(file, preview) {
+    var target = preview.find('[data-dz-video]');
+
+    if (target.length) {
+      var reader = new FileReader();
+
+      reader.onload = function (event) {
+        target.attr('src', event.target.result);
+        this._appendPreview(preview);
+      }.bind(this);
+
+      reader.readAsDataURL(file);
+    }
   }
 
   /**

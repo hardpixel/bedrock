@@ -19,7 +19,14 @@
 
 <template id="file-input-preview-template">
   <div class="text-center">
-    <img src="{{root}}assets/img/upload-preview.svg" data-dz-thumbnail class="margin-bottom-1" />
+    <div class="margin-bottom-1">
+      <img data-mime-match="image/*" data-dz-thumbnail />
+      <video data-mime-match="video/*" data-dz-video controls></video>
+      <div class="file-preview" data-mime-match="*/*">
+        <i class="mdi mdi-file-document-box"></i>
+        <span class="margin-bottom-1" data-dz-name></span>
+      </div>
+    </div>
     <div class="panel-section expanded border last grid-x">
       <div class="cell auto text-left">
         <button class="button alert small hollow margin-0" data-dz-remove>Remove</button>

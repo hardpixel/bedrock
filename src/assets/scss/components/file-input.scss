@@ -16,6 +16,13 @@
     position: relative;
     z-index: 1;
   }
+
+  video, img {
+    max-width: 100%;
+    display: block;
+    width: auto;
+    margin: auto;
+  }
 }
 
 
