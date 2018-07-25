@@ -1,0 +1,36 @@
+$file-preview-background: #cccccc !default;
+$file-preview-color: #808080 !default;
+
+// File Preview Mixins
+
+@mixin file-preview {
+  padding: $global-padding * 2;
+  text-align: center;
+  background: $file-preview-background;
+  color: $file-preview-color;
+
+  > i {
+    font-size: 3rem;
+  }
+
+  > img {
+    height: 3rem;
+    margin-bottom: $global-margin;
+  }
+
+  > span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+
+// File Preview Component
+
+@mixin bedrock-file-preview {
+  .file-preview {
+    @include file-preview;
+  }
+}

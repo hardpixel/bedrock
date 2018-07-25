@@ -7,6 +7,7 @@
 @import 'components/reveal-panel';
 @import 'components/attachments-grid';
 @import 'components/no-content';
+@import 'components/file-preview';
 @import 'components/login-box';
 @import 'components/dropzone-upload';
 @import 'components/inline-edit-box';
@@ -35,6 +36,7 @@
 @include bedrock-reveal-panel;
 @include bedrock-attachments-grid;
 @include bedrock-no-content;
+@include bedrock-file-preview;
 @include bedrock-login-box;
 @include bedrock-dropzone-upload;
 @include bedrock-inline-edit-box;
