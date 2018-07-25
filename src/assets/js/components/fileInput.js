@@ -141,7 +141,7 @@ class FileInput extends Plugin {
     if (previews.length) {
       var match = null;
 
-      previews.each(function(index, el) {
+      previews.each(function(idx, el) {
         var regex = $(el).attr('data-mime-match');
 
         if (match == null && MatchMimeType(file.name, regex)) {
@@ -152,16 +152,23 @@ class FileInput extends Plugin {
       preview.find(`[data-mime-match]:not([data-mime-match="${match}"])`).remove();
     }
 
+    var image = preview.find('[data-dz-thumbnail]');
+    var video = preview.find('[data-dz-video]');
+
     preview.find('[data-dz-name]').text(file.name);
     preview.find('[data-dz-size]').html(sizestr);
     preview.addClass('input-added');
 
-    this._previewVideo(file, preview);
-
-    if (this.thumbWidth > 0 && this.thumbHeight > 0) {
-      this._resizeImage(file, preview);
+    if (image.length) {
+      if (this.thumbWidth > 0 && this.thumbHeight > 0) {
+        this._resizeImage(file, preview);
+      } else {
+        this._previewImage(file, preview);
+      }
+    } else if (video.length) {
+      this._previewVideo(file, preview);
     } else {
-      this._previewImage(file, preview);
+      this._appendPreview(preview);
     }
   }
 
@@ -189,18 +196,14 @@ class FileInput extends Plugin {
    * @function
    */
   _previewImage(file, preview) {
-    var target = preview.find('[data-dz-thumbnail]');
+    var reader = new FileReader();
 
-    if (target.length) {
-      var reader = new FileReader();
+    reader.onload = function (event) {
+      preview.find('[data-dz-thumbnail]').attr('src', event.target.result);
+      this._appendPreview(preview);
+    }.bind(this);
 
-      reader.onload = function (event) {
-        target.attr('src', event.target.result);
-        this._appendPreview(preview);
-      }.bind(this);
-
-      reader.readAsDataURL(file);
-    }
+    reader.readAsDataURL(file);
   }
 
   /**
@@ -211,18 +214,14 @@ class FileInput extends Plugin {
    * @function
    */
   _previewVideo(file, preview) {
-    var target = preview.find('[data-dz-video]');
+    var reader = new FileReader();
 
-    if (target.length) {
-      var reader = new FileReader();
+    reader.onload = function (event) {
+      preview.find('[data-dz-video]').attr('src', event.target.result);
+      this._appendPreview(preview);
+    }.bind(this);
 
-      reader.onload = function (event) {
-        target.attr('src', event.target.result);
-        this._appendPreview(preview);
-      }.bind(this);
-
-      reader.readAsDataURL(file);
-    }
+    reader.readAsDataURL(file);
   }
 
   /**

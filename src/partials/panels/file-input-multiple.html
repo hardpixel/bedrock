@@ -37,7 +37,9 @@
 <template id="file-input-multiple-preview-template">
   <div class="attachment is-new" data-list-item>
     <div class="thumbnail">
-      <img src="{{root}}assets/img/upload-preview.svg" data-dz-thumbnail>
+      <img src="{{root}}assets/img/upload-preview.svg" data-mime-match="image/*" data-dz-thumbnail>
+      <img src="{{root}}assets/img/video-preview.svg" data-mime-match="video/*">
+      <img src="{{root}}assets/img/generic-preview.svg" data-mime-match="*/*">
       <span class="filename" data-dz-name></span>
       <span class="size left" data-dz-size></span>
       <span class="new-button mdi mdi-plus"></span>
