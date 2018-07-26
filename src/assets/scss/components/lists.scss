@@ -1,0 +1,58 @@
+// Lists Mixins
+
+@mixin list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 $global-margin;
+
+  li:not(:last-child) {
+    margin-bottom: $global-margin / 2;
+  }
+
+  i {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: .5rem;
+  }
+
+  &.border {
+
+    li {
+      margin: 0;
+
+      &:not(:first-child) {
+        padding-top: $global-padding / 2;
+      }
+
+      &:not(:last-child) {
+        padding-bottom: $global-padding / 2;
+        border-bottom: 1px solid rgba($black, .04);
+      }
+    }
+  }
+
+  &.striped {
+
+    li {
+      margin: 0;
+      padding: ($global-padding / 2) $global-padding;
+
+      &:nth-child(2n) {
+        background-color: rgba($black, .04);
+      }
+
+      &.border:not(:last-child) {
+        border-bottom: 1px solid smart-scale($panel-background, $panel-color-scale);
+      }
+    }
+  }
+}
+
+
+// Lists Component
+
+@mixin bedrock-lists {
+  .list {
+    @include list;
+  }
+}
