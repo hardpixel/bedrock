@@ -27,6 +27,7 @@
 @import 'components/rrule-generator';
 @import 'components/rrule-reveal';
 @import 'components/frame-embed';
+@import 'components/icon-box';
 
 @include bedrock-global-styles;
 @include bedrock-prototype-classes;
@@ -57,3 +58,4 @@
 @include bedrock-rrule-generator;
 @include bedrock-rrule-reveal;
 @include bedrock-frame-embed;
+@include bedrock-icon-box;

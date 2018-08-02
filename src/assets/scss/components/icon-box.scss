@@ -1,0 +1,38 @@
+// Icon box Mixins
+
+@mixin icon-box {
+  padding: $global-padding;
+  text-align: center;
+  line-height: 1;
+  font-size: 1.5rem;
+  display: block;
+
+  &.small {
+    padding: $global-padding / 2;
+    font-size: 1rem;
+  }
+
+  &.large {
+    padding: $global-padding * 2;
+    font-size: 2rem;
+  }
+
+  @each $name, $color in $foundation-palette {
+    &.#{$name} {
+      background-color: $color;
+
+      @if $name != 'default' {
+        color: $white;
+      }
+    }
+  }
+}
+
+
+// Icon box Component
+
+@mixin bedrock-icon-box {
+  .icon-box {
+    @include icon-box;
+  }
+}

@@ -76,4 +76,15 @@
       width: 100%;
     }
   }
+
+  .progress {
+
+    &.small {
+      height: $meter-height / 2;
+    }
+
+    &.large {
+      height: $meter-height * 2;
+    }
+  }
 }
