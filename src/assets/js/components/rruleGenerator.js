@@ -6,6 +6,28 @@ import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
 var moment = require('moment');
 
+var rruleOptionKeys = [
+  'freq',
+  'dtstart',
+  'interval',
+  'wkst',
+  'count',
+  'until',
+  'tzid',
+  'bysetpos',
+  'bymonth',
+  'bymonthday',
+  'bynmonthday',
+  'byyearday',
+  'byweekno',
+  'byweekday',
+  'bynweekday',
+  'byhour',
+  'byminute',
+  'bysecond',
+  'byeaster'
+];
+
 
 /**
  * RruleGenerator module.
@@ -282,7 +304,7 @@ class RruleGenerator extends Plugin {
       delete(options['interval']);
     }
 
-    Object.keys(options).forEach(function(item) {
+    rruleOptionKeys.forEach(function(item) {
       var value = options[item];
 
       if (typeof value != 'undefined') {
