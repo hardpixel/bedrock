@@ -1,9 +1,9 @@
 'use strict';
 
 import $ from 'jquery';
+import { RRule } from 'rrule';
 import { Plugin } from 'foundation-sites/js/foundation.plugin';
 
-var RRule = require('rrule').RRule;
 var moment = require('moment');
 
 
@@ -282,7 +282,7 @@ class RruleGenerator extends Plugin {
       delete(options['interval']);
     }
 
-    Object.keys(RRule.DEFAULT_OPTIONS).forEach(function(item) {
+    Object.keys(options).forEach(function(item) {
       var value = options[item];
 
       if (typeof value != 'undefined') {
