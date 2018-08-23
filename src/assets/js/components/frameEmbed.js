@@ -51,12 +51,12 @@ class FrameEmbed extends Plugin {
    */
   _events() {
     this.$frame.off('load').on({
-      'load': this._load.bind(this)
+      'load': this._frameLoad.bind(this)
     });
 
     $(window).off('.zf.frame.embed').on({
       'load.zf.frame.embed': this._setMinHeight.bind(this),
-      'resize.zf.frame.embed': this._setMinHeight.bind(this)
+      'resize.zf.frame.embed': this._parentResize.bind(this)
     });
   }
 
@@ -102,13 +102,24 @@ class FrameEmbed extends Plugin {
    * @function
    * @private
    */
-  _load(event) {
+  _frameLoad(event) {
     this.$frameBody = this.$frame.contents().find('body');
     this._setHeight();
 
     this.$frameBody.off('mousemove').on({
       'mousemove': this._setHeight.bind(this)
     });
+  }
+
+  /**
+   * Resizes frame on parent resize.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   * @private
+   */
+  _parentResize(event) {
+    this._setMinHeight();
+    this._setHeight();
   }
 
   /**
