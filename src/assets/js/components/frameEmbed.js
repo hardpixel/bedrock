@@ -22,6 +22,7 @@ class FrameEmbed extends Plugin {
     this.className = 'FrameEmbed'; // ie9 back compat
     this.$element = element;
     this.options = $.extend({}, FrameEmbed.defaults, this.$element.data(), options);
+    this.height = 0;
 
     this._init();
   }
@@ -35,6 +36,9 @@ class FrameEmbed extends Plugin {
     this.id = GetOrSetId(this.$element, 'fre');
     this.$frame = this.$element.find('iframe');
     this.$parent = this.$element.parent();
+    this.$frameBody = null;
+
+    this.$frame.attr('scrolling', 'no');
 
     this._setMinHeight();
     this._events();
@@ -46,9 +50,8 @@ class FrameEmbed extends Plugin {
    * @private
    */
   _events() {
-    this.$frame.off('load resize').on({
-      'load': this._setHeight.bind(this),
-      'resize': this._setHeight.bind(this)
+    this.$frame.off('load').on({
+      'load': this._load.bind(this)
     });
 
     $(window).off('.zf.frame.embed').on({
@@ -85,8 +88,27 @@ class FrameEmbed extends Plugin {
    * @private
    */
   _setHeight(event) {
-    var height = this.$frame.contents().find('body').innerHeight();
-    this.$frame.height(height);
+    var height = this.$frameBody.innerHeight();
+
+    if (height !== this.height) {
+      this.height = height;
+      this.$frame.height(height);
+    }
+  }
+
+  /**
+   * Sets events on frame load.
+   * @param {Object} event - Event object passed from listener.
+   * @function
+   * @private
+   */
+  _load(event) {
+    this.$frameBody = this.$frame.contents().find('body');
+    this._setHeight();
+
+    this.$frameBody.off('mousemove').on({
+      'mousemove': this._setHeight.bind(this)
+    });
   }
 
   /**
@@ -95,7 +117,9 @@ class FrameEmbed extends Plugin {
    * @private
    */
   _destroy() {
-    this.$frame.off('load resize');
+    this.$frame.off('load');
+    this.$frameBody.off('mousemove');
+
     $(window).off('.zf.frame.embed');
   }
 }
