@@ -88,11 +88,6 @@ class RruleSchedule extends Plugin {
       this.rruleSet = new RRuleSet();
       this.$empty.removeClass('hide');
     }
-
-    if (this.$input.length) {
-      var rules = this.rruleSet.valueOf();
-      this.$input.val(rules.join("\n"));
-    }
   }
 
   /**
