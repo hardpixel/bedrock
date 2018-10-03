@@ -293,12 +293,7 @@ class RruleGenerator extends Plugin {
    */
   _normalizeOptions(options) {
     var config = {};
-    var wkst = options['wkst'];
     var intval = options['interval'];
-
-    if (!wkst) {
-      options['wkst'] = RRule.MO;
-    }
 
     if (intval < 2) {
       delete(options['interval']);
