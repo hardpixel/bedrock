@@ -8,6 +8,21 @@ var SeoPreview = require('yoastseo').SnippetPreview;
 var SeoApp = require('yoastseo').App;
 
 /**
+ * SimpleI18n class.
+ */
+
+class SimpleI18n {
+  /**
+   * Returns the requested value without searching translations.
+   * @function
+   */
+  dgettext(namespace, value) {
+    return value;
+  }
+}
+
+
+/**
  * SeoAnalysis module.
  * @module seoAnalysis
  */
@@ -58,6 +73,7 @@ class SeoAnalysis extends Plugin {
 
     this.seoPreview = new SeoPreview({
       baseURL: `${this.options.baseUrl}/`,
+      i18n: new SimpleI18n(),
       targetElement: this.$preview.get(0),
       addTrailingSlash: false,
       data: this.defaultValues
