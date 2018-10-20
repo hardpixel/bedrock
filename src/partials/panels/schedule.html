@@ -1,16 +1,20 @@
 <div class="panel">
-  <div class="panel-header border">
+  <div class="panel-header">
     RRule Schedule
   </div>
 
-  <div class="panel-content border padding-bottom-0">
+  <div class="panel-content padding-0 border-none">
     <div id="rrule-schedule" data-rrule-schedule="rrule-modal">
       <input type="hidden" value="" data-rrule-input name="schedule">
-      <div class="no-content margin-bottom-1" data-empty-state>
+      <div class="no-content padding-bottom-2 border" data-empty-state>
         <i class="mdi mdi-calendar-clock"></i>
         <span>No rules created</span>
       </div>
-      <div id="rrule-schedule-preview" class="item-list" data-list-remove></div>
+      <div id="rrule-schedule-preview">
+        <table class="hover unstriped margin-0">
+          <tbody data-list-remove></tbody>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -27,12 +31,13 @@
 </div>
 
 <template id="rrule-schedule-item-template">
-  <div class="item" data-list-item>
-    <span class="counter"></span>
-    <div class="content grid-x">
-      <span class="form-element" data-rrule-string></span>
+  <tr data-list-item>
+    <td class="expand">
       <input type="hidden" name="rrule[]" data-rrule-input>
-    </div>
-    <span class="remove mdi mdi-close" data-remove></span>
-  </div>
+      <span data-rrule-string></span>
+    </td>
+    <td class="shrink">
+      <a class="mdi mdi-close color-alert" data-remove></a>
+    </td>
+  </tr>
 </template>

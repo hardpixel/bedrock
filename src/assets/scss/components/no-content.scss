@@ -1,4 +1,5 @@
 $no-content-color: $medium-gray !default;
+$no-content-border: $table-border !default;
 
 // No Content Mixins
 
@@ -6,6 +7,10 @@ $no-content-color: $medium-gray !default;
   padding: $global-padding;
   text-align: center;
   color: $no-content-color;
+
+  &.border {
+    border: $no-content-border;
+  }
 
   > i {
     font-size: 3rem;
