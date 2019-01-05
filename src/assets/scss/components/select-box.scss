@@ -13,7 +13,7 @@
         color: $body-font-color;
         background: transparent;
         position: relative;
-        border-bottom: $input-border;
+        border-bottom: 1px solid smart-scale($panel-background, $panel-color-scale);
 
         &:nth-last-child(2) {
           border-bottom: 0;
